@@ -84,63 +84,67 @@ int DynamicData[32];
       if (tile >= TILE_COUNT) tile -= TILE_COUNT;
 
 
-#if defined(MSDOS) || defined(OSF1) || defined(IS_INTEL)
-
-#define ROW1_8(n) \
+#define LE_ROW1_8(n) \
       l = mem[n]; \
       image[0] = l; \
       image[1] = l >>8; \
       image[2] = l >>16; \
       image += lineBytes;
 
-#define ROW1_16(n) \
+#define LE_ROW1_16(n) \
       memcpy((char *)image, ((char *)mem) + (n * 4 * 2), (3 * 2)); \
       image += lineBytes;
 
-#define ROW1_24(n) \
+#define LE_ROW1_24(n) \
       memcpy((char *)image, ((char *)mem) + (n * 4 * 3), (3 * 3)); \
       image += lineBytes;
 
-#define ROW1_32(n) \
+#define LE_ROW1_32(n) \
       memcpy((char *)image, ((char *)mem) + (n * 4 * 4), (3 * 4)); \
       image += lineBytes;
 
-#else
-
-#define ROW1_8(n) \
+#define BE_ROW1_8(n) \
       l = mem[n]; \
       image[0] = l >>24; \
       image[1] = l >>16; \
       image[2] = l >>8; \
       image += lineBytes;
 
-#define ROW1_16(n) \
+#define BE_ROW1_16(n) \
       l = mem[n]; /* XXX: WRONG. handle depth */ \
       image[0] = l >>24; \
       image[1] = l >>16; \
       image[2] = l >>8; \
       image += lineBytes;
 
-#define ROW1_24(n) \
+#define BE_ROW1_24(n) \
       l = mem[n]; /* XXX: WRONG. handle depth */ \
       image[0] = l >>24; \
       image[1] = l >>16; \
       image[2] = l >>8; \
       image += lineBytes;
 
-#define ROW1_32(n) \
+#define BE_ROW1_32(n) \
       l = mem[n]; /* XXX: WRONG. handle depth */ \
       image[0] = l >>24; \
       image[1] = l >>16; \
       image[2] = l >>8; \
       image += lineBytes;
 
-#endif
+#define LE_ROW3_8 LE_ROW1_8(0) LE_ROW1_8(1) LE_ROW1_8(2)
+#define LE_ROW3_16 LE_ROW1_16(0) LE_ROW1_16(1) LE_ROW1_16(2)
+#define LE_ROW3_24 LE_ROW1_24(0) LE_ROW1_24(1) LE_ROW1_24(2)
+#define LE_ROW3_32 LE_ROW1_32(0) LE_ROW1_32(1) LE_ROW1_32(2)
 
-#define ROW3_8 ROW1_8(0) ROW1_8(1) ROW1_8(2)
-#define ROW3_16 ROW1_16(0) ROW1_16(1) ROW1_16(2)
-#define ROW3_24 ROW1_24(0) ROW1_24(1) ROW1_24(2)
-#define ROW3_32 ROW1_32(0) ROW1_32(1) ROW1_32(2)
+#define BE_ROW3_8 BE_ROW1_8(0) BE_ROW1_8(1) BE_ROW1_8(2)
+#define BE_ROW3_16 BE_ROW1_16(0) BE_ROW1_16(1) BE_ROW1_16(2)
+#define BE_ROW3_24 BE_ROW1_24(0) BE_ROW1_24(1) BE_ROW1_24(2)
+#define BE_ROW3_32 BE_ROW1_32(0) BE_ROW1_32(1) BE_ROW1_32(2)
+
+#define ROW3_8 if (view->x->big_endian) { BE_ROW3_8 } else { LE_ROW3_8 }
+#define ROW3_16 if (view->x->big_endian) { BE_ROW3_16 } else { LE_ROW3_16 }
+#define ROW3_24 if (view->x->big_endian) { BE_ROW3_24 } else { LE_ROW3_24 }
+#define ROW3_32 if (view->x->big_endian) { BE_ROW3_32 } else { LE_ROW3_32 }
 
 #define ROW3 \
 	  switch (view->x->depth) { \

@@ -584,6 +584,8 @@ InitNewView(SimView *view, char *title, int class, int w, int h)
     view->type = X_Mem_View;
   }
 
+  view->x->big_endian = (ImageByteOrder(view->x->dpy) == MSBFirst);
+
   GetPixmaps(view->x);
   view->pixels = view->x->pixels;
 
