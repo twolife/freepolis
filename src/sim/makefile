@@ -16,6 +16,7 @@ DEFINES = -DIS_LINUX -DIS_INTEL
 CFLAGS = $(OPTFLAGS) $(DEFINES)
 
 #LDFLAGS = -Bstatic
+LDFLAGS=-L/usr/X11/lib
 
 INSTALL = install -s
 
