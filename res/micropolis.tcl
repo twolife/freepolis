@@ -942,7 +942,7 @@ proc EchoPlaySound {soundspec} {
   if {$Sound} {
     echo PlaySound [lindex $soundspec 0]
     signal ignore SIGCHLD
-    exec play res/sounds/[string tolower [lindex $soundspec 0]].wav &
+    exec res/sounds/player res/sounds/[string tolower [lindex $soundspec 0]].wav &
   }
 }
 

@@ -1,0 +1,13 @@
+#!/bin/sh
+
+PLAYER=true
+
+if [ -x "`which aplay`" ]; then
+	PLAYER=aplay
+elif [ -x "`which play`" ]; then
+	PLAYER=play
+elif [ -x "`which mplayer`" ]; then
+	PLAYER="mplayer -nogui -nocache"
+fi
+
+exec ${PLAYER} "$@" >/dev/null 2>&1
