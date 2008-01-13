@@ -940,7 +940,7 @@ proc EchoPlaySound {soundspec} {
   # Temporary workaround to tell Python Sugar app to play sound.
   global Sound
   if {$Sound} {
-    echo PlaySound [lindex $soundspec 0]
+    #echo PlaySound [lindex $soundspec 0]
     signal ignore SIGCHLD
     exec res/sounds/player res/sounds/[string tolower [lindex $soundspec 0]].wav &
   }
