@@ -941,6 +941,7 @@ proc EchoPlaySound {soundspec} {
   global Sound
   if {$Sound} {
     echo PlaySound [lindex $soundspec 0]
+    exec play res/sounds/[string tolower [lindex $soundspec 0]].wav &
   }
 }
 
