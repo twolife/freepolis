@@ -441,7 +441,9 @@ FindXDisplay(Tk_Window tkwin)
 	} else {
 	  fprintf(stderr,
 		  "Cool, I found the shared memory extension!\n");
-	  xd->shared = 1;
+	  fprintf(stderr,
+	  	  "Disabled SHM, because it is currently broken!\n");
+	  xd->shared = 0;
 	}
       }
     }
