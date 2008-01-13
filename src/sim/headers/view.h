@@ -113,7 +113,7 @@ typedef struct XDisplay {
   Pixmap vert_stipple;
   Pixmap horiz_stipple;
   Pixmap diag_stipple;
-  int big_endian;
+  int needs_swap;
 } XDisplay;
 
 

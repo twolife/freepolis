@@ -490,6 +490,7 @@ SimView *
 InitNewView(SimView *view, char *title, int class, int w, int h)
 {
   int type, i;
+  int test = 1;
   int d = 8;
   unsigned long valuemask = 0;
   char *t;
@@ -584,7 +585,11 @@ InitNewView(SimView *view, char *title, int class, int w, int h)
     view->type = X_Mem_View;
   }
 
-  view->x->big_endian = (ImageByteOrder(view->x->dpy) == MSBFirst);
+  if ((ImageByteOrder(view->x->dpy) == MSBFirst) == !(*(unsigned char*) (&test)))
+    view->x->needs_swap = 0;
+  else
+    view->x->needs_swap = 1;
+
 
   GetPixmaps(view->x);
   view->pixels = view->x->pixels;
