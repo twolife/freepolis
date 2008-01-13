@@ -67,7 +67,10 @@
 #    include <sys/times.h>
 #endif 
 
-#include <values.h>
+//#include "values.h"
+#include <limits.h>
+#include <float.h>
+#define MAXDOUBLE       DBL_MAX
 #include <grp.h>
 /*
  * On some systems this is not included by tclUnix.h.
