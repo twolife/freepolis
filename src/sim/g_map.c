@@ -467,11 +467,8 @@ drawRect(SimView *view, int pixel, int solid,
 	unsigned char *data = 
 	  (unsigned char *)view->data;
 	unsigned char *image;
-	int bitmapPad = view->x->small_tile_image->bitmap_pad;
-	int rowBytes = view->x->small_tile_image->bytes_per_line;
-	line = rowBytes >> 1; /* Convert from byte offset to short offset */
 	image = 
-	  &data[(line * y) + x];
+	  &data[(line * y) + x * pixelBytes];
 
 	if (solid) {
 	  for (i = h; i > 0; i--) {
@@ -479,11 +476,11 @@ drawRect(SimView *view, int pixel, int solid,
 	      *(image++) = (pixel >> 0) & 0xff;
 	      *(image++) = (pixel >> 8) & 0xff;
 	      *(image++) = (pixel >> 16) & 0xff;
-	      if (bitmapPad == 32) {
+	      if (pixelBytes == 4) {
 	        image++;
 	      }
 	    }
-	    image += line - w;
+	    image += line - w * pixelBytes;
 	  }
 	} else {
 	  for (i = h; i > 0; i--) {
@@ -492,15 +489,17 @@ drawRect(SimView *view, int pixel, int solid,
 		*(image++) = (pixel >> 0) & 0xff;
 		*(image++) = (pixel >> 8) & 0xff;
 		*(image++) = (pixel >> 16) & 0xff;
-	        if (bitmapPad == 32) {
-		  image++;
-		}
+	      } else {
+	        image += 3;
+	      }
+	      if (pixelBytes == 4) {
+		image++;
 	      }
 	    }
 	    if (!(w & 1)) {
 	      stipple++;
 	    }
-	    image += line - w;
+	    image += line - w * pixelBytes;
 	  }
 	}
       }

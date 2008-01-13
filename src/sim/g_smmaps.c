@@ -153,8 +153,6 @@ int DynamicData[32];
 		  ROW3_16 \
 		  break; \
 		case 24: \
-		  ROW3_24 \
-		  break; \
 		case 32: \
 		  ROW3_32 \
 		  break; \
