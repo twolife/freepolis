@@ -585,10 +585,8 @@ InitNewView(SimView *view, char *title, int class, int w, int h)
     view->type = X_Mem_View;
   }
 
-  if ((ImageByteOrder(view->x->dpy) == MSBFirst) == !(*(unsigned char*) (&test)))
-    view->x->needs_swap = 0;
-  else
-    view->x->needs_swap = 1;
+  /* XXX: Find cases where transaltion is needed */
+  view->x->needs_swap = 0;
 
 
   GetPixmaps(view->x);
