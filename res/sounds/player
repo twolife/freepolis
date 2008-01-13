@@ -4,6 +4,9 @@ PLAYER=
 
 if [ -x "`which aplay`" ]; then
 	PLAYER=aplay
+elif [ -x "`which afplay`" ]; then
+	#afplay is shipped with OS X Leopard
+	PLAYER=afplay
 elif [ -x "`which play`" ]; then
 	PLAYER=play
 elif [ -x "`which mplayer`" ]; then
