@@ -685,7 +685,16 @@ place configure $win.col2\
   -x [expr "$HeadPanelWidth + 5"]\
   -y 0\
   -relheight 1.0\
-  -relwidth 1.0
+  -width [expr "($screenwidth - $HeadPanelWidth) - 5"]
+
+proc resizeeditor {win width} {
+  global HeadPanelWidth
+
+  place configure $win.col2\
+    -width [expr "($width - $HeadPanelWidth) - 5"]
+}
+
+bind $win <Configure> "resizeeditor $win %w"
 
 #pack append $win.col2\
 #    $win.col2.x1		{top frame nw fillx} \
