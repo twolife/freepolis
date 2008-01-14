@@ -2,14 +2,14 @@
 
 PLAYER=
 
-if [ -x "`which aplay`" ]; then
+if type -a aplay &>/dev/null; then
 	PLAYER=aplay
-elif [ -x "`which afplay`" ]; then
+elif type -a afplay &>/dev/null; then
 	#afplay is shipped with OS X Leopard
 	PLAYER=afplay
-elif [ -x "`which play`" ]; then
+elif type -a play &>/dev/null; then
 	PLAYER=play
-elif [ -x "`which mplayer`" ]; then
+elif type -a mplayer &>/dev/null; then
 	PLAYER="mplayer -nogui -nocache"
 fi
 
