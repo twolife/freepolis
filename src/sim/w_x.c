@@ -1145,7 +1145,7 @@ DoResizeView(SimView *view, int w, int h)
 	  view->pixel_bytes = 2;
 	  view->depth = 15;
 	  bitmap_pad = 16;
-	  bitmap_depth = 16;
+	  bitmap_depth = 15;
 	  view->line_bytes8 =
 	    ((view->m_width * view->pixel_bytes) + 3) & (~3);
 	  break;
