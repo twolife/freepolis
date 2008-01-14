@@ -585,8 +585,7 @@ InitNewView(SimView *view, char *title, int class, int w, int h)
     view->type = X_Mem_View;
   }
 
-  /* XXX: Find cases where transaltion is needed */
-  view->x->needs_swap = 0;
+  view->x->needs_swap = !(*(unsigned char*) (&test));
 
 
   GetPixmaps(view->x);

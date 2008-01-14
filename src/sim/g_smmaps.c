@@ -142,9 +142,9 @@ int DynamicData[32];
 #define BE_ROW3_32 BE_ROW1_32(0) BE_ROW1_32(1) BE_ROW1_32(2)
 
 #define ROW3_8 if (view->x->needs_swap) { BE_ROW3_8 } else { LE_ROW3_8 }
-#define ROW3_16 if (view->x->needs_swap) { BE_ROW3_16 } else { LE_ROW3_16 }
-#define ROW3_24 if (view->x->needs_swap) { BE_ROW3_24 } else { LE_ROW3_24 }
-#define ROW3_32 if (view->x->needs_swap) { BE_ROW3_32 } else { LE_ROW3_32 }
+#define ROW3_16 LE_ROW3_16
+#define ROW3_24 LE_ROW3_24
+#define ROW3_32 LE_ROW3_32
 
 #define ROW3 \
 	  switch (view->x->depth) { \
