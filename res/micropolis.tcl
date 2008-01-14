@@ -412,8 +412,8 @@ sim ResetDynamic
 # the font in res (because it's already in the system fonts).  These lines
 # are for other systems that lack the font.
 set FontPath "[pwd]/res/dejavu-lgc"
-system "xset -fp $FontPath >&/dev/null"
-system "xset +fp $FontPath >&/dev/null"
+system "xset -fp $FontPath >/dev/null 2>&1"
+system "xset +fp $FontPath >/dev/null 2>&1"
 
 
 ########################################################################
