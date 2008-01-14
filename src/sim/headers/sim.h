@@ -111,7 +111,7 @@
 #endif
 
 #ifdef sun
-#ifdef SOLARIS2
+#ifdef __SVR4
 #include <sys/systeminfo.h>
 #else
 #include <sys/vadvise.h>
