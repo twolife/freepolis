@@ -119,8 +119,8 @@ wm iconname $win {Micropolis Controls}
 wm geometry $win 1200x900+0+0
 #wm positionfrom $win user
 wm withdraw $win
-#wm maxsize $win $screenwidth $screenheight
-#wm minsize $win 100 100
+wm maxsize $win $screenwidth $screenheight
+wm minsize $win 100 100
 wm protocol $win delete "DeleteHeadWindow $win ;"
 wm fullscreen $win on
 
