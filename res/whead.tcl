@@ -656,7 +656,7 @@ place configure $win.col1\
   -x 0\
   -y 0\
   -width $HeadPanelWidth\
-  -height $screenheight
+  -relheight 1.0
 
 pack append $win.col1\
     $win.col1.w1		{top frame nw fillx} \
