@@ -78,10 +78,10 @@ global NoticePanelHeight
 
 set visual [winfo screenvisual $win]
 set depth [winfo screendepth $win]
-#set screenwidth [winfo screenwidth $win]
-#set screenheight [winfo screenheight $win]
-set screenwidth 1200
-set screenheight 900
+set screenwidth [winfo screenwidth $win]
+set screenheight [winfo screenheight $win]
+#set screenwidth 1200
+#set screenheight 900
 
 if {!(("$visual" == "pseudocolor") ||
       ("$visual" == "truecolor") ||
@@ -684,8 +684,8 @@ pack append $win.col1\
 place configure $win.col2\
   -x [expr "$HeadPanelWidth + 5"]\
   -y 0\
-  -width [expr "($screenwidth - $HeadPanelWidth) - 5"]\
-  -height $screenheight
+  -relheight 1.0\
+  -relwidth 1.0
 
 #pack append $win.col2\
 #    $win.col2.x1		{top frame nw fillx} \
