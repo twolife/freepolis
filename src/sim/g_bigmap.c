@@ -192,6 +192,8 @@ MemDrawBeegMapRect(SimView *view, int x, int y, int w, int h)
 	  case 24:
 	  case 32:
 	    ROW16_32();
+	    break;
+
 	  default:
 	    /* XXX: handle different depths */
 	    break;
