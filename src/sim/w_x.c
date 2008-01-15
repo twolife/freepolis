@@ -327,28 +327,43 @@ FindXDisplay(Tk_Window tkwin)
 	      color->pixel; \
 	    break; \
 	  case 15: \
+	    if (xd->visual->red_mask == 0x7c00) { \
 	    xd->pixels[i] = \
 	      (((color->red >> (8 + 3)) & 0x1f) << (5 + 5)) | \
 	      (((color->green >> (8 + 2)) & 0x1f) << (5)) | \
 	      (((color->blue >> (8 + 3)) & 0x1f) << (0)); \
+	    } else { \
+	      (((color->blue >> (8 + 3)) & 0x1f) << (5 + 5)) | \
+	      (((color->green >> (8 + 2)) & 0x1f) << (5)) | \
+	      (((color->red >> (8 + 3)) & 0x1f) << (0)); \
+	    } \
 	    break; \
 	  case 16: \
+	    if (xd->visual->red_mask == 0xf800) { \
 	    xd->pixels[i] = \
 	      (((color->red >> (8 + 3)) & 0x1f) << (6 + 5)) | \
 	      (((color->green >> (8 + 2)) & 0x3f) << (5)) | \
 	      (((color->blue >> (8 + 3)) & 0x1f) << (0)); \
+	    } else { \
+	    xd->pixels[i] = \
+	      (((color->blue >> (8 + 3)) & 0x1f) << (6 + 5)) | \
+	      (((color->green >> (8 + 2)) & 0x3f) << (5)) | \
+	      (((color->red >> (8 + 3)) & 0x1f) << (0)); \
+	    } \
 	    break; \
 	  case 24: \
-	    xd->pixels[i] = \
-	      ((color->red & 0xff) << 16) | \
-	      ((color->green & 0xff) << 8) | \
-	      ((color->blue & 0xff) << 0); \
-	    break; \
 	  case 32: \
+	    if (xd->visual->red_mask == 0xff0000) { \
 	    xd->pixels[i] = \
 	      ((color->red & 0xff) << 16) | \
 	      ((color->green & 0xff) << 8) | \
 	      ((color->blue & 0xff) << 0); \
+	    } else { \
+	    xd->pixels[i] = \
+	      ((color->blue & 0xff) << 16) | \
+	      ((color->green & 0xff) << 8) | \
+	      ((color->red & 0xff) << 0); \
+	    } \
 	    break; \
 	  } \
 	} \
