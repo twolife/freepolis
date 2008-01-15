@@ -819,7 +819,7 @@ tk_main()
 
   Tk_MainLoop();
 
-  sim_exit(0); // Just sets tkMustExit and ExitReturn
+  sim_really_exit(0);
 
  bail:
 
