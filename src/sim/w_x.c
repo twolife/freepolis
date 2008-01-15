@@ -601,6 +601,7 @@ InitNewView(SimView *view, char *title, int class, int w, int h)
   }
 
   view->x->needs_swap = !(*(unsigned char*) (&test));
+  view->x->x_big_endian = (ImageByteOrder(view->x->dpy) == MSBFirst);
 
 
   GetPixmaps(view->x);
