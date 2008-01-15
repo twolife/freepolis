@@ -80,8 +80,17 @@ set visual [winfo screenvisual $win]
 set depth [winfo screendepth $win]
 set screenwidth [winfo screenwidth $win]
 set screenheight [winfo screenheight $win]
-#set screenwidth 1200
-#set screenheight 900
+set initialwidth 1200
+set initialheight 900
+
+if {$screenwidth < $initialwidth} {
+	set initialwidth $screenwidth
+}
+
+if {$screenheight < $initialheight} {
+	set initialheight $screenheight
+}
+
 
 if {!(("$visual" == "pseudocolor") ||
       ("$visual" == "truecolor") ||
@@ -116,7 +125,7 @@ bind $win <Mod2-Key> {tk_traverseToMenu %W %A}
 
 wm title $win "Micropolis Controls"
 wm iconname $win {Micropolis Controls}
-wm geometry $win 1200x900+0+0
+wm geometry $win ${initialwidth}x${initialheight}+0+0
 #wm positionfrom $win user
 wm withdraw $win
 wm maxsize $win $screenwidth $screenheight
