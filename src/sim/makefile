@@ -97,7 +97,7 @@ all: sim
 lint:
 	alint $(INCLUDES) $(SRCS) > LINT
 
-sim: $(ALLOBJS)
+sim: $(ALLOBJS) $(TCLXHOME)/libtk.a $(TCLXHOME)/libtcl.a
 	$(CC) $(CFLAGS) $(LDFLAGS) $(INCLUDES) $(ALLOBJS) $(LIBS) -o sim
 
 clean:
