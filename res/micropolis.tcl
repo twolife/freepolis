@@ -3101,8 +3101,10 @@ proc ShowSplashOf {head} {
 
 
 proc WithdrawSplashOf {head} {
-  set win WindowLink $head.splash]
-  wm withdraw $win
+  set win [WindowLink $head.splash]
+  if {$win != {}} {
+    wm withdraw $win
+  }
 }
 
 
@@ -3152,8 +3154,10 @@ proc ShowScenarioOf {head} {
 
 
 proc WithdrawScenarioOf {head} {
-  set win WindowLink $head.scenario]
-  wm withdraw $win
+  set win [WindowLink $head.scenario]
+  if {$win != {}} {
+    wm withdraw $win
+  }
 }
 
 
