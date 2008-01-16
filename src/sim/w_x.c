@@ -611,8 +611,6 @@ InitNewView(SimView *view, char *title, int class, int w, int h)
   view->pan_x = w / 2; view->pan_y = h / 2;
   DoResizeView(view, w, h);
 
-  GetViewTiles(view);
-
   return (view);
 }
 
@@ -1244,6 +1242,9 @@ DoResizeView(SimView *view, int w, int h)
       }
     }
   }
+
+  GetViewTiles(view);
+
 }
 
 

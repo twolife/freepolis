@@ -310,11 +310,9 @@ WireDrawBeegMapRect(SimView *view, short x, short y, short w, short h)
 
       if (tile != *ha) {
 	*ha = tile;
-	if (view->x->big_tile_pixmap) {
-	  XCopyArea(view->x->dpy, view->x->big_tile_pixmap, view->pixmap,
+	XCopyArea(view->x->dpy, view->x->big_tile_pixmap, view->pixmap,
 		  view->x->gc, 0, tile * 16, 16, 16,
 		  col * 16, row * 16);
-	}
       }
     }
     map += mm;
