@@ -1642,9 +1642,11 @@ MatchPatterns(bindPtr, psPtr)
 		    != patPtr->needMods) {
 		goto nextSequence;
 	    }
+#if 0
 	    if ((state & patPtr->hateMods) != 0) {
 		goto nextSequence;
 	    }
+#endif
 	    if ((patPtr->detail != 0)
 		    && (patPtr->detail != *detailPtr)) {
 		goto nextSequence;
