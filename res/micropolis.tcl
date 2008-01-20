@@ -484,7 +484,7 @@ Either clean up your act or open a gas mask concession at city hall.} \
 {{view {PanView $v [sim PolMaxX] [sim PolMaxY]}}}
 
 Message 11 #ff4f4f {CRIME ALERT!} \
-{Crime in your city is our of hand.  Angry mobs are looting and vandalizing the central city.  The president will send in the national guard soon if you cannot control the problem.} \
+{Crime in your city is out of hand.  Angry mobs are looting and vandalizing the central city.  The president will send in the national guard soon if you cannot control the problem.} \
 {{view {PanView $v [sim CrimeMaxX] [sim CrimeMaxY]}}}
 
 Message 12 #ff4f4f {TRAFFIC WARNING!} \
