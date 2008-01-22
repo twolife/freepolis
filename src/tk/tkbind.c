@@ -1609,9 +1609,6 @@ MatchPatterns(bindPtr, psPtr)
 	    if (ringCount <= 0) {
 		goto nextSequence;
 	    }
-	    if (eventPtr->xany.window != window) {
-		goto nextSequence;
-	    }
 	    if (eventPtr->xany.type != patPtr->eventType) {
 		/*
 		 * If the event is a mouse motion, button release,
@@ -1624,9 +1621,14 @@ MatchPatterns(bindPtr, psPtr)
 			|| (eventPtr->xany.type == ButtonRelease)
 			|| (eventPtr->xany.type == KeyRelease)
 			|| (eventPtr->xany.type == NoExpose)
+			|| (eventPtr->xany.type == EnterNotify)
+			|| (eventPtr->xany.type == LeaveNotify)
 			|| (eventPtr->xany.type == GraphicsExpose)) {
 		    goto nextEvent;
 		}
+		goto nextSequence;
+	    }
+	    if (eventPtr->xany.window != window) {
 		goto nextSequence;
 	    }
 
