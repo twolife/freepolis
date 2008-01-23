@@ -3548,6 +3548,10 @@ proc DoPickScenario {win param} {
   UILoadScenario $param
 }
 
+proc DeleteScenarioWindow {win} {
+  UIQuit $win
+}
+
 
 ########################################################################
 # Undo/Redo Facility
