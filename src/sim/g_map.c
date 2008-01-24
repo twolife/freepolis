@@ -470,7 +470,7 @@ drawRect(SimView *view, int pixel, int solid,
 	        image += 3;
 	      }
 	    } else {
-	      if (stipple++ & 1) {
+	      if (solid || stipple++ & 1) {
 	        *(image++) = (pixel >> 0) & 0xff;
 	        *(image++) = (pixel >> 8) & 0xff;
 	        *(image++) = (pixel >> 16) & 0xff;
