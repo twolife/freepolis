@@ -269,6 +269,11 @@ bind $win.col1.w1.f1.disasters.m <Mod2-Key> {tk_traverseToMenu %W %A}
   $win.col1.w1.f1.disasters.m add command\
     -label {Meltdown}\
     -command "UIDisaster $win \"sim MakeMeltdown\" \"have a nuclear meltdown?\""
+  if {[sim HasAirCrash]} {
+    $win.col1.w1.f1.disasters.m add command\
+      -label {Air Crash}\
+      -command "UIDisaster $win \"sim MakeAirCrash\" \"crash an airplane?\""
+  }
   $win.col1.w1.f1.disasters.m add command\
     -label {Tornado}\
     -command "UIDisaster $win \"sim MakeTornado\" \"spin up a tornado?\""

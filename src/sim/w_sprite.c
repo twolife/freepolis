@@ -1588,6 +1588,23 @@ GeneratePlane(int x, int y)
 }
 
 
+MakeAirCrash(void)
+{
+#ifndef NO_AIRCRASH
+  if (GetSprite(AIR) == NULL) {
+    short x, y;
+
+    x = Rand(WORLD_X - 20) + 10;
+    y = Rand(WORLD_Y - 10) + 5;
+
+    GeneratePlane(x, y);
+  }
+
+  ExplodeSprite(GetSprite(AIR));
+#endif
+}
+
+
 MakeTornado(void)
 {
   short x, y;
