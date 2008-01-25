@@ -229,11 +229,11 @@ static ModInfo modArray[] = {
     "Button5",		Button5Mask,	0,
     "Mod1",		Mod1Mask,	0,
     "M1",		Mod1Mask,	0,
-    "Meta",		Mod1Mask,	0,
-    "M",		Mod1Mask,	0,
+    "Meta",		META_MASK,	0,
+    "M",		META_MASK,	0,
     "Mod2",		Mod2Mask,	0,
     "M2",		Mod2Mask,	0,
-    "Alt",		Mod2Mask,	0,
+    "Alt",		ALT_MASK,	0,
     "Mod3",		Mod3Mask,	0,
     "M3",		Mod3Mask,	0,
     "Mod4",		Mod4Mask,	0,
@@ -383,8 +383,8 @@ static PatSeq *		FindSequence _ANSI_ARGS_((Tcl_Interp *interp,
 static char *		GetField _ANSI_ARGS_((char *p, char *copy, int size));
 static KeySym		GetKeySym _ANSI_ARGS_((TkDisplay *dispPtr,
 			    XEvent *eventPtr));
-static PatSeq *		MatchPatterns _ANSI_ARGS_((BindingTable *bindPtr,
-			    PatSeq *psPtr));
+static PatSeq *		MatchPatterns _ANSI_ARGS_((TkDisplay *dispPtr,
+			    BindingTable *bindPtr, PatSeq *psPtr));
 
 /*
  *--------------------------------------------------------------
@@ -1034,14 +1034,14 @@ Tk_BindEvent(bindingTable, eventPtr, tkwin, numObjects, objectPtr)
 	key.detail = detail;
 	hPtr = Tcl_FindHashEntry(&bindPtr->patternTable, (char *) &key);
 	if (hPtr != NULL) {
-	    matchPtr = MatchPatterns(bindPtr,
+	    matchPtr = MatchPatterns(dispPtr, bindPtr,
 		    (PatSeq *) Tcl_GetHashValue(hPtr));
 	}
 	if ((detail != 0) && (matchPtr == NULL)) {
 	    key.detail = 0;
 	    hPtr = Tcl_FindHashEntry(&bindPtr->patternTable, (char *) &key);
 	    if (hPtr != NULL) {
-		matchPtr = MatchPatterns(bindPtr,
+		matchPtr = MatchPatterns(dispPtr, bindPtr,
 			(PatSeq *) Tcl_GetHashValue(hPtr));
 	    }
 	}
@@ -1576,7 +1576,8 @@ GetKeySym(dispPtr, eventPtr)
  */
 
 static PatSeq *
-MatchPatterns(bindPtr, psPtr)
+MatchPatterns(dispPtr, bindPtr, psPtr)
+    TkDisplay *dispPtr;
     BindingTable *bindPtr;	/* Information about binding table, such
 				 * as ring of recent events. */
     register PatSeq *psPtr;	/* List of pattern sequences. */
@@ -1640,9 +1641,52 @@ MatchPatterns(bindPtr, psPtr)
 	    } else {
 		state = 0;
 	    }
-	    if ((state & patPtr->needMods)
-		    != patPtr->needMods) {
-		goto nextSequence;
+	    if (patPtr->needMods != 0) {
+	        int modMask = patPtr->needMods;
+
+		if (!dispPtr->metaModMask && !dispPtr->altModMask && !dispPtr->modeModMask) {
+			int i, max;
+			XModifierKeymap *modMapPtr;
+			KeyCode *codePtr;
+			KeySym keysym;
+
+			modMapPtr = XGetModifierMapping(dispPtr->display);
+			codePtr = modMapPtr->modifiermap;
+			max = 8*modMapPtr->max_keypermod;
+
+			for (i = 0; i < max; i++, codePtr++) {
+				if (*codePtr == 0) {
+					continue;
+				}
+				keysym = XKeycodeToKeysym(dispPtr->display, *codePtr, 0);
+				if (keysym == XK_Mode_switch) {
+					dispPtr->modeModMask |= ShiftMask << (i/modMapPtr->max_keypermod);
+				}
+				if ((keysym == XK_Meta_L) || (keysym == XK_Meta_R)) {
+					dispPtr->metaModMask |= ShiftMask << (i/modMapPtr->max_keypermod);
+				}
+				if ((keysym == XK_Alt_L) || (keysym == XK_Alt_R)) {
+					dispPtr->altModMask |= ShiftMask << (i/modMapPtr->max_keypermod);
+				}
+			}
+		}
+	        if ((modMask & META_MASK) && (dispPtr->metaModMask != 0)) {
+	                modMask = (modMask & ~META_MASK) | dispPtr->metaModMask;
+	        }
+	        if ((modMask & ALT_MASK) && (dispPtr->altModMask != 0)) {
+	                modMask = (modMask & ~ALT_MASK) | dispPtr->altModMask;
+	        }
+
+	        if ((state & META_MASK) && (dispPtr->metaModMask != 0)) {
+	                state = (state & ~META_MASK) | dispPtr->metaModMask;
+	        }
+	        if ((state & ALT_MASK) && (dispPtr->altModMask != 0)) {
+	                state = (state & ~ALT_MASK) | dispPtr->altModMask;
+	        }
+
+	        if ((state & modMask) != modMask) {
+	                goto nextSequence;
+	        }
 	    }
 #if 0
 	    if ((state & patPtr->hateMods) != 0) {

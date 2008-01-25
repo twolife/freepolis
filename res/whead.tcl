@@ -121,7 +121,7 @@ LinkWindow $win.ask {}
 
 tk_bindForTraversal $win
 bind $win <F10> {tk_firstMenu %W} 
-bind $win <Mod2-Key> {tk_traverseToMenu %W %A} 
+bind $win <Alt-Key> {tk_traverseToMenu %W %A} 
 
 wm title $win "Micropolis Controls"
 wm iconname $win {Micropolis Controls}
@@ -151,7 +151,7 @@ frame $win.col1.w1.f1\
   -relief raised
 tk_bindForTraversal $win.col1.w1.f1
 bind $win.col1.w1.f1 <F10> {tk_firstMenu %W} 
-bind $win.col1.w1.f1 <Mod2-Key> {tk_traverseToMenu %W %A} 
+bind $win.col1.w1.f1 <Alt-Key> {tk_traverseToMenu %W %A} 
 
 SetHelp $win.col1.w1.f1.micropolis Head.MicropolisMenu
 
@@ -162,7 +162,7 @@ menubutton $win.col1.w1.f1.micropolis\
   -variable $win.postedMenu
 tk_bindForTraversal $win.col1.w1.f1.micropolis
 bind $win.col1.w1.f1.micropolis <F10> {tk_firstMenu %W} 
-bind $win.col1.w1.f1.micropolis <Mod2-Key> {tk_traverseToMenu %W %A} 
+bind $win.col1.w1.f1.micropolis <Alt-Key> {tk_traverseToMenu %W %A} 
 
 tk_menus $win $win.col1.w1.f1.micropolis
 
@@ -170,7 +170,7 @@ menu $win.col1.w1.f1.micropolis.m\
   -font [Font $win Medium]
 tk_bindForTraversal $win.col1.w1.f1.micropolis.m
 bind $win.col1.w1.f1.micropolis.m <F10> {tk_firstMenu %W} 
-bind $win.col1.w1.f1.micropolis.m <Mod2-Key> {tk_traverseToMenu %W %A} 
+bind $win.col1.w1.f1.micropolis.m <Alt-Key> {tk_traverseToMenu %W %A} 
   $win.col1.w1.f1.micropolis.m add command\
     -label {About...}\
     -command "UIShowPicture 300"
@@ -201,7 +201,7 @@ menubutton $win.col1.w1.f1.options\
   -variable $win.postedMenu
 tk_bindForTraversal $win.col1.w1.f1.options
 bind $win.col1.w1.f1.options <F10> {tk_firstMenu %W} 
-bind $win.col1.w1.f1.options <Mod2-Key> {tk_traverseToMenu %W %A} 
+bind $win.col1.w1.f1.options <Alt-Key> {tk_traverseToMenu %W %A} 
 
 tk_menus $win $win.col1.w1.f1.options
 
@@ -209,7 +209,7 @@ menu $win.col1.w1.f1.options.m\
   -font [Font $win Medium]
 tk_bindForTraversal $win.col1.w1.f1.options.m
 bind $win.col1.w1.f1.options.m <F10> {tk_firstMenu %W} 
-bind $win.col1.w1.f1.options.m <Mod2-Key> {tk_traverseToMenu %W %A} 
+bind $win.col1.w1.f1.options.m <Alt-Key> {tk_traverseToMenu %W %A} 
   $win.col1.w1.f1.options.m add checkbutton\
     -label {Auto Budget}\
     -variable AutoBudget\
@@ -248,7 +248,7 @@ menubutton $win.col1.w1.f1.disasters\
   -variable $win.postedMenu
 tk_bindForTraversal $win.col1.w1.f1.disasters
 bind $win.col1.w1.f1.disasters <F10> {tk_firstMenu %W} 
-bind $win.col1.w1.f1.disasters <Mod2-Key> {tk_traverseToMenu %W %A} 
+bind $win.col1.w1.f1.disasters <Alt-Key> {tk_traverseToMenu %W %A} 
 
 tk_menus $win $win.col1.w1.f1.disasters
 
@@ -256,7 +256,7 @@ menu $win.col1.w1.f1.disasters.m\
   -font [Font $win Medium]
 tk_bindForTraversal $win.col1.w1.f1.disasters.m
 bind $win.col1.w1.f1.disasters.m <F10> {tk_firstMenu %W} 
-bind $win.col1.w1.f1.disasters.m <Mod2-Key> {tk_traverseToMenu %W %A} 
+bind $win.col1.w1.f1.disasters.m <Alt-Key> {tk_traverseToMenu %W %A} 
   $win.col1.w1.f1.disasters.m add command\
     -label {Monster}\
     -command "UIDisaster $win \"UIMakeMonster\" \"release a monster?\""
@@ -290,7 +290,7 @@ menubutton $win.col1.w1.f1.priority\
   -variable $win.postedMenu
 tk_bindForTraversal $win.col1.w1.f1.priority
 bind $win.col1.w1.f1.priority <F10> {tk_firstMenu %W} 
-bind $win.col1.w1.f1.priority <Mod2-Key> {tk_traverseToMenu %W %A} 
+bind $win.col1.w1.f1.priority <Alt-Key> {tk_traverseToMenu %W %A} 
 
 tk_menus $win $win.col1.w1.f1.priority
 
@@ -298,7 +298,7 @@ menu $win.col1.w1.f1.priority.m\
   -font [Font $win Medium]
 tk_bindForTraversal $win.col1.w1.f1.priority.m
 bind $win.col1.w1.f1.priority.m <F10> {tk_firstMenu %W} 
-bind $win.col1.w1.f1.priority.m <Mod2-Key> {tk_traverseToMenu %W %A} 
+bind $win.col1.w1.f1.priority.m <Alt-Key> {tk_traverseToMenu %W %A} 
   $win.col1.w1.f1.priority.m add radiobutton\
     -label {Super Fast}\
     -command {SetPriority 4}\
@@ -334,7 +334,7 @@ menubutton $win.col1.w1.f1.windows\
   -variable $win.postedMenu
 tk_bindForTraversal $win.col1.w1.f1.windows
 bind $win.col1.w1.f1.windows <F10> {tk_firstMenu %W} 
-bind $win.col1.w1.f1.windows <Mod2-Key> {tk_traverseToMenu %W %A} 
+bind $win.col1.w1.f1.windows <Alt-Key> {tk_traverseToMenu %W %A} 
 
 tk_menus $win $win.col1.w1.f1.windows
 
@@ -342,7 +342,7 @@ menu $win.col1.w1.f1.windows.m\
   -font [Font $win Medium]
 tk_bindForTraversal $win.col1.w1.f1.windows.m
 bind $win.col1.w1.f1.windows.m <F10> {tk_firstMenu %W} 
-bind $win.col1.w1.f1.windows.m <Mod2-Key> {tk_traverseToMenu %W %A} 
+bind $win.col1.w1.f1.windows.m <Alt-Key> {tk_traverseToMenu %W %A} 
   $win.col1.w1.f1.windows.m add command\
     -label {Budget}\
     -command "UIShowBudgetAndWait"
@@ -530,7 +530,7 @@ frame $win.col1.w1.f2.f2\
   -relief flat
 tk_bindForTraversal $win.col1.w1.f2.f2
 bind $win.col1.w1.f2.f2 <F10> {tk_firstMenu %W} 
-bind $win.col1.w1.f2.f2 <Mod2-Key> {tk_traverseToMenu %W %A} 
+bind $win.col1.w1.f2.f2 <Alt-Key> {tk_traverseToMenu %W %A} 
 
 SetHelp $win.col1.w1.f2.f2 Head.Log
 
@@ -572,7 +572,7 @@ if {[sim MultiPlayerMode]} {
     -relief flat
   tk_bindForTraversal $win.col1.w1.f2.f3
   bind $win.col1.w1.f2.f3 <F10> {tk_firstMenu %W} 
-  bind $win.col1.w1.f2.f3 <Mod2-Key> {tk_traverseToMenu %W %A} 
+  bind $win.col1.w1.f2.f3 <Alt-Key> {tk_traverseToMenu %W %A} 
 
   button $win.col1.w1.f2.f3.chat \
     -font [Font $win Large] \
@@ -595,7 +595,7 @@ if {[sim MultiPlayerMode]} {
   set $win.col1.w1.f2.f3.entry.value ""
   tk_bindForTraversal $win.col1.w1.f2.f3.entry
   bind $win.col1.w1.f2.f3.entry <F10> {tk_firstMenu %W} 
-  bind $win.col1.w1.f2.f3.entry <Mod2-Key> {tk_traverseToMenu %W %A}
+  bind $win.col1.w1.f2.f3.entry <Alt-Key> {tk_traverseToMenu %W %A}
   bind $win.col1.w1.f2.f3.entry <Return> "DoEnterMessage %W %W.value"
   bind $win.col1.w1.f2.f3.entry <Escape> "DoEvalMessage %W %W.value"
   bind $win.col1.w1.f2.f3.entry <Any-Enter> {focus %W}

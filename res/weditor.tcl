@@ -120,7 +120,7 @@ if {0} {
     -relief flat
   tk_bindForTraversal $win.topframe.controls.update
   bind $win.topframe.controls.update <F10> {tk_firstMenu %W} 
-  bind $win.topframe.controls.update <Mod2-Key> {tk_traverseToMenu %W %A} 
+  bind $win.topframe.controls.update <Alt-Key> {tk_traverseToMenu %W %A} 
   tk_menus $win $win.topframe.controls.update
 
   SetHelp $win.topframe.controls.update Editor.Display
@@ -129,7 +129,7 @@ if {0} {
     -font [Font $win Medium]
   tk_bindForTraversal $win.topframe.controls.update.m
   bind $win.topframe.controls.update.m <F10> {tk_firstMenu %W} 
-  bind $win.topframe.controls.update.m <Mod2-Key> {tk_traverseToMenu %W %A} 
+  bind $win.topframe.controls.update.m <Alt-Key> {tk_traverseToMenu %W %A} 
     $win.topframe.controls.update.m add radiobutton\
       -label {Always}\
       -variable Skip.$win\
@@ -166,7 +166,7 @@ menubutton $win.topframe.controls.options\
   -relief flat
 tk_bindForTraversal $win.topframe.controls.options
 bind $win.topframe.controls.options <F10> {tk_firstMenu %W} 
-bind $win.topframe.controls.options <Mod2-Key> {tk_traverseToMenu %W %A} 
+bind $win.topframe.controls.options <Alt-Key> {tk_traverseToMenu %W %A} 
 tk_menus $win $win.topframe.controls.options
 
 SetHelp $win.topframe.controls.options Editor.Options
@@ -175,7 +175,7 @@ menu $win.topframe.controls.options.m\
   -font [Font $win Medium]
 tk_bindForTraversal $win.topframe.controls.options.m
 bind $win.topframe.controls.options.m <F10> {tk_firstMenu %W} 
-bind $win.topframe.controls.options.m <Mod2-Key> {tk_traverseToMenu %W %A} 
+bind $win.topframe.controls.options.m <Alt-Key> {tk_traverseToMenu %W %A} 
 $win.topframe.controls.options.m add checkbutton\
   -label {Auto Goto}\
   -variable AutoGoto.$win\
