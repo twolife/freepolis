@@ -219,7 +219,7 @@ drawFireRadius(SimView *view)
   short x, y;
 
   drawAll(view);
-  for (x = 0; x < SmY; x++) {
+  for (x = 0; x < SmX; x++) {
     for (y = 0; y < SmY; y++) {
       maybeDrawRect(view, GetCI(FireRate[x][y]),
 		    x * 24, y * 24, 24, 24);
