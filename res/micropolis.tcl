@@ -413,8 +413,8 @@ sim ResetDynamic
 # the font in res (because it's already in the system fonts).  These lines
 # are for other systems that lack the font.
 set FontPath "[pwd]/res/dejavu-lgc"
-system "xset -fp $FontPath >/dev/null 2>&1"
-system "xset +fp $FontPath >/dev/null 2>&1"
+system "xset -fp \"$FontPath\" >/dev/null 2>&1"
+system "xset +fp \"$FontPath\" >/dev/null 2>&1"
 
 
 ########################################################################
@@ -2286,12 +2286,12 @@ proc NameComplete {win Type} {
 
 proc ShowFileDialog {win Path Pattern} {
   busy $win {
-    set Path [lindex [split $Path] 0]
+    #set Path [lindex [split $Path] 0]
     if {[$win.files.files size] > 0} {
       $win.files.files delete 0 end
     }
     # read directory
-    if {[catch "exec ls -F $Path" Result]} {
+    if {[catch "exec ls -F \"$Path\"" Result]} {
       set ElementList {}
     }
     if {[string match $Result "* not found"]} {
