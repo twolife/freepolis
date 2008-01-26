@@ -3310,12 +3310,33 @@ proc UpdateScenarioButtonID {win id} {
 
 
 proc UpdateScenarioButton {win data} {
+  global Messages
+
   set type [lindex $data 0]
   set id [lindex $data 1]
   set over [WindowLink $win.$id.over]
   set enabled [WindowLink $win.$id.enabled]
   set checked [WindowLink $win.$id.checked]
   #echo "WIN $win TYPE $type ID $id OVER $over ENABLED $enabled CHECKED $checked"
+  if {$over} {
+    if {[lindex ${data} 2] == "DoPickScenario"} {
+      catch {text $win.desc \
+      	-borderwidth 2 \
+      	-relief flat \
+      	-wrap word \
+      	-state normal \
+      	-font [Font $win Large]}
+      
+      $win.desc configure -state normal
+      $win.desc delete 0.0 end
+      $win.desc insert end "[lindex $Messages([lindex ${data} 3]) 1]\n\n[lindex $Messages([lindex ${data} 3]) 2]"
+      $win.desc configure -state disabled
+      
+      place $win.desc -x 232 -y 170 -width 280 -height 285
+    }
+  } else {
+    catch {destroy $win.desc}
+  }
   if {$enabled} {
     if {$checked} {
       if {$over} {
