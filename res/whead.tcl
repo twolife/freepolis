@@ -324,6 +324,10 @@ bind $win.col1.w1.f1.priority.m <Alt-Key> {tk_traverseToMenu %W %A}
     -command {SetPriority 0}\
     -value {0}\
     -variable Priority
+  $win.col1.w1.f1.priority.m add checkbutton\
+    -label {Pause}\
+    -command {TogglePause}\
+    -variable Pause
 
 SetHelp $win.col1.w1.f1.windows Head.WindowsMenu
 

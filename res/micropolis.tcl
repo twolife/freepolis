@@ -97,6 +97,7 @@ set DemandCom 0
 set DemandInd 0
 set Priority 2
 set Time 3
+set Pause 0
 set AutoGoto 1
 set AutoBudget 1
 set Disasters 1
@@ -4917,12 +4918,14 @@ proc oops {} {
 
 
 proc TogglePause {} {
-  global State
+  global State Pause
 
   if {"$State" != "play" || [sim Speed]} {
     sim Speed 0
+    set Pause 1
   } else {
     sim Speed 3
+    set Pause 0
   }
   MakeRunningSound
 }
