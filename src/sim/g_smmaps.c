@@ -295,14 +295,26 @@ void drawPower(SimView *view)
 		case 16:
 		  { 
 			unsigned short *p;
-			p = (short *)image;
-			p[0] = p[1] = p[2] = pix;
+			p = (unsigned short *)image;
+			if (view->x->x_big_endian) {
+			  p[0] = p[1] = p[2] = ((pix & 0xff) << 8) | ((pix & 0xff00) >> 8);
+			} else {
+			  p[0] = p[1] = p[2] = pix;
+			}
 			image += lineBytes;
-			p = (short *)image;
-			p[0] = p[1] = p[2] = pix;
+			p = (unsigned short *)image;
+			if (view->x->x_big_endian) {
+			  p[0] = p[1] = p[2] = ((pix & 0xff) << 8) | ((pix & 0xff00) >> 8);
+			} else {
+			  p[0] = p[1] = p[2] = pix;
+			}
 			image += lineBytes;
-			p = (short *)image;
-			p[0] = p[1] = p[2] = pix;
+			p = (unsigned short *)image;
+			if (view->x->x_big_endian) {
+			  p[0] = p[1] = p[2] = ((pix & 0xff) << 8) | ((pix & 0xff00) >> 8);
+			} else {
+			  p[0] = p[1] = p[2] = pix;
+			}
 			image += lineBytes;
 		  }
 		  break;
@@ -315,12 +327,21 @@ void drawPower(SimView *view)
 			  unsigned char *img =
 				image;
 			  for (x = 0; x < 4; x++) {
-				*(img++) = (pix >> 0) & 0xff;
-				*(img++) = (pix >> 8) & 0xff;
-				*(img++) = (pix >> 16) & 0xff;
-				if (pixelBytes == 4) {
-				  img++;
-				} // if
+			  	if (view->x->x_big_endian) {
+				  if (pixelBytes == 4) {
+				    img++;
+				  } // if
+				  *(img++) = (pix >> 16) & 0xff;
+				  *(img++) = (pix >> 8) & 0xff;
+				  *(img++) = (pix >> 0) & 0xff;
+				} else {
+				  *(img++) = (pix >> 0) & 0xff;
+				  *(img++) = (pix >> 8) & 0xff;
+				  *(img++) = (pix >> 16) & 0xff;
+				  if (pixelBytes == 4) {
+				    img++;
+				  } // if
+				}
 			  } // for x
 			  image += lineBytes;
 			} // for y
