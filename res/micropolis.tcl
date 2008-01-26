@@ -2044,13 +2044,13 @@ proc DoFileDialog {win Message Path Pattern FileName ActionOk ActionCancel} {
       wm withdraw $win"
   bind $win.files.files "<Double-Button-1>" "\
     FileSelectDouble $win %W %y $Pattern \"
-	$ActionOk \[$win.file.file get\] \[$win.path.path get\]\""
+	$ActionOk {\[$win.file.file get\]} {\[$win.path.path get\]}\""
   bind $win.path.path <Return> "
     ShowFileDialog $win \[$win.path.path get\] $Pattern
     $win.file.file cursor 0
     focus $win.file.file"
   bind $win.file.file <Return> "\
-    $ActionOk \[$win.file.file get\] \[$win.path.path get]
+    $ActionOk \[$win.file.file get\] \[$win.path.path get\]
     wm withdraw $win"
 }
 
@@ -2297,7 +2297,7 @@ proc ShowFileDialog {win Path Pattern} {
     if {[string match $Result "* not found"]} {
       set ElementList {}
     }
-    set ElementList [lsort $Result]
+    set ElementList [lsort [split $Result "\n"]]
 
     # insert ..
     if {[string compare $Path "/"]} {
@@ -5132,7 +5132,7 @@ proc UIDoLoadCity {name path} {
   if {![string match *.cty $name]} {
     set name $name.cty
   }
-  MakeHistory "DoLoadCity $path/$name"
+  MakeHistory "DoLoadCity {$path/$name}"
 }
 
 
