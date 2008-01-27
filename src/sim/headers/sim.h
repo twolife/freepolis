@@ -102,9 +102,6 @@
 #include <sys/ioctl.h>
 #include <sys/resource.h>
 #ifndef MSDOS
-#ifndef HPUX
-#include <alloca.h>
-#endif
 #include <sys/mman.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
