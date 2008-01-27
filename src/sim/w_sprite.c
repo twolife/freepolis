@@ -898,11 +898,13 @@ DoShipSprite(SimSprite *sprite)
     sprite->frame = 0;
     return;
   }
-  for (z = 0; z < 8; z++) {
-    if (t == BtClrTab[z]) break;
-    if (z == 7) {
-      ExplodeSprite(sprite);
-      Destroy(sprite->x + 48, sprite->y);
+  if (!NoDisasters) {
+    for (z = 0; z < 8; z++) {
+      if (t == BtClrTab[z]) break;
+      if (z == 7) {
+        ExplodeSprite(sprite);
+        Destroy(sprite->x + 48, sprite->y);
+      }
     }
   }
 }
