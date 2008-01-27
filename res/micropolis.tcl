@@ -5250,8 +5250,7 @@ proc DoLeaveGame {head} {
 proc UILoseGame {} {
   global Messages
   UIShowPicture 200
-  sim Speed 0
-  sim Pause 1
+  sim Pause
   AskQuestion [Color . #ff0000 #ffffff] [lindex $Messages(200) 1] \
     [lindex $Messages(200) 2] \
     ""\
