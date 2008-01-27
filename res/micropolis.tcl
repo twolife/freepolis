@@ -5248,8 +5248,15 @@ proc DoLeaveGame {head} {
 
 
 proc UILoseGame {} {
-  UIPickScenarioMode
+  global Messages
   UIShowPicture 200
+  sim Speed 0
+  sim Pause 1
+  AskQuestion [Color . #ff0000 #ffffff] [lindex $Messages(200) 1] \
+    [lindex $Messages(200) 2] \
+    ""\
+    ""\
+    "{Ok} SelectCity.Yes {UIPickScenarioMode}"
 }
 
 
