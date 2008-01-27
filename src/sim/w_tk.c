@@ -475,8 +475,8 @@ TileViewEventProc(ClientData clientData, XEvent *eventPtr)
 /* XXX: redraw all views showing cursor */
 /* XXX: also, make sure switching tools works w/out moving */
     if (((view->tool_showing != last_showing) ||
-	 (view->tool_x != last_x) ||
-	 (view->tool_y != last_y))) {
+        ((view->tool_x >> 4) != (last_x >> 4)) ||
+        ((view->tool_y >> 4)  != (last_y >> 4)))) {
 #if 1
       EventuallyRedrawView(view);
 #else
