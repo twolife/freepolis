@@ -25,4 +25,4 @@ clean:
 	cd src/tclx && $(MAKE) clean
 	rm -f res/sim
 
-.PHONY: clean tcl tk tclx sim
+.PHONY: all clean tcl tk tclx sim
