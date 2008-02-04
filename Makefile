@@ -6,8 +6,9 @@ DOCDIR=$(PREFIX)/share/doc/micropolis
 
 INSTALL=install
 
-DIRS=	$(DATADIR)/res/sounds $(DATADIR)/res/dejavu-lgc $(DATADIR)/images \
-	$(DATADIR)/cities $(LIBEXECDIR) $(BINDIR) $(DOCDIR)
+DIRS=	$(DESTDIR)/$(DATADIR)/res/sounds $(DESTDIR)/$(DATADIR)/res/dejavu-lgc \
+	$(DESTDIR)/$(DATADIR)/images $(DESTDIR)/$(DATADIR)/cities \
+	$(DESTDIR)/$(LIBEXECDIR) $(DESTDIR)/$(BINDIR) $(DESTDIR)/$(DOCDIR)
 
 RES=	res/buildidx.tcl res/button.tcl res/entry.tcl res/help.tcl res/hexa.112 \
 	res/hexa.232 res/hexa.384 res/hexa.385 res/hexa.386 res/hexa.387 \
@@ -57,32 +58,32 @@ install-dirs:
 	$(INSTALL) -d $(DIRS)
 
 install-bin:
-	$(INSTALL) -m 0755 res/sim $(LIBEXECDIR)/sim
-	$(INSTALL) -m 0755 res/sounds/player $(DATADIR)/res/sounds/player
-	echo "SIMHOME=$(DATADIR); export SIMHOME" >$(PREFIX)/bin/Micropolis
-	echo "echo \"Starting Micropolis in \$${SIMHOME} ... \"" >>$(PREFIX)/bin/Micropolis
-	echo "cd $(DATADIR) && $(LIBEXECDIR)/sim \$$*" >>$(PREFIX)/bin/Micropolis
-	chmod 755 $(PREFIX)/bin/Micropolis
+	$(INSTALL) -m 0755 res/sim $(DESTDIR)/$(LIBEXECDIR)/sim
+	$(INSTALL) -m 0755 res/sounds/player $(DESTDIR)/$(DATADIR)/res/sounds/player
+	echo "SIMHOME=$(DATADIR); export SIMHOME" >$(DESTDIR)/$(BINDIR)/Micropolis
+	echo "echo \"Starting Micropolis in \$${SIMHOME} ... \"" >>$(DESTDIR)/$(BINDIR)/Micropolis
+	echo "cd $(DATADIR) && $(LIBEXECDIR)/sim \$$*" >>$(DESTDIR)/$(BINDIR)/Micropolis
+	chmod 755 $(DESTDIR)/$(BINDIR)/Micropolis
 
 install-res: install-res-sounds install-res-dejavu-lgc
 	for file in $(RES); do \
-		install -m 0644 $$file $(DATADIR)/$$file; \
+		install -m 0644 $$file $(DESTDIR)/$(DATADIR)/$$file; \
 	done
 
 install-res-sounds:
-	find res/sounds -type f -name \*.wav -exec $(INSTALL) -m 0644 {} $(DATADIR)/res/sounds/ \;
+	find res/sounds -type f -name \*.wav -exec $(INSTALL) -m 0644 {} $(DESTDIR)/$(DATADIR)/res/sounds/ \;
 
 install-res-dejavu-lgc:
-	find res/dejavu-lgc -type f -exec $(INSTALL) -m 0644 {} $(DATADIR)/res/dejavu-lgc/ \;
+	find res/dejavu-lgc -type f -exec $(INSTALL) -m 0644 {} $(DESTDIR)/$(DATADIR)/res/dejavu-lgc/ \;
 
 install-images:
-	find images -type f -exec $(INSTALL) -m 0644 {} $(DATADIR)/images/ \;
+	find images -type f -exec $(INSTALL) -m 0644 {} $(DESTDIR)/$(DATADIR)/images/ \;
 
 install-cities:
-	find cities -type f -exec $(INSTALL) -m 0644 {} $(DATADIR)/cities/ \;
+	find cities -type f -exec $(INSTALL) -m 0644 {} $(DESTDIR)/$(DATADIR)/cities/ \;
 
 install-doc:
-	find manual -type f -exec $(INSTALL) -m 0644 {} $(DOCDIR)/ \;
+	find manual -type f -exec $(INSTALL) -m 0644 {} $(DESTDIR)/$(DOCDIR)/ \;
 
 .PHONY: all clean install install-dirs install-bin install-res \
 	install-res-sounds install-res-dejavu-lgc install-images \
