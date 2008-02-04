@@ -3,12 +3,15 @@ DATADIR=$(PREFIX)/share/micropolis
 LIBEXECDIR=$(PREFIX)/libexec
 BINDIR=$(PREFIX)/bin
 DOCDIR=$(PREFIX)/share/doc/micropolis
+PIXMAPDIR=$(PREFIX)/share/pixmaps
+APPLICATIONSDIR=$(PREFIX)/share/applications
 
 INSTALL=install
 
 DIRS=	$(DESTDIR)/$(DATADIR)/res/sounds $(DESTDIR)/$(DATADIR)/res/dejavu-lgc \
 	$(DESTDIR)/$(DATADIR)/images $(DESTDIR)/$(DATADIR)/cities \
-	$(DESTDIR)/$(LIBEXECDIR) $(DESTDIR)/$(BINDIR) $(DESTDIR)/$(DOCDIR)
+	$(DESTDIR)/$(LIBEXECDIR) $(DESTDIR)/$(BINDIR) $(DESTDIR)/$(DOCDIR) \
+	$(DESTDIR)/$(PIXMAPDIR) $(DESTDIR)/$(APPLICATIONSDIR)
 
 RES=	res/buildidx.tcl res/button.tcl res/entry.tcl res/help.tcl res/hexa.112 \
 	res/hexa.232 res/hexa.384 res/hexa.385 res/hexa.386 res/hexa.387 \
@@ -52,7 +55,8 @@ clean:
 	cd src/tclx && $(MAKE) MAKEFLAGS= $@
 	rm -f res/sim
 
-install: res/sim install-dirs install-bin install-res install-images install-cities install-doc
+install: res/sim install-dirs install-bin install-res install-images \
+	install-cities install-doc install-desktop
 
 install-dirs:
 	$(INSTALL) -d $(DIRS)
@@ -60,10 +64,10 @@ install-dirs:
 install-bin:
 	$(INSTALL) -m 0755 res/sim $(DESTDIR)/$(LIBEXECDIR)/sim
 	$(INSTALL) -m 0755 res/sounds/player $(DESTDIR)/$(DATADIR)/res/sounds/player
-	echo "SIMHOME=$(DATADIR); export SIMHOME" >$(DESTDIR)/$(BINDIR)/Micropolis
-	echo "echo \"Starting Micropolis in \$${SIMHOME} ... \"" >>$(DESTDIR)/$(BINDIR)/Micropolis
-	echo "cd $(DATADIR) && $(LIBEXECDIR)/sim \$$*" >>$(DESTDIR)/$(BINDIR)/Micropolis
-	chmod 755 $(DESTDIR)/$(BINDIR)/Micropolis
+	echo "SIMHOME=$(DATADIR); export SIMHOME" >$(DESTDIR)/$(BINDIR)/micropolis
+	echo "echo \"Starting Micropolis in \$${SIMHOME} ... \"" >>$(DESTDIR)/$(BINDIR)/micropolis
+	echo "cd $(DATADIR) && $(LIBEXECDIR)/sim \$$*" >>$(DESTDIR)/$(BINDIR)/micropolis
+	chmod 755 $(DESTDIR)/$(BINDIR)/micropolis
 
 install-res: install-res-sounds install-res-dejavu-lgc
 	for file in $(RES); do \
@@ -85,6 +89,10 @@ install-cities:
 install-doc:
 	find manual -type f -exec $(INSTALL) -m 0644 {} $(DESTDIR)/$(DOCDIR)/ \;
 
+install-desktop:
+	$(INSTALL) -m 0644 Micropolis.desktop $(DESTDIR)/$(APPLICATIONSDIR)/micropolis.desktop
+	$(INSTALL) -m 0644 Micropolis.png $(DESTDIR)/$(PIXMAPDIR)/micropolis.png
+
 .PHONY: all clean install install-dirs install-bin install-res \
 	install-res-sounds install-res-dejavu-lgc install-images \
-	install-cities install-doc tcl tk tclx sim
+	install-cities install-doc install-desktop tcl tk tclx sim
