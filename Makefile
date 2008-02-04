@@ -93,6 +93,32 @@ install-desktop:
 	$(INSTALL) -m 0644 Micropolis.desktop $(DESTDIR)/$(APPLICATIONSDIR)/micropolis.desktop
 	$(INSTALL) -m 0644 Micropolis.png $(DESTDIR)/$(PIXMAPDIR)/micropolis.png
 
+uninstall:
+	rm -f $(DESTDIR)/$(BINDIR)/micropolis
+	rm -f $(DESTDIR)/$(LIBEXECDIR)/sim
+	-rmdir $(DESTDIR)/$(LIBEXECDIR)
+	rm -f $(DESTDIR)/$(DATADIR)/res/sounds/player
+	rm -f $(DESTDIR)/$(DATADIR)/res/sounds/*.wav
+	-rmdir $(DESTDIR)/$(DATADIR)/res/sounds
+	rm -f $(DESTDIR)/$(DATADIR)/res/dejavu-lgc/*ttf \
+		$(DESTDIR)/$(DATADIR)/res/dejavu-lgc/fonts.alias \
+		$(DESTDIR)/$(DATADIR)/res/dejavu-lgc/fonts.dir \
+		$(DESTDIR)/$(DATADIR)/res/dejavu-lgc/fonts.scale
+	-rmdir $(DESTDIR)/$(DATADIR)/res/dejavu-lgc
+	for file in $(RES); do \
+		rm $(DESTDIR)/$(DATADIR)/$$file; \
+	done
+	-rmdir $(DESTDIR)/$(DATADIR)/res
+	rm -f $(DESTDIR)/$(DATADIR)/images/*.xpm
+	-rmdir $(DESTDIR)/$(DATADIR)/images
+	rm -f $(DESTDIR)/$(DATADIR)/cities/*.cty
+	-rmdir $(DESTDIR)/$(DATADIR)/cities
+	-rmdir $(DESTDIR)/$(DATADIR)
+	rm -f $(DESTDIR)/$(DOCDIR)/*.html $(DESTDIR)/$(DOCDIR)/README
+	-rmdir $(DESTDIR)/$(DOCDIR)
+	rm -f $(DESTDIR)/$(APPLICATIONSDIR)/micropolis.desktop
+	rm -f $(DESTDIR)/$(PIXMAPDIR)/micropolis.png
+
 .PHONY: all clean install install-dirs install-bin install-res \
 	install-res-sounds install-res-dejavu-lgc install-images \
-	install-cities install-doc install-desktop tcl tk tclx sim
+	install-cities install-doc install-desktop uninstall tcl tk tclx sim
