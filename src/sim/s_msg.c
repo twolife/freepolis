@@ -340,7 +340,7 @@ doMessage(void)
       MakeSound("city", "Siren");
       break;
     case  21:
-      MakeSound("city", "Monster -speed [MonsterSpeed]");
+      MakeSound("city", "Monster");
       break;
     case 30:
       MakeSound("city", "Explosion-Low");

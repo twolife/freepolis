@@ -849,7 +849,7 @@ DoShipSprite(SimSprite *sprite)
     if ((Rand16() & 3) == 1) {
       if ((ScenarioID == 2) && /* San Francisco */
 	  (Rand(10) < 5)) {
-	MakeSound("city", "HonkHonk-Low -speed 80");
+	MakeSound("city", "HonkHonk-Low");
       } else {
 	MakeSound("city", "HonkHonk-Low");
       }
@@ -985,7 +985,7 @@ DoMonsterSprite(SimSprite *sprite)
 	  else z = ND2[d];
 	  d = 4;
 	  if (!sprite->sound_count) {
-	    MakeSound("city", "Monster -speed [MonsterSpeed]"); /* monster */
+	    MakeSound("city", "Monster"); /* monster */
 	    sprite->sound_count = 50 + Rand(100);
 	  }
 	}

@@ -5,6 +5,12 @@ TCLXHOME = ../tclx
 TCLLIBRARY = /usr/local/lib/tcl
 TKLIBRARY = /usr/local/lib/tk
 
+SDLINCLUDE =
+SDLLIBS = -lSDL -lSDL_mixer
+ 
+#SDLINCLUDE += $$(pkg-config -cflags sdl)
+#SDLLIBS += $$(pkg-config -libs sdl)
+
 CC = gcc
 
 OPTFLAGS = -O3
@@ -26,7 +32,8 @@ INCLUDES = \
 	-I$(XINCLUDE) \
 	-I$(TCLHOME) \
 	-I$(TCLXHOME)/src \
-	-I$(TKHOME)
+	-I$(TKHOME) \
+	$(SDLINCLUDE)
 
 CPPFLAGS = $(INCLUDES)
 
@@ -35,7 +42,8 @@ LIBS =	$(TCLXHOME)/libtk.a \
 	-lm \
         -lX11 \
         -lXext \
-	-lXpm
+	-lXpm \
+	$(SDLLIBS)
 
 SRCS = \
 	sim.c \

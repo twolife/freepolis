@@ -938,21 +938,11 @@ proc UISetChannelVolume {win chan vol} {
 
 
 proc EchoPlaySound {soundspec} {
-  # Temporary workaround to tell Python Sugar app to play sound.
-  global Sound ResourceDir
-  if {$Sound} {
-    #echo PlaySound [lindex $soundspec 0]
-    signal ignore SIGCHLD
-    exec "${ResourceDir}/sounds/player" "${ResourceDir}/sounds/[string tolower [lindex $soundspec 0]].wav" &
-  }
 }
 
 
 proc UIMakeSoundOn {win chan sound {opts ""}} {
-  # Send message to Python to play sound.
-  EchoPlaySound $sound
-
-  #UIDoSoundOn $win "play $sound -replay -channel $chan $opts"
+  playsound $chan $sound $opts
 }
 
 
@@ -961,11 +951,6 @@ proc UIStartSoundOn {win chan sound {opts ""}} {
   EchoPlaySound $sound
 
   #UIDoSoundOn $win "play $sound -replay -channel $chan -repeat 100 $opts"
-}
-
-
-proc UIStopSoundOn {win chan sound {opts ""}} {
-  UIDoSoundOn $win "stop $sound"
 }
 
 
@@ -982,11 +967,6 @@ proc UIStartSound {chan sound {opts ""}} {
   EchoPlaySound $sound
 
   #UIDoSound "sound play $sound -channel $chan -repeat 100 $opts"
-}
-
-
-proc UIStopSound {chan sound {opts ""}} {
-  UIDoSound "sound stop $sound"
 }
 
 
@@ -2537,7 +2517,7 @@ proc EditorToolUp {w x y} {
 
   case [$w ToolState] in \
     7 { # bulldozer
-     UIStopSoundOn $w edit 1
+      stopdozer
     } \
     10 { # chalk
       StopChalk $w

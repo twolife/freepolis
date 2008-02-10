@@ -774,6 +774,7 @@ tk_main()
   graph_command_init();
   date_command_init();
   sprite_command_init();
+  sound_command_init();
 
 #ifdef CAM
   cam_command_init();
