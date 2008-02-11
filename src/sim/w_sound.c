@@ -239,9 +239,6 @@ MakeSoundOn(SimView *view, char *channel, char *id)
 
 StartBulldozer(void)
 {
-  size_t size;
-  char buf[256];
-
   if (!UserSoundOn) return;
   if (!SoundInitialized) return;
 
