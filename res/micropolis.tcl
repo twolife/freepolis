@@ -955,10 +955,7 @@ proc UIStartSoundOn {win chan sound {opts ""}} {
 
 
 proc UIMakeSound {chan sound {opts ""}} {
-  # Send message to Python to play sound.
-  EchoPlaySound $sound
-
-  #UIDoSound "sound play $sound -replay -channel $chan $opts"
+  playsound $chan $sound $opts
 }
 
 
