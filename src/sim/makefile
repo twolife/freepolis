@@ -8,8 +8,8 @@ TKLIBRARY = /usr/local/lib/tk
 SDLINCLUDE =
 SDLLIBS = -lSDL -lSDL_mixer
  
-#SDLINCLUDE += $$(pkg-config -cflags sdl)
-#SDLLIBS += $$(pkg-config -libs sdl)
+#SDLINCLUDE += $$(pkg-config --cflags sdl)
+#SDLLIBS += $$(pkg-config --libs sdl)
 
 CC = gcc
 
