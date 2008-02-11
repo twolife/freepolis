@@ -63,8 +63,11 @@
  * CONSUMER, SO SOME OR ALL OF THE ABOVE EXCLUSIONS AND LIMITATIONS MAY
  * NOT APPLY TO YOU.
  */
+#ifdef WITH_SDL_MIXER
 #include "SDL.h"
 #include "SDL_mixer.h"
+#endif
+
 #include "sim.h"
 
 
@@ -76,7 +79,11 @@
 struct sound {
   char *id;
   char *file;
+#ifdef WITH_SDL_MIXER
   Mix_Chunk *wave;
+#else
+  void *wave;
+#endif
 };
 
 struct sound sounds[SIM_NSOUNDS] = {
@@ -129,10 +136,12 @@ struct sound sounds[SIM_NSOUNDS] = {
   { "Zone",		"zone.wav",		NULL }
 };
 
+static int SoundInitialized = 0;
+
+#ifdef WITH_SDL_MIXER
 /* Sound routines */
 
 
-int SoundInitialized = 0;
 Mix_Chunk *rumble;
 
 
@@ -256,6 +265,32 @@ StopBulldozer(void)
 
   Mix_HaltChannel(DOZER_CHANNEL);
 }
+
+#else /* WITH_SDL_MIXER */
+InitializeSound()
+{
+}
+
+ShutDownSound()
+{
+}
+
+MakeSound(char *channel, char *id)
+{
+}
+
+MakeSoundOn(SimView *view, char *channel, char *id)
+{
+}
+
+StartBulldozer(void)
+{
+}
+
+StopBulldozer(void)
+{
+}
+#endif
 
 
 /* XXX comefrom: doKeyEvent */
