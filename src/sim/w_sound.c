@@ -63,8 +63,8 @@
  * CONSUMER, SO SOME OR ALL OF THE ABOVE EXCLUSIONS AND LIMITATIONS MAY
  * NOT APPLY TO YOU.
  */
-#include <SDL/SDL.h>
-#include <SDL/SDL_mixer.h>
+#include "SDL.h"
+#include "SDL_mixer.h"
 #include "sim.h"
 
 
