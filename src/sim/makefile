@@ -5,8 +5,8 @@ TCLXHOME = ../tclx
 TCLLIBRARY = /usr/local/lib/tcl
 TKLIBRARY = /usr/local/lib/tk
 
-SDLINCLUDE = $$(./sdl_helper cflags)
-SDLLIBS = $$(./sdl_helper libs)
+SDLINCLUDE = $$(/bin/sh ./sdl_helper cflags)
+SDLLIBS = $$(/bin/sh ./sdl_helper libs)
 
 CC = gcc
 

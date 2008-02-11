@@ -1,5 +1,3 @@
-#!/bin/sh
-
 SDLINCLUDE="`pkg-config --cflags sdl 2>/dev/null`"
 SDLLIBS="`pkg-config --libs sdl 2>/dev/null`"
 
