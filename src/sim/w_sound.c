@@ -237,15 +237,6 @@ MakeSound(char *channel, char *id)
     fprintf(stderr, "Mix_PlayChannel: %s\n", Mix_GetError());
 }
 
-MakeSoundOn(SimView *view, char *channel, char *id)
-{
-  if (!UserSoundOn) return;
-  if (!SoundInitialized) return;
-
-  MakeSound(channel, id);
-}
-
-
 StartBulldozer(void)
 {
   if (!UserSoundOn) return;
@@ -269,28 +260,65 @@ StopBulldozer(void)
 #else /* WITH_SDL_MIXER */
 InitializeSound()
 {
+  SoundInitialized = 1;
 }
 
 ShutDownSound()
 {
+  SoundInitialized = 0;
 }
 
 MakeSound(char *channel, char *id)
 {
-}
+  char filename[256], player[256];
+  int i;
+  pid_t pid;
 
-MakeSoundOn(SimView *view, char *channel, char *id)
-{
+  if (!UserSoundOn) return;
+  if (!SoundInitialized) return;
+
+  for (i = 0; i < SIM_NSOUNDS; i++) {
+    if (!strcmp(sounds[i].id, id))
+      break;
+  }
+ 
+  snprintf(filename, sizeof(filename), "%s/sounds/%s", ResourceDir,
+	   sounds[i].file);
+
+  snprintf(player, sizeof(player), "%s/sounds/player", ResourceDir);
+
+  pid = fork();
+
+  switch(pid) {
+    case 0:
+      execl(player, player, filename, NULL);
+      break;
+    case -1:
+      perror("fork failed");
+      break;
+    default:
+      break;
+  }
 }
 
 StartBulldozer(void)
 {
+  MakeSound(0, "Rumble");
 }
 
 StopBulldozer(void)
 {
 }
 #endif
+
+
+MakeSoundOn(SimView *view, char *channel, char *id)
+{
+  if (!UserSoundOn) return;
+  if (!SoundInitialized) return;
+
+  MakeSound(channel, id);
+}
 
 
 /* XXX comefrom: doKeyEvent */

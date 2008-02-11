@@ -416,6 +416,10 @@ set FontPath "[pwd]/res/dejavu-lgc"
 system "xset -fp \"$FontPath\" >/dev/null 2>&1"
 system "xset +fp \"$FontPath\" >/dev/null 2>&1"
 
+# Ignore SIGCHLD for spawned sound-player childs, this should lead to them
+# being reaped by init
+signal ignore SIGCHLD
+
 
 ########################################################################
 # Messages
