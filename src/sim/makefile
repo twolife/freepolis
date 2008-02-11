@@ -5,11 +5,8 @@ TCLXHOME = ../tclx
 TCLLIBRARY = /usr/local/lib/tcl
 TKLIBRARY = /usr/local/lib/tk
 
-SDLINCLUDE =
-SDLLIBS = -lSDL -lSDL_mixer
- 
-#SDLINCLUDE += $$(pkg-config --cflags sdl)
-#SDLLIBS += $$(pkg-config --libs sdl)
+SDLINCLUDE = $$(./sdl_helper cflags)
+SDLLIBS = $$(./sdl_helper libs)
 
 CC = gcc
 
@@ -17,7 +14,7 @@ OPTFLAGS = -O3
 #OPTFLAGS = -g
 
 #DEFINES = -DIS_LINUX -DCAM -DNET
-DEFINES = -DIS_LINUX -DWITH_SDL_MIXER -DNO_AIRCRASH
+DEFINES = -DIS_LINUX -DNO_AIRCRASH
 
 CFLAGS += $(OPTFLAGS) $(DEFINES)
 
