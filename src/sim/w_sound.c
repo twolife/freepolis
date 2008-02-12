@@ -271,8 +271,21 @@ ShutDownSound()
 MakeSound(char *channel, char *id)
 {
   char filename[256], player[256];
+  static struct timeval last = {0, 0};
+  struct timeval now;
+  unsigned int diff;
   int i;
   pid_t pid;
+
+  gettimeofday(&now, NULL);
+
+  diff = ((now.tv_sec - last.tv_sec) * 1000000) +
+    (now.tv_usec - last.tv_usec);
+  
+  if (diff < 100000)
+    return;
+
+  last = now;
 
   if (!UserSoundOn) return;
   if (!SoundInitialized) return;
