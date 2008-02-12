@@ -292,6 +292,7 @@ MakeSound(char *channel, char *id)
   switch(pid) {
     case 0:
       execl(player, player, filename, NULL);
+      exit(1);
       break;
     case -1:
       perror("fork failed");
