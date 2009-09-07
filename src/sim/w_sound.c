@@ -145,7 +145,8 @@ static int SoundInitialized = 0;
 Mix_Chunk *rumble;
 
 
-InitializeSound()
+void
+InitializeSound(void)
 {
   int reserved_chans;
   char buf[256];
@@ -184,6 +185,7 @@ InitializeSound()
 }
 
 
+void
 ShutDownSound()
 {
   int i;
@@ -204,6 +206,7 @@ ShutDownSound()
 }
 
 
+void
 MakeSound(char *channel, char *id)
 {
   char buf[256];
@@ -237,6 +240,7 @@ MakeSound(char *channel, char *id)
     fprintf(stderr, "Mix_PlayChannel: %s\n", Mix_GetError());
 }
 
+void
 StartBulldozer(void)
 {
   if (!UserSoundOn) return;
@@ -249,6 +253,7 @@ StartBulldozer(void)
 }
 
 
+void
 StopBulldozer(void)
 {
   if (!UserSoundOn) return;
@@ -258,16 +263,19 @@ StopBulldozer(void)
 }
 
 #else /* WITH_SDL_MIXER */
+void
 InitializeSound()
 {
   SoundInitialized = 1;
 }
 
+void
 ShutDownSound()
 {
   SoundInitialized = 0;
 }
 
+void
 MakeSound(char *channel, char *id)
 {
   char filename[256], player[256];
@@ -315,17 +323,20 @@ MakeSound(char *channel, char *id)
   }
 }
 
+void
 StartBulldozer(void)
 {
   MakeSound(0, "Rumble");
 }
 
+void
 StopBulldozer(void)
 {
 }
 #endif
 
 
+void
 MakeSoundOn(SimView *view, char *channel, char *id)
 {
   if (!UserSoundOn) return;
@@ -336,22 +347,26 @@ MakeSoundOn(SimView *view, char *channel, char *id)
 
 
 /* XXX comefrom: doKeyEvent */
+void
 SoundOff(void)
 {
   ShutDownSound();
 }
 
 
+void
 DoStartSound(char *channel, char *id)
 {
   MakeSound(channel, id);
 }
 
+void
 DoStopSound(char *id)
 {
   StopBulldozer();
 }
 
+int
 SoundCmd(CLIENT_ARGS)
 {
   if (!strcmp(argv[2], "Rumble"))
@@ -361,13 +376,15 @@ SoundCmd(CLIENT_ARGS)
   return 0;
 }
 
+int
 DozerCmd(CLIENT_ARGS)
 {
   StopBulldozer();
   return 0;
 }
 
-sound_command_init()
+void
+sound_command_init(void)
 {
   Tcl_CreateCommand(tk_mainInterp, "playsound", SoundCmd,
 		    (ClientData)NULL, (void (*)()) NULL);

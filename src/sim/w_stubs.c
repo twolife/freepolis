@@ -81,13 +81,20 @@ short MesNum;
 short EvalChanged;
 short flagBlink;
 
+void DoStartScenario(int scenario);
+void DoStartLoad(void);
+void DoReallyStartGame(void);
+void DoPlayNewCity(void);
 
+
+void
 Spend(int dollars)
 {
   SetFunds(TotalFunds - dollars);
 }
 
 
+void
 SetFunds(int dollars)
 {
   TotalFunds = dollars;
@@ -97,7 +104,7 @@ SetFunds(int dollars)
 
 /* Mac */
 
-QUAD TickCount()
+QUAD TickCount(void)
 {
   struct timeval time;
 
@@ -117,7 +124,8 @@ int size;
 
 /* w_hlhandlers.c */
 
-GameStarted()
+void
+GameStarted(void)
 {
   InvalidateMaps();
   InvalidateEditors();
@@ -150,24 +158,28 @@ GameStarted()
 }
 
 
-DoPlayNewCity()
+void
+DoPlayNewCity(void)
 {
   Eval("UIPlayNewCity");
 }
 
 
-DoReallyStartGame()
+void
+DoReallyStartGame(void)
 {
   Eval("UIReallyStartGame");
 }
 
 
-DoStartLoad()
+void
+DoStartLoad(void)
 {
   Eval("UIStartLoad");
 }
 
 
+void
 DoStartScenario(int scenario)
 {
   char buf[256];
@@ -177,20 +189,23 @@ DoStartScenario(int scenario)
 }
 
 
-DropFireBombs()
+void
+DropFireBombs(void)
 {
   Eval("DropFireBombs");
 }
 
 
-InitGame()
+void
+InitGame(void)
 {
   sim_skips = sim_skip = sim_paused = sim_paused_speed = heat_steps = 0;
   setSpeed(0);
 }
 
 
-ReallyQuit()
+void
+ReallyQuit(void)
 {
   sim_exit(0); // Just sets tkMustExit and ExitReturn
 }

@@ -679,9 +679,243 @@ extern SimSprite *GetSprite();
 extern SimSprite *MakeSprite();
 extern SimSprite *MakeNewSprite();
 
-extern int setSpeed(short speed);
-extern int setSkips(int skips);
-extern int SetGameLevel(short level);
-extern int SetGameLevelFunds(short level);
-
 extern struct XDisplay *XDisplays;
+
+/* Functions referenced from other files */
+/* g_ani.c */
+void animateTiles(void);
+/* g_bigmap.c */
+void WireDrawBeegMapRect(SimView *view, short x, short y, short w, short h);
+void MemDrawBeegMapRect(SimView *view, int x, int y, int w, int h);
+/* g_map.c */
+void setUpMapProcs(void);
+void MemDrawMap(SimView *view);
+/* g_setup.c */
+void GetViewTiles(SimView *view);
+void GetPixmaps(XDisplay *xd);
+/* g_smmaps.c */
+void drawAll(SimView *view);
+void drawRes(SimView *view);
+void drawCom(SimView *view);
+void drawInd(SimView *view);
+void drawLilTransMap(SimView *view);
+void drawPower(SimView *view);
+void drawDynamic(SimView *view);
+/* rand.c */
+int sim_rand(void);
+void sim_srand(u_int seed);
+/* sim.c */
+void sim_exit(int val);
+void sim_update_editors(void);
+void sim_update(void);
+void sim_init(void);
+void sim_really_exit(int val);
+void sim_loop(int doSim);
+/* s_alloc.c */
+void initMapArrays(void);
+/* s_disast.c */
+void DoDisasters(void);
+void DoFlood(void);
+void MakeFlood(void);
+void MakeEarthquake(void);
+void MakeMeltdown(void);
+void MakeFire(void);
+void FireBomb(void);
+/* s_eval.c */
+void EvalInit(void);
+void CityEvaluation(void);
+int GetFire(void);
+int GetUnemployment(void);
+int AverageTrf(void);
+/* s_fileio.c */
+int LoadCity(char *filename);
+void SaveCity(void);
+void SaveCityAs(char *filename);
+void LoadScenario(short s);
+/* s_gen.c */
+void ClearMap(void);
+void SmoothTrees(void);
+void SmoothRiver(void);
+void GenerateSomeCity(int r);
+void ClearUnnatural(void);
+void SmoothWater(void);
+void GenerateNewCity(void);
+/* s_init.c */
+void ResetMapState(void);
+void ResetEditorState(void);
+void InitWillStuff(void);
+/* s_msg.c */
+void SendMessages(void);
+void SendMesAt(short Mnum, short x, short y);
+void ClearMes(void);
+int SendMes(int Mnum);
+void SendMesAt(short Mnum, short x, short y);
+void doMessage(void);
+/* s_power.c */
+void PushPowerStack(void);
+void DoPowerScan(void);
+int MoveMapSim (short MDir);
+/* s_scan.c */
+void FireAnalysis(void);
+void PopDenScan(void);
+void CrimeScan(void);
+void PTLScan(void);
+/* s_sim.c */
+void SimFrame(void);
+void DoSimInit(void);
+void SeedRand(int seed);
+void DoMeltdown(int SX, int SY);
+void FireZone(int Xloc, int Yloc, int ch);
+int Rand16(void);
+int Rand16Signed(void);
+void RandomlySeedRand();
+void RepairZone(short ZCent, short zsize);
+void DoSPZone(short PwrOn);
+void UpdateFundEffects(void);
+/* s_traf.c */
+int FindPRoad(void);
+int MakeTraf(int Zt);
+/* s_zone.c */
+void DoZone(void);
+int SetZPower(void);
+int RZPop(int Ch9);
+int CZPop(int Ch9);
+int IZPop(int Ch9);
+int DoFreePop (void);
+/* w_budget.c */
+void UpdateBudgetWindow(void);
+void InitFundingLevel(void);
+void drawCurrPercents(void);
+void DoBudget(void);
+void drawBudgetWindow(void);
+void DoBudgetFromMenu(void);
+void UpdateBudget(void);
+/* w_con.c */
+int ConnecTile(short x, short y, short *TileAdrPtr, short Command);
+/* w_date.c */
+void date_command_init(void);
+/* w_editor.c */
+void DoUpdateEditor(SimView *view);
+void editor_command_init(void);
+void DoNewEditor(SimView *view);
+/* w_eval.c */
+void scoreDoer(void);
+void ChangeEval(void);
+/* w_graph.c */
+void graphDoer(void);
+void initGraphs(void);
+void ChangeCensus(void);
+void doAllGraphs(void);
+void DestroyGraph(SimGraph *graph);
+void InitGraphMax(void);
+void graph_command_init(void);
+int ConfigureSimGraph(Tcl_Interp *interp, SimGraph *graph, int argc, char **argv, int flags);
+/* w_keys.c */
+void ResetLastKeys(void);
+void doKeyUp(SimView *view, short charCode);
+void doKeyDown(SimView *view, short charCode);
+/* w_map.c */
+int DoUpdateMap(SimView *view);
+void map_command_init(void);
+void DoNewMap(SimView *view);
+/* w_resrc.c */
+void GetIndString(char *str, int id, short num);
+/* w_sim.c */
+void sim_command_init(void);
+/* w_sound.c */
+void InitializeSound(void);
+void MakeSound(char *channel, char *id);
+void MakeSoundOn(SimView *view, char *channel, char *id);
+void SoundOff(void);
+void StartBulldozer(void);
+void StopBulldozer(void);
+void sound_command_init(void);
+/* w_sprite.c */
+void MoveObjects(void);
+void MakeExplosion(int x, int y);
+void MakeExplosionAt(int x, int y);
+void GenerateShip(void);
+void GeneratePlane(int x, int y);
+void GenerateCopter(int x, int y);
+void GenerateTrain(int x, int y);
+void MakeMonster(void);
+void MakeTornado(void);
+void MakeAirCrash(void);
+void DestroyAllSprites(void);
+void DrawObjects(SimView *view);
+void sprite_command_init(void);
+/* w_stubs.c */
+void SetFunds(int dollars);
+void Spend(int dollars);
+void DropFireBombs(void);
+QUAD TickCount(void);
+void GameStarted(void);
+void InitGame(void);
+void ReallyQuit(void);
+/* w_tk.c */
+void tk_main(void);
+void StopEarthquake(void);
+void CancelRedrawView(SimView *view);
+void RedrawMaps(void);
+void EventuallyRedrawView(SimView *view);
+void StopToolkit(void);
+void InvalidateEditors(void);
+int Eval(char *buf);
+void DoEarthQuake(void);
+void Kick(void);
+void InvalidateMaps(void);
+int ConfigureTileView(Tcl_Interp *interp, SimView *view, int argc, char **argv, int flags);
+void DidStopPan(SimView *view);
+void RedrawEditors(void);
+void StartMicropolisTimer(void);
+void StopMicropolisTimer(void);
+/* w_tool.c */
+void ToolDrag(SimView *view, int px, int py);
+void ToolUp(SimView *view, int x, int y);
+void ChalkTo(SimView *view, int x, int y);
+void ChalkStart(SimView *view, int x, int y, int color);
+short tally(short tileValue);
+int bulldozer_tool(SimView *view, short x, short y);
+void setWandState(SimView *view, short state);
+void ToolDown(SimView *view, int x, int y);
+void DoTool(SimView *view, short tool, short x, short y);
+/* w_update.c */
+void DoUpdateHeads(void);
+void UpdateFunds(void);
+void UpdateEvaluation(void);
+void UpdateGraphs(void);
+void UpdateEditors(void);
+void UpdateMaps(void);
+void UpdateHeads(void);
+void doTimeStuff(void);
+/* w_util.c */
+void DoNewGame(void);
+void setCityName(char *name);
+void setAnyCityName(char *name);
+void DoSetMapState(SimView *view, short state);
+void makeDollarDecimalStr(char *numStr, char *dollarStr);
+int CurrentYear(void);
+void SetYear(int year);
+void Pause(void);
+void Resume(void);
+void setSpeed(short speed);
+void setSkips(int skips);
+void SetGameLevel(short level);
+void SetGameLevelFunds(short level);
+/* w_x.c */
+void DoTimeoutListen(void);
+void DoStopMicropolis(void);
+void UpdateFlush(void);
+void DoPanTo(struct SimView *view, int x, int y);
+void DoResizeView(SimView *view, int w, int h);
+void DestroyView(SimView *view);
+void ViewToPixelCoords(SimView *view, int x, int y, int *outx, int *outy);
+void FreeInk(Ink *ink);
+void AddInk(Ink *ink, int x, int y);
+void StartInk(Ink *ink, int x, int y);
+void DoPanBy(struct SimView *view, int dx, int dy);
+void ViewToTileCoords(SimView *view, int x, int y, int *outx, int *outy);
+void EraseOverlay(void);
+SimView *InitNewView(SimView *view, char *title, int class, int w, int h);
+void IncRefDisplay(XDisplay *xd);
+void DecRefDisplay(XDisplay *xd);

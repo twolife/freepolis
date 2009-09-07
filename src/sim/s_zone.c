@@ -64,8 +64,31 @@
 
 /* Zone Stuff */
 
+void ZonePlop (int base);
+void IndPlop (int Den, int Value);
+void ComPlop (int Den, int Value);
+void ResPlop (int Den, int Value);
+int EvalLot (int x, int y);
+void BuildHouse(int value);
+void DoIndOut(int pop, int value);
+void DoComOut(int pop, int value);
+void DoResOut(int pop, int value);
+void IncROG(int amount);
+void DoIndIn(int pop, int value);
+void DoComIn(int pop, int value);
+void DoResIn(int pop, int value);
+void MakeHosp(void);
+void DoResidential(int ZonePwrFlg);
+int EvalRes (int traf);
+int EvalCom (int traf);
+int GetCRVal(void);
+void DoCommercial(int ZonePwrFlg);
+void DoIndustrial(int ZonePwrFlg);
+int EvalInd (int traf);
+void DoHospChur(void);
 
-DoZone(void)
+
+void DoZone(void)
 {
   short ZonePwrFlg;
 
@@ -94,6 +117,7 @@ DoZone(void)
 }
 
 
+void
 DoHospChur(void)
 {
   if (CChr9 == HOSPITAL) {
@@ -118,13 +142,16 @@ DoHospChur(void)
 #define ASCBIT (ANIMBIT | CONDBIT | BURNBIT)
 #define REGBIT (CONDBIT | BURNBIT)
 
+void
 SetSmoke(int ZonePower)
 {
   static short AniThis[8] = {    T,    F,    T,    T,    F,    F,    T,    T };
   static short DX1[8]	  = {   -1,    0,    1,    0,    0,    0,    0,    1 };
   static short DY1[8]	  = {   -1,    0,   -1,   -1,    0,    0,   -1,   -1 };
+#if 0
   static short DX2[8]	  = {   -1,    0,    1,    1,    0,    0,    1,    1 };
   static short DY2[8]	  = {   -1,    0,    0,   -1,    0,    0,   -1,    0 };
+#endif
   static short AniTabA[8] = {    0,    0,   32,   40,    0,    0,   48,   56 };
   static short AniTabB[8] = {    0,    0,   36,   44,    0,    0,   52,   60 };
   static short AniTabC[8] = { IND1,    0, IND2, IND4,    0,    0, IND6, IND8 };
@@ -158,6 +185,7 @@ SetSmoke(int ZonePower)
 }
 
 
+void
 DoIndustrial(int ZonePwrFlg)
 {
   short tpop, zscore, TrfGood;
@@ -189,6 +217,7 @@ DoIndustrial(int ZonePwrFlg)
 }
 
 
+void
 DoCommercial(int ZonePwrFlg)
 {
   register short tpop, TrfGood;
@@ -227,6 +256,7 @@ DoCommercial(int ZonePwrFlg)
 }
 
 
+void
 DoResidential(int ZonePwrFlg)
 {
   short tpop, zscore, locvalve, value, TrfGood;
@@ -269,6 +299,7 @@ DoResidential(int ZonePwrFlg)
 }
 
 
+void
 MakeHosp(void)
 {
   if (NeedHosp > 0) {
@@ -284,6 +315,7 @@ MakeHosp(void)
 }
 
 
+int
 GetCRVal(void)
 {
   register short LVal;
@@ -297,6 +329,7 @@ GetCRVal(void)
 }
 
 
+void
 DoResIn(int pop, int value)
 {
   short z;
@@ -324,6 +357,7 @@ DoResIn(int pop, int value)
 }
 
 
+void
 DoComIn(int pop, int value)
 {
   register short z;
@@ -339,6 +373,7 @@ DoComIn(int pop, int value)
 }
 
 
+void
 DoIndIn(int pop, int value)
 {
   if (pop < 4) {
@@ -348,12 +383,14 @@ DoIndIn(int pop, int value)
 }
 
 
+void
 IncROG(int amount)
 {
   RateOGMem[SMapX>>3][SMapY>>3] += amount<<2;
 }
 
 
+void
 DoResOut(int pop, int value)
 {
   static short Brdr[9] = {0,3,6,1,4,7,2,5,8};
@@ -397,6 +434,7 @@ DoResOut(int pop, int value)
 }
 
 
+void
 DoComOut(int pop, int value)
 {
   if (pop > 1) {
@@ -411,6 +449,7 @@ DoComOut(int pop, int value)
 }
 
 
+void
 DoIndOut(int pop, int value)
 {
   if (pop > 1) {
@@ -425,6 +464,7 @@ DoIndOut(int pop, int value)
 }
 
 
+int
 RZPop(int Ch9)
 {
   short CzDen;
@@ -434,6 +474,7 @@ RZPop(int Ch9)
 }
 
 
+int
 CZPop(int Ch9)
 {
   short CzDen;
@@ -444,6 +485,7 @@ CZPop(int Ch9)
 }
 
 
+int
 IZPop(int Ch9)
 {
   short CzDen;
@@ -454,6 +496,7 @@ IZPop(int Ch9)
 }
 
 
+void
 BuildHouse(int value)
 {
   short z, score, hscore, BestLoc;
@@ -487,6 +530,7 @@ BuildHouse(int value)
 }
 
 
+void
 ResPlop (int Den, int Value)
 {
   short base;
@@ -496,6 +540,7 @@ ResPlop (int Den, int Value)
 }
 
 
+void
 ComPlop (int Den, int Value)
 {
   short base;
@@ -505,6 +550,7 @@ ComPlop (int Den, int Value)
 }
 
 
+void
 IndPlop (int Den, int Value)
 {
   short base;
@@ -514,6 +560,7 @@ IndPlop (int Den, int Value)
 }
 
 
+int
 EvalLot (int x, int y)
 {
   short z, score;
@@ -538,6 +585,7 @@ EvalLot (int x, int y)
 }
 
 
+void
 ZonePlop (int base)
 {
   short z, x;
@@ -549,7 +597,7 @@ ZonePlop (int base)
     int yy = SMapY + Zy[z];
     if (TestBounds(xx, yy)) {
       x = Map[xx][yy] & LOMASK;
-      if ((x >= FLOOD) && (x < ROADBASE)) return (FALSE);
+      if ((x >= FLOOD) && (x < ROADBASE)) return;
     }
   }
   for (z = 0; z < 9; z++) {
@@ -566,6 +614,7 @@ ZonePlop (int base)
 }
 
 
+int
 EvalRes (int traf)
 {
   register short Value;
@@ -585,6 +634,7 @@ EvalRes (int traf)
 }
 
 
+int
 EvalCom (int traf)
 {
   short Value;
@@ -595,6 +645,7 @@ EvalCom (int traf)
 }
 
 
+int
 EvalInd (int traf)
 {
   if (traf < 0) return (-1000);
@@ -602,6 +653,7 @@ EvalInd (int traf)
 }
 
 
+int
 DoFreePop (void)
 {
   short count;
@@ -621,9 +673,12 @@ DoFreePop (void)
 }
 
 
+int
 SetZPower(void)		/* set bit in MapWord depending on powermap  */
 {
+#if 0
   short z;
+#endif
   QUAD PowerWrd;
 
 /* TestPowerBit was taking alot of time so I inlined it. -Don */

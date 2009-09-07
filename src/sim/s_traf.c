@@ -72,8 +72,17 @@ short LDir;
 short Zsource;
 short TrafMaxX, TrafMaxY;
 
+int GetFromMap(int x);
+int DriveDone(void);
+int TryGo(int z);
+int RoadTest(int x);
+void PullPos(void);
+void SetTrafMem(void);
+int TryDrive(void);
+
 
 /* comefrom: DoIndustrial DoCommercial DoResidential */
+int
 MakeTraf(int Zt)
 {
   short xtem, ytem;
@@ -106,6 +115,7 @@ MakeTraf(int Zt)
 
 
 /* comefrom: MakeTraf */
+void
 SetTrafMem(void)
 {
   register short x, z;
@@ -139,6 +149,7 @@ SetTrafMem(void)
 
 
 /* comefrom: TryGo */
+void
 PushPos(void)
 {
   PosStackN++;
@@ -148,6 +159,7 @@ PushPos(void)
 
 
 /* comefrom: SetTrafMem */
+void
 PullPos(void)
 {
   SMapX = SMapXStack[PosStackN];
@@ -157,6 +169,7 @@ PullPos(void)
 
 
 /* comefrom: DoSPZone MakeTraf */
+int
 FindPRoad(void)		/* look for road on edges of zone   */
 {
   static short PerimX[12] = {-1, 0, 1, 2, 2, 2, 1, 0,-1,-2,-2,-2};
@@ -178,6 +191,7 @@ FindPRoad(void)		/* look for road on edges of zone   */
 }
 
 
+int
 FindPTele(void)		/* look for telecommunication on edges of zone */
 {
   static short PerimX[12] = {-1, 0, 1, 2, 2, 2, 1, 0,-1,-2,-2,-2};
@@ -199,6 +213,7 @@ FindPTele(void)		/* look for telecommunication on edges of zone */
 
 
 /* comefrom: MakeTraf */
+int
 TryDrive(void)
 {
   short z;
@@ -221,6 +236,7 @@ TryDrive(void)
 
 
 /* comefrom: TryDrive */
+int
 TryGo(int z)
 {
   short x, rdir, realdir;
@@ -246,6 +262,7 @@ TryGo(int z)
 
 
 /* comefrom: TryGo DriveDone */
+int
 GetFromMap(int x)
 {
   switch (x) {
@@ -272,11 +289,15 @@ GetFromMap(int x)
 
 
 /* comefrom: TryDrive */
+int
 DriveDone(void)
 {
   static short TARGL[3] = {COMBASE, LHTHR, LHTHR};
   static short TARGH[3] = {NUCLEAR, PORT, COMBASE};	/* for destinations */
-  register short x, z, l, h;
+#if 0
+  register short x;
+#endif
+  register short z, l, h;
 
 /* unwound -Don */
 #if 0
@@ -316,6 +337,7 @@ DriveDone(void)
 
 
 /* comefrom: TryGo FindPRoad */
+int
 RoadTest(int x)
 {
   x = x & LOMASK;

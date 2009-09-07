@@ -63,10 +63,10 @@
 
 
 #ifdef MSDOS
-#define PATHSTR	"%s\\%c%c%c%c.%d"
+#define PATHSTR	"%s\\%c%c%c%c.%ld"
 #define PERMSTR	"rb"
 #else
-#define PATHSTR	"%s/%c%c%c%c.%d"
+#define PATHSTR	"%s/%c%c%c%c.%ld"
 #define PERMSTR	"r"
 #endif
 
@@ -162,6 +162,7 @@ ResourceID(Handle h)
 }
 
 
+void
 GetIndString(char *str, int id, short num)
 {
   struct StringTable **tp, *st = NULL;

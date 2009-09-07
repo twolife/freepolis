@@ -79,7 +79,8 @@ static char LastKeys[5];
 */
 
 
-ResetLastKeys()
+void
+ResetLastKeys(void)
 {
   LastKeys[0] = ' ';
   LastKeys[1] = ' ';
@@ -91,6 +92,7 @@ ResetLastKeys()
 
 
 /* comefrom: processEvent */
+void
 doKeyDown(SimView *view, short charCode)
 {
   LastKeys[0] = LastKeys[1];
@@ -291,6 +293,7 @@ doKeyDown(SimView *view, short charCode)
 
 
 /* comefrom: processEvent */
+void
 doKeyUp(SimView *view, short charCode)
 {
   switch(charCode) {

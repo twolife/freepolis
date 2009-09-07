@@ -61,9 +61,12 @@
  */
 #include "sim.h"
 
+void UpdateGameLevel(void);
+
 
 /* comefrom: drawTaxesCollected incBoxValue decBoxValue drawCurrentFunds 
 	     drawActualBox UpdateFunds updateCurrentCost */
+void
 makeDollarDecimalStr(char *numStr, char *dollarStr)
 {
   register short leftMostSet;
@@ -121,7 +124,8 @@ makeDollarDecimalStr(char *numStr, char *dollarStr)
 }
 
 
-Pause()
+void
+Pause(void)
 {
   if (!sim_paused) {
     sim_paused_speed = SimMetaSpeed;
@@ -131,7 +135,8 @@ Pause()
 }
 
 
-Resume()
+void
+Resume(void)
 {
   if (sim_paused) {
     sim_paused = 0;
@@ -140,6 +145,7 @@ Resume()
 }
 
 
+void
 setSpeed(short speed)
 {
   if (speed < 0) speed = 0;
@@ -167,6 +173,7 @@ setSpeed(short speed)
 }
 
 
+void
 setSkips(int skips)
 {
   sim_skips = skips;
@@ -174,6 +181,7 @@ setSkips(int skips)
 }
 
 
+void
 SetGameLevelFunds(short level)
 {
   switch (level) {
@@ -194,6 +202,7 @@ SetGameLevelFunds(short level)
 }
 
 
+void
 SetGameLevel(short level)
 {
   GameLevel = level;
@@ -201,7 +210,8 @@ SetGameLevel(short level)
 }
 
 
-UpdateGameLevel()
+void
+UpdateGameLevel(void)
 {
   char buf[256];
 
@@ -210,6 +220,7 @@ UpdateGameLevel()
 }
 
 
+void
 setCityName(char *name)
 {
   char *cp = name;
@@ -223,6 +234,7 @@ setCityName(char *name)
 }
 
 
+void
 setAnyCityName(char *name)
 {
   char buf[1024];
@@ -233,6 +245,7 @@ setAnyCityName(char *name)
 }
 
 
+void
 SetYear(int year)
 {
   // Must prevent year from going negative, since it screws up the non-floored modulo arithmetic.
@@ -247,12 +260,13 @@ SetYear(int year)
 
 
 int
-CurrentYear()
+CurrentYear(void)
 {
   return (CityTime/48 + StartingYear);
 }
 
 
+void
 DoSetMapState(SimView *view, short state)
 {
   char buf[256];
@@ -266,24 +280,28 @@ DoSetMapState(SimView *view, short state)
 }
 
 
-DoNewGame()
+void
+DoNewGame(void)
 {
   Eval("UINewGame");
 }
 
 
+void
 DoGeneratedCityImage(char *name, int time, int pop, char *class, int score)
 {
   /* XXX: TODO: print city */
 }
 
 
+void
 DoStartElmd()
 {
   /* XXX: TODO: start elm daemon */
 }
 
 
+void
 DoPopUpMessage(char *msg)
 {
   char buf[1024];

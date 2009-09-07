@@ -77,8 +77,16 @@ short CityClass;			/*  0..5  */
 short CityScore, deltaCityScore, AverageCityScore;
 short TrafficAverage;
 
+void DoVotes(void);
+void GetScore(void);
+void VoteProblems(void);
+void DoProblems(void);
+void DoPopNum(void);
+void GetAssValue(void);
+
 
 /* comefrom: SpecialInit Simulate */
+void
 CityEvaluation(void)
 {
   EvalValid = 0;
@@ -98,6 +106,7 @@ CityEvaluation(void)
 
 
 /* comefrom: CityEvaluation SetCommonInits */
+void
 EvalInit(void)
 {
   register short x, z;
@@ -120,6 +129,7 @@ EvalInit(void)
 
 
 /* comefrom: CityEvaluation */
+void
 GetAssValue(void)
 {
   QUAD z;
@@ -139,6 +149,7 @@ GetAssValue(void)
 
 
 /* comefrom: CityEvaluation */
+void
 DoPopNum(void)
 {
   QUAD OldCityPop;
@@ -160,10 +171,11 @@ DoPopNum(void)
 
 
 /* comefrom: CityEvaluation */
+void
 DoProblems(void)
 {
   register short x, z;
-  short ThisProb, Max;
+  short ThisProb = 0, Max;
 
   for (z = 0; z < PROBNUM; z++)
     ProblemTable[z] = 0;
@@ -198,9 +210,10 @@ DoProblems(void)
 
 
 /* comefrom: DoProblems */
+void
 VoteProblems(void)
 {
-  register x, z, count;
+  register int x, z, count;
 
   for (z = 0; z < PROBNUM; z++)
     ProblemVotes[z] = 0;
@@ -221,6 +234,7 @@ VoteProblems(void)
 
 
 /* comefrom: DoProblems */
+int
 AverageTrf(void)
 {
   QUAD TrfTotal;
@@ -241,6 +255,7 @@ AverageTrf(void)
 
 
 /* comefrom: DoProblems */
+int
 GetUnemployment(void)
 {
   float r;
@@ -260,6 +275,7 @@ GetUnemployment(void)
 
 
 /* comefrom: DoProblems GetScore */
+int
 GetFire(void)
 {
   short z;
@@ -273,9 +289,10 @@ GetFire(void)
 
 
 /* comefrom: CityEvaluation */
+void
 GetScore(void)
 {
-  register x, z;
+  register int x, z;
   short OldCityScore;
   float SM, TM;
 
@@ -329,9 +346,10 @@ GetScore(void)
 
 
 /* comefrom: CityEvaluation */
+void
 DoVotes(void)
 {
-  register z;
+  register int z;
 
   CityYes = 0;
   CityNo = 0;

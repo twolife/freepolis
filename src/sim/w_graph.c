@@ -71,6 +71,11 @@ short Graph10Max, Graph120Max;
 Tcl_HashTable GraphCmds;
 int GraphUpdateTime = 100;
 
+void DoUpdateGraph(SimGraph *graph);
+void DoNewGraph(SimGraph *graph);
+void DoResizeGraph(SimGraph *graph, int w, int h);
+void InitNewGraph(SimGraph *graph);
+
 
 #define DEF_GRAPH_FONT	"-Adobe-Helvetica-Bold-R-Normal-*-140-*"
 #define DEF_GRAPH_BG_COLOR	"#b0b0b0"
@@ -104,8 +109,6 @@ DisplaySimGraph(ClientData clientData)
 {
   SimGraph *graph = (SimGraph *) clientData;
   Tk_Window tkwin = graph->tkwin;
-  Pixmap pm = None;
-  Drawable d;
 
   graph->flags &= ~VIEW_REDRAW_PENDING;
 
@@ -133,6 +136,7 @@ DestroySimGraph(ClientData clientData)
 }
 
 
+void
 EventuallyRedrawGraph(SimGraph *graph)
 {
   if (!(graph->flags & VIEW_REDRAW_PENDING)) {
@@ -209,8 +213,6 @@ int GraphCmdconfigure(GRAPH_ARGS)
 
 int GraphCmdposition(GRAPH_ARGS)
 {
-  int result = TCL_OK;
-
     if ((argc != 2) && (argc != 4)) {
       return TCL_ERROR;
     }
@@ -336,7 +338,7 @@ DoGraphCmd(CLIENT_ARGS)
     return TCL_ERROR;
   }
 
-  if (ent = Tcl_FindHashEntry(&GraphCmds, argv[1])) {
+  if ((ent = Tcl_FindHashEntry(&GraphCmds, argv[1]))) {
     cmd = (int (*)())ent->clientData;
     Tk_Preserve((ClientData) graph);
     result = cmd(graph, interp, argc, argv);
@@ -434,10 +436,9 @@ unsigned char HistColor[] = {
 };
 
 
-graph_command_init()
+void
+graph_command_init(void)
 {
-  int new;
-
   Tcl_CreateCommand(tk_mainInterp, "graphview", GraphViewCmd,
 		    (ClientData)MainWindow, (void (*)()) NULL);
 
@@ -568,9 +569,10 @@ initGraphs(void)
 
 
 /* comefrom: InitWillStuff */
+void
 InitGraphMax(void)
 {
-  register x;
+  register int x;
 
   ResHisMax = 0;
   ComHisMax = 0;
@@ -604,11 +606,9 @@ InitGraphMax(void)
 }
 
 
+void
 InitNewGraph(SimGraph *graph)
 {
-  int d = 8;
-  struct XDisplay *xd;
-
   graph->next = NULL;
   graph->range = 10;
   graph->mask = ALL_HISTORIES;
@@ -641,6 +641,7 @@ InitNewGraph(SimGraph *graph)
 }
 
 
+void
 DestroyGraph(SimGraph *graph)
 {
   SimGraph **gp;
@@ -666,10 +667,9 @@ DestroyGraph(SimGraph *graph)
 }
 
 
+void
 DoResizeGraph(SimGraph *graph, int w, int h)
 {
-  int resize = 0;
-
   graph->w_width = w; graph->w_height = h;
 
   if (graph->pixmap != None) {
@@ -688,6 +688,7 @@ DoResizeGraph(SimGraph *graph, int w, int h)
 }
 
 
+void
 DoNewGraph(SimGraph *graph)
 {
   sim->graphs++; graph->next = sim->graph; sim->graph = graph;
@@ -698,6 +699,7 @@ DoNewGraph(SimGraph *graph)
 
 #define BORDER 5
 
+void
 DoUpdateGraph(SimGraph *graph)
 {
   Display *dpy;

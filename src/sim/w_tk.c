@@ -104,14 +104,8 @@ Tk_ConfigSpec TileViewConfigSpecs[] = {
 
 
 int TileViewCmd(CLIENT_ARGS);
-int ConfigureTileView(Tcl_Interp *interp, SimView *view,
-		      int argc, char **argv, int flags);
 static void TileViewEventProc(ClientData clientData, XEvent *eventPtr);
 static void DestroyTileView(ClientData clientData);
-
-int ConfigureSimGraph(Tcl_Interp *interp, SimGraph *graph,
-		      int argc, char **argv, int flags);
-
 static void MicropolisTimerProc(ClientData clientData);
 
 int SimCmd(CLIENT_ARGS);
@@ -241,7 +235,8 @@ ConfigureTileView(Tcl_Interp *interp, SimView *view,
 }
 
 
-InvalidateMaps()
+void
+InvalidateMaps(void)
 {
   SimView *view;
 
@@ -255,7 +250,8 @@ InvalidateMaps()
 }
 
 
-InvalidateEditors()
+void
+InvalidateEditors(void)
 {
   SimView *view;
 
@@ -269,7 +265,8 @@ InvalidateEditors()
 }
 
 
-RedrawMaps()
+void
+RedrawMaps(void)
 {
   SimView *view;
 
@@ -283,7 +280,8 @@ RedrawMaps()
 }
 
 
-RedrawEditors()
+void
+RedrawEditors(void)
 {
   SimView *view;
 
@@ -302,8 +300,6 @@ DisplayTileView(ClientData clientData)
 {
   SimView *view = (SimView *) clientData;
   Tk_Window tkwin = view->tkwin;
-  Pixmap pm = None;
-  Drawable d;
 
   view->flags &= ~VIEW_REDRAW_PENDING;
   if (view->visible && (tkwin != NULL) && Tk_IsMapped(tkwin)) {
@@ -334,6 +330,7 @@ DisplayTileView(ClientData clientData)
     EraserTo
  */
 
+void
 EventuallyRedrawView(SimView *view)
 {
   if (!(view->flags & VIEW_REDRAW_PENDING)) {
@@ -344,6 +341,7 @@ EventuallyRedrawView(SimView *view)
 }
 
 
+void
 CancelRedrawView(SimView *view)
 {
   if (view->flags & VIEW_REDRAW_PENDING) {
@@ -361,7 +359,7 @@ TileAutoScrollProc(ClientData clientData)
 
   if (view->tool_mode != 0) {
     int dx = 0, dy = 0;
-    int result, root_x, root_y, x, y;
+    int root_x, root_y, x, y;
     unsigned int key_buttons;
     Window root, child;
 
@@ -433,7 +431,7 @@ TileViewEventProc(ClientData clientData, XEvent *eventPtr)
 	      (eventPtr->type == MotionNotify))) {
     int last_x = view->tool_x, last_y = view->tool_y,
         last_showing = view->tool_showing;
-    int x, y, showing, autoscroll;
+    int x, y, showing;
 
     if (eventPtr->type == EnterNotify) {
       showing = 1;
@@ -547,6 +545,7 @@ StructureProc(ClientData clientData, XEvent *eventPtr)
 }
 
 
+#if 0
 static void
 DelayedMap(ClientData clientData)
 {
@@ -558,8 +557,10 @@ DelayedMap(ClientData clientData)
   }
   Tk_MapWindow(MainWindow);
 }
+#endif
 
 
+void
 DidStopPan(SimView *view)
 {
   char buf[256];
@@ -621,7 +622,8 @@ ReallyStartMicropolisTimer(ClientData clientData)
 }
 
 
-StartMicropolisTimer()
+void
+StartMicropolisTimer(void)
 {
   if (sim_timer_idle == 0) {
     sim_timer_idle = 1;
@@ -632,7 +634,8 @@ StartMicropolisTimer()
 }
 
 
-StopMicropolisTimer()
+void
+StopMicropolisTimer(void)
 {
   if (sim_timer_idle != 0) {
     sim_timer_idle = 0;
@@ -651,10 +654,11 @@ StopMicropolisTimer()
 }
 
 
+void
 FixMicropolisTimer()
 {
   if (sim_timer_set) {
-    StartMicropolisTimer(NULL);
+    StartMicropolisTimer();
   }
 }
 
@@ -669,7 +673,8 @@ DelayedUpdate(ClientData clientData)
 }
 
 
-Kick()
+void
+Kick(void)
 {
   if (!UpdateDelayed) {
     UpdateDelayed = 1;
@@ -679,7 +684,7 @@ Kick()
 
 
 void
-StopEarthquake()
+StopEarthquake(void)
 {
   ShakeNow = 0;
   if (earthquake_timer_set) {
@@ -689,6 +694,7 @@ StopEarthquake()
 }
 
 
+void
 DoEarthQuake(void)
 {
   MakeSound("city", "Explosion-Low");
@@ -702,7 +708,8 @@ DoEarthQuake(void)
 }
 
 
-StopToolkit()
+void
+StopToolkit(void)
 {
   if (tk_mainInterp != NULL) {
     Eval("catch {DoStopMicropolis}");
@@ -710,6 +717,7 @@ StopToolkit()
 }
 
 
+int
 Eval(char *buf)
 {
   int result = Tcl_Eval(tk_mainInterp, buf, 0, (char **) NULL);
@@ -724,10 +732,8 @@ Eval(char *buf)
 }
 
 
-tk_main()
+void tk_main(void)
 {
-  char *p, *msg;
-  char buf[20];
   char initCmd[256];
   Tk_3DBorder border;
 

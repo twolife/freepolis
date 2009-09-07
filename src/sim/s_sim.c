@@ -85,12 +85,31 @@ short Spdcycle = 0;
 short DoInitialEval = 0;
 short MeltX, MeltY;
 
+void CoalSmoke(int mx, int my);
+void DoAirport(void);
+void DrawStadium(int z);
+void DoFire(void);
+int GetBoatDis(void);
+int DoBridge(void);
+void DoRoad(void);
+void DoRadTile(void);
+void DoRail(void);
+void MapScan(int x1, int x2);
+void CollectTax(void);
+void Take2Census(void);
+void TakeCensus(void);
+void ClearCensus(void);
+void SetValves(void);
+void SetCommonInits(void);
+void SimLoadInit(void);
+void InitSimMemory(void);
+void DecROGMem(void);
+void DecTrafficMem(void);
+void Simulate(int mod16);
 
 /* comefrom: doEditWindow scoreDoer doMapInFront graphDoer doNilEvent */
-SimFrame(void)
+void SimFrame(void)
 {
-  short i;
-
   if (SimSpeed == 0)
     return;
 
@@ -110,6 +129,7 @@ SimFrame(void)
 
 
 /* comefrom: SimFrame */
+void
 Simulate(int mod16)
 {
   static short SpdPwr[4] = { 1,  2,  4,  5 };
@@ -204,6 +224,7 @@ Simulate(int mod16)
 
 
 /* comefrom: Simulate */
+void
 DoSimInit(void)
 {
   Fcycle = 0;
@@ -235,6 +256,7 @@ DoSimInit(void)
 
 
 /* comefrom: SimLoadInit */
+void
 DoNilPower(void)
 {
   register short x, y, z;
@@ -253,13 +275,14 @@ DoNilPower(void)
 
 
 /* comefrom: Simulate */
+void
 DecTrafficMem(void)		/* tends to empty TrfDensity   */
 {
   register short x, y, z;
 
   for (x = 0; x < HWLDX; x++)
     for (y = 0; y < HWLDY; y++)
-      if (z = TrfDensity[x][y]) {
+      if ((z = TrfDensity[x][y])) {
 	if (z > 24) {
 	  if (z > 200) TrfDensity[x][y] = z - 34;
 	  else TrfDensity[x][y] = z - 24;
@@ -270,6 +293,7 @@ DecTrafficMem(void)		/* tends to empty TrfDensity   */
 
 
 /* comefrom: Simulate */
+void
 DecROGMem(void)			/* tends to empty RateOGMem   */
 {
   register short x, y, z;
@@ -292,6 +316,7 @@ DecROGMem(void)			/* tends to empty RateOGMem   */
 
 
 /* comefrom: DoSimInit */
+void
 InitSimMemory(void)
 {	
   register short x, z;
@@ -330,6 +355,7 @@ InitSimMemory(void)
 
 
 /* comefrom: DoSimInit */
+void
 SimLoadInit(void)
 {
   static short DisTab[9] = { 0, 2, 10, 5, 20, 3, 5, 5, 2 * 48};
@@ -395,6 +421,7 @@ SimLoadInit(void)
 
 
 /* comefrom: InitSimMemory SimLoadInit */
+void
 SetCommonInits(void)
 {
   EvalInit();
@@ -411,6 +438,7 @@ SetCommonInits(void)
 
 
 /* comefrom: Simulate DoSimInit */
+void
 SetValves(void)
 {
   static short TaxTable[21] = {
@@ -448,7 +476,7 @@ SetValves(void)
   Births = NormResPop * (.02); 			/* Birth Rate  */
   PjResPop = NormResPop + Migration + Births;	/* Projected Res.Pop  */
 
-  if (temp = (ComHis[1] + IndHis[1])) LaborBase = (ResHis[1] / temp);
+  if ((temp = (ComHis[1] + IndHis[1]))) LaborBase = (ResHis[1] / temp);
   else LaborBase = 1;
   if (LaborBase > 1.3) LaborBase = 1.3;
   if (LaborBase < 0) LaborBase = 0;  /* LB > 1 - .1  */
@@ -521,6 +549,7 @@ SetValves(void)
 
 
 /* comefrom: Simulate DoSimInit */
+void
 ClearCensus(void)
 {
   register short x, y, z;
@@ -556,6 +585,7 @@ ClearCensus(void)
 
 
 /* comefrom: Simulate */
+void
 TakeCensus(void)
 {
   short x;
@@ -608,6 +638,7 @@ TakeCensus(void)
 
 
 /* comefrom: Simulate */
+void
 Take2Census(void)    /* Long Term Graphs */
 {
   short x;
@@ -638,6 +669,7 @@ Take2Census(void)    /* Long Term Graphs */
 
 
 /* comefrom: Simulate */
+void
 CollectTax(void)
 {	
   static float RLevels[3] = { 0.7, 0.9, 1.2 };
@@ -667,6 +699,7 @@ CollectTax(void)
 }
 
 
+void
 UpdateFundEffects(void)
 {
   if (RoadFund)
@@ -692,13 +725,14 @@ UpdateFundEffects(void)
 
 
 /* comefrom: Simulate DoSimInit */
+void
 MapScan(int x1, int x2)
 {
   register short x, y;
 
   for (x = x1; x < x2; x++)  {
     for (y = 0; y < WORLD_Y; y++) {
-      if (CChr = Map[x][y]) {
+      if ((CChr = Map[x][y])) {
 	CChr9 = CChr & LOMASK;	/* Mask off status bits  */
 	if (CChr9 >= FLOOD) {
 	  SMapX = x;
@@ -744,6 +778,7 @@ MapScan(int x1, int x2)
 
 
 /* comefrom: MapScan */
+void
 DoRail(void)
 {
   RailTotal++;
@@ -762,6 +797,7 @@ DoRail(void)
 
 
 /* comefrom: MapScan */
+void
 DoRadTile(void)
 {
   if (!(Rand16() & 4095)) Map[SMapX][SMapY] = 0; /* Radioactive decay */
@@ -769,6 +805,7 @@ DoRadTile(void)
 
 
 /* comefrom: MapScan */
+void
 DoRoad(void)
 {
   register short Density, tden, z;
@@ -810,6 +847,7 @@ DoRoad(void)
 
 
 /* comefrom: MapScan */
+int
 DoBridge(void)
 {
   static short HDx[7] = { -2,  2, -2, -1,  0,  1,  2 };
@@ -828,7 +866,7 @@ DoBridge(void)
   static short VBRTAB2[7] = {
     VBRIDGE | BULLBIT, RIVER, VBRIDGE | BULLBIT, VBRIDGE | BULLBIT,
     VBRIDGE | BULLBIT, VBRIDGE | BULLBIT, RIVER };
-  register z, x, y, MPtem;
+  register int z, x, y, MPtem;
 
   if (CChr9 == BRWV) { /*  Vertical bridge close */
     if ((!(Rand16() & 3)) &&
@@ -918,6 +956,7 @@ GetBoatDis(void)
 
 
 /* comefrom: MapScan */
+void
 DoFire(void)
 {
   static short DX[4] = { -1,  0,  1,  0 };
@@ -955,6 +994,7 @@ DoFire(void)
 
 
 /* comefrom: DoFire MakeFlood */
+void
 FireZone(int Xloc, int Yloc, int ch)
 {
   register short Xtem, Ytem;
@@ -985,6 +1025,7 @@ FireZone(int Xloc, int Yloc, int ch)
 
 
 /* comefrom: DoSPZone DoHospChur */
+void
 RepairZone(short ZCent, short zsize)
 {
   short cnt;
@@ -1011,10 +1052,11 @@ RepairZone(short ZCent, short zsize)
 
 
 /* comefrom: DoZone */
+void
 DoSPZone(short PwrOn)
 {
   static short MltdwnTab[3] = { 30000, 20000, 10000 };  /* simadj */
-  register z;
+  register int z;
 
   switch (CChr9) {
 
@@ -1117,6 +1159,7 @@ DoSPZone(short PwrOn)
 
 
 /* comefrom: DoSPZone */
+void
 DrawStadium(int z)
 {
   register int x, y;
@@ -1130,6 +1173,7 @@ DrawStadium(int z)
 
 
 /* comefrom: DoSPZone */
+void
 DoAirport(void)
 {
   if (!(Rand(5))) {
@@ -1142,6 +1186,7 @@ DoAirport(void)
 
 
 /* comefrom: DoSPZone */
+void
 CoalSmoke(int mx, int my)
 {
   static short SmTb[4] = { COALSMOKE1, COALSMOKE2, COALSMOKE3, COALSMOKE4 };
@@ -1156,9 +1201,10 @@ CoalSmoke(int mx, int my)
 
 
 /* comefrom: DoSPZone MakeMeltdown */
+void
 DoMeltdown(int SX, int SY)
 {
-  register x, y, z, t;
+  register int x, y, z, t;
 
   MeltX = SX; MeltY = SY;
 
@@ -1224,6 +1270,7 @@ Rand16Signed(void)
 }
 
 
+void
 RandomlySeedRand()
 {
   struct timeval time;
@@ -1233,7 +1280,7 @@ RandomlySeedRand()
   SeedRand(time.tv_usec ^ time.tv_sec ^ sim_rand());
 }
 
-
+void
 SeedRand(int seed)
 {
   sim_srand(seed);

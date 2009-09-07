@@ -66,6 +66,14 @@ short NewDate = 0;
 Tcl_HashTable DateCmds;
 int DateUpdateTime = 200;
 
+void DoUpdateDate(SimDate *date);
+void DoNewDate(SimDate *date);
+void DoResizeDate(SimDate *date, int w, int h);
+void DestroyDate(SimDate *date);
+void InitNewDate(SimDate *date);
+int ConfigureSimDate(Tcl_Interp *interp, SimDate *date,
+		  int argc, char **argv, int flags);
+
 
 #define DEF_DATE_FONT	"-Adobe-Helvetica-Bold-R-Normal-*-140-*"
 #define DEF_DATE_BG_COLOR	"#b0b0b0"
@@ -111,8 +119,6 @@ DisplaySimDate(ClientData clientData)
 {
   SimDate *date = (SimDate *) clientData;
   Tk_Window tkwin = date->tkwin;
-  Pixmap pm = None;
-  Drawable d;
 
   date->flags &= ~VIEW_REDRAW_PENDING;
 //fprintf(stderr, "DisplaySimDate cleared VIEW_REDRAW_PENDING\n");
@@ -138,6 +144,7 @@ DestroySimDate(ClientData clientData)
 }
 
 
+void
 EventuallyRedrawDate(SimDate *date)
 {
   if (!(date->flags & VIEW_REDRAW_PENDING)) {
@@ -255,8 +262,6 @@ int DateCmdconfigure(DATE_ARGS)
 
 int DateCmdposition(DATE_ARGS)
 {
-  int result = TCL_OK;
-
     if ((argc != 2) && (argc != 4)) {
       return TCL_ERROR;
     }
@@ -320,8 +325,6 @@ int DateCmdVisible(DATE_ARGS)
 
 int DateCmdReset(DATE_ARGS)
 {
-  int range;
-
   if (argc != 2) {
     Tcl_AppendResult(interp, "wrong # args", (char *) NULL);
     return TCL_ERROR;
@@ -339,8 +342,6 @@ int DateCmdReset(DATE_ARGS)
 
 int DateCmdSet(DATE_ARGS)
 {
-  int range;
-
   if (argc != 4) {
     Tcl_AppendResult(interp, "wrong # args", (char *) NULL);
     return TCL_ERROR;
@@ -379,7 +380,7 @@ DoDateCmd(CLIENT_ARGS)
     return TCL_ERROR;
   }
 
-  if (ent = Tcl_FindHashEntry(&DateCmds, argv[1])) {
+  if ((ent = Tcl_FindHashEntry(&DateCmds, argv[1]))) {
     cmd = (int (*)())ent->clientData;
     Tk_Preserve((ClientData) date);
     result = cmd(date, interp, argc, argv);
@@ -472,10 +473,9 @@ ConfigureSimDate(Tcl_Interp *interp, SimDate *date,
 }
 
 
-date_command_init()
+void
+date_command_init(void)
 {
-  int new;
-
   Tcl_CreateCommand(tk_mainInterp, "dateview", DateViewCmd,
 		    (ClientData)MainWindow, (void (*)()) NULL);
 
@@ -492,11 +492,9 @@ date_command_init()
 }
 
 
+void
 InitNewDate(SimDate *date)
 {
-  int d = 8;
-  struct XDisplay *xd;
-
   date->next = NULL;
 
 /* This stuff was initialized in our caller (DateCmd) */
@@ -537,6 +535,7 @@ InitNewDate(SimDate *date)
 }
 
 
+void
 DestroyDate(SimDate *date)
 {
   SimDate **gp;
@@ -562,10 +561,9 @@ DestroyDate(SimDate *date)
 }
 
 
+void
 DoResizeDate(SimDate *date, int w, int h)
 {
-  int resize = 0;
-
   date->w_width = w; date->w_height = h;
 
   if (date->pixmap != None) {
@@ -584,6 +582,7 @@ DoResizeDate(SimDate *date, int w, int h)
 }
 
 
+void
 DoNewDate(SimDate *date)
 {
   sim->dates++; date->next = sim->date; sim->date = date;
@@ -594,15 +593,15 @@ DoNewDate(SimDate *date)
 
 #define BORDER 1
 
+void
 DoUpdateDate(SimDate *date)
 {
   Display *dpy;
   GC gc;
   Pixmap pm;
   int *pix;
-  int w, h, i, j, x, y;
+  int w, h, x, y;
   int tx, ty;
-  float sx, sy;
 
   if (!date->visible) {
     return;

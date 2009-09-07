@@ -64,6 +64,7 @@
 
 
 /* comefrom: moveWorld doEditWindow scoreDoer doMapInFront graphDoer */
+void
 animateTiles(void)
 {
   unsigned short tilevalue, tileflags;

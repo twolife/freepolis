@@ -70,13 +70,21 @@ QUAD LastCityMonth;
 QUAD LastFunds;
 QUAD LastR, LastC, LastI;
 
+void UpdateOptionsMenu(int options);
+void updateOptions(void);
+void SetDemand(double r, double c, double i);
+void drawValve(void);
+void showValves(void);
+void updateDate(void);
+void ReallyUpdateFunds(void);
+
 char *dateStr[12] = {
   "Jan", "Feb", "Mar", "Apr", "May", "Jun", 
   "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
 };
 
 
-void DoUpdateHeads()
+void DoUpdateHeads(void)
 {
   showValves();
   doTimeStuff();
@@ -85,38 +93,39 @@ void DoUpdateHeads()
 }
 
 
-void UpdateEditors()
+void UpdateEditors(void)
 {
   InvalidateEditors();
   DoUpdateHeads();
 }
 
 
-void UpdateMaps()
+void UpdateMaps(void)
 {
   InvalidateMaps();
 }
 
 
-void UpdateGraphs()
+void UpdateGraphs(void)
 {
   ChangeCensus();
 }
 
 
-void UpdateEvaluation()
+void UpdateEvaluation(void)
 {
   ChangeEval();
 }
 
 
-void UpdateHeads()
+void UpdateHeads(void)
 {
   MustUpdateFunds = ValveFlag = 1;
   LastCityTime = LastCityYear = LastCityMonth = LastFunds = LastR = -999999;
   DoUpdateHeads();
 }
 
+void
 UpdateFunds(void)
 {
   MustUpdateFunds = 1;
@@ -124,6 +133,7 @@ UpdateFunds(void)
 }
 
 
+void
 ReallyUpdateFunds(void)
 {
   char localStr[256], dollarStr[256], buf[256];
@@ -136,7 +146,7 @@ ReallyUpdateFunds(void)
 
   if (TotalFunds != LastFunds) {
     LastFunds = TotalFunds;
-    sprintf(localStr, "%d", TotalFunds);
+    sprintf(localStr, "%ld", TotalFunds);
     makeDollarDecimalStr(localStr, dollarStr);
 
     sprintf(localStr, "Funds: %s", dollarStr);
@@ -147,7 +157,8 @@ ReallyUpdateFunds(void)
 }
 
 
-doTimeStuff(void) 
+void
+doTimeStuff(void)
 {
 //  if ((CityTime >> 2) != LastCityTime) {
     updateDate();
@@ -155,6 +166,7 @@ doTimeStuff(void)
 }
 
 
+void
 updateDate(void)
 {	
   int y;
@@ -191,6 +203,7 @@ updateDate(void)
 }
 
 
+void
 showValves(void)
 {
   if (ValveFlag) {
@@ -200,6 +213,7 @@ showValves(void)
 }
 
 
+void
 drawValve(void)
 {
   double r, c, i;
@@ -227,6 +241,7 @@ drawValve(void)
 }
 
 
+void
 SetDemand(double r, double c, double i)
 {
   char buf[256];
@@ -237,7 +252,8 @@ SetDemand(double r, double c, double i)
 }
 
 
-updateOptions()
+void
+updateOptions(void)
 {
   int options;
 
@@ -258,6 +274,7 @@ updateOptions()
 }
 
 
+void
 UpdateOptionsMenu(int options)
 {
   char buf[256];

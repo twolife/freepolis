@@ -70,7 +70,7 @@
 
 #define gray25_width 16
 #define gray25_height 16
-static unsigned char gray25_bits[] = {
+static char gray25_bits[] = {
   0x77, 0x77,
   0xdd, 0xdd,
   0x77, 0x77,
@@ -92,7 +92,7 @@ static unsigned char gray25_bits[] = {
 
 #define gray50_width 16
 #define gray50_height 16
-static unsigned char gray50_bits[] = {
+static char gray50_bits[] = {
   0x55, 0x55,
   0xaa, 0xaa,
   0x55, 0x55,
@@ -114,7 +114,7 @@ static unsigned char gray50_bits[] = {
 
 #define gray75_width 16
 #define gray75_height 16
-static unsigned char gray75_bits[] = {
+static char gray75_bits[] = {
   0x88, 0x88,
   0x22, 0x22,
   0x88, 0x88,
@@ -135,7 +135,7 @@ static unsigned char gray75_bits[] = {
 
 #define vert_width 16
 #define vert_height 16
-static unsigned char vert_bits[] = {
+static char vert_bits[] = {
   0xaa, 0xaa,
   0xaa, 0xaa,
   0xaa, 0xaa,
@@ -157,7 +157,7 @@ static unsigned char vert_bits[] = {
 
 #define horiz_width 16
 #define horiz_height 16
-static unsigned char horiz_bits[] = {
+static char horiz_bits[] = {
   0xff, 0xff,
   0x00, 0x00,
   0xff, 0xff,
@@ -179,7 +179,7 @@ static unsigned char horiz_bits[] = {
 
 #define diag_width 16
 #define diag_height 16
-static unsigned char diag_bits[] = {
+static char diag_bits[] = {
   0x55, 0x55, 
   0xee, 0xee, 
   0x55, 0x55, 
@@ -239,6 +239,7 @@ GetObjectXpms(XDisplay *xd, int id, int frames)
 }
 
 
+void
 GetPixmaps(XDisplay *xd)
 {
   if (xd->gray25_stipple == None) {
@@ -286,6 +287,7 @@ GetPixmaps(XDisplay *xd)
 }
 
 
+void
 GetViewTiles(SimView *view)
 {
   char name[256];
@@ -363,10 +365,9 @@ GetViewTiles(SimView *view)
       }
     }
 
-    { int x, y, b, tile;
+    { int x, y, tile;
       unsigned char *from, *to;
       int pixelBytes = view->pixel_bytes;
-      int rowBytes = view->x->small_tile_image->bytes_per_line;
       
       if (pixelBytes == 0) {
 	/* handle the case of monochrome display (8 bit map) */

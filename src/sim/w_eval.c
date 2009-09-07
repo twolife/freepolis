@@ -61,6 +61,13 @@
  */
 #include "sim.h"
 
+void SetEvaluation(char *changed, char *score,
+	      char *ps0, char *ps1, char *ps2, char *ps3,
+	      char *pv0, char *pv1, char *pv2, char *pv3,
+	      char *pop, char *delta, char *assessed_dollars,
+	      char *cityclass, char *citylevel,
+	      char *goodyes, char *goodno, char *title);
+
 
 char *cityClassStr[6] = {
   "VILLAGE", "TOWN", "CITY", "CAPITAL", "METROPOLIS", "MEGALOPOLIS"
@@ -77,6 +84,7 @@ char *probStr[10] = {
 
 
 /* comefrom: DoSubUpDate scoreDoer */
+void
 doScoreCard(void)
 {
   char title[256],
@@ -103,9 +111,9 @@ doScoreCard(void)
   sprintf(prob1, "%d%%", ProblemVotes[ProblemOrder[1]]);
   sprintf(prob2, "%d%%", ProblemVotes[ProblemOrder[2]]);
   sprintf(prob3, "%d%%", ProblemVotes[ProblemOrder[3]]);
-  sprintf(pop, "%d", CityPop);
-  sprintf(delta, "%d", deltaCityPop);
-  sprintf(assessed, "%d", CityAssValue);
+  sprintf(pop, "%ld", CityPop);
+  sprintf(delta, "%ld", deltaCityPop);
+  sprintf(assessed, "%ld", CityAssValue);
   makeDollarDecimalStr(assessed, assessed_dollars);
 
   sprintf(score, "%d", CityScore);
@@ -126,12 +134,14 @@ doScoreCard(void)
 }
 
 
-ChangeEval()
+void
+ChangeEval(void)
 {
   EvalChanged = 1;
 }
 
 
+void
 scoreDoer(void)
 {
   if (EvalChanged) {
@@ -141,6 +151,7 @@ scoreDoer(void)
 }
 
 
+void
 SetEvaluation(char *changed, char *score,
 	      char *ps0, char *ps1, char *ps2, char *ps3,
 	      char *pv0, char *pv1, char *pv2, char *pv3,

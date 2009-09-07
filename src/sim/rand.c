@@ -41,15 +41,14 @@
 static unsigned QUAD next = 1;
 
 int
-sim_rand()
+sim_rand(void)
 {
 	next = next * 1103515245 + 12345;
 	return ((next % ((SIM_RAND_MAX + 1) <<8)) >>8);
 }
 
 void
-sim_srand(seed)
-u_int seed;
+sim_srand(u_int seed)
 {
 	next = seed;
 }

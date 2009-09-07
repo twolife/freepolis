@@ -63,14 +63,15 @@
 
 
 int dynamicFilter(int c, int r);
-int WireDrawBeegMapRect(SimView *view, short x, short y, short w, short h);
 
+void
 drawBeegMaps()
 {
   sim_update_editors();
 }
 
 
+void
 MemDrawBeegMapRect(SimView *view, int x, int y, int w, int h)
 {
   int lineBytes = view->line_bytes;
@@ -264,6 +265,7 @@ MemDrawBeegMapRect(SimView *view, int x, int y, int w, int h)
 }
 
 
+void
 WireDrawBeegMapRect(SimView *view, short x, short y, short w, short h)
 {
   unsigned short *map;

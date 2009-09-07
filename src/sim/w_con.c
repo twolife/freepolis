@@ -61,6 +61,13 @@
  */
 #include "sim.h"
 
+void _FixSingle(int x, int y, short *TileAdrPtr);
+void _FixZone(int x, int y, short *TileAdrPtr);
+int _LayDoze(int x, int y, short *TileAdrPtr);
+int _LayRoad(int x, int y, short *TileAdrPtr);
+int _LayRail(int x, int y, short *TileAdrPtr);
+int _LayWire(int x, int y, short *TileAdrPtr);
+
 
 short _RoadTable[16] = {
   66, 67, 66, 68,
@@ -494,6 +501,7 @@ _LayWire(int x, int y, short *TileAdrPtr)
 
 
 /* comefrom: ConnecTile */
+void
 _FixZone(int x, int y, short *TileAdrPtr)
 {
   _FixSingle(x,y, &TileAdrPtr[0]);
@@ -518,6 +526,7 @@ _FixZone(int x, int y, short *TileAdrPtr)
 
 
 /* comefrom: _FixZone */
+void
 _FixSingle(int x, int y, short *TileAdrPtr)
 {
   short Tile;

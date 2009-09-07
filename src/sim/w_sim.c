@@ -325,8 +325,6 @@ int SimCmdDelay(ARGS)
 
 int SimCmdWorldX(ARGS)
 {
-  int val;
-
   if (argc != 2) {
     return (TCL_ERROR);
   }
@@ -338,8 +336,6 @@ int SimCmdWorldX(ARGS)
 
 int SimCmdWorldY(ARGS)
 {
-  int val;
-
   if (argc != 2) {
     return (TCL_ERROR);
   }
@@ -502,7 +498,7 @@ int SimCmdFunds(ARGS)
     Kick();
   }
 
-  sprintf(interp->result, "%d", TotalFunds);
+  sprintf(interp->result, "%ld", TotalFunds);
   return (TCL_OK);
 }
 
@@ -731,8 +727,6 @@ int SimCmdSound(ARGS)
 
 int SimCmdFlush(ARGS)
 {
-  int style;
-
   if (argc != 2) {
     return (TCL_ERROR);
   }
@@ -778,7 +772,7 @@ int SimCmdDonDither(ARGS)
     DonDither = dd;
   }
 
-  sprintf(interp->result, "%d", DonDither);
+  sprintf(interp->result, "%ld", DonDither);
   return (TCL_OK);
 }
 
@@ -935,7 +929,7 @@ int SimCmdFill(ARGS)
 
 int SimCmdDynamicData(ARGS)
 {
-  int index, val;
+  int index;
 
   if ((argc != 3) && (argc != 4)) {
     return (TCL_ERROR);
@@ -1019,8 +1013,6 @@ int SimCmdUpdate(ARGS)
 
 int SimCmdLandValue(ARGS)
 {
-  int val;
-
   if (argc != 2) {
     return (TCL_ERROR);
   }
@@ -1032,8 +1024,6 @@ int SimCmdLandValue(ARGS)
 
 int SimCmdTraffic(ARGS)
 {
-  int val;
-
   if (argc != 2) {
     return (TCL_ERROR);
   }
@@ -1045,8 +1035,6 @@ int SimCmdTraffic(ARGS)
 
 int SimCmdCrime(ARGS)
 {
-  int val;
-
   if (argc != 2) {
     return (TCL_ERROR);
   }
@@ -1058,8 +1046,6 @@ int SimCmdCrime(ARGS)
 
 int SimCmdUnemployment(ARGS)
 {
-  int val;
-
   if (argc != 2) {
     return (TCL_ERROR);
   }
@@ -1071,8 +1057,6 @@ int SimCmdUnemployment(ARGS)
 
 int SimCmdFires(ARGS)
 {
-  int val;
-
   if (argc != 2) {
     return (TCL_ERROR);
   }
@@ -1084,8 +1068,6 @@ int SimCmdFires(ARGS)
 
 int SimCmdPollution(ARGS)
 {
-  int val;
-
   if (argc != 2) {
     return (TCL_ERROR);
   }
@@ -1097,8 +1079,6 @@ int SimCmdPollution(ARGS)
 
 int SimCmdPolMaxX(ARGS)
 {
-  int val;
-
   if (argc != 2) {
     return (TCL_ERROR);
   }
@@ -1110,8 +1090,6 @@ int SimCmdPolMaxX(ARGS)
 
 int SimCmdPolMaxY(ARGS)
 {
-  int val;
-
   if (argc != 2) {
     return (TCL_ERROR);
   }
@@ -1123,8 +1101,6 @@ int SimCmdPolMaxY(ARGS)
 
 int SimCmdTrafMaxX(ARGS)
 {
-  int val;
-
   if (argc != 2) {
     return (TCL_ERROR);
   }
@@ -1136,8 +1112,6 @@ int SimCmdTrafMaxX(ARGS)
 
 int SimCmdTrafMaxY(ARGS)
 {
-  int val;
-
   if (argc != 2) {
     return (TCL_ERROR);
   }
@@ -1149,8 +1123,6 @@ int SimCmdTrafMaxY(ARGS)
 
 int SimCmdMeltX(ARGS)
 {
-  int val;
-
   if (argc != 2) {
     return (TCL_ERROR);
   }
@@ -1162,8 +1134,6 @@ int SimCmdMeltX(ARGS)
 
 int SimCmdMeltY(ARGS)
 {
-  int val;
-
   if (argc != 2) {
     return (TCL_ERROR);
   }
@@ -1175,8 +1145,6 @@ int SimCmdMeltY(ARGS)
 
 int SimCmdCrimeMaxX(ARGS)
 {
-  int val;
-
   if (argc != 2) {
     return (TCL_ERROR);
   }
@@ -1188,8 +1156,6 @@ int SimCmdCrimeMaxX(ARGS)
 
 int SimCmdCrimeMaxY(ARGS)
 {
-  int val;
-
   if (argc != 2) {
     return (TCL_ERROR);
   }
@@ -1201,8 +1167,6 @@ int SimCmdCrimeMaxY(ARGS)
 
 int SimCmdCenterX(ARGS)
 {
-  int val;
-
   if (argc != 2) {
     return (TCL_ERROR);
   }
@@ -1214,8 +1178,6 @@ int SimCmdCenterX(ARGS)
 
 int SimCmdCenterY(ARGS)
 {
-  int val;
-
   if (argc != 2) {
     return (TCL_ERROR);
   }
@@ -1227,8 +1189,6 @@ int SimCmdCenterY(ARGS)
 
 int SimCmdFloodX(ARGS)
 {
-  int val;
-
   if (argc != 2) {
     return (TCL_ERROR);
   }
@@ -1240,8 +1200,6 @@ int SimCmdFloodX(ARGS)
 
 int SimCmdFloodY(ARGS)
 {
-  int val;
-
   if (argc != 2) {
     return (TCL_ERROR);
   }
@@ -1253,8 +1211,6 @@ int SimCmdFloodY(ARGS)
 
 int SimCmdCrashX(ARGS)
 {
-  int val;
-
   if (argc != 2) {
     return (TCL_ERROR);
   }
@@ -1266,8 +1222,6 @@ int SimCmdCrashX(ARGS)
 
 int SimCmdCrashY(ARGS)
 {
-  int val;
-
   if (argc != 2) {
     return (TCL_ERROR);
   }
@@ -1279,8 +1233,6 @@ int SimCmdCrashY(ARGS)
 
 int SimCmdDollars(ARGS)
 {
-  int val;
-
   if (argc != 2) {
     return (TCL_ERROR);
   }
@@ -1390,7 +1342,7 @@ int SimCmdPlatform(ARGS)
 
 int SimCmdVersion(ARGS)
 {
-  sprintf(interp->result, MicropolisVersion);
+  strcpy(interp->result, MicropolisVersion);
 
   return (TCL_OK);
 }
@@ -1420,7 +1372,6 @@ int SimCmdOpenWebBrowser(ARGS)
 
 int SimCmdQuoteURL(ARGS)
 {
-  int result = 1;
   char buf[2048];
   char *from, *to;
   int ch;
@@ -1542,7 +1493,7 @@ SimCmd(CLIENT_ARGS)
     return TCL_ERROR;
   }
 
-  if (ent = Tcl_FindHashEntry(&SimCmds, argv[1])) {
+  if ((ent = Tcl_FindHashEntry(&SimCmds, argv[1]))) {
     cmd = (int (*)())ent->clientData;
     result = cmd(interp, argc, argv);
   } else {
@@ -1552,10 +1503,9 @@ SimCmd(CLIENT_ARGS)
 }
 
 
-sim_command_init()
+void
+sim_command_init(void)
 {
-  int new;
-
   Tcl_CreateCommand(tk_mainInterp, "sim", SimCmd,
 		    (ClientData)MainWindow, (void (*)()) NULL);
 

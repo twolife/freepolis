@@ -295,6 +295,8 @@ static void		TrackInterval _ANSI_ARGS_((Interval *intervalPtr,
 static void		StartTrackInterval _ANSI_ARGS_((Interval *intervalPtr,
 			    int value));
 static int		ValueToPixel _ANSI_ARGS_((Interval *intervalPtr, int value));
+
+static void		NotifyInterval(register Interval *intervalPtr);
 
 /*
  *--------------------------------------------------------------
@@ -799,7 +801,7 @@ DisplayVerticalInterval(clientData)
     register Interval *intervalPtr = (Interval *) clientData;
     register Tk_Window tkwin = intervalPtr->tkwin;
     int tickRightEdge, valueRightEdge, labelLeftEdge, intervalLeftEdge;
-    int totalPixels, x, y, width, height, tickValue, min, max;
+    int totalPixels, x, width, height, tickValue, min, max;
     int relief;
     Tk_3DBorder sliderBorder;
 
@@ -1013,7 +1015,7 @@ DisplayHorizontalInterval(clientData)
     register Interval *intervalPtr = (Interval *) clientData;
     register Tk_Window tkwin = intervalPtr->tkwin;
     int tickBottom, valueBottom, labelBottom, intervalBottom;
-    int totalPixels, x, y, width, height, tickValue, min, max;
+    int totalPixels, y, width, height, tickValue, min, max;
     int relief;
     Tk_3DBorder sliderBorder;
 
@@ -1438,9 +1440,6 @@ StartTrackInterval(intervalPtr, value)
     int value;			/* New value for interval.  Gets
 				 * adjusted if it's off the interval. */
 {
-    int result;
-    char string[20];
-
     if ((value < intervalPtr->fromValue)
 	    ^ (intervalPtr->toValue < intervalPtr->fromValue)) {
 	value = intervalPtr->fromValue;
@@ -1467,8 +1466,6 @@ TrackInterval(intervalPtr, value)
     register Interval *intervalPtr;	/* Info about widget. */
     int value;
 {
-    int result;
-    char string[20];
     int min, max, delta, lastmin, lastmax;
 
 
@@ -1548,8 +1545,8 @@ SetInterval(intervalPtr, min, max, notify)
 }
 
 
-NotifyInterval(intervalPtr)
-    register Interval *intervalPtr;	/* Info about widget. */
+static void
+NotifyInterval(register Interval *intervalPtr)
 {
     int result;
     char string[256];

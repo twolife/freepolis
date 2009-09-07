@@ -69,8 +69,11 @@ int PowerStackNum;
 char PowerStackX[PWRSTKSIZE], PowerStackY[PWRSTKSIZE];
 QUAD MaxPower, NumPower;
 
+void PullPowerStack(void);
+
 
 /* comefrom: TestForCond DoPowerScan TryGo */
+int
 MoveMapSim (short MDir)
 {
   switch (MDir) {
@@ -183,7 +186,8 @@ short TestForCond(short TFDir)
 
 
 /* comefrom: Simulate SpecialInit InitSimMemory */
-DoPowerScan()
+void
+DoPowerScan(void)
 {	
   short ADir;
   register int ConNum, Dir, x;
@@ -230,6 +234,7 @@ DoPowerScan()
 
 
 /* comefrom: DoPowerScan DoSPZone */
+void
 PushPowerStack(void) 
 { 	
   if (PowerStackNum < (PWRSTKSIZE - 2)) {
@@ -241,6 +246,7 @@ PushPowerStack(void)
 
 
 /* comefrom: DoPowerScan */
+void
 PullPowerStack(void)
 { 	
   if (PowerStackNum > 0)  {

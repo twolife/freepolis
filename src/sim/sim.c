@@ -61,6 +61,12 @@
  */
 #include "sim.h"
 
+void signal_init();
+void sim_update_evaluations(void);
+void sim_update_editors(void);
+void sim_update_budgets(void);
+void sim_update_graphs(void);
+void sim_update_maps(void);
 
 /* Sim City */
 
@@ -97,6 +103,7 @@ char *FirstDisplay = NULL;
 int ExitReturn = 0;
 
 
+void
 sim_exit(int val)
 {
   tkMustExit = 1;
@@ -104,7 +111,7 @@ sim_exit(int val)
 }
 
 
-sim_really_exit(int val)
+void sim_really_exit(int val)
 {
   DoStopMicropolis();
 
@@ -236,6 +243,7 @@ SignalExitHandler()
 }
 
 
+void
 signal_init()
 {
   signal(SIGHUP, (void (*)())SignalExitHandler);
@@ -246,7 +254,7 @@ signal_init()
 
 
 void
-sim_update()
+sim_update(void)
 {
   gettimeofday(&now_time, NULL);
 
@@ -267,6 +275,7 @@ sim_update()
 }
 
 
+void
 sim_update_editors(void)
 {
   SimView *view;
@@ -285,6 +294,7 @@ sim_update_editors(void)
 }
 
 
+void
 sim_update_maps(void)
 {
   SimView *view;
@@ -319,12 +329,14 @@ sim_update_maps(void)
 }
 
 
+void
 sim_update_graphs(void)
 {
   graphDoer();
 }
 
 
+void
 sim_update_budgets(void)
 {
   if ((sim_skips != 0) &&
@@ -336,6 +348,7 @@ sim_update_budgets(void)
 }
 
 
+void
 sim_update_evaluations(void)
 {
   if ((sim_skips != 0) &&
@@ -409,7 +422,7 @@ short *CellDst = NULL;
 void
 sim_heat(void)
 {
-  int x, y, l, r, u, d;
+  int x, y;
   static int a = 0;
   short *src, *dst;
   register int fl = heat_flow;
@@ -546,7 +559,6 @@ sim_heat(void)
   }
 }
 
-
 void
 sim_timeout_loop(short doSim)
 {
@@ -557,6 +569,7 @@ sim_timeout_loop(short doSim)
 }
 
 
+void
 sim_loop(int doSim)
 {
 #ifdef CAM

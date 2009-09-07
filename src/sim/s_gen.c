@@ -78,13 +78,27 @@ int LakeLevel = -1;		/* level for lake creation */
 int CurveLevel = -1;		/* level for river curviness */
 int CreateIsland = -1;		/* -1 => 10%, 0 => never, 1 => always */
 
+void DoBRiv(void);
+void DoSRiv(void);
+void BRivPlop(void);
+void SRivPlop(void);
+void DoRivers(void);
+void DoTrees(void);
+void GetRandStart(void);
+void MakeLakes(void);
+void MakeIsland(void);
+void MakeNakedIsland(void);
+void GenerateMap(int r);
 
+
+void
 GenerateNewCity(void) 
 {
   GenerateSomeCity(Rand16());
 }
 
 
+void
 GenerateSomeCity(int r)
 {
   if (CityFileName != NULL) {
@@ -112,6 +126,7 @@ GenerateSomeCity(int r)
 }
 
 
+int
 ERand(short limit)
 {
   short x, z;
@@ -124,6 +139,7 @@ ERand(short limit)
 }
 
 
+void
 GenerateMap(int r)
 {
   SeedRand(r);
@@ -154,6 +170,7 @@ GenerateMap(int r)
 }
 
 
+void
 ClearMap(void)
 {
   register short x, y;
@@ -164,6 +181,7 @@ ClearMap(void)
 }
 
 
+void
 ClearUnnatural(void)
 {
   register short x, y;
@@ -180,7 +198,8 @@ ClearUnnatural(void)
 
 #define RADIUS 18
 
-MakeNakedIsland()
+void
+MakeNakedIsland(void)
 {
   register int x, y;
 
@@ -215,6 +234,7 @@ MakeNakedIsland()
 }
 
 
+void
 MakeIsland(void)
 {
   MakeNakedIsland();
@@ -223,6 +243,7 @@ MakeIsland(void)
 }
 
 
+void
 MakeLakes(void)
 {
   short Lim1, Lim2, t, z;
@@ -249,6 +270,7 @@ MakeLakes(void)
 }
 
 
+void
 GetRandStart(void)
 {
   XStart = 40 + Rand(WORLD_X - 80);
@@ -258,6 +280,7 @@ GetRandStart(void)
 }
 
 
+void
 MoveMap(short dir)
 {
   static short DirTab[2][8] = { { 0, 1, 1, 1, 0, -1, -1, -1},
@@ -268,10 +291,11 @@ MoveMap(short dir)
 }
 
 
+void
 TreeSplash(short xloc, short yloc)
 {
   short dis, dir;
-  register short xoff, yoff, z;
+  register short z;
 
   if (TreeLevel < 0) {
     dis = Rand(150) + 50;
@@ -291,6 +315,7 @@ TreeSplash(short xloc, short yloc)
 }
 
 
+void
 DoTrees(void)
 {
   short Amount, x, xloc, yloc;
@@ -310,6 +335,7 @@ DoTrees(void)
 }
 
 
+void
 SmoothRiver(void)
 {
   static short DX[4] = {-1, 0, 1, 0};
@@ -346,6 +372,7 @@ SmoothRiver(void)
 }
 
 
+int
 IsTree(int cell)
 {
   if (((cell & LOMASK) >= WOODS_LOW) &&
@@ -355,6 +382,7 @@ IsTree(int cell)
 }
  
 
+void
 SmoothTrees(void)
 {
   static short DX[4] = {-1, 0, 1, 0};
@@ -393,6 +421,7 @@ SmoothTrees(void)
 }
 
 
+void
 DoRivers(void)
 {	
 
@@ -411,6 +440,7 @@ DoRivers(void)
 }
 
 
+void
 DoBRiv(void)
 {
   int r1, r2;
@@ -436,6 +466,7 @@ DoBRiv(void)
 }
 
 
+void
 DoSRiv(void)
 {
   int r1, r2;
@@ -461,6 +492,7 @@ DoSRiv(void)
 }
 
 
+void
 PutOnMap(short Mchar, short Xoff, short Yoff)
 {
   register short Xloc, Yloc, temp;
@@ -471,7 +503,7 @@ PutOnMap(short Mchar, short Xoff, short Yoff)
   Yloc = MapY + Yoff;
   if (TestBounds(Xloc, Yloc) == FALSE)
     return;
-  if (temp = Map[Xloc][Yloc]) {
+  if ((temp = Map[Xloc][Yloc])) {
     temp = temp & LOMASK;
     if (temp == RIVER)
       if (Mchar != CHANNEL)
@@ -483,6 +515,7 @@ PutOnMap(short Mchar, short Xoff, short Yoff)
 }
 
 
+void
 BRivPlop(void)
 {
   static short BRMatrix[9][9] = {
@@ -503,6 +536,7 @@ BRivPlop(void)
 }
 
 
+void
 SRivPlop(void)
 {
   static short SRMatrix[6][6] = {
@@ -520,7 +554,8 @@ SRivPlop(void)
 }
 
 
-SmoothWater()
+void
+SmoothWater(void)
 {
   int x, y;
 

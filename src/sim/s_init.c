@@ -66,9 +66,10 @@
 
 
 /* comefrom: loadFile bootUp main doMessage */
-InitWillStuff()
+void
+InitWillStuff(void)
 {
-  register short x, y, z;
+  register short x, y;
 
   RandomlySeedRand();
   InitGraphMax();
@@ -131,7 +132,8 @@ InitWillStuff()
 }
 
 
-ResetMapState()
+void
+ResetMapState(void)
 {
   SimView *view;
 
@@ -141,7 +143,8 @@ ResetMapState()
 }
 
 
-ResetEditorState()
+void
+ResetEditorState(void)
 {
   SimView *view;
 

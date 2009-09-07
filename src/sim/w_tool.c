@@ -124,14 +124,18 @@ QUAD toolColors[] = {
 
 Ink *NewInk();
 
-short tally(short tileValue);
-int DoSetWandState(SimView *view, short state);
+void DoSetWandState(SimView *view, short state);
+void DoPendTool(SimView *view, int tool, int x, int y);
+void EraserTo(SimView *view, int x, int y);
+void EraserStart(SimView *view, int x, int y);
+void DoShowZoneStatus(char *str, char *s0, char *s1, char *s2, char *s3, char *s4, int x, int y);
 
 
 /*************************************************************************/
 /* UTILITIES */
 
 
+void
 setWandState(SimView *view, short state)
 {
 #if 0
@@ -440,14 +444,14 @@ check3x3(SimView *view, short mapH, short mapV, short base, short tool)
 void
 check4x4border(short xMap, short yMap)
 {
-  Ptr tilePtr;
+  short *tilePtr;
   short xPos, yPos;
   short cnt;
 
   xPos = xMap; yPos = yMap - 1;
   for (cnt = 0; cnt < 4; cnt++) {
     /* this will do the upper bordering row */
-    tilePtr = (Ptr) &Map[xPos][yPos];
+    tilePtr = &Map[xPos][yPos];
     ConnecTile(xPos, yPos, tilePtr, 0);
     xPos++;
   }
@@ -455,7 +459,7 @@ check4x4border(short xMap, short yMap)
   xPos = xMap - 1; yPos = yMap;
   for (cnt = 0; cnt < 4; cnt++) {
     /* this will do the left bordering row */
-    tilePtr = (Ptr) &Map[xPos][yPos];
+    tilePtr = &Map[xPos][yPos];
     ConnecTile(xPos, yPos, tilePtr, 0);
     yPos++;
   }
@@ -463,7 +467,7 @@ check4x4border(short xMap, short yMap)
   xPos = xMap; yPos = yMap + 4;
   for (cnt = 0; cnt < 4;cnt++) {
     /* this will do the bottom bordering row */
-    tilePtr = (Ptr) &Map[xPos][yPos];
+    tilePtr = &Map[xPos][yPos];
     ConnecTile(xPos, yPos, tilePtr, 0);
     xPos++;
   }
@@ -471,7 +475,7 @@ check4x4border(short xMap, short yMap)
   xPos = xMap + 4; yPos = yMap;
   for (cnt = 0; cnt < 4; cnt++) {
     /* this will do the right bordering row */
-    tilePtr = (Ptr) &Map[xPos][yPos];
+    tilePtr = &Map[xPos][yPos];
     ConnecTile(xPos, yPos, tilePtr, 0);
     yPos++;
   }
@@ -637,12 +641,13 @@ check6x6(SimView *view, short mapH, short mapV, short base, short tool)
 
       if (autoBulldoze) {
 	/* if autoDoze is enabled, add up the cost of bulldozed tiles */
-	if (tileValue != 0)
+	if (tileValue != 0) {
 	  if (tally(tileValue)) {
 	    cost++;
 	  } else {
 	    flag = 0;
 	  }
+	}
       } else {
 	/* check and see if the tile is clear or not  */
 	if (tileValue != 0) {
@@ -762,9 +767,11 @@ int getDensityStr(short catNo, short mapH, short mapV)
     if  (z > 100) return (19);
     return (18);
   }
+  return 0;
 }
 
 
+void
 doZoneStatus(short mapH, short mapV)
 {
   char localStr[256];
@@ -805,6 +812,7 @@ doZoneStatus(short mapH, short mapV)
 }
 
 
+void
 DoShowZoneStatus(char *str, char *s0, char *s1, char *s2, char *s3, char *s4,
 		 int x, int y)
 {
@@ -817,9 +825,10 @@ DoShowZoneStatus(char *str, char *s0, char *s1, char *s2, char *s3, char *s4,
 
 
 /* comefrom: processWand */
+void
 put3x3Rubble(short x, short y)
 {
-  register xx, yy, zz;
+  register int xx, yy, zz;
 	
   for (xx = x - 1; xx < x + 2; xx++) {
     for (yy = y - 1; yy < y + 2; yy++)  {
@@ -839,9 +848,10 @@ put3x3Rubble(short x, short y)
 
 
 /* comefrom: processWand */
+void
 put4x4Rubble(short x, short y)
 {
-  register xx, yy, zz;
+  register int xx, yy, zz;
 	
   for (xx = x - 1; xx < x + 3; xx++) {
     for (yy = y - 1; yy < y + 3; yy++) {
@@ -861,9 +871,10 @@ put4x4Rubble(short x, short y)
 
 
 /* comefrom: processWand */
+void
 put6x6Rubble(short x, short y)
 {
-  register xx, yy, zz;
+  register int xx, yy, zz;
 
   for (xx = x - 1; xx < x + 5; xx++) {
     for (yy = y - 1; yy < y + 5; yy++)  {
@@ -882,6 +893,7 @@ put6x6Rubble(short x, short y)
 }	
 
 
+void
 DidTool(SimView *view, char *name, short x, short y)
 {
   char buf[256];
@@ -894,6 +906,7 @@ DidTool(SimView *view, char *name, short x, short y)
 }
 
 
+void
 DoSetWandState(SimView *view, short state)
 {
   char buf[256];
@@ -1306,6 +1319,7 @@ ChalkTool(SimView *view, short x, short y, short color, short first)
 }
 
 
+void
 ChalkStart(SimView *view, int x, int y, int color)
 {
   Ink *ink;
@@ -1325,9 +1339,12 @@ ChalkStart(SimView *view, int x, int y, int color)
 }
 
 
+void
 ChalkTo(SimView *view, int x, int y)
 {
+#ifdef MOTIONBUFFER
   int x0, y0, lx, ly;
+#endif
   Ink *ink = (Ink *)view->track_info;
 
 #ifdef MOTIONBUFFER
@@ -1390,6 +1407,7 @@ EraserTool(SimView *view, short x, short y, short first)
 }
 
 
+int
 InkInBox(Ink *ink, int left, int top, int right, int bottom)
 {
   if ((left <= ink->right) &&
@@ -1424,15 +1442,16 @@ InkInBox(Ink *ink, int left, int top, int right, int bottom)
 }
 
 
+void
 EraserStart(SimView *view, int x, int y)
 {
   EraserTo(view, x, y);
 }
 
 
+void
 EraserTo(SimView *view, int x, int y)
 {
-  SimView *v;
   Ink **ip, *ink;
 
   for (ip = &sim->overlay; *ip != NULL;) {
@@ -1541,6 +1560,7 @@ current_tool(SimView *view, short x, short y, short first)
 }
 
 
+void
 DoTool(SimView *view, short tool, short x, short y)
 {
   int result;
@@ -1563,6 +1583,7 @@ DoTool(SimView *view, short tool, short x, short y)
 }
 
 
+void
 ToolDown(SimView *view, int x, int y)
 {
   int result;
@@ -1591,16 +1612,14 @@ ToolDown(SimView *view, int x, int y)
 }
 
 
+void
 ToolUp(SimView *view, int x, int y)
 {
-  int result;
-
-  result = ToolDrag(view, x, y);
-
-  return (result);
+  ToolDrag(view, x, y);
 }
 
 
+void
 ToolDrag(SimView *view, int px, int py)
 {
   int x, y, dx, dy, adx, ady, lx, ly, dist;
@@ -1622,8 +1641,6 @@ ToolDrag(SimView *view, int px, int py)
     x >>= 4; y >>= 4;
     lx = view->last_x >> 4;
     ly = view->last_y >> 4;
-
-  reset:
 
     dx = x - lx;
     dy = y - ly;
@@ -1684,6 +1701,7 @@ ToolDrag(SimView *view, int px, int py)
 }
 
 
+void
 DoPendTool(SimView *view, int tool, int x, int y)
 {
   char buf[256];

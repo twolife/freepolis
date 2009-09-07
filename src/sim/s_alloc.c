@@ -147,7 +147,7 @@ short *MiscHis;
 short *PowerMap;
 
 
-int initMapArrays(void)
+void initMapArrays(void)
 {
   short i;
   unsigned short *auxPtr, *temp1;

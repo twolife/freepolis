@@ -368,6 +368,9 @@ static void	NeverPopupPieMenu _ANSI_ARGS_((PieMenu *menuPtr));
 static void	EventuallyPopupPieMenu _ANSI_ARGS_((PieMenu *menuPtr));
 static void	DeferPopupPieMenu _ANSI_ARGS_((PieMenu *menuPtr));
 static void	ShapePieMenu _ANSI_ARGS_((PieMenu *menuPtr));
+static void	LayoutPieMenu(PieMenu *menu);
+static void	UpdatePieMenuEntries(PieMenu *menuPtr);
+static int	CalcPieMenuItem(PieMenu *menu, int x, int y);
 
 
 /*
@@ -546,8 +549,6 @@ PieMenuWidgetCmd(clientData, interp, argc, argv)
 	DeferPopupPieMenu(menuPtr);
     } else if ((c == 's') && (strncmp(argv[1], "show", length) == 0)
 	    && (length >= 2)) {
-	int index;
-
 	if (argc != 2) {
 	    Tcl_AppendResult(interp, "wrong # args: should be \"",
 		    argv[0], " show\"", (char *) NULL);
@@ -556,8 +557,6 @@ PieMenuWidgetCmd(clientData, interp, argc, argv)
 	NowPopupPieMenu(menuPtr);
     } else if ((c == 'p') && (strncmp(argv[1], "pending", length) == 0)
 	    && (length >= 2)) {
-	int index;
-
 	if (argc != 2) {
 	    Tcl_AppendResult(interp, "wrong # args: should be \"",
 		    argv[0], " pending\"", (char *) NULL);
@@ -567,8 +566,6 @@ PieMenuWidgetCmd(clientData, interp, argc, argv)
 		(menuPtr->flags & POPUP_PENDING) ? 1 : 0);
     } else if ((c == 'd') && (strncmp(argv[1], "defer", length) == 0)
 	    && (length >= 2)) {
-	int index;
-
 	if (argc != 2) {
 	    Tcl_AppendResult(interp, "wrong # args: should be \"",
 		    argv[0], " defer\"", (char *) NULL);
@@ -768,7 +765,10 @@ PieMenuWidgetCmd(clientData, interp, argc, argv)
 	}
 	Tk_Release((ClientData) mePtr);
     } else if ((c == 'p') && (strncmp(argv[1], "post", length) == 0)) {
-	int x, y, ix, iy, tmp, err;
+	int x, y;
+#if 0
+	int ix, iy, tmp, err;
+#endif
 	Tk_Uid group;
 
 	if ((argc != 4) && (argc != 5)) {
@@ -1355,7 +1355,6 @@ DisplayPieMenu(clientData)
     register PieMenu *menuPtr = (PieMenu *) clientData;
     register Tk_Window tkwin = menuPtr->tkwin;
     XFontStruct *fontPtr;
-    int index;
 
     menuPtr->flags &= ~REDRAW_PENDING;
     if ((menuPtr->tkwin == NULL) || !Tk_IsMapped(menuPtr->tkwin)) {
@@ -1428,8 +1427,8 @@ UpdatePieMenu(clientData)
 }
 
 
-UpdatePieMenuEntries(menuPtr)
-    PieMenu *menuPtr;
+static void
+UpdatePieMenuEntries(PieMenu *menuPtr)
 {
     register PieMenuEntry *mePtr;
     register Tk_Window tkwin = menuPtr->tkwin;
@@ -1521,7 +1520,7 @@ GetPieMenuIndex(interp, menuPtr, string, indexPtr)
 				 * manual entry for valid .*/
     int *indexPtr;		/* Where to store converted relief. */
 {
-    int i, y;
+    int i;
 
     if ((string[0] == 'a') && (strcmp(string, "active") == 0)) {
 	*indexPtr = menuPtr->active;
@@ -1787,10 +1786,7 @@ UnpostSubPieMenu(interp, menuPtr)
 				 * reporting errors. */
     register PieMenu *menuPtr;	/* Information about menu as a whole. */
 {
-    char string[30];
-    int result, x, y, win_x, win_y;
-    unsigned int key_buttons;
-    Window root, child;
+    int result;
 
     if (menuPtr->postedPie == NULL) {
 	return TCL_OK;
@@ -1909,13 +1905,11 @@ ActivatePieMenuEntry(menuPtr, index, preview)
     }
 
 
-int
-CalcPieMenuItem(menu, x, y)
-  PieMenu *menu;
-  int x, y;
+static int
+CalcPieMenuItem(PieMenu *menu, int x, int y)
 {
   register PieMenuEntry *it, *last_it;
-  int i, j, order, quadrant;
+  int i, order = 0, quadrant;
   int numerator, denominator;
   int first, last_i, last_order;
   
@@ -2072,8 +2066,8 @@ case 3: /*
 }
 
 
-LayoutPieMenu(menu)
-  PieMenu *menu;
+static void
+LayoutPieMenu(PieMenu *menu)
 {
   int i;
   int total_slice, radius;

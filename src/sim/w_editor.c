@@ -69,6 +69,16 @@ int BobHeight = 8;
 
 extern Tk_ConfigSpec TileViewConfigSpecs[];
 
+void ClipTheOverlay(SimView *view);
+void DrawTheOverlay(SimView *view, GC gc, Pixmap pm, int color, 
+	       int top, int bottom, int left, int right,
+	       int onoverlay);
+void DrawOverlay(SimView *view);
+void DrawCursor(SimView *view);
+void DrawPending(SimView *view);
+void DrawOutside(SimView *view);
+void HandleAutoGoto(SimView *view);
+
 
 int EditorCmdconfigure(VIEW_ARGS)
 {
@@ -409,8 +419,6 @@ int EditorCmdPanBy(VIEW_ARGS)
 
 int EditorCmdTweakCursor(VIEW_ARGS)
 {
-  int x, y;
-
   XWarpPointer (view->x->dpy, None, None, 0, 0, 0, 0, 0, 0);
 
   return TCL_OK;
@@ -642,7 +650,6 @@ int EditorCmdShowMe(VIEW_ARGS)
 
 int EditorCmdFollow(VIEW_ARGS)
 {
-  int id;
   SimSprite *sprite;
 
   if ((argc != 2) && (argc != 3)) {
@@ -736,8 +743,10 @@ int EditorCmdDynamicFilter(VIEW_ARGS)
 
 int EditorCmdWriteJpeg(VIEW_ARGS)
 {
+#if 0
   int val;
   char *fileName = argv[2];
+#endif
 
   if (argc != 3) {
     return TCL_ERROR;
@@ -749,9 +758,9 @@ int EditorCmdWriteJpeg(VIEW_ARGS)
 }
 
 
-editor_command_init()
+void
+editor_command_init(void)
 {
-  int new;
   extern int TileViewCmd(CLIENT_ARGS);
 
   Tcl_CreateCommand(tk_mainInterp, "editorview", TileViewCmd,
@@ -810,7 +819,7 @@ DoEditorCmd(CLIENT_ARGS)
     return TCL_ERROR;
   }
 
-  if (ent = Tcl_FindHashEntry(&EditorCmds, argv[1])) {
+  if ((ent = Tcl_FindHashEntry(&EditorCmds, argv[1]))) {
     cmd = (int (*)())ent->clientData;
     Tk_Preserve((ClientData) view);
     result = cmd(view, interp, argc, argv);
@@ -828,6 +837,7 @@ DoEditorCmd(CLIENT_ARGS)
 /*************************************************************************/
 
 
+void
 DoNewEditor(SimView *view)
 {
   sim->editors++; view->next = sim->editor; sim->editor = view;
@@ -835,6 +845,7 @@ DoNewEditor(SimView *view)
 }
 
 
+void
 DoUpdateEditor(SimView *view)
 {
   int dx, dy, i;
@@ -852,12 +863,12 @@ DoUpdateEditor(SimView *view)
        view->skips)) {
     if (sim_skips) {
       if (sim_skip > 0) {
-	return 0;
+	return;
       }
     } else {
       if (view->skip > 0) {
 	--view->skip;
-	return 0;
+	return;
       } else {
 	view->skip = view->skips;
       }
@@ -918,6 +929,7 @@ DoUpdateEditor(SimView *view)
 }
 
 
+void
 HandleAutoGoto(SimView *view)
 {
   if (view->follow != NULL) {
@@ -932,7 +944,7 @@ HandleAutoGoto(SimView *view)
 	     view->auto_going &&
 	     (view->tool_mode == 0)) {
     int dx, dy;
-    int panx, pany, speed;
+    int speed;
     double dist, sloth;
 
     speed = view->auto_speed;
@@ -977,6 +989,7 @@ HandleAutoGoto(SimView *view)
   }
 }
 
+void
 DrawOutside(SimView *view)
 {
   Pixmap pm = view->pixmap2;
@@ -1014,6 +1027,7 @@ DrawOutside(SimView *view)
 
 char CursorDashes[] = { 4, 4 };
 
+void
 DrawPending(SimView *view)
 {
   Pixmap pm = view->pixmap2;
@@ -1078,6 +1092,7 @@ DrawPending(SimView *view)
 }
 
 
+void
 DrawCursor(SimView *view)
 {
   Pixmap pm = Tk_WindowId(view->tkwin);
@@ -1406,6 +1421,7 @@ DrawCursor(SimView *view)
 }
 
 
+void
 TimeElapsed(struct timeval *elapsed,
 	    struct timeval *start,
 	    struct timeval *finish)
@@ -1423,6 +1439,7 @@ TimeElapsed(struct timeval *elapsed,
 
 
 
+void
 DrawOverlay(SimView *view)
 {
   int width = view->w_width;
@@ -1512,6 +1529,7 @@ DrawOverlay(SimView *view)
 }
 
 
+void
 DrawTheOverlay(SimView *view, GC gc, Pixmap pm, int color, 
 	       int top, int bottom, int left, int right,
 	       int onoverlay)
@@ -1555,6 +1573,7 @@ DrawTheOverlay(SimView *view, GC gc, Pixmap pm, int color,
 }
 
 
+void
 ClipTheOverlay(SimView *view)
 {
   if (view->x->color) {

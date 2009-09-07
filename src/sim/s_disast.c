@@ -69,8 +69,12 @@ short ShakeNow;
 short FloodCnt;
 short FloodX, FloodY;
 
+void SetFire(void);
+int Vunerable(int tem);
+void ScenarioDisaster(void);
 
 /* comefrom: Simulate */
+void
 DoDisasters(void)
 { 
   /* Chance of disasters at lev 0 1 2 */
@@ -115,10 +119,9 @@ DoDisasters(void)
 
 
 /* comefrom: DoDisasters */
+void
 ScenarioDisaster(void)
 {
-  int x, y;
-
   switch (DisasterEvent) {
     case 1:			/* Dullsville */
       break;
@@ -148,6 +151,7 @@ ScenarioDisaster(void)
 
 
 /* comefrom: ScenarioDisaster */
+void
 MakeMeltdown(void)
 {
   short x, y;
@@ -164,7 +168,8 @@ MakeMeltdown(void)
 }
 
 
-FireBomb()
+void
+FireBomb(void)
 {
   CrashX = Rand(WORLD_X - 1);
   CrashY = Rand(WORLD_Y - 1);
@@ -175,6 +180,7 @@ FireBomb()
 
 
 /* comefrom: DoDisasters ScenarioDisaster */
+void
 MakeEarthquake(void)
 {
   register short x, y, z;
@@ -202,6 +208,7 @@ MakeEarthquake(void)
 
 
 /* comefrom: DoDisasters */
+void
 SetFire(void)
 {
   register short x, y, z;
@@ -222,6 +229,7 @@ SetFire(void)
 
 
 /* comefrom: DoDisasters */
+void
 MakeFire(void)
 {
   short t, x, y, z;
@@ -243,6 +251,7 @@ MakeFire(void)
 
 
 /* comefrom: MakeEarthquake */
+int
 Vunerable(int tem)
 {
   register int tem2;
@@ -257,6 +266,7 @@ Vunerable(int tem)
 
 
 /* comefrom: DoDisasters ScenarioDisaster */
+void
 MakeFlood(void)
 {
   static short Dx[4] = { 0, 1, 0,-1};
@@ -290,6 +300,7 @@ MakeFlood(void)
 
 
 /* comefrom: MapScan */
+void
 DoFlood(void)
 {
   static short Dx[4] = { 0, 1, 0,-1};
