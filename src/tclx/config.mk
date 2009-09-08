@@ -60,7 +60,7 @@ XPM_LIBS=-L/usr/X11R6/lib -lXpm
 # profiling is enabled, the DO_STRIPPING option below must be disabled.
 #
 
-CC=gcc
+#CC=gcc
 
 OPTIMIZE_FLAG=-O3 -DIS_LINUX
 #OPTIMIZE_FLAG=-g -DIS_LINUX
