@@ -906,7 +906,7 @@ DoResizeView(SimView *view, int w, int h)
     }
 
     view->data = (unsigned char *)shmat(view->shminfo->shmid, 0, 0);
-    if ((int)view->data == -1) {
+    if ((char*)view->data == (char*)-1) {
       perror("shmat");
       fprintf(stderr,
 	      "Darn, Micropolis can't find any memory to share with display \"%s\".\n",
