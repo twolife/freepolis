@@ -1,5 +1,5 @@
 SDLINCLUDE="`pkg-config --cflags sdl 2>/dev/null`"
-SDLLIBS="`pkg-config --libs sdl 2>/dev/null`"
+SDLLIBS="`pkg-config --libs-only-L sdl 2>/dev/null` `pkg-config --libs-only-l sdl 2>/dev/null`"
 
 found=0
 
