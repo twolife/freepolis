@@ -1055,6 +1055,7 @@ DoMonsterSprite(SimSprite *sprite)
   if ((c == -1) ||
       ((c == RIVER) &&
        (sprite->count != 0) &&
+       (sprite->count < 900) &&
        (sprite->control == -1))) {
     sprite->frame = 0; /* kill zilla */
   }
