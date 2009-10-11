@@ -1052,7 +1052,14 @@ DoMonsterSprite(SimSprite *sprite)
 
   if (sprite->count > 0) sprite->count--;
   c = GetChar(sprite->x + sprite->x_hot, sprite->y + sprite->y_hot);
-  if (c == -1) {
+  if ((c == -1)
+#ifndef ORIGINAL_MONSTER_BEHAVIOUR
+      || ((c == RIVER) &&
+       (sprite->count != 0) &&
+       (sprite->count < 900) &&
+       (sprite->control == -1))
+#endif
+     ) {
     sprite->frame = 0; /* kill zilla */
   }
 

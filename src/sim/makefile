@@ -13,8 +13,14 @@ CC = gcc
 OPTFLAGS = -O3
 #OPTFLAGS = -g
 
+#Possible defines:
+#ORIGINAL_MONSTER_BEHAVIOUR: The monster is able to walk over water and not die
+#NO_AIRCRASH: The Aircrash-Disaster is disables completely
+#CAM: ?
+#NET: ?
+
 #DEFINES = -DIS_LINUX -DCAM -DNET
-DEFINES = -DIS_LINUX #-DNO_AIRCRASH
+DEFINES = -DIS_LINUX -DORIGINAL_MONSTER_BEHAVIOUR #-DNO_AIRCRASH
 
 CFLAGS += $(OPTFLAGS) $(DEFINES) -Wall
 
