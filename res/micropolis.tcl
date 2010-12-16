@@ -246,12 +246,15 @@ set ScenarioButtons600x450 {
   { button	scenario6	DoPickScenario	"8"	""	259 319 105  94		""	@images/scenario6hilite-small.xpm "" }
   { button	scenario7	DoPickScenario	"7"	""	363 319 105  94		""	@images/scenario7hilite-small.xpm "" }
   { button	scenario8	DoPickScenario	"6"	""	468 319 105  94		""	@images/scenario8hilite-small.xpm "" }
+  { button	map		DoMap		""	""	267 24	180 150		""	"" "" }
 }
 
 set ScenarioButtons $ScenarioButtons1200x900
 set ScenarioBackground "@images/background-micropolis.xpm"
 set ScenarioMapX 534
 set ScenarioMapY 48
+set ScenarioMapFloatX -1
+set ScenarioMapFloatY -1
 set ScenarioCityNameX 530
 set ScenarioCityNameY 0
 set ScenarioDescX 232
@@ -271,6 +274,8 @@ if {($screenwidth < $ScenarioPanelWidth) ||
 	set ScenarioPanelHeight 450
 	set ScenarioMapX -1
 	set ScenarioMapY -1
+	set ScenarioMapFloatX 140
+	set ScenarioMapFloatY 2
 	set ScenarioCityNameX 162
 	set ScenarioCityNameY 422
 	set ScenarioDescX 250
@@ -3372,8 +3377,18 @@ proc UpdateScenarioButton {win data} {
       
       place $win.desc -x $ScenarioDescX -y $ScenarioDescY -width $ScenarioDescWidth -height $ScenarioDescHeight
     }
+    if {[lindex ${data} 2] == "DoMap"} {
+      global ScenarioMapFloatX ScenarioMapFloatY
+      if { $ScenarioMapFloatX != "-1" } {
+        place $win.canvas.view -x $ScenarioMapFloatX -y $ScenarioMapFloatY
+      }
+    }
   } else {
     catch {destroy $win.desc}
+    global ScenarioMapFloatX
+    if { $ScenarioMapFloatX != "-1" } {
+      catch {place forget $win.canvas.view}
+    }
   }
   if {$enabled} {
     if {$checked} {
