@@ -173,8 +173,16 @@ pack append $win.canvas.name \
   $win.canvas.name.cityname	{left frame e}
 
 place $win.canvas -x 0 -y 0
-place $win.canvas.view -x 534 -y 48
-place $win.canvas.name -x 530 -y 0
+
+global ScenarioMapX
+global ScenarioMapY
+if {$ScenarioMapX != -1} {
+	place $win.canvas.view -x $ScenarioMapX -y $ScenarioMapY
+}
+
+global ScenarioCityNameX
+global ScenarioCityNameY
+place $win.canvas.name -x $ScenarioCityNameX -y $ScenarioCityNameY
 
 InitScenario $win
 

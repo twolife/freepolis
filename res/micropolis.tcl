@@ -227,15 +227,58 @@ set ScenarioButtons1200x900 {
   { button	scenario8	DoPickScenario	"6"	""	937 638 209 188		""	@images/scenario8hilite.xpm "" }
 }
 
+set ScenarioButtons600x450 {
+  { button	load		DoLoad		""	""	 35 119  79  45		""	@images/button1hilite-small.xpm "" }
+  { button	generate	DoGenerate	""	""	 31 196  79  45		""	@images/button2hilite-small.xpm "" }
+  { button	quit		DoQuit		""	""	 34 272  79  45		""	@images/button3hilite-small.xpm "" }
+  { button	about		DoAbout		""	""	 51 353  79  45		""	@images/button4hilite-small.xpm "" }
+  { checkbox	easy		DoLevel		0	""	491  53  95  35		""	@images/checkbox1hilite-small.xpm "" @images/checkbox1checked-small.xpm @images/checkbox1hilitechecked-small.xpm }
+  { checkbox	medium		DoLevel		1	""	491  88  95  35		""	@images/checkbox2hilite-small.xpm "" @images/checkbox2checked-small.xpm @images/checkbox2hilitechecked-small.xpm }
+  { checkbox	hard		DoLevel		2	""	491 123  95  35		""	@images/checkbox3hilite-small.xpm "" @images/checkbox3checked-small.xpm @images/checkbox3hilitechecked-small.xpm }
+  { button	left		DoLeft		""	""	270 187  25  25		""	@images/lefthilite-small.xpm @images/leftdisabled-small.xpm }
+  { button	right		DoRight		""	""	420 187  25  25		""	@images/righthilite-small.xpm @images/rightdisabled-small.xpm }
+  { button	play		DoPlay		""	""	312 188  90  25		""	@images/playhilite-small.xpm "" }
+  { button	scenario1	DoPickScenario	"1"	""	155 225 105  94		""	@images/scenario1hilite-small.xpm "" }
+  { button	scenario2	DoPickScenario	"2"	""	259 225 105  94		""	@images/scenario2hilite-small.xpm "" }
+  { button	scenario3	DoPickScenario	"3"	""	363 225	105  94		""	@images/scenario3hilite-small.xpm "" }
+  { button	scenario4	DoPickScenario	"4"	""	468 225 105  94		""	@images/scenario4hilite-small.xpm "" }
+  { button	scenario5	DoPickScenario	"5"	""	155 319 105  94		""	@images/scenario5hilite-small.xpm "" }
+  { button	scenario6	DoPickScenario	"8"	""	259 319 105  94		""	@images/scenario6hilite-small.xpm "" }
+  { button	scenario7	DoPickScenario	"7"	""	363 319 105  94		""	@images/scenario7hilite-small.xpm "" }
+  { button	scenario8	DoPickScenario	"6"	""	468 319 105  94		""	@images/scenario8hilite-small.xpm "" }
+}
+
 set ScenarioButtons $ScenarioButtons1200x900
 set ScenarioBackground "@images/background-micropolis.xpm"
+set ScenarioMapX 534
+set ScenarioMapY 48
+set ScenarioCityNameX 530
+set ScenarioCityNameY 0
+set ScenarioDescX 232
+set ScenarioDescY 170
+set ScenarioDescWidth 280
+set ScenarioDescHeight 285
+set ScenarioDescFont Large
 
 set screenwidth [winfo screenwidth .]
 set screenheight [winfo screenheight .]
 
 if {($screenwidth < $ScenarioPanelWidth) ||
     ($screenheight < $ScenarioPanelHeight)} {
-	puts stderr "WARNING: Screen too small for scenario window, no matching images available.\n"
+	puts stdout "Screen too small for normal scenario window, using resized version.\n"
+	set ScenarioBackground "@images/background-micropolis-small.xpm"
+	set ScenarioPanelWidth 600
+	set ScenarioPanelHeight 450
+	set ScenarioMapX -1
+	set ScenarioMapY -1
+	set ScenarioCityNameX 162
+	set ScenarioCityNameY 422
+	set ScenarioDescX 250
+	set ScenarioDescY 4
+	set ScenarioDescWidth 240
+	set ScenarioDescHeight 210
+	set ScenarioDescFont Tiny
+	set ScenarioButtons $ScenarioButtons600x450
 }
 
 # Disabled until we handle mouse events on the map itself.
@@ -3314,19 +3357,20 @@ proc UpdateScenarioButton {win data} {
   #echo "WIN $win TYPE $type ID $id OVER $over ENABLED $enabled CHECKED $checked"
   if {$over} {
     if {[lindex ${data} 2] == "DoPickScenario"} {
+      global ScenarioDescX ScenarioDescY ScenarioDescWidth ScenarioDescHeight ScenarioDescFont
       catch {text $win.desc \
       	-borderwidth 2 \
       	-relief flat \
       	-wrap word \
       	-state normal \
-      	-font [Font $win Large]}
+      	-font [Font $win $ScenarioDescFont]}
       
       $win.desc configure -state normal
       $win.desc delete 0.0 end
       $win.desc insert end "[lindex $Messages([lindex ${data} 3]) 1]\n\n[lindex $Messages([lindex ${data} 3]) 2]"
       $win.desc configure -state disabled
       
-      place $win.desc -x 232 -y 170 -width 280 -height 285
+      place $win.desc -x $ScenarioDescX -y $ScenarioDescY -width $ScenarioDescWidth -height $ScenarioDescHeight
     }
   } else {
     catch {destroy $win.desc}
