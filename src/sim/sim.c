@@ -632,6 +632,7 @@ main(int argc, char *argv[])
   printf("Welcome to X11 Multi Player Micropolis version %s by Will Wright, Don Hopkins.\n",
 	 MicropolisVersion);
   printf("Copyright (C) 2002 by Electronic Arts, Maxis. All rights reserved.\n");
+  printf("Support for newer Unix systems and new bugs added by Michael Gernoth.\n");
 
   while (!errflg && 
 	 !tkMustExit &&

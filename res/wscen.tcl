@@ -75,9 +75,12 @@ if {[catch "toplevel $win -screen $display"]} {
   return ""
 }
 
+global ScenarioPanelWidth
+global ScenarioPanelHeight
+
 wm title $win "Micropolis Scenarios"
 wm iconname $win {Micropolis Scenarios}
-wm geometry $win 1200x900+0+0
+wm geometry $win ${ScenarioPanelWidth}x${ScenarioPanelHeight}+0+0
 wm withdraw $win
 wm protocol $win delete "DeleteScenarioWindow $win ;"
 wm fullscreen $win on
@@ -90,13 +93,15 @@ canvas $win.canvas \
   -scrollincrement 0 \
   -borderwidth 0 \
   -background #BFBFBF \
-  -width 1200 -height 900
+  -width $ScenarioPanelWidth -height $ScenarioPanelHeight
 LinkWindow $win.canvas $win.canvas
 LinkWindow $win.canvas.w $win
 
+global ScenarioBackground
+
 $win.canvas create bitmap 0 0 \
   -tags background  \
-  -bitmap "@images/background-micropolis.xpm" \
+  -bitmap $ScenarioBackground \
   -anchor nw
 
 $win.canvas bind background <ButtonPress> {HandleScenarioDown %W %x %y}

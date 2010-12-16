@@ -174,8 +174,10 @@ set NoticePanelHeight 250
 set SplashPanelWidth 1200
 set SplashPanelHeight 900
 
-set ScenarioPanelWidth 420
-set ScenarioPanelHeight 440
+#set ScenarioPanelWidth 420
+#set ScenarioPanelHeight 440
+set ScenarioPanelWidth 1200
+set ScenarioPanelHeight 900
 
 set SugarURI ""
 set SugarNickName ""
@@ -204,7 +206,7 @@ set SubWindows {
 #   0           1               2               3       4         5   6   7   8         9       10   11       12      13
 #   type	id		callback	param	var	  x   y   w   h		normal	over disabled checked checkedover
 #   ----------- --------------- --------------- ------- ------- --- --- --- ---         ------- ---- -------- ------- -----------
-set ScenarioButtons {
+set ScenarioButtons1200x900 {
   { button	load		DoLoad		""	""	 70 238 157  90		""	@images/button1hilite.xpm "" }
   { button	generate	DoGenerate	""	""	 62 392 157  90		""	@images/button2hilite.xpm "" }
   { button	quit		DoQuit		""	""	 68 544 157  90		""	@images/button3hilite.xpm "" }
@@ -223,6 +225,17 @@ set ScenarioButtons {
   { button	scenario6	DoPickScenario	"8"	""	519 639 209 188		""	@images/scenario6hilite.xpm "" }
   { button	scenario7	DoPickScenario	"7"	""	728 638 209 188		""	@images/scenario7hilite.xpm "" }
   { button	scenario8	DoPickScenario	"6"	""	937 638 209 188		""	@images/scenario8hilite.xpm "" }
+}
+
+set ScenarioButtons $ScenarioButtons1200x900
+set ScenarioBackground "@images/background-micropolis.xpm"
+
+set screenwidth [winfo screenwidth .]
+set screenheight [winfo screenheight .]
+
+if {($screenwidth < $ScenarioPanelWidth) ||
+    ($screenheight < $ScenarioPanelHeight)} {
+	puts stderr "WARNING: Screen too small for scenario window, no matching images available.\n"
 }
 
 # Disabled until we handle mouse events on the map itself.
