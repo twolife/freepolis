@@ -232,6 +232,30 @@ bind $win.topframe.overlays.m <Alt-Key> {tk_traverseToMenu %W %A}
     -value 13\
     -command "SetMapState $win 13"
 
+button $win.topframe.hide\
+  -text {Hide Map}\
+  -font [Font $win Medium]\
+  -borderwidth 1\
+  -command "HideMap $win" \
+  -relief flat
+LinkWindow $win.hide $win.topframe.hide
+tk_bindForTraversal $win.topframe.hide
+
+proc HideMap {win} {
+  pack unpack $win.centerframe
+  $win.topframe.hide configure \
+    -text {Show Map}\
+    -command "ShowMap $win"
+}
+
+proc ShowMap {win} {
+  pack append $win\
+    $win.centerframe		{top frame center fill}
+  $win.topframe.hide configure \
+    -text {Hide Map}\
+    -command "HideMap $win"
+}
+
 label $win.topframe.legend\
   -bitmap "@images/legendn.xpm" \
   -font [Font $win Medium]
@@ -240,6 +264,7 @@ LinkWindow $win.legend $win.topframe.legend
 pack append $win.topframe\
   $win.topframe.zones		{left frame nw} \
   $win.topframe.overlays	{left frame nw} \
+  $win.topframe.hide		{left frame nw} \
   $win.topframe.legend		{right frame ne}
 
 pack append $win\
