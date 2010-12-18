@@ -262,6 +262,7 @@ set ScenarioDescY 170
 set ScenarioDescWidth 280
 set ScenarioDescHeight 285
 set ScenarioDescFont Large
+set EventLines 5
 
 set screenwidth [winfo screenwidth .]
 set screenheight [winfo screenheight .]
@@ -284,6 +285,7 @@ if {($screenwidth < $ScenarioPanelWidth) ||
 	set ScenarioDescHeight 210
 	set ScenarioDescFont Tiny
 	set ScenarioButtons $ScenarioButtons600x450
+	set EventLines 2
 }
 
 # Disabled until we handle mouse events on the map itself.

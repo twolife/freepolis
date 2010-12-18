@@ -544,13 +544,15 @@ scrollbar $win.col1.w1.f2.f2.scroll\
 
 SetHelp $win.col1.w1.f2.f2.scroll Head.Scrollbar
 
+global EventLines
+
 text $win.col1.w1.f2.f2.text \
   -yscroll "$win.col1.w1.f2.f2.scroll set" \
   -borderwidth 1 \
   -relief sunken \
   -wrap word \
   -state disabled \
-  -height 5 \
+  -height $EventLines \
   -font [Font $win Text]
 LinkWindow $win.text $win.col1.w1.f2.f2.text
 
