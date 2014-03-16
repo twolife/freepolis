@@ -580,8 +580,8 @@ Tcl_GetDate (p, now, zone)
  * Error message are not used, so discard with dummy function.
  */
 
-void
+int
 yyerror(msg)
-    char *msg;
+    const char *msg;
 {
 }
