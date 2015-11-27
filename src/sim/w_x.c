@@ -581,7 +581,7 @@ InitNewView(SimView *view, char *title, int class, int w, int h)
   view->update_context = 0;
   view->auto_goto = 0;
   view->auto_going = 0;
-  view->auto_x_goal = view->auto_x_goal = 0;
+  view->auto_x_goal = view->auto_y_goal = 0;
   view->auto_speed = 75;
   view->follow = NULL;
   view->sound = 1;
