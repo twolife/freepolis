@@ -33,15 +33,6 @@
  *
  *-----------------------------------------------------------------------------
  */
-int
-matherr (except)
-    struct exception *except;
-{
-    if (Tcl_MathError (except->name, except->type))
-        return 1;
-    else
-        return 0;
-}
 
 #else
 
