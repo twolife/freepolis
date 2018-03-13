@@ -119,27 +119,8 @@ static int
 ReturnFPMathError (interp)
     Tcl_Interp *interp;
 {
-    char *errorMsg;
 
-    switch (G_errorType) {
-       case DOMAIN: 
-           errorMsg = "domain";
-           break;
-       case SING:
-           errorMsg = "singularity";
-           break;
-       case OVERFLOW:
-           errorMsg = "overflow";
-           break;
-       case UNDERFLOW:
-           errorMsg = "underflow";
-           break;
-       case TLOSS:
-       case PLOSS:
-           errorMsg = "loss of significance";
-           break;
-    }
-    Tcl_AppendResult (interp, "floating point ", errorMsg, " error",
+    Tcl_AppendResult (interp, "floating point error",
                       (char *) NULL);
     G_gotTclFPMathErr = FALSE;  /* Clear the flag. */
     return TCL_ERROR;
