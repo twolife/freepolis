@@ -5,8 +5,8 @@ TCLXHOME = ../tclx
 TCLLIBRARY = /usr/local/lib/tcl
 TKLIBRARY = /usr/local/lib/tk
 
-SDLINCLUDE = $$(/bin/sh ./sdl_helper cflags)
-SDLLIBS = $$(/bin/sh ./sdl_helper libs)
+SDLINCLUDE := $(shell /bin/sh sdl_helper cflags)
+SDLLIBS := $(shell /bin/sh sdl_helper libs)
 
 CC = gcc
 
@@ -31,7 +31,6 @@ INSTALL = install -s
 
 INCLUDES = \
 	-Iheaders \
-	-I$(XPMHOME) \
 	-I$(XINCLUDE) \
 	-I$(TCLHOME) \
 	-I$(TCLXHOME)/src \
