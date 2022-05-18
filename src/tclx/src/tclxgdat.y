@@ -58,6 +58,9 @@
 #define DAYLIGHT 1
 #define STANDARD 2
 #define MAYBE    3
+
+int yylex(void);
+void yyerror(const char *);
 %}
 
 %%
@@ -229,6 +232,7 @@ time_t daylcorr(future, now) time_t future, now;
 static char *lptr;
 
 //static
+int
 yylex()
 {
 #ifndef YYSTYPE
@@ -580,7 +584,7 @@ Tcl_GetDate (p, now, zone)
  * Error message are not used, so discard with dummy function.
  */
 
-int
+void
 yyerror(msg)
     const char *msg;
 {
