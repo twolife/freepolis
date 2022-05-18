@@ -1,3 +1,6 @@
+/#include "tclint.h"/a\
+\#include "tclxtend.h"
+
 /(\*cmdPtr->proc)/a\
 \        /*\
 \         * Signal handling added for Extended Tcl.\
