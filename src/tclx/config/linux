@@ -9,5 +9,6 @@ LIBS=-lm
 RANLIB_CMD=ranlib
 MCS_CMD=true
 TCL_TK_LIBS= -L/usr/X11/lib -lX11 -lm -lXpm
+XINCLUDE=/usr/include/X11
 
 TCL_MAN_SEPARATOR=

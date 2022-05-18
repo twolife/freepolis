@@ -54,6 +54,7 @@ TCL_TK_SHELL=wish
 TCL_TK_DIR=../tk
 TK_LIBRARY=/usr/local/lib/tk
 XPM_LIBS=-L/usr/X11R6/lib -lXpm 
+XINCLUDE=/usr/X11R6/include
 
 #------------------------------------------------------------------------------
 # Compiler debug/optimization/profiling flag to use.  Not that if debugging or
