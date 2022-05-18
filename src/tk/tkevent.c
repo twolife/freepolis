@@ -21,6 +21,8 @@ static char rcsid[] = "$Header: /user6/ouster/wish/RCS/tkEvent.c,v 1.60 92/08/21
 
 #include "tkconfig.h"
 #include "tkint.h"
+#include "tclxtend.h"
+#include "tkwm.h"
 #include <errno.h>
 #include <signal.h>
 #include <sys/time.h>
