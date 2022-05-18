@@ -45,6 +45,7 @@
 #include <sys/file.h>
 #include <sys/stat.h>
 #include <sys/time.h>
+#include <unistd.h>
 #ifndef _TCL
 #   include <tcl.h>
 #endif
