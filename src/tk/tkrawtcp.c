@@ -43,6 +43,7 @@ static char rcsid[] = "...";
 #include <sys/un.h>
 
 #include <tk.h>
+#include "tkint.h"
 
 static int inet_connect _ANSI_ARGS_((char *host, char *port,int server));
 static int unix_connect _ANSI_ARGS_((char *path, int server));
