@@ -1,6 +1,6 @@
 PREFIX=/usr/local
 DATADIR=$(PREFIX)/share/micropolis
-LIBEXECDIR=$(PREFIX)/libexec
+LIBEXECDIR=$(PREFIX)/libexec/micropolis
 BINDIR=$(PREFIX)/bin
 DOCDIR=$(PREFIX)/share/doc/micropolis
 PIXMAPDIR=$(PREFIX)/share/pixmaps
@@ -64,9 +64,10 @@ install-dirs:
 install-bin:
 	$(INSTALL) -m 0755 res/sim $(DESTDIR)/$(LIBEXECDIR)/sim
 	$(INSTALL) -m 0755 res/sounds/player $(DESTDIR)/$(DATADIR)/res/sounds/player
-	echo "SIMHOME=$(DATADIR); export SIMHOME" >$(DESTDIR)/$(BINDIR)/micropolis
+	echo "#!/bin/sh" >$(DESTDIR)/$(BINDIR)/micropolis
+	echo "SIMHOME=$(DATADIR); export SIMHOME" >>$(DESTDIR)/$(BINDIR)/micropolis
 	echo "echo \"Starting Micropolis in \$${SIMHOME} ... \"" >>$(DESTDIR)/$(BINDIR)/micropolis
-	echo "cd $(DATADIR) && $(LIBEXECDIR)/sim \$$*" >>$(DESTDIR)/$(BINDIR)/micropolis
+	echo "cd $(DATADIR) && exec $(LIBEXECDIR)/sim \"\$$@\"" >>$(DESTDIR)/$(BINDIR)/micropolis
 	chmod 755 $(DESTDIR)/$(BINDIR)/micropolis
 
 install-res: install-res-sounds install-res-dejavu-lgc
