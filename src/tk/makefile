@@ -176,7 +176,7 @@ libtk.a: $(OBJS)
 	ranlib libtk.a
 
 $(TCL_DIR)/libtcl.a:
-	cd $(TCL_DIR); make libtcl.a
+	cd $(TCL_DIR); $(MAKE) libtcl.a
 
 clean:
 	touch junk~

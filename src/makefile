@@ -75,10 +75,10 @@ TARFILES = \
 	micropolis-activity/Micropolis.png
 
 all:
-	cd tcl ; make all
-	cd tk ; make all
-	cd tclx ; make all
-	cd sim ; make all
+	cd tcl ; $(MAKE) all
+	cd tk ; $(MAKE) all
+	cd tclx ; $(MAKE) all
+	cd sim ; $(MAKE) all
 
 clean:
 	rm -f Micropolis.tgz
@@ -86,10 +86,10 @@ clean:
 	(cd .. ; touch junk~ ; rm -f *~)
 	touch junk~ ; rm -f *~
 	rm -rf BUILDIT
-	cd tcl ; make clean
-	cd tk ; make clean
-	cd tclx ; make clean
-	cd sim ; make clean
+	cd tcl ; $(MAKE) clean
+	cd tk ; $(MAKE) clean
+	cd tclx ; $(MAKE) clean
+	cd sim ; $(MAKE) clean
 
 install: all
 	(cd $(RES) ; rm -f sim)
