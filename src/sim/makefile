@@ -1,4 +1,4 @@
-XINCLUDE = /usr/include/X11
+XINCLUDE = /usr/X11R6/include
 TCLHOME = ../tcl
 TKHOME = ../tk
 TCLXHOME = ../tclx
