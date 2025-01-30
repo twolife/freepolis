@@ -46,11 +46,11 @@
 #if 0
 	static time_t timeconv(int hh, int mm, int ss, int mer);
 	static time_t daylcorr(time_t future, time_t now);
-	static lookup(char *id);
+	static int lookup(char *id);
 #else
 	static time_t timeconv();
 	static time_t daylcorr();
-	static lookup();
+	static int lookup();
 #endif
 
 #define AM 1
@@ -463,7 +463,7 @@ struct table milzone[] = {
         {0, 0, 0}};
 
 static
-lookup(id) char *id;
+int lookup(id) char *id;
 {
 #define gotit (yylval=i->value,  i->type)
 #define getid for(j=idvar, k=id; *j++ = *k++; )
