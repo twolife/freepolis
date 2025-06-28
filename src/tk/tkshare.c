@@ -92,11 +92,12 @@ static void		ShareEventProc _ANSI_ARGS_((ClientData clientData,
  *----------------------------------------------------------------------
  */
 
-void
-Tk_ShareEvents(tkwin, groupId)
-    Tk_Window tkwin;			/* Token for window. */
-    Tk_Uid groupId;			/* Identifier for group among which
+void 
+Tk_ShareEvents (
+    Tk_Window tkwin,			/* Token for window. */
+    Tk_Uid groupId			/* Identifier for group among which
 					 * events are to be shared. */
+)
 {
     register Group *groupPtr;
 
@@ -165,10 +166,11 @@ Tk_ShareEvents(tkwin, groupId)
  *----------------------------------------------------------------------
  */
 
-void
-Tk_UnshareEvents(tkwin, groupId)
-    Tk_Window tkwin;			/* Token for window. */
-    Tk_Uid groupId;			/* Identifier for group. */
+void 
+Tk_UnshareEvents (
+    Tk_Window tkwin,			/* Token for window. */
+    Tk_Uid groupId			/* Identifier for group. */
+)
 {
     register Group *groupPtr;
     int i;
@@ -219,9 +221,10 @@ Tk_UnshareEvents(tkwin, groupId)
  *----------------------------------------------------------------------
  */
 
-static void
-DeleteGroup(groupPtr)
-    Group *groupPtr;			/* Group to delete. */
+static void 
+DeleteGroup (
+    Group *groupPtr			/* Group to delete. */
+)
 {
     if (groupList == groupPtr) {
 	groupList = groupPtr->nextPtr;
@@ -262,9 +265,10 @@ DeleteGroup(groupPtr)
  */
 
 static void
-ShareEventProc(clientData, eventPtr)
-    ClientData clientData;		/* Information about share group. */
-    register XEvent *eventPtr;		/* Event that just occurred. */
+ShareEventProc(
+    ClientData clientData,		/* Information about share group. */
+    register XEvent *eventPtr		/* Event that just occurred. */
+)
 {
     register Group *groupPtr = (Group *) clientData;
     register Tk_Window tkwin;

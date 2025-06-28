@@ -126,12 +126,13 @@ static void	MapFrame _ANSI_ARGS_((ClientData clientData));
  */
 
 int
-Tk_FrameCmd(clientData, interp, argc, argv)
-    ClientData clientData;	/* Main window associated with
+Tk_FrameCmd(
+    ClientData clientData,	/* Main window associated with
 				 * interpreter. */
-    Tcl_Interp *interp;		/* Current interpreter. */
-    int argc;			/* Number of arguments. */
-    char **argv;		/* Argument strings. */
+    Tcl_Interp *interp,		/* Current interpreter. */
+    int argc,			/* Number of arguments. */
+    char **argv			/* Argument strings. */
+)
 {
     Tk_Window tkwin = (Tk_Window) clientData;
     Tk_Window new;
@@ -210,7 +211,7 @@ Tk_FrameCmd(clientData, interp, argc, argv)
     Tk_CreateEventHandler(framePtr->tkwin, ExposureMask|StructureNotifyMask,
 	    FrameEventProc, (ClientData) framePtr);
     Tcl_CreateCommand(interp, Tk_PathName(framePtr->tkwin),
-	    FrameWidgetCmd, (ClientData) framePtr, (void (*)()) NULL);
+	    FrameWidgetCmd, (ClientData) framePtr, (void (*)(int *)) NULL);
 
     if (ConfigureFrame(interp, framePtr, argc-2, argv+2, 0) != TCL_OK) {
 	Tk_DestroyWindow(framePtr->tkwin);
@@ -242,11 +243,12 @@ Tk_FrameCmd(clientData, interp, argc, argv)
  */
 
 static int
-FrameWidgetCmd(clientData, interp, argc, argv)
-    ClientData clientData;	/* Information about frame widget. */
-    Tcl_Interp *interp;		/* Current interpreter. */
-    int argc;			/* Number of arguments. */
-    char **argv;		/* Argument strings. */
+FrameWidgetCmd(
+    ClientData clientData,	/* Information about frame widget. */
+    Tcl_Interp *interp,		/* Current interpreter. */
+    int argc,			/* Number of arguments. */
+    char **argv			/* Argument strings. */
+)
 {
     register Frame *framePtr = (Frame *) clientData;
     int result = TCL_OK;
@@ -300,8 +302,9 @@ FrameWidgetCmd(clientData, interp, argc, argv)
  */
 
 static void
-DestroyFrame(clientData)
-    ClientData clientData;	/* Info about frame widget. */
+DestroyFrame(
+    ClientData clientData	/* Info about frame widget. */
+)
 {
     register Frame *framePtr = (Frame *) clientData;
 
@@ -338,14 +341,15 @@ DestroyFrame(clientData)
  *----------------------------------------------------------------------
  */
 
-static int
-ConfigureFrame(interp, framePtr, argc, argv, flags)
-    Tcl_Interp *interp;		/* Used for error reporting. */
-    register Frame *framePtr;	/* Information about widget;  may or may
+static int 
+ConfigureFrame (
+    Tcl_Interp *interp,		/* Used for error reporting. */
+    register Frame *framePtr,	/* Information about widget;  may or may
 				 * not already have values for some fields. */
-    int argc;			/* Number of valid entries in argv. */
-    char **argv;		/* Arguments. */
-    int flags;			/* Flags to pass to Tk_ConfigureWidget. */
+    int argc,			/* Number of valid entries in argv. */
+    char **argv,		/* Arguments. */
+    int flags			/* Flags to pass to Tk_ConfigureWidget. */
+)
 {
     if (Tk_ConfigureWidget(interp, framePtr->tkwin, configSpecs,
 	    argc, argv, (char *) framePtr, flags) != TCL_OK) {
@@ -393,8 +397,9 @@ ConfigureFrame(interp, framePtr, argc, argv, flags)
  */
 
 static void
-DisplayFrame(clientData)
-    ClientData clientData;	/* Information about widget. */
+DisplayFrame(
+    ClientData clientData	/* Information about widget. */
+)
 {
     register Frame *framePtr = (Frame *) clientData;
     register Tk_Window tkwin = framePtr->tkwin;
@@ -436,9 +441,10 @@ DisplayFrame(clientData)
  */
 
 static void
-FrameEventProc(clientData, eventPtr)
-    ClientData clientData;	/* Information about window. */
-    register XEvent *eventPtr;	/* Information about event. */
+FrameEventProc(
+    ClientData clientData,	/* Information about window. */
+    register XEvent *eventPtr	/* Information about event. */
+)
 {
     register Frame *framePtr = (Frame *) clientData;
 
@@ -477,8 +483,9 @@ FrameEventProc(clientData, eventPtr)
  */
 
 static void
-MapFrame(clientData)
-    ClientData clientData;		/* Pointer to frame structure. */
+MapFrame(
+    ClientData clientData		/* Pointer to frame structure. */
+)
 {
     Frame *framePtr = (Frame *) clientData;
 

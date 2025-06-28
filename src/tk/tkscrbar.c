@@ -229,13 +229,14 @@ static void		ScrollCmd _ANSI_ARGS_((Scrollbar *scrollPtr,
  *--------------------------------------------------------------
  */
 
-int
-Tk_ScrollbarCmd(clientData, interp, argc, argv)
-    ClientData clientData;	/* Main window associated with
+int 
+Tk_ScrollbarCmd (
+    ClientData clientData,	/* Main window associated with
 				 * interpreter. */
-    Tcl_Interp *interp;		/* Current interpreter. */
-    int argc;			/* Number of arguments. */
-    char **argv;		/* Argument strings. */
+    Tcl_Interp *interp,		/* Current interpreter. */
+    int argc,			/* Number of arguments. */
+    char **argv		/* Argument strings. */
+)
 {
     Tk_Window tkwin = (Tk_Window) clientData;
     register Scrollbar *scrollPtr;
@@ -283,7 +284,7 @@ Tk_ScrollbarCmd(clientData, interp, argc, argv)
 	    |PointerMotionMask|ButtonPressMask|ButtonReleaseMask,
 	    ScrollbarMouseProc, (ClientData) scrollPtr);
     Tcl_CreateCommand(interp, Tk_PathName(scrollPtr->tkwin), ScrollbarWidgetCmd,
-	    (ClientData) scrollPtr, (void (*)()) NULL);
+	    (ClientData) scrollPtr, (void (*)(int *)) NULL);
     if (ConfigureScrollbar(interp, scrollPtr, argc-2, argv+2, 0) != TCL_OK) {
 	goto error;
     }
@@ -314,13 +315,14 @@ Tk_ScrollbarCmd(clientData, interp, argc, argv)
  *--------------------------------------------------------------
  */
 
-static int
-ScrollbarWidgetCmd(clientData, interp, argc, argv)
-    ClientData clientData;	/* Information about scrollbar
+static int 
+ScrollbarWidgetCmd (
+    ClientData clientData,	/* Information about scrollbar
 					 * widget. */
-    Tcl_Interp *interp;			/* Current interpreter. */
-    int argc;				/* Number of arguments. */
-    char **argv;			/* Argument strings. */
+    Tcl_Interp *interp,			/* Current interpreter. */
+    int argc,				/* Number of arguments. */
+    char **argv			/* Argument strings. */
+)
 {
     register Scrollbar *scrollPtr = (Scrollbar *) clientData;
     int result = TCL_OK;
@@ -430,9 +432,10 @@ ScrollbarWidgetCmd(clientData, interp, argc, argv)
  *----------------------------------------------------------------------
  */
 
-static void
-DestroyScrollbar(clientData)
-    ClientData clientData;	/* Info about scrollbar widget. */
+static void 
+DestroyScrollbar (
+    ClientData clientData	/* Info about scrollbar widget. */
+)
 {
     register Scrollbar *scrollPtr = (Scrollbar *) clientData;
 
@@ -478,16 +481,17 @@ DestroyScrollbar(clientData)
  *----------------------------------------------------------------------
  */
 
-static int
-ConfigureScrollbar(interp, scrollPtr, argc, argv, flags)
-    Tcl_Interp *interp;			/* Used for error reporting. */
-    register Scrollbar *scrollPtr;	/* Information about widget;  may or
+static int 
+ConfigureScrollbar (
+    Tcl_Interp *interp,			/* Used for error reporting. */
+    register Scrollbar *scrollPtr,	/* Information about widget;  may or
 					 * may not already have values for
 					 * some fields. */
-    int argc;				/* Number of valid entries in argv. */
-    char **argv;			/* Arguments. */
-    int flags;				/* Flags to pass to
+    int argc,				/* Number of valid entries in argv. */
+    char **argv,			/* Arguments. */
+    int flags				/* Flags to pass to
 					 * Tk_ConfigureWidget. */
+)
 {
     int length;
     XGCValues gcValues;
@@ -557,9 +561,10 @@ ConfigureScrollbar(interp, scrollPtr, argc, argv, flags)
  *--------------------------------------------------------------
  */
 
-static void
-DisplayScrollbar(clientData)
-    ClientData clientData;	/* Information about window. */
+static void 
+DisplayScrollbar (
+    ClientData clientData	/* Information about window. */
+)
 {
     register Scrollbar *scrollPtr = (Scrollbar *) clientData;
     register Tk_Window tkwin = scrollPtr->tkwin;
@@ -722,10 +727,11 @@ DisplayScrollbar(clientData)
  *--------------------------------------------------------------
  */
 
-static void
-ScrollbarEventProc(clientData, eventPtr)
-    ClientData clientData;	/* Information about window. */
-    XEvent *eventPtr;		/* Information about event. */
+static void 
+ScrollbarEventProc (
+    ClientData clientData,	/* Information about window. */
+    XEvent *eventPtr		/* Information about event. */
+)
 {
     Scrollbar *scrollPtr = (Scrollbar *) clientData;
 
@@ -761,10 +767,11 @@ ScrollbarEventProc(clientData, eventPtr)
  *----------------------------------------------------------------------
  */
 
-static void
-ComputeScrollbarGeometry(scrollPtr)
-    register Scrollbar *scrollPtr;	/* Scrollbar whose geometry may
+static void 
+ComputeScrollbarGeometry (
+    register Scrollbar *scrollPtr	/* Scrollbar whose geometry may
 					 * have changed. */
+)
 {
     int width, fieldLength;
 
@@ -857,11 +864,13 @@ ComputeScrollbarGeometry(scrollPtr)
  *--------------------------------------------------------------
  */
 
-static int
-ScrollbarPosition(scrollPtr, x, y)
-    register Scrollbar *scrollPtr;	/* Scrollbar widget record. */
-    int x, y;				/* Coordinates within scrollPtr's
+static int 
+ScrollbarPosition (
+    register Scrollbar *scrollPtr,	/* Scrollbar widget record. */
+    int x,
+    int y				/* Coordinates within scrollPtr's
 					 * window. */
+)
 {
     int length, width, tmp;
 
@@ -920,10 +929,11 @@ ScrollbarPosition(scrollPtr, x, y)
  *--------------------------------------------------------------
  */
 
-static void
-ScrollbarMouseProc(clientData, eventPtr)
-    ClientData clientData;		/* Information about window. */
-    register XEvent *eventPtr;		/* Information about event. */
+static void 
+ScrollbarMouseProc (
+    ClientData clientData,		/* Information about window. */
+    register XEvent *eventPtr		/* Information about event. */
+)
 {
     register Scrollbar *scrollPtr = (Scrollbar *) clientData;
 
@@ -1053,13 +1063,14 @@ ScrollbarMouseProc(clientData, eventPtr)
  *--------------------------------------------------------------
  */
 
-static void
-ScrollCmd(scrollPtr, unit)
-    register Scrollbar *scrollPtr;	/* Scrollbar from which to issue
+static void 
+ScrollCmd (
+    register Scrollbar *scrollPtr,	/* Scrollbar from which to issue
 					 * command. */
-    int unit;				/* Unit position within thing being
+    int unit				/* Unit position within thing being
 					 * being displayed that should appear
 					 * at top or right of screen. */
+)
 {
     char string[20];
     int result;
@@ -1092,9 +1103,10 @@ ScrollCmd(scrollPtr, unit)
  *--------------------------------------------------------------
  */
 
-static void
-EventuallyRedraw(scrollPtr)
-    register Scrollbar *scrollPtr;	/* Information about widget. */
+static void 
+EventuallyRedraw (
+    register Scrollbar *scrollPtr	/* Information about widget. */
+)
 {
     if ((scrollPtr->tkwin == NULL) || (!Tk_IsMapped(scrollPtr->tkwin))) {
 	return;
@@ -1124,11 +1136,12 @@ EventuallyRedraw(scrollPtr)
  *--------------------------------------------------------------
  */
 
-static void
-ScrollbarNewField(scrollPtr, field)
-    register Scrollbar *scrollPtr;	/* Information about widget. */
-    int field;				/* Identifies field under mouse,
+static void 
+ScrollbarNewField (
+    register Scrollbar *scrollPtr,	/* Information about widget. */
+    int field				/* Identifies field under mouse,
 					 * e.g. TOP_ARROW. */
+)
 {
     if (field == scrollPtr->mouseField) {
 	return;
@@ -1157,9 +1170,10 @@ ScrollbarNewField(scrollPtr, field)
  *--------------------------------------------------------------
  */
 
-static void
-ScrollbarTimerProc(clientData)
-    ClientData clientData;	/* Information about widget. */
+static void 
+ScrollbarTimerProc (
+    ClientData clientData	/* Information about widget. */
+)
 {
     register Scrollbar *scrollPtr = (Scrollbar *) clientData;
 

@@ -44,7 +44,7 @@ static int (*bringInMathErr)() = matherr;
  *-----------------------------------------------------------------------------
  */
 Tcl_Interp *
-Tcl_CreateExtendedInterp ()
+Tcl_CreateExtendedInterp (void)
 {
     Tcl_Interp *interp;
 
@@ -61,37 +61,37 @@ Tcl_CreateExtendedInterp ()
      * from tclXbsearch.c
      */
     Tcl_CreateCommand (interp, "bsearch", Tcl_BsearchCmd, 
-                      (ClientData)NULL, (void (*)())NULL);
+                      (ClientData)NULL, (void (*)(int *))NULL);
 
     /*
      * from tclXchmod.c
      */
     Tcl_CreateCommand (interp, "chgrp", Tcl_ChgrpCmd, (ClientData)NULL,
-                      (void (*)())NULL);
+                      (void (*)(int *))NULL);
     Tcl_CreateCommand (interp, "chmod", Tcl_ChmodCmd, (ClientData)NULL,
-                      (void (*)())NULL);
+                      (void (*)(int *))NULL);
     Tcl_CreateCommand (interp, "chown", Tcl_ChownCmd, (ClientData)NULL,
-                      (void (*)())NULL);
+                      (void (*)(int *))NULL);
 
     /*
      * from tclXclock.c
      */
     Tcl_CreateCommand (interp, "getclock", Tcl_GetclockCmd, 
-                      (ClientData)NULL, (void (*)())NULL);
+                      (ClientData)NULL, (void (*)(int *))NULL);
     Tcl_CreateCommand (interp, "fmtclock", Tcl_FmtclockCmd, 
-                      (ClientData)NULL, (void (*)())NULL);
+                      (ClientData)NULL, (void (*)(int *))NULL);
 
     /*
      * from tclXcnvdate.c
      */
     Tcl_CreateCommand (interp, "convertclock", Tcl_ConvertclockCmd,
-                      (ClientData)NULL, (void (*)())NULL);
+                      (ClientData)NULL, (void (*)(int *))NULL);
 
     /*
      * from tclXcmdloop.c
      */
     Tcl_CreateCommand (interp, "commandloop", Tcl_CommandloopCmd, 
-                      (ClientData)NULL, (void (*)())NULL);
+                      (ClientData)NULL, (void (*)(int *))NULL);
 
     /*
      * from tclXdebug.c
@@ -102,28 +102,28 @@ Tcl_CreateExtendedInterp ()
      * from tclXdup.c
      */
     Tcl_CreateCommand (interp, "dup",  Tcl_DupCmd, 
-                       (ClientData) NULL, (void (*)())NULL);
+                       (ClientData) NULL, (void (*)(int *))NULL);
     /*
      * from tclXtclXfcntl.c
      */
     Tcl_CreateCommand (interp, "fcntl", Tcl_FcntlCmd,
-                       (ClientData) NULL, (void (*)())NULL);
+                       (ClientData) NULL, (void (*)(int *))NULL);
 
     /*
      * from tclXfilecmds.c
      */
     Tcl_CreateCommand (interp, "pipe", Tcl_PipeCmd,
-                       (ClientData) NULL, (void (*)())NULL);
+                       (ClientData) NULL, (void (*)(int *))NULL);
     Tcl_CreateCommand (interp, "copyfile", Tcl_CopyfileCmd,
-                       (ClientData) NULL, (void (*)())NULL);
+                       (ClientData) NULL, (void (*)(int *))NULL);
     Tcl_CreateCommand (interp, "fstat", Tcl_FstatCmd,
-                       (ClientData) NULL, (void (*)())NULL);
+                       (ClientData) NULL, (void (*)(int *))NULL);
     Tcl_CreateCommand (interp, "lgets", Tcl_LgetsCmd,
-                       (ClientData) NULL, (void (*)())NULL);
+                       (ClientData) NULL, (void (*)(int *))NULL);
     Tcl_CreateCommand (interp, "flock", Tcl_FlockCmd,
-                       (ClientData) NULL, (void (*)())NULL);
+                       (ClientData) NULL, (void (*)(int *))NULL);
     Tcl_CreateCommand (interp, "funlock", Tcl_FunlockCmd,
-                       (ClientData) NULL, (void (*)())NULL);
+                       (ClientData) NULL, (void (*)(int *))NULL);
 
     /*
      * from tclXfilescan.c
@@ -134,90 +134,90 @@ Tcl_CreateExtendedInterp ()
      * from tclXfmath.c
      */
     Tcl_CreateCommand(interp, "acos", Tcl_AcosCmd, 
-                     (ClientData)NULL, (void (*)())NULL);
+                     (ClientData)NULL, (void (*)(int *))NULL);
     Tcl_CreateCommand(interp, "asin", Tcl_AsinCmd, 
-                     (ClientData)NULL, (void (*)())NULL);
+                     (ClientData)NULL, (void (*)(int *))NULL);
     Tcl_CreateCommand(interp, "atan", Tcl_AtanCmd, 
-                     (ClientData)NULL, (void (*)())NULL);
+                     (ClientData)NULL, (void (*)(int *))NULL);
     Tcl_CreateCommand(interp, "cos", Tcl_CosCmd, 
-                     (ClientData)NULL, (void (*)())NULL);
+                     (ClientData)NULL, (void (*)(int *))NULL);
     Tcl_CreateCommand(interp, "sin", Tcl_SinCmd, 
-                     (ClientData)NULL, (void (*)())NULL);
+                     (ClientData)NULL, (void (*)(int *))NULL);
     Tcl_CreateCommand(interp, "tan", Tcl_TanCmd, 
-                     (ClientData)NULL, (void (*)())NULL);
+                     (ClientData)NULL, (void (*)(int *))NULL);
     Tcl_CreateCommand(interp, "cosh", Tcl_CoshCmd, 
-                     (ClientData)NULL, (void (*)())NULL);
+                     (ClientData)NULL, (void (*)(int *))NULL);
     Tcl_CreateCommand(interp, "sinh", Tcl_SinhCmd, 
-                     (ClientData)NULL, (void (*)())NULL);
+                     (ClientData)NULL, (void (*)(int *))NULL);
     Tcl_CreateCommand(interp, "tanh", Tcl_TanhCmd, 
-                     (ClientData)NULL, (void (*)())NULL);
+                     (ClientData)NULL, (void (*)(int *))NULL);
     Tcl_CreateCommand(interp, "exp", Tcl_ExpCmd, 
-                     (ClientData)NULL, (void (*)())NULL);
+                     (ClientData)NULL, (void (*)(int *))NULL);
     Tcl_CreateCommand(interp, "log", Tcl_LogCmd, 
-                     (ClientData)NULL, (void (*)())NULL);
+                     (ClientData)NULL, (void (*)(int *))NULL);
     Tcl_CreateCommand(interp, "log10", Tcl_Log10Cmd, 
-                     (ClientData)NULL, (void (*)())NULL);
+                     (ClientData)NULL, (void (*)(int *))NULL);
     Tcl_CreateCommand(interp, "sqrt", Tcl_SqrtCmd, 
-                     (ClientData)NULL, (void (*)())NULL);
+                     (ClientData)NULL, (void (*)(int *))NULL);
     Tcl_CreateCommand(interp, "fabs", Tcl_FabsCmd, 
-                     (ClientData)NULL, (void (*)())NULL);
+                     (ClientData)NULL, (void (*)(int *))NULL);
     Tcl_CreateCommand(interp, "floor", Tcl_FloorCmd, 
-                     (ClientData)NULL, (void (*)())NULL);
+                     (ClientData)NULL, (void (*)(int *))NULL);
     Tcl_CreateCommand(interp, "ceil", Tcl_CeilCmd, 
-                     (ClientData)NULL, (void (*)())NULL);
+                     (ClientData)NULL, (void (*)(int *))NULL);
     Tcl_CreateCommand(interp, "fmod", Tcl_FmodCmd, 
-                     (ClientData)NULL, (void (*)())NULL);
+                     (ClientData)NULL, (void (*)(int *))NULL);
     Tcl_CreateCommand(interp, "pow", Tcl_PowCmd, 
-                     (ClientData)NULL, (void (*)())NULL);
+                     (ClientData)NULL, (void (*)(int *))NULL);
 
     /*
      * from tclXgeneral.c
      */
     Tcl_CreateCommand(interp, "echo", Tcl_EchoCmd, 
-                     (ClientData)NULL, (void (*)())NULL);
+                     (ClientData)NULL, (void (*)(int *))NULL);
     Tcl_CreateCommand(interp, "infox", Tcl_InfoxCmd, 
-                     (ClientData)NULL, (void (*)())NULL);
+                     (ClientData)NULL, (void (*)(int *))NULL);
     Tcl_CreateCommand(interp, "loop", Tcl_LoopCmd, 
-                     (ClientData)NULL, (void (*)())NULL);
+                     (ClientData)NULL, (void (*)(int *))NULL);
 
     /*
      * from tclXid.c
      */
     Tcl_CreateCommand (interp, "id", Tcl_IdCmd,
-                       (ClientData)NULL, (void (*)())NULL);
+                       (ClientData)NULL, (void (*)(int *))NULL);
 
     /*
      * from tclXkeylist.c
      */
     Tcl_CreateCommand(interp, "keyldel", Tcl_KeyldelCmd,
-                     (ClientData)NULL, (void (*)())NULL);
+                     (ClientData)NULL, (void (*)(int *))NULL);
     Tcl_CreateCommand(interp, "keylget", Tcl_KeylgetCmd,
-                     (ClientData)NULL, (void (*)())NULL);
+                     (ClientData)NULL, (void (*)(int *))NULL);
     Tcl_CreateCommand(interp, "keylkeys", Tcl_KeylkeysCmd,
-                     (ClientData)NULL, (void (*)())NULL);
+                     (ClientData)NULL, (void (*)(int *))NULL);
     Tcl_CreateCommand(interp, "keylset", Tcl_KeylsetCmd,
-                     (ClientData)NULL, (void (*)())NULL);
+                     (ClientData)NULL, (void (*)(int *))NULL);
 
     /*
      * from tclXlist.c
      */
     Tcl_CreateCommand(interp, "lvarcat", Tcl_LvarcatCmd, 
-                     (ClientData)NULL, (void (*)())NULL);
+                     (ClientData)NULL, (void (*)(int *))NULL);
     Tcl_CreateCommand(interp, "lvarpop", Tcl_LvarpopCmd, 
-                     (ClientData)NULL, (void (*)())NULL);
+                     (ClientData)NULL, (void (*)(int *))NULL);
     Tcl_CreateCommand(interp, "lvarpush", Tcl_LvarpushCmd, 
-                     (ClientData)NULL, (void (*)())NULL);
+                     (ClientData)NULL, (void (*)(int *))NULL);
     Tcl_CreateCommand(interp, "lempty", Tcl_LemptyCmd, 
-                     (ClientData)NULL, (void (*)())NULL);
+                     (ClientData)NULL, (void (*)(int *))NULL);
     /*
      * from tclXmath.c
      */
     Tcl_CreateCommand (interp, "max", Tcl_MaxCmd, (ClientData)NULL, 
-              (void (*)())NULL);
+              (void (*)(int *))NULL);
     Tcl_CreateCommand (interp, "min", Tcl_MinCmd, (ClientData)NULL, 
-              (void (*)())NULL);
+              (void (*)(int *))NULL);
     Tcl_CreateCommand (interp, "random", Tcl_RandomCmd, (ClientData)NULL, 
-              (void (*)())NULL);
+              (void (*)(int *))NULL);
 
     /*
      * from tclXmsgcat.c
@@ -228,11 +228,11 @@ Tcl_CreateExtendedInterp ()
      * from tclXprocess.c
      */
     Tcl_CreateCommand (interp, "execl", Tcl_ExeclCmd, (ClientData)NULL,
-                      (void (*)())NULL);
+                      (void (*)(int *))NULL);
     Tcl_CreateCommand (interp, "fork", Tcl_ForkCmd, (ClientData)NULL,
-                      (void (*)())NULL);
+                      (void (*)(int *))NULL);
     Tcl_CreateCommand (interp, "wait", Tcl_WaitCmd, (ClientData)NULL,
-                      (void (*)())NULL);
+                      (void (*)(int *))NULL);
 
     /*
      * from tclXprofile.c
@@ -243,7 +243,7 @@ Tcl_CreateExtendedInterp ()
      * from tclXselect.c
      */
     Tcl_CreateCommand (interp, "select", Tcl_SelectCmd,
-                       (ClientData) NULL, (void (*)())NULL);
+                       (ClientData) NULL, (void (*)(int *))NULL);
 
     /*
      * from tclXsignal.c
@@ -254,49 +254,49 @@ Tcl_CreateExtendedInterp ()
      * from tclXstring.c
      */
     Tcl_CreateCommand(interp, "cindex", Tcl_CindexCmd, 
-                     (ClientData)NULL, (void (*)())NULL);
+                     (ClientData)NULL, (void (*)(int *))NULL);
     Tcl_CreateCommand(interp, "clength", Tcl_ClengthCmd, 
-                     (ClientData)NULL, (void (*)())NULL);
+                     (ClientData)NULL, (void (*)(int *))NULL);
     Tcl_CreateCommand(interp, "crange", Tcl_CrangeCmd, 
-                     (ClientData)NULL, (void (*)())NULL);
+                     (ClientData)NULL, (void (*)(int *))NULL);
     Tcl_CreateCommand(interp, "csubstr", Tcl_CrangeCmd, 
-                     (ClientData)NULL, (void (*)())NULL);
+                     (ClientData)NULL, (void (*)(int *))NULL);
     Tcl_CreateCommand(interp, "replicate", Tcl_ReplicateCmd, 
-                     (ClientData)NULL, (void (*)())NULL);
+                     (ClientData)NULL, (void (*)(int *))NULL);
     Tcl_CreateCommand (interp, "translit", Tcl_TranslitCmd, (ClientData)NULL,
-                       (void (*)())NULL);
+                       (void (*)(int *))NULL);
     Tcl_CreateCommand (interp, "ctype", Tcl_CtypeCmd,
-                       (ClientData)NULL, (void (*)())NULL);
+                       (ClientData)NULL, (void (*)(int *))NULL);
 
     /*
      * from tclXlib.c
      */
     Tcl_CreateCommand (interp, "demand_load", Tcl_Demand_loadCmd,
-                      (ClientData)NULL, (void (*)())NULL);
+                      (ClientData)NULL, (void (*)(int *))NULL);
     Tcl_CreateCommand (interp, "loadlibindex", Tcl_LoadlibindexCmd,
-                      (ClientData)NULL, (void (*)())NULL);
+                      (ClientData)NULL, (void (*)(int *))NULL);
 
     /*
      * from tclXunixcmds.c
      */
     Tcl_CreateCommand (interp, "system", Tcl_SystemCmd, (ClientData)NULL,
-                      (void (*)())NULL);
+                      (void (*)(int *))NULL);
     Tcl_CreateCommand (interp, "times", Tcl_TimesCmd, (ClientData)NULL,
-                      (void (*)())NULL);
+                      (void (*)(int *))NULL);
     Tcl_CreateCommand (interp, "umask", Tcl_UmaskCmd, (ClientData)NULL,
-                      (void (*)())NULL);
+                      (void (*)(int *))NULL);
     Tcl_CreateCommand (interp, "link", Tcl_LinkCmd, (ClientData)NULL,
-                      (void (*)())NULL);
+                      (void (*)(int *))NULL);
     Tcl_CreateCommand (interp, "unlink", Tcl_UnlinkCmd, (ClientData)NULL,
-                      (void (*)())NULL);
+                      (void (*)(int *))NULL);
     Tcl_CreateCommand (interp, "mkdir", Tcl_MkdirCmd, (ClientData)NULL,
-                      (void (*)())NULL);
+                      (void (*)(int *))NULL);
     Tcl_CreateCommand (interp, "rmdir", Tcl_RmdirCmd, (ClientData)NULL,
-                      (void (*)())NULL);
+                      (void (*)(int *))NULL);
     Tcl_CreateCommand (interp, "alarm", Tcl_AlarmCmd, (ClientData)NULL, 
-                      (void (*)())NULL);
+                      (void (*)(int *))NULL);
     Tcl_CreateCommand (interp, "sleep", Tcl_SleepCmd, (ClientData)NULL, 
-                      (void (*)())NULL);
+                      (void (*)(int *))NULL);
 
     return interp;
 }

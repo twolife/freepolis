@@ -65,13 +65,14 @@ static void		WaitWindowProc _ANSI_ARGS_((ClientData clientData,
  */
 
 	/* ARGSUSED */
-int
-Tk_AfterCmd(clientData, interp, argc, argv)
-    ClientData clientData;	/* Main window associated with
+int 
+Tk_AfterCmd (
+    ClientData clientData,	/* Main window associated with
 				 * interpreter.  Not used.*/
-    Tcl_Interp *interp;		/* Current interpreter. */
-    int argc;			/* Number of arguments. */
-    char **argv;		/* Argument strings. */
+    Tcl_Interp *interp,		/* Current interpreter. */
+    int argc,			/* Number of arguments. */
+    char **argv		/* Argument strings. */
+)
 {
     int ms;
     AfterInfo *afterPtr;
@@ -139,9 +140,10 @@ Tk_AfterCmd(clientData, interp, argc, argv)
  *----------------------------------------------------------------------
  */
 
-static void
-AfterProc(clientData)
-    ClientData clientData;	/* Describes command to execute. */
+static void 
+AfterProc (
+    ClientData clientData	/* Describes command to execute. */
+)
 {
     AfterInfo *afterPtr = (AfterInfo *) clientData;
     int result;
@@ -176,13 +178,14 @@ AfterProc(clientData)
  *----------------------------------------------------------------------
  */
 
-int
-Tk_BindCmd(clientData, interp, argc, argv)
-    ClientData clientData;		/* Main window associated with
+int 
+Tk_BindCmd (
+    ClientData clientData,		/* Main window associated with
 				 * interpreter. */
-    Tcl_Interp *interp;		/* Current interpreter. */
-    int argc;			/* Number of arguments. */
-    char **argv;		/* Argument strings. */
+    Tcl_Interp *interp,		/* Current interpreter. */
+    int argc,			/* Number of arguments. */
+    char **argv		/* Argument strings. */
+)
 {
     Tk_Window tkwin = (Tk_Window) clientData;
     TkWindow *winPtr;
@@ -255,10 +258,11 @@ Tk_BindCmd(clientData, interp, argc, argv)
  *----------------------------------------------------------------------
  */
 
-void
-TkBindEventProc(winPtr, eventPtr)
-    TkWindow *winPtr;			/* Pointer to info about window. */
-    XEvent *eventPtr;			/* Information about event. */
+void 
+TkBindEventProc (
+    TkWindow *winPtr,			/* Pointer to info about window. */
+    XEvent *eventPtr			/* Information about event. */
+)
 {
     ClientData objects[3];
     static Tk_Uid allUid = NULL;
@@ -293,13 +297,14 @@ TkBindEventProc(winPtr, eventPtr)
  *----------------------------------------------------------------------
  */
 
-int
-Tk_DestroyCmd(clientData, interp, argc, argv)
-    ClientData clientData;		/* Main window associated with
+int 
+Tk_DestroyCmd (
+    ClientData clientData,		/* Main window associated with
 				 * interpreter. */
-    Tcl_Interp *interp;		/* Current interpreter. */
-    int argc;			/* Number of arguments. */
-    char **argv;		/* Argument strings. */
+    Tcl_Interp *interp,		/* Current interpreter. */
+    int argc,			/* Number of arguments. */
+    char **argv		/* Argument strings. */
+)
 {
     Tk_Window window;
     Tk_Window tkwin = (Tk_Window) clientData;
@@ -336,13 +341,14 @@ Tk_DestroyCmd(clientData, interp, argc, argv)
  */
 
 	/* ARGSUSED */
-int
-Tk_UpdateCmd(clientData, interp, argc, argv)
-    ClientData clientData;	/* Main window associated with
+int 
+Tk_UpdateCmd (
+    ClientData clientData,	/* Main window associated with
 				 * interpreter. */
-    Tcl_Interp *interp;		/* Current interpreter. */
-    int argc;			/* Number of arguments. */
-    char **argv;		/* Argument strings. */
+    Tcl_Interp *interp,		/* Current interpreter. */
+    int argc,			/* Number of arguments. */
+    char **argv		/* Argument strings. */
+)
 {
     Tk_Window tkwin = (Tk_Window) clientData;
     int flags;
@@ -404,13 +410,14 @@ Tk_UpdateCmd(clientData, interp, argc, argv)
  */
 
 	/* ARGSUSED */
-int
-Tk_TkwaitCmd(clientData, interp, argc, argv)
-    ClientData clientData;	/* Main window associated with
+int 
+Tk_TkwaitCmd (
+    ClientData clientData,	/* Main window associated with
 				 * interpreter. */
-    Tcl_Interp *interp;		/* Current interpreter. */
-    int argc;			/* Number of arguments. */
-    char **argv;		/* Argument strings. */
+    Tcl_Interp *interp,		/* Current interpreter. */
+    int argc,			/* Number of arguments. */
+    char **argv		/* Argument strings. */
+)
 {
     Tk_Window tkwin = (Tk_Window) clientData;
     int c, length;
@@ -466,12 +473,13 @@ Tk_TkwaitCmd(clientData, interp, argc, argv)
 
 	/* ARGSUSED */
 static char *
-WaitVariableProc(clientData, interp, name1, name2, flags)
-    ClientData clientData;	/* Pointer to integer to set to 1. */
-    Tcl_Interp *interp;		/* Interpreter containing variable. */
-    char *name1;		/* Name of variable. */
-    char *name2;		/* Second part of variable name. */
-    int flags;			/* Information about what happened. */
+WaitVariableProc (
+    ClientData clientData,	/* Pointer to integer to set to 1. */
+    Tcl_Interp *interp,		/* Interpreter containing variable. */
+    char *name1,		/* Name of variable. */
+    char *name2,		/* Second part of variable name. */
+    int flags			/* Information about what happened. */
+)
 {
     int *donePtr = (int *) clientData;
 
@@ -479,10 +487,11 @@ WaitVariableProc(clientData, interp, name1, name2, flags)
     return (char *) NULL;
 }
 
-static void
-WaitWindowProc(clientData, eventPtr)
-    ClientData clientData;	/* Pointer to integer to set to 1. */
-    XEvent *eventPtr;		/* Information about event. */
+static void 
+WaitWindowProc (
+    ClientData clientData,	/* Pointer to integer to set to 1. */
+    XEvent *eventPtr		/* Information about event. */
+)
 {
     int *donePtr = (int *) clientData;
 
@@ -508,13 +517,14 @@ WaitWindowProc(clientData, eventPtr)
  *----------------------------------------------------------------------
  */
 
-int
-Tk_WinfoCmd(clientData, interp, argc, argv)
-    ClientData clientData;	/* Main window associated with
+int 
+Tk_WinfoCmd (
+    ClientData clientData,	/* Main window associated with
 				 * interpreter. */
-    Tcl_Interp *interp;		/* Current interpreter. */
-    int argc;			/* Number of arguments. */
-    char **argv;		/* Argument strings. */
+    Tcl_Interp *interp,		/* Current interpreter. */
+    int argc,			/* Number of arguments. */
+    char **argv		/* Argument strings. */
+)
 {
     Tk_Window tkwin = (Tk_Window) clientData;
     int length;
@@ -805,12 +815,13 @@ Tk_WinfoCmd(clientData, interp, argc, argv)
  */
 
 	/* ARGSUSED */
-int
-TkDeadAppCmd(clientData, interp, argc, argv)
-    ClientData clientData;	/* Dummy. */
-    Tcl_Interp *interp;		/* Current interpreter. */
-    int argc;			/* Number of arguments. */
-    char **argv;		/* Argument strings. */
+int 
+TkDeadAppCmd (
+    ClientData clientData,	/* Dummy. */
+    Tcl_Interp *interp,		/* Current interpreter. */
+    int argc,			/* Number of arguments. */
+    char **argv		/* Argument strings. */
+)
 {
     Tcl_AppendResult(interp, "can't invoke \"", argv[0],
 	    "\" command:  application has been destroyed", (char *) NULL);

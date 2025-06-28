@@ -189,13 +189,14 @@ static Tk_Uid pieSliceUid = NULL;
  *--------------------------------------------------------------
  */
 
-static int
-CreateArc(canvasPtr, itemPtr, argc, argv)
-    register Tk_Canvas *canvasPtr;	/* Canvas to hold new item. */
-    Tk_Item *itemPtr;			/* Record to hold new item;  header
+static int 
+CreateArc (
+    register Tk_Canvas *canvasPtr,	/* Canvas to hold new item. */
+    Tk_Item *itemPtr,			/* Record to hold new item;  header
 					 * has been initialized by caller. */
-    int argc;				/* Number of arguments in argv. */
-    char **argv;			/* Arguments describing arc. */
+    int argc,				/* Number of arguments in argv. */
+    char **argv			/* Arguments describing arc. */
+)
 {
     register ArcItem *arcPtr = (ArcItem *) itemPtr;
 
@@ -273,15 +274,16 @@ CreateArc(canvasPtr, itemPtr, argc, argv)
  *--------------------------------------------------------------
  */
 
-static int
-ArcCoords(canvasPtr, itemPtr, argc, argv)
-    register Tk_Canvas *canvasPtr;	/* Canvas containing item. */
-    Tk_Item *itemPtr;			/* Item whose coordinates are to be
+static int 
+ArcCoords (
+    register Tk_Canvas *canvasPtr,	/* Canvas containing item. */
+    Tk_Item *itemPtr,			/* Item whose coordinates are to be
 					 * read or modified. */
-    int argc;				/* Number of coordinates supplied in
+    int argc,				/* Number of coordinates supplied in
 					 * argv. */
-    char **argv;			/* Array of coordinates: x1, y1,
+    char **argv			/* Array of coordinates: x1, y1,
 					 * x2, y2, ... */
+)
 {
     register ArcItem *arcPtr = (ArcItem *) itemPtr;
     char buffer[500];
@@ -331,13 +333,14 @@ ArcCoords(canvasPtr, itemPtr, argc, argv)
  *--------------------------------------------------------------
  */
 
-static int
-ConfigureArc(canvasPtr, itemPtr, argc, argv, flags)
-    Tk_Canvas *canvasPtr;	/* Canvas containing itemPtr. */
-    Tk_Item *itemPtr;		/* Arc item to reconfigure. */
-    int argc;			/* Number of elements in argv.  */
-    char **argv;		/* Arguments describing things to configure. */
-    int flags;			/* Flags to pass to Tk_ConfigureWidget. */
+static int 
+ConfigureArc (
+    Tk_Canvas *canvasPtr,	/* Canvas containing itemPtr. */
+    Tk_Item *itemPtr,		/* Arc item to reconfigure. */
+    int argc,			/* Number of elements in argv.  */
+    char **argv,		/* Arguments describing things to configure. */
+    int flags			/* Flags to pass to Tk_ConfigureWidget. */
+)
 {
     register ArcItem *arcPtr = (ArcItem *) itemPtr;
     XGCValues gcValues;
@@ -447,9 +450,10 @@ ConfigureArc(canvasPtr, itemPtr, argc, argv, flags)
  *--------------------------------------------------------------
  */
 
-static void
-DeleteArc(itemPtr)
-    Tk_Item *itemPtr;			/* Item that is being deleted. */
+static void 
+DeleteArc (
+    Tk_Item *itemPtr			/* Item that is being deleted. */
+)
 {
     register ArcItem *arcPtr = (ArcItem *) itemPtr;
 
@@ -492,11 +496,12 @@ DeleteArc(itemPtr)
  */
 
 	/* ARGSUSED */
-static void
-ComputeArcBbox(canvasPtr, arcPtr)
-    register Tk_Canvas *canvasPtr;	/* Canvas that contains item. */
-    register ArcItem *arcPtr;		/* Item whose bbox is to be
+static void 
+ComputeArcBbox (
+    register Tk_Canvas *canvasPtr,	/* Canvas that contains item. */
+    register ArcItem *arcPtr		/* Item whose bbox is to be
 					 * recomputed. */
+)
 {
     double tmp, center[2], point[2];
 
@@ -606,12 +611,13 @@ ComputeArcBbox(canvasPtr, arcPtr)
  *--------------------------------------------------------------
  */
 
-static void
-DisplayArc(canvasPtr, itemPtr, drawable)
-    register Tk_Canvas *canvasPtr;	/* Canvas that contains item. */
-    Tk_Item *itemPtr;			/* Item to be displayed. */
-    Drawable drawable;			/* Pixmap or window in which to draw
+static void 
+DisplayArc (
+    register Tk_Canvas *canvasPtr,	/* Canvas that contains item. */
+    Tk_Item *itemPtr,			/* Item to be displayed. */
+    Drawable drawable			/* Pixmap or window in which to draw
 					 * item. */
+)
 {
     register ArcItem *arcPtr = (ArcItem *) itemPtr;
     Display *display = Tk_Display(canvasPtr->tkwin);
@@ -711,11 +717,12 @@ DisplayArc(canvasPtr, itemPtr, drawable)
  */
 
 	/* ARGSUSED */
-static double
-ArcToPoint(canvasPtr, itemPtr, pointPtr)
-    Tk_Canvas *canvasPtr;	/* Canvas containing item. */
-    Tk_Item *itemPtr;		/* Item to check against point. */
-    double *pointPtr;		/* Pointer to x and y coordinates. */
+static double 
+ArcToPoint (
+    Tk_Canvas *canvasPtr,	/* Canvas containing item. */
+    Tk_Item *itemPtr,		/* Item to check against point. */
+    double *pointPtr		/* Pointer to x and y coordinates. */
+)
 {
     register ArcItem *arcPtr = (ArcItem *) itemPtr;
     double vertex[2], pointAngle, diff, dist, newDist;
@@ -863,13 +870,14 @@ ArcToPoint(canvasPtr, itemPtr, pointPtr)
  */
 
 	/* ARGSUSED */
-static int
-ArcToArea(canvasPtr, itemPtr, rectPtr)
-    Tk_Canvas *canvasPtr;	/* Canvas containing item. */
-    Tk_Item *itemPtr;		/* Item to check against arc. */
-    double *rectPtr;		/* Pointer to array of four coordinates
+static int 
+ArcToArea (
+    Tk_Canvas *canvasPtr,	/* Canvas containing item. */
+    Tk_Item *itemPtr,		/* Item to check against arc. */
+    double *rectPtr		/* Pointer to array of four coordinates
 				 * (x1, y1, x2, y2) describing rectangular
 				 * area.  */
+)
 {
     register ArcItem *arcPtr = (ArcItem *) itemPtr;
     double rx, ry;		/* Radii for transformed oval:  these define
@@ -1106,13 +1114,15 @@ ArcToArea(canvasPtr, itemPtr, rectPtr)
  *--------------------------------------------------------------
  */
 
-static void
-ScaleArc(canvasPtr, itemPtr, originX, originY, scaleX, scaleY)
-    Tk_Canvas *canvasPtr;		/* Canvas containing arc. */
-    Tk_Item *itemPtr;			/* Arc to be scaled. */
-    double originX, originY;		/* Origin about which to scale rect. */
-    double scaleX;			/* Amount to scale in X direction. */
-    double scaleY;			/* Amount to scale in Y direction. */
+static void 
+ScaleArc (
+    Tk_Canvas *canvasPtr,		/* Canvas containing arc. */
+    Tk_Item *itemPtr,			/* Arc to be scaled. */
+    double originX,
+    double originY,		/* Origin about which to scale rect. */
+    double scaleX,			/* Amount to scale in X direction. */
+    double scaleY			/* Amount to scale in Y direction. */
+)
 {
     register ArcItem *arcPtr = (ArcItem *) itemPtr;
 
@@ -1141,12 +1151,14 @@ ScaleArc(canvasPtr, itemPtr, originX, originY, scaleX, scaleY)
  *--------------------------------------------------------------
  */
 
-static void
-TranslateArc(canvasPtr, itemPtr, deltaX, deltaY)
-    Tk_Canvas *canvasPtr;		/* Canvas containing item. */
-    Tk_Item *itemPtr;			/* Item that is being moved. */
-    double deltaX, deltaY;		/* Amount by which item is to be
+static void 
+TranslateArc (
+    Tk_Canvas *canvasPtr,		/* Canvas containing item. */
+    Tk_Item *itemPtr,			/* Item that is being moved. */
+    double deltaX,
+    double deltaY		/* Amount by which item is to be
 					 * moved. */
+)
 {
     register ArcItem *arcPtr = (ArcItem *) itemPtr;
 
@@ -1178,9 +1190,8 @@ TranslateArc(canvasPtr, itemPtr, deltaX, deltaY)
  *--------------------------------------------------------------
  */
 
-static void
-ComputeArcOutline(arcPtr)
-    register ArcItem *arcPtr;
+static void 
+ComputeArcOutline (register ArcItem *arcPtr)
 {
     double sin1, cos1, sin2, cos2, angle, halfWidth;
     double boxWidth, boxHeight;
@@ -1372,15 +1383,19 @@ ComputeArcOutline(arcPtr)
  *--------------------------------------------------------------
  */
 
-static int
-HorizLineToArc(x1, x2, y, rx, ry, start, extent)
-    double x1, x2;		/* X-coords of endpoints of line segment. 
+static int 
+HorizLineToArc (
+    double x1,
+    double x2,		/* X-coords of endpoints of line segment. 
 				 * X1 must be <= x2. */
-    double y;			/* Y-coordinate of line segment. */
-    double rx, ry;		/* These x- and y-radii define an oval
+    double y,			/* Y-coordinate of line segment. */
+    double rx,
+    double ry,		/* These x- and y-radii define an oval
 				 * centered at the origin. */
-    double start, extent;	/* Angles that define extent of arc, in
+    double start,
+    double extent	/* Angles that define extent of arc, in
 				 * the standard fashion for this module. */
+)
 {
     double tmp;
     double tx, ty;		/* Coordinates of intersection point in
@@ -1436,15 +1451,19 @@ HorizLineToArc(x1, x2, y, rx, ry, start, extent)
  *--------------------------------------------------------------
  */
 
-static int
-VertLineToArc(x, y1, y2, rx, ry, start, extent)
-    double x;			/* X-coordinate of line segment. */
-    double y1, y2;		/* Y-coords of endpoints of line segment. 
+static int 
+VertLineToArc (
+    double x,			/* X-coordinate of line segment. */
+    double y1,
+    double y2,		/* Y-coords of endpoints of line segment. 
 				 * Y1 must be <= y2. */
-    double rx, ry;		/* These x- and y-radii define an oval
+    double rx,
+    double ry,		/* These x- and y-radii define an oval
 				 * centered at the origin. */
-    double start, extent;	/* Angles that define extent of arc, in
+    double start,
+    double extent	/* Angles that define extent of arc, in
 				 * the standard fashion for this module. */
+)
 {
     double tmp;
     double tx, ty;		/* Coordinates of intersection point in
@@ -1500,12 +1519,14 @@ VertLineToArc(x, y1, y2, rx, ry, start, extent)
  *--------------------------------------------------------------
  */
 
-static int
-AngleInRange(x, y, start, extent)
-    double x, y;		/* Coordinate of point;  angle measured
+static int 
+AngleInRange (
+    double x,
+    double y,		/* Coordinate of point;  angle measured
 				 * from origin to here, relative to x-axis. */
-    double start;		/* First angle, degrees, >=0, <=360. */
-    double extent;		/* Size of arc in degrees >=-360, <=360. */
+    double start,		/* First angle, degrees, >=0, <=360. */
+    double extent		/* Size of arc in degrees >=-360, <=360. */
+)
 {
     double diff;
 

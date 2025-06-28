@@ -138,12 +138,13 @@ static void		SetFontMetrics _ANSI_ARGS_((TkFont *fontPtr));
  */
 
 XFontStruct *
-Tk_GetFontStruct(interp, tkwin, name)
-    Tcl_Interp *interp;		/* Place to leave error message if
+Tk_GetFontStruct (
+    Tcl_Interp *interp,		/* Place to leave error message if
 				 * font can't be found. */
-    Tk_Window tkwin;		/* Window in which font will be used. */
-    Tk_Uid name;		/* Name of font (in form suitable for
+    Tk_Window tkwin,		/* Window in which font will be used. */
+    Tk_Uid name		/* Name of font (in form suitable for
 				 * passing to XLoadQueryFont). */
+)
 {
     NameKey nameKey;
     Tcl_HashEntry *nameHashPtr, *fontHashPtr;
@@ -219,8 +220,9 @@ Tk_GetFontStruct(interp, tkwin, name)
  */
 
 char *
-Tk_NameOfFontStruct(fontStructPtr)
-    XFontStruct *fontStructPtr;		/* Font whose name is desired. */
+Tk_NameOfFontStruct (
+    XFontStruct *fontStructPtr		/* Font whose name is desired. */
+)
 {
     Tcl_HashEntry *fontHashPtr;
     TkFont *fontPtr;
@@ -258,9 +260,10 @@ Tk_NameOfFontStruct(fontStructPtr)
  *----------------------------------------------------------------------
  */
 
-void
-Tk_FreeFontStruct(fontStructPtr)
-    XFontStruct *fontStructPtr;	/* Font to be released. */
+void 
+Tk_FreeFontStruct (
+    XFontStruct *fontStructPtr	/* Font to be released. */
+)
 {
     Tcl_HashEntry *fontHashPtr;
     register TkFont *fontPtr;
@@ -306,8 +309,8 @@ Tk_FreeFontStruct(fontStructPtr)
  *----------------------------------------------------------------------
  */
 
-static void
-FontInit()
+static void 
+FontInit (void)
 {
     initialized = 1;
     Tcl_InitHashTable(&nameTable, sizeof(NameKey)/sizeof(int));
@@ -331,10 +334,11 @@ FontInit()
  *--------------------------------------------------------------
  */
 
-static void
-SetFontMetrics(fontPtr)
-    register TkFont *fontPtr;		/* Font structure in which to
+static void 
+SetFontMetrics (
+    register TkFont *fontPtr		/* Font structure in which to
 					 * set metrics. */
+)
 {
     int i, replaceOK, baseWidth;
     register XFontStruct *fontStructPtr = fontPtr->fontStructPtr;
@@ -446,18 +450,18 @@ SetFontMetrics(fontPtr)
  *--------------------------------------------------------------
  */
 
-int
-TkMeasureChars(fontStructPtr, source, maxChars, startX, maxX, flags, nextXPtr)
-    XFontStruct *fontStructPtr;	/* Font in which to draw characters. */
-    char *source;		/* Characters to be displayed.  Need not
+int 
+TkMeasureChars (
+    XFontStruct *fontStructPtr,	/* Font in which to draw characters. */
+    char *source,		/* Characters to be displayed.  Need not
 				 * be NULL-terminated. */
-    int maxChars;		/* Maximum # of characters to consider from
+    int maxChars,		/* Maximum # of characters to consider from
 				 * source. */
-    int startX;			/* X-position at which first character will
+    int startX,			/* X-position at which first character will
 				 * be drawn. */
-    int maxX;			/* Don't consider any character that would
+    int maxX,			/* Don't consider any character that would
 				 * cross this x-position. */
-    int flags;			/* Various flag bits OR-ed together.
+    int flags,			/* Various flag bits OR-ed together.
 				 * TK_WHOLE_WORDS means stop on a word boundary
 				 * (just before a space character) if
 				 * possible.  TK_AT_LEAST_ONE means always
@@ -468,8 +472,9 @@ TkMeasureChars(fontStructPtr, source, maxChars, startX, maxX, flags, nextXPtr)
 				 * TK_NEWLINES_NOT_SPECIAL means that newlines
 				 * are treated just like other control chars:
 				 * they don't terminate the line,*/
-    int *nextXPtr;		/* Return x-position of terminating
+    int *nextXPtr		/* Return x-position of terminating
 				 * character here. */
+)
 {
     register TkFont *fontPtr;
     register char *p;		/* Current character. */
@@ -591,24 +596,25 @@ TkMeasureChars(fontStructPtr, source, maxChars, startX, maxX, flags, nextXPtr)
  *--------------------------------------------------------------
  */
 
-void
-TkDisplayChars(display, drawable, gc, fontStructPtr, string, numChars,
-	x, y, flags)
-    Display *display;		/* Display on which to draw. */
-    Drawable drawable;		/* Window or pixmap in which to draw. */
-    GC gc;			/* Graphics context for actually drawing
+void 
+TkDisplayChars (
+    Display *display,		/* Display on which to draw. */
+    Drawable drawable,		/* Window or pixmap in which to draw. */
+    GC gc,			/* Graphics context for actually drawing
 				 * characters. */
-    XFontStruct *fontStructPtr;	/* Font used in GC;  must have been allocated
+    XFontStruct *fontStructPtr,	/* Font used in GC;  must have been allocated
 				 * by Tk_GetFontStruct.  Used to compute sizes
 				 * of tabs, etc. */
-    char *string;		/* Characters to be displayed. */
-    int numChars;		/* Number of characters to display from
+    char *string,		/* Characters to be displayed. */
+    int numChars,		/* Number of characters to display from
 				 * string. */
-    int x, y;			/* Coordinates at which to draw string. */
-    int flags;			/* Flags to control display.  Only
+    int x,
+    int y,			/* Coordinates at which to draw string. */
+    int flags			/* Flags to control display.  Only
 				 * TK_NEWLINES_NOT_SPECIAL is supported right
 				 * now.  See TkMeasureChars for information
 				 * about it. */
+)
 {
     register TkFont *fontPtr;
     register char *p;		/* Current character being scanned. */
@@ -721,23 +727,24 @@ TkDisplayChars(display, drawable, gc, fontStructPtr, string, numChars,
  *----------------------------------------------------------------------
  */
 
-void
-TkUnderlineChars(display, drawable, gc, fontStructPtr, string, x, y,
-	flags, firstChar, lastChar)
-    Display *display;		/* Display on which to draw. */
-    Drawable drawable;		/* Window or pixmap in which to draw. */
-    GC gc;			/* Graphics context for actually drawing
+void 
+TkUnderlineChars (
+    Display *display,		/* Display on which to draw. */
+    Drawable drawable,		/* Window or pixmap in which to draw. */
+    GC gc,			/* Graphics context for actually drawing
 				 * underline. */
-    XFontStruct *fontStructPtr;	/* Font used in GC;  must have been allocated
+    XFontStruct *fontStructPtr,	/* Font used in GC;  must have been allocated
 				 * by Tk_GetFontStruct.  Used to character
 				 * dimensions, etc. */
-    char *string;		/* String containing characters to be
+    char *string,		/* String containing characters to be
 				 * underlined. */
-    int x, y;			/* Coordinates at which first character of
+    int x,
+    int y,			/* Coordinates at which first character of
 				 * string is drawn. */
-    int flags;			/* Flags that were passed to TkDisplayChars. */
-    int firstChar;		/* Index of first character to underline. */
-    int lastChar;		/* Index of last character to underline. */
+    int flags,			/* Flags that were passed to TkDisplayChars. */
+    int firstChar,		/* Index of first character to underline. */
+    int lastChar		/* Index of last character to underline. */
+)
 {
     int xUnder, yUnder, width, height;
     unsigned long value;

@@ -141,14 +141,15 @@ static void		ColorInit _ANSI_ARGS_((void));
  */
 
 XColor *
-Tk_GetColor(interp, tkwin, colormap, name)
-    Tcl_Interp *interp;		/* Place to leave error message if
+Tk_GetColor (
+    Tcl_Interp *interp,		/* Place to leave error message if
 				 * color can't be found. */
-    Tk_Window tkwin;		/* Window in which color will be used. */
-    Colormap colormap;		/* Map from which to allocate color.  None
+    Tk_Window tkwin,		/* Window in which color will be used. */
+    Colormap colormap,		/* Map from which to allocate color.  None
 				 * means use default. */
-    Tk_Uid name;		/* Name of color to allocated (in form
+    Tk_Uid name		/* Name of color to allocated (in form
 				 * suitable for passing to XParseColor). */
+)
 {
     NameKey nameKey;
     Tcl_HashEntry *nameHashPtr;
@@ -252,14 +253,15 @@ Tk_GetColor(interp, tkwin, colormap, name)
  */
 
 XColor *
-Tk_GetColorByValue(interp, tkwin, colormap, colorPtr)
-    Tcl_Interp *interp;		/* Place to leave error message if
+Tk_GetColorByValue (
+    Tcl_Interp *interp,		/* Place to leave error message if
 				 * color can't be found. */
-    Tk_Window tkwin;		/* Window in which color will be used. */
-    Colormap colormap;		/* Map from which to allocate color.  None
+    Tk_Window tkwin,		/* Window in which color will be used. */
+    Colormap colormap,		/* Map from which to allocate color.  None
 				 * means use default. */
-    XColor *colorPtr;		/* Red, green, and blue fields indicate
+    XColor *colorPtr		/* Red, green, and blue fields indicate
 				 * desired color. */
+)
 {
     ValueKey valueKey;
     Tcl_HashEntry *valueHashPtr;
@@ -339,8 +341,9 @@ Tk_GetColorByValue(interp, tkwin, colormap, colorPtr)
  */
 
 char *
-Tk_NameOfColor(colorPtr)
-    XColor *colorPtr;		/* Color whose name is desired. */
+Tk_NameOfColor (
+    XColor *colorPtr		/* Color whose name is desired. */
+)
 {
     register TkColor *tkColPtr = (TkColor *) colorPtr;
     static char string[20];
@@ -373,11 +376,12 @@ Tk_NameOfColor(colorPtr)
  *----------------------------------------------------------------------
  */
 
-void
-Tk_FreeColor(colorPtr)
-    XColor *colorPtr;		/* Color to be released.  Must have been
+void 
+Tk_FreeColor (
+    XColor *colorPtr		/* Color to be released.  Must have been
 				 * allocated by Tk_GetColor or
 				 * Tk_GetColorByValue. */
+)
 {
     register TkColor *tkColPtr = (TkColor *) colorPtr;
     Visual *visual;
@@ -429,8 +433,8 @@ Tk_FreeColor(colorPtr)
  *----------------------------------------------------------------------
  */
 
-static void
-ColorInit()
+static void 
+ColorInit (void)
 {
     initialized = 1;
     Tcl_InitHashTable(&nameTable, sizeof(NameKey)/sizeof(int));

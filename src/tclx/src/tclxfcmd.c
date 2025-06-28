@@ -66,11 +66,12 @@ ParseLockUnlockArgs _ANSI_ARGS_((Tcl_Interp    *interp,
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_PipeCmd (clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_PipeCmd (
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     Interp    *iPtr = (Interp *) interp;
     int        fileIds [2];
@@ -125,11 +126,12 @@ errorExit:
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_CopyfileCmd (clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_CopyfileCmd (
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     OpenFile  *fromFilePtr, *toFilePtr;
     char       transferBuffer [2048];
@@ -191,8 +193,9 @@ unixError:
  *-----------------------------------------------------------------------------
  */
 static char *
-GetFileType (statBufPtr)
-    struct stat  *statBufPtr;
+GetFileType (
+    struct stat  *statBufPtr
+)
 {
     char *typeStr;
 
@@ -234,10 +237,11 @@ GetFileType (statBufPtr)
  *-----------------------------------------------------------------------------
  */
 static void
-ReturnStatList (interp, filePtr, statBufPtr)
-    Tcl_Interp   *interp;
-    OpenFile     *filePtr;
-    struct stat  *statBufPtr;
+ReturnStatList (
+    Tcl_Interp   *interp,
+    OpenFile     *filePtr,
+    struct stat  *statBufPtr
+)
 {
     char statList [200];
 
@@ -273,11 +277,12 @@ ReturnStatList (interp, filePtr, statBufPtr)
  *-----------------------------------------------------------------------------
  */
 static int
-ReturnStatArray (interp, filePtr, statBufPtr, arrayName)
-    Tcl_Interp   *interp;
-    OpenFile     *filePtr;
-    struct stat  *statBufPtr;
-    char         *arrayName;
+ReturnStatArray (
+    Tcl_Interp   *interp,
+    OpenFile     *filePtr,
+    struct stat  *statBufPtr,
+    char         *arrayName
+)
 {
     char numBuf [30];
 
@@ -361,11 +366,12 @@ ReturnStatArray (interp, filePtr, statBufPtr, arrayName)
  *-----------------------------------------------------------------------------
  */
 static int
-ReturnStatItem (interp, filePtr, statBufPtr, itemName)
-    Tcl_Interp   *interp;
-    OpenFile     *filePtr;
-    struct stat  *statBufPtr;
-    char         *itemName;
+ReturnStatItem (
+    Tcl_Interp   *interp,
+    OpenFile     *filePtr,
+    struct stat  *statBufPtr,
+    char         *itemName
+)
 {
     if (STREQU (itemName, "dev"))
         sprintf (interp->result, "%d", statBufPtr->st_dev);
@@ -414,11 +420,12 @@ ReturnStatItem (interp, filePtr, statBufPtr, itemName)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_FstatCmd (clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_FstatCmd (
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     OpenFile    *filePtr;
     struct stat  statBuf;
@@ -473,11 +480,12 @@ Tcl_FstatCmd (clientData, interp, argc, argv)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_LgetsCmd (notUsed, interp, argc, argv)
-    ClientData   notUsed;
-    Tcl_Interp  *interp;
-    int          argc;
-    char       **argv;
+Tcl_LgetsCmd (
+    ClientData   notUsed,
+    Tcl_Interp  *interp,
+    int          argc,
+    char       **argv
+)
 {
     dynamicBuf_t  dynBuf;
     char          prevChar;
@@ -599,14 +607,8 @@ errorExit:
  *
  *-----------------------------------------------------------------------------
  */
-static int
-ParseLockUnlockArgs (interp, argc, argv, argIdx, filePtrPtr, lockInfoPtr)
-    Tcl_Interp    *interp;
-    int            argc;
-    char         **argv;
-    int            argIdx;
-    OpenFile     **filePtrPtr;
-    struct flock  *lockInfoPtr;
+static int 
+ParseLockUnlockArgs (Tcl_Interp *interp, int argc, char **argv, int argIdx, OpenFile **filePtrPtr, struct flock *lockInfoPtr)
 {
 
     lockInfoPtr->l_start  = 0;
@@ -665,11 +667,12 @@ ParseLockUnlockArgs (interp, argc, argv, argIdx, filePtrPtr, lockInfoPtr)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_FlockCmd (notUsed, interp, argc, argv)
-    ClientData   notUsed;
-    Tcl_Interp  *interp;
-    int          argc;
-    char       **argv;
+Tcl_FlockCmd (
+    ClientData   notUsed,
+    Tcl_Interp  *interp,
+    int          argc,
+    char       **argv
+)
 {
     int           argIdx, stat;
     int           readLock = FALSE, writeLock = FALSE, noWaitLock = FALSE;
@@ -780,11 +783,12 @@ Tcl_FlockCmd (notUsed, interp, argc, argv)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_FunlockCmd (notUsed, interp, argc, argv)
-    ClientData   notUsed;
-    Tcl_Interp  *interp;
-    int          argc;
-    char       **argv;
+Tcl_FunlockCmd (
+    ClientData   notUsed,
+    Tcl_Interp  *interp,
+    int          argc,
+    char       **argv
+)
 {
     OpenFile     *filePtr;
     struct flock  lockInfo;

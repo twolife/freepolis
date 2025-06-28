@@ -47,9 +47,7 @@ DoSpecialDup _ANSI_ARGS_((Tcl_Interp *interp,
  *-----------------------------------------------------------------------------
  */
 static OpenFile *
-DoNormalDup (interp, oldFilePtr)
-    Tcl_Interp *interp;
-    OpenFile   *oldFilePtr;
+DoNormalDup (Tcl_Interp *interp, OpenFile *oldFilePtr)
 {
     Interp   *iPtr = (Interp *) interp;
     int       newFileId;
@@ -91,10 +89,7 @@ unixError:
  *-----------------------------------------------------------------------------
  */
 static OpenFile *
-DoSpecialDup (interp, oldFilePtr, newHandleName)
-    Tcl_Interp *interp;
-    OpenFile   *oldFilePtr;
-    char       *newHandleName;
+DoSpecialDup (Tcl_Interp *interp, OpenFile *oldFilePtr, char *newHandleName)
 {
     Interp   *iPtr = (Interp *) interp;
     int       newFileId;
@@ -198,11 +193,12 @@ unixError:
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_DupCmd (clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_DupCmd (
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     OpenFile *oldFilePtr, *newFilePtr;
     long      seekOffset = -1;

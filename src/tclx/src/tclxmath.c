@@ -41,11 +41,12 @@ really_random _ANSI_ARGS_((int my_range));
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_MaxCmd (clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_MaxCmd (
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     double value, maxValue = -MAXDOUBLE;
     int    idx,   maxIdx   =  1;
@@ -82,11 +83,12 @@ Tcl_MaxCmd (clientData, interp, argc, argv)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_MinCmd (clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int     argc;
-    char      **argv;
+Tcl_MinCmd (
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int     argc,
+    char      **argv
+)
 {
     double value, minValue = MAXDOUBLE;
     int    idx,   minIdx   = 1;
@@ -125,9 +127,7 @@ Tcl_MinCmd (clientData, interp, argc, argv)
 #endif
 
 static int 
-
-ReallyRandom (myRange)
-    int myRange;
+ReallyRandom (int myRange)
 {
     int maxMultiple, rnum;
 
@@ -158,11 +158,12 @@ ReallyRandom (myRange)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_RandomCmd (clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_RandomCmd (
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     unsigned range;
 

@@ -42,11 +42,12 @@
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_ExeclCmd (clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_ExeclCmd (
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
 #define STATIC_ARG_SIZE   12
     char  *staticArgv [STATIC_ARG_SIZE];
@@ -106,11 +107,12 @@ Tcl_ExeclCmd (clientData, interp, argc, argv)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_ForkCmd (clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_ForkCmd (
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     int pid;
 
@@ -146,11 +148,12 @@ Tcl_ForkCmd (clientData, interp, argc, argv)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_WaitCmd (clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_WaitCmd (
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     WAIT_STATUS_TYPE  status;
     int               pid, returnedPid;

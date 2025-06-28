@@ -70,7 +70,7 @@
  * up being too many conflicts with slightly-different prototypes.
  */
 
-extern double strtod();
+extern double strtod(const char *, char **);
 
 /*
  *----------------------------------------------------------------
@@ -657,7 +657,7 @@ extern char *		tclRegexpError;
  *----------------------------------------------------------------
  */
 
-extern void		panic();
+extern void		panic(char *format, ...);
 extern regexp *		TclCompileRegexp _ANSI_ARGS_((Tcl_Interp *interp,
 			    char *string));
 extern void		TclCopyAndCollapse _ANSI_ARGS_((int count, char *src,

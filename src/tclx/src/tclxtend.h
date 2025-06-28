@@ -62,7 +62,7 @@ extern char *tclAppVersion;      /* Version number of the application       */
  * If set to be a pointer to the procedure Tcl_RecordAndEval, will link in
  * history.  Should be set by main.
  */
-extern int (*tclShellCmdEvalProc) ();
+extern int (*tclShellCmdEvalProc) (Tcl_Interp *, char *, int, char **);
 
 /*
  * If non-zero, a signal was received.  Normally signals are handled in
@@ -84,7 +84,7 @@ EXTERN void
 Tcl_CommandLoop _ANSI_ARGS_((Tcl_Interp *interp,
                              FILE       *inFile,
                              FILE       *outFile,
-                             int         (*evalProc) (),
+                             int         (*evalProc) (Tcl_Interp *, char *, int, char**),
                              unsigned    options));
 
 EXTERN Tcl_Interp * 

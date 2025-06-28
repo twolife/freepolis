@@ -146,13 +146,14 @@ Tk_ItemType TkPolygonType = {
  *--------------------------------------------------------------
  */
 
-static int
-CreatePolygon(canvasPtr, itemPtr, argc, argv)
-    register Tk_Canvas *canvasPtr;	/* Canvas to hold new item. */
-    Tk_Item *itemPtr;			/* Record to hold new item;  header
+static int 
+CreatePolygon (
+    register Tk_Canvas *canvasPtr,	/* Canvas to hold new item. */
+    Tk_Item *itemPtr,			/* Record to hold new item;  header
 					 * has been initialized by caller. */
-    int argc;				/* Number of arguments in argv. */
-    char **argv;			/* Arguments describing polygon. */
+    int argc,				/* Number of arguments in argv. */
+    char **argv			/* Arguments describing polygon. */
+)
 {
     register PolygonItem *polyPtr = (PolygonItem *) itemPtr;
     int i;
@@ -221,15 +222,16 @@ CreatePolygon(canvasPtr, itemPtr, argc, argv)
  *--------------------------------------------------------------
  */
 
-static int
-PolygonCoords(canvasPtr, itemPtr, argc, argv)
-    register Tk_Canvas *canvasPtr;	/* Canvas containing item. */
-    Tk_Item *itemPtr;			/* Item whose coordinates are to be
+static int 
+PolygonCoords (
+    register Tk_Canvas *canvasPtr,	/* Canvas containing item. */
+    Tk_Item *itemPtr,			/* Item whose coordinates are to be
 					 * read or modified. */
-    int argc;				/* Number of coordinates supplied in
+    int argc,				/* Number of coordinates supplied in
 					 * argv. */
-    char **argv;			/* Array of coordinates: x1, y1,
+    char **argv			/* Array of coordinates: x1, y1,
 					 * x2, y2, ... */
+)
 {
     register PolygonItem *polyPtr = (PolygonItem *) itemPtr;
     char buffer[300];
@@ -307,13 +309,14 @@ PolygonCoords(canvasPtr, itemPtr, argc, argv)
  *--------------------------------------------------------------
  */
 
-static int
-ConfigurePolygon(canvasPtr, itemPtr, argc, argv, flags)
-    Tk_Canvas *canvasPtr;	/* Canvas containing itemPtr. */
-    Tk_Item *itemPtr;		/* Polygon item to reconfigure. */
-    int argc;			/* Number of elements in argv.  */
-    char **argv;		/* Arguments describing things to configure. */
-    int flags;			/* Flags to pass to Tk_ConfigureWidget. */
+static int 
+ConfigurePolygon (
+    Tk_Canvas *canvasPtr,	/* Canvas containing itemPtr. */
+    Tk_Item *itemPtr,		/* Polygon item to reconfigure. */
+    int argc,			/* Number of elements in argv.  */
+    char **argv,		/* Arguments describing things to configure. */
+    int flags			/* Flags to pass to Tk_ConfigureWidget. */
+)
 {
     register PolygonItem *polyPtr = (PolygonItem *) itemPtr;
     XGCValues gcValues;
@@ -378,9 +381,10 @@ ConfigurePolygon(canvasPtr, itemPtr, argc, argv, flags)
  *--------------------------------------------------------------
  */
 
-static void
-DeletePolygon(itemPtr)
-    Tk_Item *itemPtr;			/* Item that is being deleted. */
+static void 
+DeletePolygon (
+    Tk_Item *itemPtr			/* Item that is being deleted. */
+)
 {
     register PolygonItem *polyPtr = (PolygonItem *) itemPtr;
 
@@ -416,11 +420,12 @@ DeletePolygon(itemPtr)
  *--------------------------------------------------------------
  */
 
-static void
-ComputePolygonBbox(canvasPtr, polyPtr)
-    register Tk_Canvas *canvasPtr;	/* Canvas that contains item. */
-    PolygonItem *polyPtr;		/* Item whose bbox is to be
+static void 
+ComputePolygonBbox (
+    register Tk_Canvas *canvasPtr,	/* Canvas that contains item. */
+    PolygonItem *polyPtr		/* Item whose bbox is to be
 					 * recomputed. */
+)
 {
     register double *coordPtr;
     int i;
@@ -463,17 +468,18 @@ ComputePolygonBbox(canvasPtr, polyPtr)
  *--------------------------------------------------------------
  */
 
-void
-TkFillPolygon(canvasPtr, coordPtr, numPoints, drawable, gc)
-    register Tk_Canvas *canvasPtr;	/* Canvas whose coordinate system
+void 
+TkFillPolygon (
+    register Tk_Canvas *canvasPtr,	/* Canvas whose coordinate system
 					 * is to be used for drawing. */
-    double *coordPtr;			/* Array of coordinates for polygon:
+    double *coordPtr,			/* Array of coordinates for polygon:
 					 * x1, y1, x2, y2, .... */
-    int numPoints;			/* Twice this many coordinates are
+    int numPoints,			/* Twice this many coordinates are
 					 * present at *coordPtr. */
-    Drawable drawable;			/* Pixmap or window in which to draw
+    Drawable drawable,			/* Pixmap or window in which to draw
 					 * polygon. */
-    GC gc;				/* Graphics context for drawing. */
+    GC gc				/* Graphics context for drawing. */
+)
 {
     XPoint staticPoints[MAX_STATIC_POINTS];
     XPoint *pointPtr;
@@ -528,12 +534,13 @@ TkFillPolygon(canvasPtr, coordPtr, numPoints, drawable, gc)
  *--------------------------------------------------------------
  */
 
-static void
-DisplayPolygon(canvasPtr, itemPtr, drawable)
-    register Tk_Canvas *canvasPtr;	/* Canvas that contains item. */
-    Tk_Item *itemPtr;			/* Item to be displayed. */
-    Drawable drawable;			/* Pixmap or window in which to draw
+static void 
+DisplayPolygon (
+    register Tk_Canvas *canvasPtr,	/* Canvas that contains item. */
+    Tk_Item *itemPtr,			/* Item to be displayed. */
+    Drawable drawable			/* Pixmap or window in which to draw
 					 * item. */
+)
 {
     register PolygonItem *polyPtr = (PolygonItem *) itemPtr;
 
@@ -593,11 +600,12 @@ DisplayPolygon(canvasPtr, itemPtr, drawable)
  */
 
 	/* ARGSUSED */
-static double
-PolygonToPoint(canvasPtr, itemPtr, pointPtr)
-    Tk_Canvas *canvasPtr;	/* Canvas containing item. */
-    Tk_Item *itemPtr;		/* Item to check against point. */
-    double *pointPtr;		/* Pointer to x and y coordinates. */
+static double 
+PolygonToPoint (
+    Tk_Canvas *canvasPtr,	/* Canvas containing item. */
+    Tk_Item *itemPtr,		/* Item to check against point. */
+    double *pointPtr		/* Pointer to x and y coordinates. */
+)
 {
     PolygonItem *polyPtr = (PolygonItem *) itemPtr;
     double *coordPtr, distance;
@@ -652,13 +660,14 @@ PolygonToPoint(canvasPtr, itemPtr, pointPtr)
  */
 
 	/* ARGSUSED */
-static int
-PolygonToArea(canvasPtr, itemPtr, rectPtr)
-    Tk_Canvas *canvasPtr;	/* Canvas containing item. */
-    Tk_Item *itemPtr;		/* Item to check against polygon. */
-    double *rectPtr;		/* Pointer to array of four coordinates
+static int 
+PolygonToArea (
+    Tk_Canvas *canvasPtr,	/* Canvas containing item. */
+    Tk_Item *itemPtr,		/* Item to check against polygon. */
+    double *rectPtr		/* Pointer to array of four coordinates
 				 * (x1, y1, x2, y2) describing rectangular
 				 * area.  */
+)
 {
     PolygonItem *polyPtr = (PolygonItem *) itemPtr;
     double *coordPtr;
@@ -711,13 +720,15 @@ PolygonToArea(canvasPtr, itemPtr, rectPtr)
  *--------------------------------------------------------------
  */
 
-static void
-ScalePolygon(canvasPtr, itemPtr, originX, originY, scaleX, scaleY)
-    Tk_Canvas *canvasPtr;		/* Canvas containing polygon. */
-    Tk_Item *itemPtr;			/* Polygon to be scaled. */
-    double originX, originY;		/* Origin about which to scale rect. */
-    double scaleX;			/* Amount to scale in X direction. */
-    double scaleY;			/* Amount to scale in Y direction. */
+static void 
+ScalePolygon (
+    Tk_Canvas *canvasPtr,		/* Canvas containing polygon. */
+    Tk_Item *itemPtr,			/* Polygon to be scaled. */
+    double originX,
+    double originY,		/* Origin about which to scale rect. */
+    double scaleX,			/* Amount to scale in X direction. */
+    double scaleY			/* Amount to scale in Y direction. */
+)
 {
     PolygonItem *polyPtr = (PolygonItem *) itemPtr;
     register double *coordPtr;
@@ -750,12 +761,14 @@ ScalePolygon(canvasPtr, itemPtr, originX, originY, scaleX, scaleY)
  *--------------------------------------------------------------
  */
 
-static void
-TranslatePolygon(canvasPtr, itemPtr, deltaX, deltaY)
-    Tk_Canvas *canvasPtr;		/* Canvas containing item. */
-    Tk_Item *itemPtr;			/* Item that is being moved. */
-    double deltaX, deltaY;		/* Amount by which item is to be
+static void 
+TranslatePolygon (
+    Tk_Canvas *canvasPtr,		/* Canvas containing item. */
+    Tk_Item *itemPtr,			/* Item that is being moved. */
+    double deltaX,
+    double deltaY		/* Amount by which item is to be
 					 * moved. */
+)
 {
     PolygonItem *polyPtr = (PolygonItem *) itemPtr;
     register double *coordPtr;

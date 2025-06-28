@@ -32,11 +32,12 @@
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_LvarcatCmd (clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_LvarcatCmd (
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     int        listArgc, idx, listIdx;
     char     **listArgv;
@@ -102,11 +103,12 @@ Tcl_LvarcatCmd (clientData, interp, argc, argv)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_LvarpopCmd (clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_LvarpopCmd (
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     int        listArgc, listIdx, idx;
     char     **listArgv;
@@ -178,11 +180,12 @@ Tcl_LvarpopCmd (clientData, interp, argc, argv)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_LvarpushCmd (clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_LvarpushCmd (
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     int        listArgc, listIdx, idx;
     char     **listArgv;
@@ -255,11 +258,12 @@ Tcl_LvarpushCmd (clientData, interp, argc, argv)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_LemptyCmd (clientData, interp, argc, argv)
-    ClientData   clientData;
-    Tcl_Interp  *interp;
-    int          argc;
-    char       **argv;
+Tcl_LemptyCmd (
+    ClientData   clientData,
+    Tcl_Interp  *interp,
+    int          argc,
+    char       **argv
+)
 {
     char *scanPtr;
 

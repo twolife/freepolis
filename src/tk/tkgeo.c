@@ -58,14 +58,15 @@ static char rcsid[] = "$Header: /user6/ouster/wish/RCS/tkGeometry.c,v 1.18 92/05
  *--------------------------------------------------------------
  */
 
-void
-Tk_ManageGeometry(tkwin, proc, clientData)
-    Tk_Window tkwin;		/* Window whose geometry is to
+void 
+Tk_ManageGeometry (
+    Tk_Window tkwin,		/* Window whose geometry is to
 				 * be managed by proc.  */
-    Tk_GeometryProc *proc;	/* Procedure to manage geometry.
+    Tk_GeometryProc *proc,	/* Procedure to manage geometry.
 				 * NULL means make tkwin unmanaged. */
-    ClientData clientData;	/* Arbitrary one-word argument to
+    ClientData clientData	/* Arbitrary one-word argument to
 				 * pass to proc. */
+)
 {
     register TkWindow *winPtr = (TkWindow *) tkwin;
 
@@ -97,12 +98,14 @@ Tk_ManageGeometry(tkwin, proc, clientData)
  *--------------------------------------------------------------
  */
 
-void
-Tk_GeometryRequest(tkwin, reqWidth, reqHeight)
-    Tk_Window tkwin;		/* Window that geometry information
+void 
+Tk_GeometryRequest (
+    Tk_Window tkwin,		/* Window that geometry information
 				 * pertains to. */
-    int reqWidth, reqHeight;	/* Minimum desired dimensions for
+    int reqWidth,
+    int reqHeight	/* Minimum desired dimensions for
 				 * window, in pixels. */
+)
 {
     register TkWindow *winPtr = (TkWindow *) tkwin;
 
@@ -136,10 +139,11 @@ Tk_GeometryRequest(tkwin, reqWidth, reqHeight)
  *----------------------------------------------------------------------
  */
 
-void
-Tk_SetInternalBorder(tkwin, width)
-    Tk_Window tkwin;		/* Window that will have internal border. */
-    int width;			/* Width of internal border, in pixels. */
+void 
+Tk_SetInternalBorder (
+    Tk_Window tkwin,		/* Window that will have internal border. */
+    int width			/* Width of internal border, in pixels. */
+)
 {
     register TkWindow *winPtr = (TkWindow *) tkwin;
 

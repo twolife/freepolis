@@ -111,16 +111,17 @@ static void		ShiftLine _ANSI_ARGS_((XPoint *p1Ptr, XPoint *p2Ptr,
  *--------------------------------------------------------------
  */
 
-Tk_3DBorder
-Tk_Get3DBorder(interp, tkwin, colormap, colorName)
-    Tcl_Interp *interp;		/* Place to store an error message. */
-    Tk_Window tkwin;		/* Token for window in which
+Tk_3DBorder 
+Tk_Get3DBorder (
+    Tcl_Interp *interp,		/* Place to store an error message. */
+    Tk_Window tkwin,		/* Token for window in which
 				 * border will be drawn. */
-    Colormap colormap;		/* Colormap to use for allocating border
+    Colormap colormap,		/* Colormap to use for allocating border
 				 * colors.  None means use default colormap
 				 * for screen. */
-    Tk_Uid colorName;		/* String giving name of color
+    Tk_Uid colorName		/* String giving name of color
 				 * for window background. */
+)
 {
     BorderKey key;
     Tcl_HashEntry *hashPtr;
@@ -279,20 +280,23 @@ Tk_Get3DBorder(interp, tkwin, colormap, colorName)
  *--------------------------------------------------------------
  */
 
-void
-Tk_Draw3DRectangle(display, drawable, border, x, y, width, height,
-	borderWidth, relief)
-    Display *display;		/* X display in which to draw. */
-    Drawable drawable;		/* X window or pixmap in which to draw. */
-    Tk_3DBorder border;		/* Token for border to draw. */
-    int x, y, width, height;	/* Outside area of region in
+void 
+Tk_Draw3DRectangle (
+    Display *display,		/* X display in which to draw. */
+    Drawable drawable,		/* X window or pixmap in which to draw. */
+    Tk_3DBorder border,		/* Token for border to draw. */
+    int x,
+    int y,
+    int width,
+    int height,	/* Outside area of region in
 				 * which border will be drawn. */
-    int borderWidth;		/* Desired width for border, in
+    int borderWidth,		/* Desired width for border, in
 				 * pixels. */
-    int relief;			/* Should be either TK_RELIEF_RAISED
+    int relief			/* Should be either TK_RELIEF_RAISED
 				 * or TK_RELIEF_SUNKEN;  indicates
 				 * position of interior of window relative
 				 * to exterior. */
+)
 {
     register Border *borderPtr = (Border *) border;
     GC top, bottom;
@@ -347,8 +351,9 @@ Tk_Draw3DRectangle(display, drawable, border, x, y, width, height,
  */
 
 char *
-Tk_NameOf3DBorder(border)
-    Tk_3DBorder border;		/* Token for border. */
+Tk_NameOf3DBorder (
+    Tk_3DBorder border		/* Token for border. */
+)
 {
     Border *borderPtr = (Border *) border;
 
@@ -372,8 +377,7 @@ Tk_NameOf3DBorder(border)
  *--------------------------------------------------------------------
  */
 XColor *
-Tk_3DBorderColor(border)
-    Tk_3DBorder border;
+Tk_3DBorderColor (Tk_3DBorder border)
 {
     return(((Border *) border)->bgColorPtr);
 }
@@ -397,9 +401,10 @@ Tk_3DBorderColor(border)
  *--------------------------------------------------------------
  */
 
-void
-Tk_Free3DBorder(border)
-    Tk_3DBorder border;		/* Token for border to be released. */
+void 
+Tk_Free3DBorder (
+    Tk_3DBorder border		/* Token for border to be released. */
+)
 {
     register Border *borderPtr = (Border *) border;
 
@@ -448,10 +453,11 @@ Tk_Free3DBorder(border)
  *----------------------------------------------------------------------
  */
 
-void
-Tk_SetBackgroundFromBorder(tkwin, border)
-    Tk_Window tkwin;		/* Window whose background is to be set. */
-    Tk_3DBorder border;		/* Token for border. */
+void 
+Tk_SetBackgroundFromBorder (
+    Tk_Window tkwin,		/* Window whose background is to be set. */
+    Tk_3DBorder border		/* Token for border. */
+)
 {
     register Border *borderPtr = (Border *) border;
 
@@ -477,11 +483,12 @@ Tk_SetBackgroundFromBorder(tkwin, border)
  *----------------------------------------------------------------------
  */
 
-int
-Tk_GetRelief(interp, name, reliefPtr)
-    Tcl_Interp *interp;		/* For error messages. */
-    char *name;			/* Name of a relief type. */
-    int *reliefPtr;		/* Where to store converted relief. */
+int 
+Tk_GetRelief (
+    Tcl_Interp *interp,		/* For error messages. */
+    char *name,			/* Name of a relief type. */
+    int *reliefPtr		/* Where to store converted relief. */
+)
 {
     char c;
     int length;
@@ -521,9 +528,10 @@ Tk_GetRelief(interp, name, reliefPtr)
  */
 
 char *
-Tk_NameOfRelief(relief)
-    int relief;		/* One of TK_RELIEF_FLAT, TK_RELIEF_RAISED,
+Tk_NameOfRelief (
+    int relief		/* One of TK_RELIEF_FLAT, TK_RELIEF_RAISED,
 			 * or TK_RELIEF_SUNKEN. */
+)
 {
     if (relief == TK_RELIEF_FLAT) {
 	return "flat";
@@ -557,23 +565,23 @@ Tk_NameOfRelief(relief)
  *--------------------------------------------------------------
  */
 
-void
-Tk_Draw3DPolygon(display, drawable, border, pointPtr, numPoints,
-	borderWidth, leftRelief)
-    Display *display;		/* X display in which to draw polygon. */
-    Drawable drawable;		/* X window or pixmap in which to draw. */
-    Tk_3DBorder border;		/* Token for border to draw. */
-    XPoint *pointPtr;		/* Array of points describing
+void 
+Tk_Draw3DPolygon (
+    Display *display,		/* X display in which to draw polygon. */
+    Drawable drawable,		/* X window or pixmap in which to draw. */
+    Tk_3DBorder border,		/* Token for border to draw. */
+    XPoint *pointPtr,		/* Array of points describing
 				 * polygon.  All points must be
 				 * absolute (CoordModeOrigin). */
-    int numPoints;		/* Number of points at *pointPtr. */
-    int borderWidth;		/* Width of border, measured in
+    int numPoints,		/* Number of points at *pointPtr. */
+    int borderWidth,		/* Width of border, measured in
 				 * pixels to the left of the polygon's
 				 * trajectory.   May be negative. */
-    int leftRelief;		/* TK_RELIEF_RAISED or
+    int leftRelief		/* TK_RELIEF_RAISED or
 				 * TK_RELIEF_SUNKEN: indicates how
 				 * stuff to left of trajectory looks
 				 * relative to stuff on right. */
+)
 {
     XPoint poly[4], b1, b2, newB1, newB2;
     XPoint perp, c, shift1, shift2;	/* Used for handling parallel lines. */
@@ -743,17 +751,20 @@ Tk_Draw3DPolygon(display, drawable, border, pointPtr, numPoints,
  *----------------------------------------------------------------------
  */
 
-void
-Tk_Fill3DRectangle(display, drawable, border, x, y, width,
-	height, borderWidth, relief)
-    Display *display;		/* X display in which to draw rectangle. */
-    Drawable drawable;		/* X window or pixmap in which to draw. */
-    Tk_3DBorder border;		/* Token for border to draw. */
-    int x, y, width, height;	/* Outside area of rectangular region. */
-    int borderWidth;		/* Desired width for border, in
+void 
+Tk_Fill3DRectangle (
+    Display *display,		/* X display in which to draw rectangle. */
+    Drawable drawable,		/* X window or pixmap in which to draw. */
+    Tk_3DBorder border,		/* Token for border to draw. */
+    int x,
+    int y,
+    int width,
+    int height,	/* Outside area of rectangular region. */
+    int borderWidth,		/* Desired width for border, in
 				 * pixels. Border will be *inside* region. */
-    int relief;			/* Indicates 3D effect: TK_RELIEF_FLAT,
+    int relief			/* Indicates 3D effect: TK_RELIEF_FLAT,
 				 * TK_RELIEF_RAISED, or TK_RELIEF_SUNKEN. */
+)
 {
     register Border *borderPtr = (Border *) border;
 
@@ -781,23 +792,23 @@ Tk_Fill3DRectangle(display, drawable, border, x, y, width,
  *----------------------------------------------------------------------
  */
 
-void
-Tk_Fill3DPolygon(display, drawable, border, pointPtr, numPoints,
-	borderWidth, leftRelief)
-    Display *display;		/* X display in which to draw polygon. */
-    Drawable drawable;		/* X window or pixmap in which to draw. */
-    Tk_3DBorder border;		/* Token for border to draw. */
-    XPoint *pointPtr;		/* Array of points describing
+void 
+Tk_Fill3DPolygon (
+    Display *display,		/* X display in which to draw polygon. */
+    Drawable drawable,		/* X window or pixmap in which to draw. */
+    Tk_3DBorder border,		/* Token for border to draw. */
+    XPoint *pointPtr,		/* Array of points describing
 				 * polygon.  All points must be
 				 * absolute (CoordModeOrigin). */
-    int numPoints;		/* Number of points at *pointPtr. */
-    int borderWidth;		/* Width of border, measured in
+    int numPoints,		/* Number of points at *pointPtr. */
+    int borderWidth,		/* Width of border, measured in
 				 * pixels to the left of the polygon's
 				 * trajectory.   May be negative. */
-    int leftRelief;			/* Indicates 3D effect of left side of
+    int leftRelief			/* Indicates 3D effect of left side of
 				 * trajectory relative to right:
 				 * TK_RELIEF_FLAT, TK_RELIEF_RAISED,
 				 * or TK_RELIEF_SUNKEN. */
+)
 {
     register Border *borderPtr = (Border *) border;
 
@@ -825,8 +836,8 @@ Tk_Fill3DPolygon(display, drawable, border, pointPtr, numPoints,
  *-------------------------------------------------------------
  */
 
-static void
-BorderInit()
+static void 
+BorderInit (void)
 {
     initialized = 1;
     Tcl_InitHashTable(&borderTable, sizeof(BorderKey)/sizeof(int));
@@ -850,16 +861,17 @@ BorderInit()
  *--------------------------------------------------------------
  */
 
-static void
-ShiftLine(p1Ptr, p2Ptr, distance, p3Ptr)
-    XPoint *p1Ptr;		/* First point on line. */
-    XPoint *p2Ptr;		/* Second point on line. */
-    int distance;		/* New line is to be this many
+static void 
+ShiftLine (
+    XPoint *p1Ptr,		/* First point on line. */
+    XPoint *p2Ptr,		/* Second point on line. */
+    int distance,		/* New line is to be this many
 				 * units to the left of original
 				 * line, when looking from p1 to
 				 * p2.  May be negative. */
-    XPoint *p3Ptr;		/* Store coords of point on new
+    XPoint *p3Ptr		/* Store coords of point on new
 				 * line here. */
+)
 {
     int dx, dy, dxNeg, dyNeg;
 
@@ -943,13 +955,14 @@ ShiftLine(p1Ptr, p2Ptr, distance, p3Ptr)
  *--------------------------------------------------------------
  */
 
-static int
-Intersect(a1Ptr, a2Ptr, b1Ptr, b2Ptr, iPtr)
-    XPoint *a1Ptr;		/* First point of first line. */
-    XPoint *a2Ptr;		/* Second point of first line. */
-    XPoint *b1Ptr;		/* First point of second line. */
-    XPoint *b2Ptr;		/* Second point of second line. */
-    XPoint *iPtr;		/* Filled in with intersection point. */
+static int 
+Intersect (
+    XPoint *a1Ptr,		/* First point of first line. */
+    XPoint *a2Ptr,		/* Second point of first line. */
+    XPoint *b1Ptr,		/* First point of second line. */
+    XPoint *b2Ptr,		/* Second point of second line. */
+    XPoint *iPtr		/* Filled in with intersection point. */
+)
 {
     int dxadyb, dxbdya, dxadxb, dyadyb, p, q;
 

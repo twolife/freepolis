@@ -120,14 +120,14 @@ DoSpriteCmd(CLIENT_ARGS)
   SimSprite *sprite = (SimSprite *) clientData;
   Tcl_HashEntry *ent;
   int result = TCL_OK;
-  int (*cmd)();
+  int (*cmd)(SimSprite*, Tcl_Interp*, int, char**);
 
   if (argc < 2) {
     return TCL_ERROR;
   }
 
   if ((ent = Tcl_FindHashEntry(&SpriteCmds, argv[1]))) {
-    cmd = (int (*)())ent->clientData;
+    cmd = (int (*)(SimSprite*, Tcl_Interp*, int, char**))ent->clientData;
     Tk_Preserve((ClientData) sprite);
     result = cmd(sprite, interp, argc, argv);
     Tk_Release((ClientData) sprite);
@@ -156,7 +156,7 @@ SpriteCmd(CLIENT_ARGS)
   sprite->frame = 0;
 
   Tcl_CreateCommand(interp, sprite->name,
-		    DoSpriteCmd, (ClientData) sprite, (void (*)()) NULL);
+		    DoSpriteCmd, (ClientData) sprite, (void (*)(int *)) NULL);
 
   interp->result = sprite->name;
   return TCL_OK;
@@ -221,7 +221,7 @@ sprite_command_init(void)
   int i;
 
   Tcl_CreateCommand(tk_mainInterp, "sprite", SpriteCmd,
-		    (ClientData)NULL, (void (*)()) NULL);
+		    (ClientData)NULL, (void (*)(int *)) NULL);
 
   Tcl_InitHashTable(&SpriteCmds, TCL_STRING_KEYS);
 

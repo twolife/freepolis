@@ -503,9 +503,8 @@ simpleCreateFileHandler (fd, mask, proc, clientData)
  * quiescent, and deletes the handler.
  */
 
-void
-simpleDeleteFileHandler (fd)
-     int fd;
+void 
+simpleDeleteFileHandler (int fd)
 {
   /* First of all, we have to zero the file's mask to avoid calling the same
      handler over again if the file is still ready. */
@@ -1633,9 +1632,8 @@ deleteTcpServerObjectCmd (clientData)
  * deleted.  All that remains is to deallocate the server's data structures.
  */
 
-static void
-tcpDeleteServer (server)
-     Tcp_ServerData * server;
+static void 
+tcpDeleteServer (Tcp_ServerData *server)
 {
   /* Get rid of the server's initial command */
 
@@ -2302,9 +2300,8 @@ deleteTcpConnectionObjectCmd (clientData)
  * to the dead client, but we shouldn't have come here in that case.
  */
 
-static void
-tcpCloseClient (client)
-     Tcp_ClientData * client;
+static void 
+tcpCloseClient (Tcp_ClientData *client)
 {
   if (client -> activeFlag) 
     abort ();
@@ -2389,9 +2386,8 @@ tcpServerAcceptConnection (clientData, mask)
   strcmp ((name1), (name2))
 #endif
 
-static int
-tcpTrustedHost (hostName)
-     char * hostName;
+static int 
+tcpTrustedHost (char *hostName)
 {
   char localName [128];
   struct hostent * hostEnt;
@@ -2597,9 +2593,8 @@ tcpWriteResultToClient (clientData, mask)
  * actual command buffering.
  */
 
-static void
-tcpPrepareClientForInput (client)
-     Tcp_ClientData * client;
+static void 
+tcpPrepareClientForInput (Tcp_ClientData *client)
 {
   simpleCreateFileHandler (client -> socketfd, TK_READABLE,
 			   (Tk_FileProc *) tcpReceiveClientInput,
@@ -2702,9 +2697,8 @@ printf("TCP executing: %s\n", buf);
  * it must define the `tcperror' procedure and process the error.
  */
 
-static void
-tcpClientReadError (client)
-     Tcp_ClientData * client;
+static void 
+tcpClientReadError (Tcp_ClientData *client)
 {
   Tcp_ServerData * server = client -> server;
   Tcl_Interp * interp = server -> interp;
@@ -2739,9 +2733,8 @@ tcpClientReadError (client)
  * it must define the `tcperror' procedure to catch the error.
  */
 
-static void
-tcpClientWriteError (client)
-     Tcp_ClientData * client;
+static void 
+tcpClientWriteError (Tcp_ClientData *client)
 {
   Tcp_ServerData * server = client -> server;
   Tcl_Interp * interp = server -> interp;

@@ -918,7 +918,7 @@ DoResizeView(SimView *view, int w, int h)
     view->shminfo->shmaddr = (char *)view->data;
     view->shminfo->readOnly = False;
 
-    { int (*old)();
+    { int (*old)(Display *, XErrorEvent *);
       int result;
       int attached = 0;
       GotXError = 0;

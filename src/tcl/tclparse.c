@@ -126,12 +126,13 @@ static char *	VarNameEnd _ANSI_ARGS_((char *string));
  *----------------------------------------------------------------------
  */
 
-char
-Tcl_Backslash(src, readPtr)
-    char *src;			/* Points to the backslash character of
+char 
+Tcl_Backslash (
+    char *src,			/* Points to the backslash character of
 				 * a backslash sequence. */
-    int *readPtr;		/* Fill in with number of characters read
+    int *readPtr		/* Fill in with number of characters read
 				 * from src, unless NULL. */
+)
 {
     register char *p = src+1;
     char result;
@@ -264,20 +265,21 @@ Tcl_Backslash(src, readPtr)
  *--------------------------------------------------------------
  */
 
-int
-TclParseQuotes(interp, string, termChar, flags, termPtr, pvPtr)
-    Tcl_Interp *interp;		/* Interpreter to use for nested command
+int 
+TclParseQuotes (
+    Tcl_Interp *interp,		/* Interpreter to use for nested command
 				 * evaluations and error messages. */
-    char *string;		/* Character just after opening double-
+    char *string,		/* Character just after opening double-
 				 * quote. */
-    int termChar;		/* Character that terminates "quoted" string
+    int termChar,		/* Character that terminates "quoted" string
 				 * (usually double-quote, but sometimes
 				 * right-paren or something else). */
-    int flags;			/* Flags to pass to nested Tcl_Eval calls. */
-    char **termPtr;		/* Store address of terminating character
+    int flags,			/* Flags to pass to nested Tcl_Eval calls. */
+    char **termPtr,		/* Store address of terminating character
 				 * here. */
-    ParseValue *pvPtr;		/* Information about where to place
+    ParseValue *pvPtr		/* Information about where to place
 				 * fully-substituted result of parse. */
+)
 {
     register char *src, *dst, c;
 
@@ -385,16 +387,17 @@ TclParseQuotes(interp, string, termChar, flags, termPtr, pvPtr)
  *--------------------------------------------------------------
  */
 
-int
-TclParseNestedCmd(interp, string, flags, termPtr, pvPtr)
-    Tcl_Interp *interp;		/* Interpreter to use for nested command
+int 
+TclParseNestedCmd (
+    Tcl_Interp *interp,		/* Interpreter to use for nested command
 				 * evaluations and error messages. */
-    char *string;		/* Character just after opening bracket. */
-    int flags;			/* Flags to pass to nested Tcl_Eval. */
-    char **termPtr;		/* Store address of terminating character
+    char *string,		/* Character just after opening bracket. */
+    int flags,			/* Flags to pass to nested Tcl_Eval. */
+    char **termPtr,		/* Store address of terminating character
 				 * here. */
-    register ParseValue *pvPtr;	/* Information about where to place
+    register ParseValue *pvPtr	/* Information about where to place
 				 * result of command. */
+)
 {
     int result, length, shortfall;
     Interp *iPtr = (Interp *) interp;
@@ -451,15 +454,16 @@ TclParseNestedCmd(interp, string, flags, termPtr, pvPtr)
  *--------------------------------------------------------------
  */
 
-int
-TclParseBraces(interp, string, termPtr, pvPtr)
-    Tcl_Interp *interp;		/* Interpreter to use for nested command
+int 
+TclParseBraces (
+    Tcl_Interp *interp,		/* Interpreter to use for nested command
 				 * evaluations and error messages. */
-    char *string;		/* Character just after opening bracket. */
-    char **termPtr;		/* Store address of terminating character
+    char *string,		/* Character just after opening bracket. */
+    char **termPtr,		/* Store address of terminating character
 				 * here. */
-    register ParseValue *pvPtr;	/* Information about where to place
+    register ParseValue *pvPtr	/* Information about where to place
 				 * result of command. */
+)
 {
     int level;
     register char *src, *dst, *end;
@@ -577,21 +581,22 @@ TclParseBraces(interp, string, termPtr, pvPtr)
  *--------------------------------------------------------------
  */
 
-int
-TclParseWords(interp, string, flags, maxWords, termPtr, argcPtr, argv, pvPtr)
-    Tcl_Interp *interp;		/* Interpreter to use for nested command
+int 
+TclParseWords (
+    Tcl_Interp *interp,		/* Interpreter to use for nested command
 				 * evaluations and error messages. */
-    char *string;		/* First character of word. */
-    int flags;			/* Flags to control parsing (same values as
+    char *string,		/* First character of word. */
+    int flags,			/* Flags to control parsing (same values as
 				 * passed to Tcl_Eval). */
-    int maxWords;		/* Maximum number of words to parse. */
-    char **termPtr;		/* Store address of terminating character
+    int maxWords,		/* Maximum number of words to parse. */
+    char **termPtr,		/* Store address of terminating character
 				 * here. */
-    int *argcPtr;		/* Filled in with actual number of words
+    int *argcPtr,		/* Filled in with actual number of words
 				 * parsed. */
-    char **argv;		/* Store addresses of individual words here. */
-    register ParseValue *pvPtr;	/* Information about where to place
+    char **argv,		/* Store addresses of individual words here. */
+    register ParseValue *pvPtr	/* Information about where to place
 				 * fully-substituted word. */
+)
 {
     register char *src, *dst;
     register char c;
@@ -811,15 +816,16 @@ TclParseWords(interp, string, flags, maxWords, termPtr, argcPtr, argv, pvPtr)
  *--------------------------------------------------------------
  */
 
-void
-TclExpandParseValue(pvPtr, needed)
-    register ParseValue *pvPtr;		/* Information about buffer that
+void 
+TclExpandParseValue (
+    register ParseValue *pvPtr,		/* Information about buffer that
 					 * must be expanded.  If the clientData
 					 * in the structure is non-zero, it
 					 * means that the current buffer is
 					 * dynamically allocated. */
-    int needed;				/* Minimum amount of additional space
+    int needed				/* Minimum amount of additional space
 					 * to allocate. */
+)
 {
     int newSpace;
     char *new;
@@ -873,11 +879,12 @@ TclExpandParseValue(pvPtr, needed)
  */
 
 char *
-TclWordEnd(start, nested)
-    char *start;		/* Beginning of a word of a Tcl command. */
-    int nested;			/* Zero means this is a top-level command.
+TclWordEnd (
+    char *start,		/* Beginning of a word of a Tcl command. */
+    int nested			/* Zero means this is a top-level command.
 				 * One means this is a nested command (close
 				 * brace is a word terminator). */
+)
 {
     register char *p;
     int count;
@@ -975,11 +982,12 @@ TclWordEnd(start, nested)
  */
 
 static char *
-QuoteEnd(string, term)
-    char *string;		/* Pointer to character just after opening
+QuoteEnd (
+    char *string,		/* Pointer to character just after opening
 				 * "quote". */
-    int term;			/* This character will terminate the
+    int term			/* This character will terminate the
 				 * quoted string (e.g. '"' or ')'). */
+)
 {
     register char *p = string;
     int count;
@@ -1024,8 +1032,9 @@ QuoteEnd(string, term)
  */
 
 static char *
-VarNameEnd(string)
-    char *string;		/* Pointer to dollar-sign character. */
+VarNameEnd (
+    char *string		/* Pointer to dollar-sign character. */
+)
 {
     register char *p = string+1;
 
@@ -1067,13 +1076,14 @@ VarNameEnd(string)
  */
 
 char *
-Tcl_ParseVar(interp, string, termPtr)
-    Tcl_Interp *interp;			/* Context for looking up variable. */
-    register char *string;		/* String containing variable name.
+Tcl_ParseVar (
+    Tcl_Interp *interp,			/* Context for looking up variable. */
+    register char *string,		/* String containing variable name.
 					 * First character must be "$". */
-    char **termPtr;			/* If non-NULL, points to word to fill
+    char **termPtr			/* If non-NULL, points to word to fill
 					 * in with character just after last
 					 * one in the variable specifier. */
+)
 
 {
     char *name1, *name1End, c, *result;

@@ -349,13 +349,14 @@ static int		InvokeButton  _ANSI_ARGS_((Button *butPtr));
  *--------------------------------------------------------------
  */
 
-int
-Tk_ButtonCmd(clientData, interp, argc, argv)
-    ClientData clientData;	/* Main window associated with
+int 
+Tk_ButtonCmd (
+    ClientData clientData,	/* Main window associated with
 				 * interpreter. */
-    Tcl_Interp *interp;		/* Current interpreter. */
-    int argc;			/* Number of arguments. */
-    char **argv;		/* Argument strings. */
+    Tcl_Interp *interp,		/* Current interpreter. */
+    int argc,			/* Number of arguments. */
+    char **argv		/* Argument strings. */
+)
 {
     register Button *butPtr;
     int type;
@@ -435,7 +436,7 @@ Tk_ButtonCmd(clientData, interp, argc, argv)
     Tk_CreateEventHandler(butPtr->tkwin, ExposureMask|StructureNotifyMask,
 	    ButtonEventProc, (ClientData) butPtr);
     Tcl_CreateCommand(interp, Tk_PathName(butPtr->tkwin), ButtonWidgetCmd,
-	    (ClientData) butPtr, (void (*)()) NULL);
+	    (ClientData) butPtr, (void (*)(int *)) NULL);
     if (ConfigureButton(interp, butPtr, argc-2, argv+2,
 	    configFlags[type]) != TCL_OK) {
 	Tk_DestroyWindow(butPtr->tkwin);
@@ -464,12 +465,13 @@ Tk_ButtonCmd(clientData, interp, argc, argv)
  *--------------------------------------------------------------
  */
 
-static int
-ButtonWidgetCmd(clientData, interp, argc, argv)
-    ClientData clientData;	/* Information about button widget. */
-    Tcl_Interp *interp;		/* Current interpreter. */
-    int argc;			/* Number of arguments. */
-    char **argv;		/* Argument strings. */
+static int 
+ButtonWidgetCmd (
+    ClientData clientData,	/* Information about button widget. */
+    Tcl_Interp *interp,		/* Current interpreter. */
+    int argc,			/* Number of arguments. */
+    char **argv		/* Argument strings. */
+)
 {
     register Button *butPtr = (Button *) clientData;
     int result = TCL_OK;
@@ -642,9 +644,10 @@ ButtonWidgetCmd(clientData, interp, argc, argv)
  *----------------------------------------------------------------------
  */
 
-static void
-DestroyButton(clientData)
-    ClientData clientData;		/* Info about entry widget. */
+static void 
+DestroyButton (
+    ClientData clientData		/* Info about entry widget. */
+)
 {
     register Button *butPtr = (Button *) clientData;
 
@@ -749,13 +752,14 @@ DestroyButton(clientData)
  */
 
 static int
-ConfigureButton(interp, butPtr, argc, argv, flags)
-    Tcl_Interp *interp;		/* Used for error reporting. */
-    register Button *butPtr;	/* Information about widget;  may or may
+ConfigureButton(
+    Tcl_Interp *interp,		/* Used for error reporting. */
+    register Button *butPtr,	/* Information about widget;  may or may
 				 * not already have values for some fields. */
-    int argc;			/* Number of valid entries in argv. */
-    char **argv;		/* Arguments. */
-    int flags;			/* Flags to pass to Tk_ConfigureWidget. */
+    int argc,			/* Number of valid entries in argv. */
+    char **argv,		/* Arguments. */
+    int flags			/* Flags to pass to Tk_ConfigureWidget. */
+)
 {
     XGCValues gcValues;
     GC newGC;
@@ -975,9 +979,10 @@ ConfigureButton(interp, butPtr, argc, argv, flags)
  *----------------------------------------------------------------------
  */
 
-static void
-DisplayButton(clientData)
-    ClientData clientData;	/* Information about widget. */
+static void 
+DisplayButton (
+    ClientData clientData	/* Information about widget. */
+)
 {
     register Button *butPtr = (Button *) clientData;
     GC gc;
@@ -1219,10 +1224,11 @@ DisplayButton(clientData)
  *--------------------------------------------------------------
  */
 
-static void
-ButtonEventProc(clientData, eventPtr)
-    ClientData clientData;	/* Information about window. */
-    XEvent *eventPtr;		/* Information about event. */
+static void 
+ButtonEventProc (
+    ClientData clientData,	/* Information about window. */
+    XEvent *eventPtr		/* Information about event. */
+)
 {
     Button *butPtr = (Button *) clientData;
     if ((eventPtr->type == Expose) && (eventPtr->xexpose.count == 0)) {
@@ -1276,8 +1282,9 @@ ButtonEventProc(clientData, eventPtr)
  */
 
 static void
-ComputeButtonGeometry(butPtr)
-    register Button *butPtr;	/* Button whose geometry may have changed. */
+ComputeButtonGeometry(
+    register Button *butPtr	/* Button whose geometry may have changed. */
+)
 {
     XCharStruct bbox;
     int dummy;
@@ -1366,8 +1373,9 @@ ComputeButtonGeometry(butPtr)
  */
 
 static int
-InvokeButton(butPtr)
-    register Button *butPtr;		/* Information about button. */
+InvokeButton(
+    register Button *butPtr		/* Information about button. */
+)
 {
     if (butPtr->type == TYPE_CHECK_BUTTON) {
 	if (butPtr->flags & SELECTED) {
@@ -1408,12 +1416,13 @@ InvokeButton(butPtr)
 
 	/* ARGSUSED */
 static char *
-ButtonVarProc(clientData, interp, name1, name2, flags)
-    ClientData clientData;	/* Information about button. */
-    Tcl_Interp *interp;		/* Interpreter containing variable. */
-    char *name1;		/* Name of variable. */
-    char *name2;		/* Second part of variable name. */
-    int flags;			/* Information about what happened. */
+ButtonVarProc (
+    ClientData clientData,	/* Information about button. */
+    Tcl_Interp *interp,		/* Interpreter containing variable. */
+    char *name1,		/* Name of variable. */
+    char *name2,		/* Second part of variable name. */
+    int flags			/* Information about what happened. */
+)
 {
     register Button *butPtr = (Button *) clientData;
     char *value;
@@ -1489,12 +1498,13 @@ ButtonVarProc(clientData, interp, name1, name2, flags)
 
 	/* ARGSUSED */
 static char *
-ButtonTextVarProc(clientData, interp, name1, name2, flags)
-    ClientData clientData;	/* Information about button. */
-    Tcl_Interp *interp;		/* Interpreter containing variable. */
-    char *name1;		/* Name of variable. */
-    char *name2;		/* Second part of variable name. */
-    int flags;			/* Information about what happened. */
+ButtonTextVarProc (
+    ClientData clientData,	/* Information about button. */
+    Tcl_Interp *interp,		/* Interpreter containing variable. */
+    char *name1,		/* Name of variable. */
+    char *name2,		/* Second part of variable name. */
+    int flags			/* Information about what happened. */
+)
 {
     register Button *butPtr = (Button *) clientData;
     char *value;

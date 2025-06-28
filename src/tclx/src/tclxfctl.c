@@ -84,12 +84,8 @@ SetFcntlAttr _ANSI_ARGS_((Tcl_Interp *interp,
  *   Returns TCL_OK if all is well, TCL_ERROR if there is an error.
  *-----------------------------------------------------------------------------
  */
-static int
-XlateFcntlAttr (interp, attrName, fcntlAttrPtr, otherAttrPtr)
-    Tcl_Interp *interp;
-    char       *attrName;
-    int        *fcntlAttrPtr;
-    int        *otherAttrPtr;
+static int 
+XlateFcntlAttr (Tcl_Interp *interp, char *attrName, int *fcntlAttrPtr, int *otherAttrPtr)
 {
     char attrNameUp [MAX_ATTR_NAME_LEN];
 
@@ -169,11 +165,8 @@ XlateFcntlAttr (interp, attrName, fcntlAttrPtr, otherAttrPtr)
  *   Returns TCL_OK if all is well, TCL_ERROR if fcntl returns an error.
  *-----------------------------------------------------------------------------
  */
-static int
-GetFcntlAttr (interp, filePtr, attrName)
-    Tcl_Interp *interp;
-    OpenFile   *filePtr;
-    char       *attrName;
+static int 
+GetFcntlAttr (Tcl_Interp *interp, OpenFile *filePtr, char *attrName)
 {
     int fcntlAttr, otherAttr, current;
 
@@ -246,12 +239,8 @@ unixError:
  *   Returns TCL_OK if all is well, TCL_ERROR if there is an error.
  *-----------------------------------------------------------------------------
  */
-static int
-SetFcntlAttr (interp, filePtr, attrName, valueStr)
-    Tcl_Interp *interp;
-    OpenFile   *filePtr;
-    char       *attrName;
-    char       *valueStr;
+static int 
+SetFcntlAttr (Tcl_Interp *interp, OpenFile *filePtr, char *attrName, char *valueStr)
 {
 
     int fcntlAttr, otherAttr, current, setValue;
@@ -325,11 +314,12 @@ SetFcntlAttr (interp, filePtr, attrName, valueStr)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_FcntlCmd (clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_FcntlCmd (
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     OpenFile    *filePtr;
 

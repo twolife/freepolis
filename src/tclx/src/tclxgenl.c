@@ -43,11 +43,12 @@ char *tclAppVersion     = NULL;  /* Version number of the application       */
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_EchoCmd(clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_EchoCmd(
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     int idx;
 
@@ -70,11 +71,12 @@ Tcl_EchoCmd(clientData, interp, argc, argv)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_InfoxCmd (clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_InfoxCmd (
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     if (argc != 2) {
         Tcl_AppendResult (interp, tclXWrongArgs, argv [0], 
@@ -119,11 +121,12 @@ Tcl_InfoxCmd (clientData, interp, argc, argv)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_LoopCmd (dummy, interp, argc, argv)
-    ClientData  dummy;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_LoopCmd (
+    ClientData  dummy,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     int   result = TCL_OK;
     long  i, first, limit, incr = 1;

@@ -115,8 +115,7 @@ QUAD TickCount(void)
 
 
 Ptr
-NewPtr(size)
-int size;
+NewPtr(int size)
 {
   return ((Ptr)calloc(size, sizeof(Byte)));
 }

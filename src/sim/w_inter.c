@@ -316,13 +316,14 @@ static void		NotifyInterval(register Interval *intervalPtr);
  *--------------------------------------------------------------
  */
 
-int
-Tk_IntervalCmd(clientData, interp, argc, argv)
-    ClientData clientData;		/* Main window associated with
+int 
+Tk_IntervalCmd (
+    ClientData clientData,		/* Main window associated with
 				 * interpreter. */
-    Tcl_Interp *interp;		/* Current interpreter. */
-    int argc;			/* Number of arguments. */
-    char **argv;		/* Argument strings. */
+    Tcl_Interp *interp,		/* Current interpreter. */
+    int argc,			/* Number of arguments. */
+    char **argv		/* Argument strings. */
+)
 {
     Tk_Window tkwin = (Tk_Window) clientData;
     register Interval *intervalPtr;
@@ -369,7 +370,7 @@ Tk_IntervalCmd(clientData, interp, argc, argv)
 	    |PointerMotionMask|ButtonPressMask|ButtonReleaseMask,
 	    IntervalMouseProc, (ClientData) intervalPtr);
     Tcl_CreateCommand(interp, Tk_PathName(intervalPtr->tkwin), IntervalWidgetCmd,
-	    (ClientData) intervalPtr, (void (*)()) NULL);
+	    (ClientData) intervalPtr, (void (*)(int *)) NULL);
     if (ConfigureInterval(interp, intervalPtr, argc-2, argv+2, 0) != TCL_OK) {
 	goto error;
     }
@@ -400,13 +401,14 @@ Tk_IntervalCmd(clientData, interp, argc, argv)
  *--------------------------------------------------------------
  */
 
-static int
-IntervalWidgetCmd(clientData, interp, argc, argv)
-    ClientData clientData;		/* Information about interval
+static int 
+IntervalWidgetCmd (
+    ClientData clientData,		/* Information about interval
 					 * widget. */
-    Tcl_Interp *interp;			/* Current interpreter. */
-    int argc;				/* Number of arguments. */
-    char **argv;			/* Argument strings. */
+    Tcl_Interp *interp,			/* Current interpreter. */
+    int argc,				/* Number of arguments. */
+    char **argv			/* Argument strings. */
+)
 {
     register Interval *intervalPtr = (Interval *) clientData;
     int result = TCL_OK;
@@ -515,9 +517,10 @@ IntervalWidgetCmd(clientData, interp, argc, argv)
  *----------------------------------------------------------------------
  */
 
-static void
-DestroyInterval(clientData)
-    ClientData clientData;	/* Info about interval widget. */
+static void 
+DestroyInterval (
+    ClientData clientData	/* Info about interval widget. */
+)
 {
     register Interval *intervalPtr = (Interval *) clientData;
 
@@ -572,14 +575,15 @@ DestroyInterval(clientData)
  *----------------------------------------------------------------------
  */
 
-static int
-ConfigureInterval(interp, intervalPtr, argc, argv, flags)
-    Tcl_Interp *interp;		/* Used for error reporting. */
-    register Interval *intervalPtr;	/* Information about widget;  may or may
+static int 
+ConfigureInterval (
+    Tcl_Interp *interp,		/* Used for error reporting. */
+    register Interval *intervalPtr,	/* Information about widget;  may or may
 				 * not already have values for some fields. */
-    int argc;			/* Number of valid entries in argv. */
-    char **argv;		/* Arguments. */
-    int flags;			/* Flags to pass to Tk_ConfigureWidget. */
+    int argc,			/* Number of valid entries in argv. */
+    char **argv,		/* Arguments. */
+    int flags			/* Flags to pass to Tk_ConfigureWidget. */
+)
 {
     XGCValues gcValues;
     GC newGC;
@@ -690,9 +694,10 @@ ConfigureInterval(interp, intervalPtr, argc, argv, flags)
  *----------------------------------------------------------------------
  */
 
-static void
-ComputeIntervalGeometry(intervalPtr)
-    register Interval *intervalPtr;		/* Information about widget. */
+static void 
+ComputeIntervalGeometry (
+    register Interval *intervalPtr		/* Information about widget. */
+)
 {
     XCharStruct bbox;
     char valueString[30];
@@ -794,9 +799,10 @@ ComputeIntervalGeometry(intervalPtr)
  *--------------------------------------------------------------
  */
 
-static void
-DisplayVerticalInterval(clientData)
-    ClientData clientData;	/* Information about widget. */
+static void 
+DisplayVerticalInterval (
+    ClientData clientData	/* Information about widget. */
+)
 {
     register Interval *intervalPtr = (Interval *) clientData;
     register Tk_Window tkwin = intervalPtr->tkwin;
@@ -953,15 +959,16 @@ DisplayVerticalInterval(clientData)
  *----------------------------------------------------------------------
  */
 
-static void
-DisplayVerticalValue(intervalPtr, value, rightEdge)
-    register Interval *intervalPtr;	/* Information about widget in which to
+static void 
+DisplayVerticalValue (
+    register Interval *intervalPtr,	/* Information about widget in which to
 				 * display value. */
-    int value;			/* Y-coordinate of number to display,
+    int value,			/* Y-coordinate of number to display,
 				 * specified in application coords, not
 				 * in pixels (we'll compute pixels). */
-    int rightEdge;		/* X-coordinate of right edge of text,
+    int rightEdge		/* X-coordinate of right edge of text,
 				 * specified in pixels. */
+)
 {
     register Tk_Window tkwin = intervalPtr->tkwin;
     int y, dummy, length;
@@ -1008,9 +1015,10 @@ DisplayVerticalValue(intervalPtr, value, rightEdge)
  *--------------------------------------------------------------
  */
 
-static void
-DisplayHorizontalInterval(clientData)
-    ClientData clientData;	/* Information about widget. */
+static void 
+DisplayHorizontalInterval (
+    ClientData clientData	/* Information about widget. */
+)
 {
     register Interval *intervalPtr = (Interval *) clientData;
     register Tk_Window tkwin = intervalPtr->tkwin;
@@ -1165,15 +1173,16 @@ DisplayHorizontalInterval(clientData)
  *----------------------------------------------------------------------
  */
 
-static void
-DisplayHorizontalValue(intervalPtr, value, bottom)
-    register Interval *intervalPtr;	/* Information about widget in which to
+static void 
+DisplayHorizontalValue (
+    register Interval *intervalPtr,	/* Information about widget in which to
 				 * display value. */
-    int value;			/* Y-coordinate of number to display,
+    int value,			/* Y-coordinate of number to display,
 				 * specified in application coords, not
 				 * in pixels (we'll compute pixels). */
-    int bottom;			/* Y-coordinate of bottom edge of text,
+    int bottom			/* Y-coordinate of bottom edge of text,
 				 * specified in pixels. */
+)
 {
     register Tk_Window tkwin = intervalPtr->tkwin;
     int x, y, dummy, length;
@@ -1220,11 +1229,13 @@ DisplayHorizontalValue(intervalPtr, value, bottom)
  *----------------------------------------------------------------------
  */
 
-static int
-PixelToValue(intervalPtr, x, y)
-    register Interval *intervalPtr;		/* Information about widget. */
-    int x, y;				/* Coordinates of point within
+static int 
+PixelToValue (
+    register Interval *intervalPtr,		/* Information about widget. */
+    int x,
+    int y				/* Coordinates of point within
 					 * window. */
+)
 {
     int value, pixelRange;
 
@@ -1288,10 +1299,11 @@ PixelToValue(intervalPtr, x, y)
  *----------------------------------------------------------------------
  */
 
-static int
-ValueToPixel(intervalPtr, value)
-    register Interval *intervalPtr;		/* Information about widget. */
-    int value;				/* Reading of the widget. */
+static int 
+ValueToPixel (
+    register Interval *intervalPtr,		/* Information about widget. */
+    int value				/* Reading of the widget. */
+)
 {
     int y, pixelRange, valueRange;
 
@@ -1328,10 +1340,11 @@ ValueToPixel(intervalPtr, value)
  *--------------------------------------------------------------
  */
 
-static void
-IntervalEventProc(clientData, eventPtr)
-    ClientData clientData;	/* Information about window. */
-    XEvent *eventPtr;		/* Information about event. */
+static void 
+IntervalEventProc (
+    ClientData clientData,	/* Information about window. */
+    XEvent *eventPtr		/* Information about event. */
+)
 {
     Interval *intervalPtr = (Interval *) clientData;
 
@@ -1374,10 +1387,11 @@ IntervalEventProc(clientData, eventPtr)
  *--------------------------------------------------------------
  */
 
-static void
-IntervalMouseProc(clientData, eventPtr)
-    ClientData clientData;		/* Information about window. */
-    register XEvent *eventPtr;		/* Information about event. */
+static void 
+IntervalMouseProc (
+    ClientData clientData,		/* Information about window. */
+    register XEvent *eventPtr		/* Information about event. */
+)
 {
     register Interval *intervalPtr = (Interval *) clientData;
 
@@ -1434,11 +1448,12 @@ IntervalMouseProc(clientData, eventPtr)
  *--------------------------------------------------------------
  */
 
-static void
-StartTrackInterval(intervalPtr, value)
-    register Interval *intervalPtr;	/* Info about widget. */
-    int value;			/* New value for interval.  Gets
+static void 
+StartTrackInterval (
+    register Interval *intervalPtr,	/* Info about widget. */
+    int value			/* New value for interval.  Gets
 				 * adjusted if it's off the interval. */
+)
 {
     if ((value < intervalPtr->fromValue)
 	    ^ (intervalPtr->toValue < intervalPtr->fromValue)) {
@@ -1461,10 +1476,11 @@ StartTrackInterval(intervalPtr, value)
 }
 
 
-static void
-TrackInterval(intervalPtr, value)
-    register Interval *intervalPtr;	/* Info about widget. */
-    int value;
+static void 
+TrackInterval (
+    register Interval *intervalPtr,	/* Info about widget. */
+    int value
+)
 {
     int min, max, delta, lastmin, lastmax;
 
@@ -1504,9 +1520,12 @@ TrackInterval(intervalPtr, value)
 
 
 static void
-SetInterval(intervalPtr, min, max, notify)
-    register Interval *intervalPtr;	/* Info about widget. */
-    int min, max, notify;
+SetInterval(
+    register Interval *intervalPtr,	/* Info about widget. */
+    int min,
+    int max,
+    int notify
+)
 {
     if (min > max) {
       int temp = min;
@@ -1580,11 +1599,12 @@ NotifyInterval(register Interval *intervalPtr)
  *--------------------------------------------------------------
  */
 
-static void
-EventuallyRedrawInterval(intervalPtr, what)
-    register Interval *intervalPtr;	/* Information about widget. */
-    int what;			/* What to redraw:  REDRAW_SLIDER
+static void 
+EventuallyRedrawInterval (
+    register Interval *intervalPtr,	/* Information about widget. */
+    int what			/* What to redraw:  REDRAW_SLIDER
 				 * or REDRAW_ALL. */
+)
 {
     if ((what == 0) || (intervalPtr->tkwin == NULL)
 	    || !Tk_IsMapped(intervalPtr->tkwin)) {

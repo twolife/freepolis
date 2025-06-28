@@ -65,18 +65,19 @@ static void	PrintUsage _ANSI_ARGS_((Tcl_Interp *interp,
  *----------------------------------------------------------------------
  */
 
-int
-Tk_ParseArgv(interp, tkwin, argcPtr, argv, argTable, flags)
-    Tcl_Interp *interp;		/* Place to store error message. */
-    Tk_Window tkwin;		/* Window to use for setting Tk options.
+int 
+Tk_ParseArgv (
+    Tcl_Interp *interp,		/* Place to store error message. */
+    Tk_Window tkwin,		/* Window to use for setting Tk options.
 				 * NULL means ignore Tk option specs. */
-    int *argcPtr;		/* Number of arguments in argv.  Modified
+    int *argcPtr,		/* Number of arguments in argv.  Modified
 				 * to hold # args left in argv at end. */
-    char **argv;		/* Array of arguments.  Modified to hold
+    char **argv,		/* Array of arguments.  Modified to hold
 				 * those that couldn't be processed here. */
-    Tk_ArgvInfo *argTable;	/* Array of option descriptions */
-    int flags;			/* Or'ed combination of various flag bits,
+    Tk_ArgvInfo *argTable,	/* Array of option descriptions */
+    int flags			/* Or'ed combination of various flag bits,
 				 * such as TK_ARGV_NO_DEFAULTS. */
+)
 {
     register Tk_ArgvInfo *infoPtr;
 				/* Pointer to the current entry in the
@@ -239,9 +240,9 @@ Tk_ParseArgv(interp, tkwin, argcPtr, argv, argTable, flags)
 		}
 		break;
 	    case TK_ARGV_FUNC: {
-		int (*handlerProc)();
+		int (*handlerProc)(char*, char*, char*);
 
-		handlerProc = (int (*)())infoPtr->src;
+		handlerProc = (int (*)(char*, char*, char*))infoPtr->src;
 		
 		if ((*handlerProc)(infoPtr->dst, infoPtr->key,
 			argv[srcIndex])) {
@@ -251,9 +252,9 @@ Tk_ParseArgv(interp, tkwin, argcPtr, argv, argTable, flags)
 		break;
 	    }
 	    case TK_ARGV_GENFUNC: {
-		int	    (*handlerProc)();
+		int	    (*handlerProc)(char*, Tcl_Interp*, char*, int, char**);
 
-		handlerProc = (int (*)())infoPtr->src;
+		handlerProc = (int (*)(char*, Tcl_Interp*, char*, int, char**))infoPtr->src;
 
 		argc = (*handlerProc)(infoPtr->dst, interp, infoPtr->key,
 			argc, argv+srcIndex);
@@ -338,15 +339,16 @@ Tk_ParseArgv(interp, tkwin, argcPtr, argv, argTable, flags)
  *----------------------------------------------------------------------
  */
 
-static void
-PrintUsage(interp, argTable, flags)
-    Tcl_Interp *interp;		/* Place information in this interp's
+static void 
+PrintUsage (
+    Tcl_Interp *interp,		/* Place information in this interp's
 				 * result area. */
-    Tk_ArgvInfo *argTable;	/* Array of command-specific argument
+    Tk_ArgvInfo *argTable,	/* Array of command-specific argument
 				 * descriptions. */
-    int flags;			/* If the TK_ARGV_NO_DEFAULTS bit is set
+    int flags			/* If the TK_ARGV_NO_DEFAULTS bit is set
 				 * in this word, then don't generate
 				 * information for default options. */
+)
 {
     register Tk_ArgvInfo *infoPtr;
     int width, i, numSpaces;

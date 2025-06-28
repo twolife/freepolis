@@ -193,9 +193,8 @@ SignalCmdCleanUp _ANSI_ARGS_((ClientData clientData));
  *
  *-----------------------------------------------------------------------------
  */
-static int
-SigNameToNum (sigName)
-    char *sigName;
+static int 
+SigNameToNum (char *sigName)
 {
     char  sigNameUp [SIG_NAME_MAX+1];  /* Upshifted signal name */
     char *sigNamePtr; 
@@ -235,11 +234,12 @@ SigNameToNum (sigName)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_KillCmd (clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int     argc;
-    char      **argv;
+Tcl_KillCmd (
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int     argc,
+    char      **argv
+)
 {
     int    signalNum, idx, procId, procArgc, result = TCL_ERROR;
     char **procArgv;
@@ -296,9 +296,8 @@ exitPoint:
  *   SIG_ERR is returned (check errno);
  *-----------------------------------------------------------------------------
  */
-static signalProcPtr_t
-GetSignalState (signalNum)
-    int signalNum;
+static signalProcPtr_t 
+GetSignalState (int signalNum)
 {
 #ifdef TCL_POSIX_SIG
     struct sigaction currentState;
@@ -333,10 +332,8 @@ GetSignalState (signalNum)
  *   TRUE if ok,  FALSE if an error (check errno).
  *-----------------------------------------------------------------------------
  */
-static int
-SetSignalAction (signalNum, sigFunc)
-    int             signalNum;
-    signalProcPtr_t sigFunc;
+static int 
+SetSignalAction (int signalNum, signalProcPtr_t sigFunc)
 {
 #ifdef TCL_POSIX_SIG
     struct sigaction newState;
@@ -369,9 +366,8 @@ SetSignalAction (signalNum, sigFunc)
  *   o signalsReceived (O) - The count of each signal that was received.
  *-----------------------------------------------------------------------------
  */
-static SIG_PROC_RET_TYPE
-TclSignalTrap (signalNum)
-    int signalNum;
+static SIG_PROC_RET_TYPE 
+TclSignalTrap (int signalNum)
 {
     /*
      * Set flags that are checked by the eval loop.
@@ -409,11 +405,8 @@ TclSignalTrap (signalNum)
  *   TCL_OK or TCL_ERROR.
  *-----------------------------------------------------------------------------
  */
-static int
-EvalTrapCode (interp, signalNum, command)
-    Tcl_Interp *interp;
-    int         signalNum;
-    char       *command;
+static int 
+EvalTrapCode (Tcl_Interp *interp, int signalNum, char *command)
 {
     Interp        *iPtr = (Interp *) interp;
     char          *signalName;
@@ -477,8 +470,8 @@ EvalTrapCode (interp, signalNum, command)
  *   o signalsReceived (O) - The count of each signal that was received.
  *-----------------------------------------------------------------------------
  */
-void
-Tcl_ResetSignals ()
+void 
+Tcl_ResetSignals (void)
 {
     int  signalNum;
 
@@ -522,10 +515,8 @@ Tcl_ResetSignals ()
  *   a signal occured.
  *-----------------------------------------------------------------------------
  */
-int
-Tcl_CheckForSignal (interp, cmdResultCode)
-    Tcl_Interp *interp;
-    int         cmdResultCode;
+int 
+Tcl_CheckForSignal (Tcl_Interp *interp, int cmdResultCode)
 {
     char   *savedResult;
     int     signalNum, result, sigCnt, retErrorForSignal = -1;
@@ -606,11 +597,8 @@ exitPoint:
  *   The number of signals converted, or -1 if an error occures.
  *-----------------------------------------------------------------------------
  */
-static int
-ParseSignalList (interp, signalListStr, signalList)
-    Tcl_Interp *interp;
-    char       *signalListStr;
-    int         signalList [];
+static int 
+ParseSignalList (Tcl_Interp *interp, char *signalListStr, int signalList[])
 {
     char         **signalListArgv;
     int            signalListSize, signalNum, idx;
@@ -682,9 +670,7 @@ exitPoint:
  *-----------------------------------------------------------------------------
  */
 static char *
-SignalBlocked (interp, signalNum)
-    Tcl_Interp  *interp;
-    int          signalNum;
+SignalBlocked (Tcl_Interp *interp, int signalNum)
 {
 #ifdef TCL_POSIX_SIG
     int      idx;
@@ -716,11 +702,8 @@ SignalBlocked (interp, signalNum)
  *   TCL_OK or TCL_ERROR, with error message in interp.
  *-----------------------------------------------------------------------------
  */
-static int
-GetSignalStates (interp, signalListSize, signalList)
-    Tcl_Interp *interp;
-    int         signalListSize;
-    int         signalList [MAXSIG];
+static int 
+GetSignalStates (Tcl_Interp *interp, int signalListSize, int signalList[MAXSIG])
 {
     int              idx, signalNum, actuallyDone = -1;
     char            *stateKeyedList [MAXSIG];
@@ -796,13 +779,8 @@ unixSigError:
  *   TCL_OK or TCL_ERROR, with error message in interp.
  *-----------------------------------------------------------------------------
  */
-static int
-SetSignalStates (interp, signalListSize, signalList, actionFunc, command)
-    Tcl_Interp      *interp;
-    int              signalListSize;
-    int              signalList [MAXSIG];
-    signalProcPtr_t  actionFunc;
-    char            *command;
+static int 
+SetSignalStates (Tcl_Interp *interp, int signalListSize, int signalList[MAXSIG], signalProcPtr_t actionFunc, char *command)
 
 {
     int idx, signalNum, commandLen;
@@ -850,12 +828,8 @@ unixSigError:
  *   TCL_OK or TCL_ERROR, with error message in interp.
  *-----------------------------------------------------------------------------
  */
-static int
-BlockSignals (interp, action, signalListSize, signalList)
-    Tcl_Interp  *interp;
-    int          action;
-    int          signalListSize;
-    int          signalList [MAXSIG];
+static int 
+BlockSignals (Tcl_Interp *interp, int action, int signalListSize, int signalList[MAXSIG])
 {
 #ifdef TCL_POSIX_SIG
     int      idx;
@@ -892,12 +866,8 @@ BlockSignals (interp, action, signalListSize, signalList)
  *	Signal handling states may be changed.
  *-----------------------------------------------------------------------------
  */
-static int
-Tcl_SignalCmd (clientData, interp, argc, argv)
-    char       *clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+static int 
+Tcl_SignalCmd (int *clientData, Tcl_Interp *interp, int argc, char **argv)
 {
     int                  signalListSize, signalNum, idx;
     int                  signalList [MAXSIG], actionClass;
@@ -986,8 +956,9 @@ Tcl_SignalCmd (clientData, interp, argc, argv)
  *-----------------------------------------------------------------------------
  */
 static void
-SignalCmdCleanUp (clientData)
-    ClientData clientData;
+SignalCmdCleanUp (
+    ClientData clientData
+)
 {
     int idx;
 
@@ -1010,9 +981,8 @@ SignalCmdCleanUp (clientData)
  *
  *-----------------------------------------------------------------------------
  */
-void
-Tcl_InitSignalHandling (interp)
-    Tcl_Interp *interp;
+void 
+Tcl_InitSignalHandling (Tcl_Interp *interp)
 {
     int idx;
 
@@ -1021,7 +991,7 @@ Tcl_InitSignalHandling (interp)
         signalTrapCmds [idx] = NULL;
     }
     Tcl_CreateCommand (interp, "kill", Tcl_KillCmd, (ClientData)NULL,
-                      (void (*)())NULL);
+                      (void (*)(int *))NULL);
     Tcl_CreateCommand (interp, "signal", Tcl_SignalCmd, (ClientData)NULL,
                       SignalCmdCleanUp);
     /*

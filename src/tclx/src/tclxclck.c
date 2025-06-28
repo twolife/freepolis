@@ -33,11 +33,12 @@
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_GetclockCmd (clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_GetclockCmd (
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     if (argc != 1) {
         Tcl_AppendResult (interp, tclXWrongArgs, argv[0], (char *) NULL);
@@ -60,11 +61,12 @@ Tcl_GetclockCmd (clientData, interp, argc, argv)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_FmtclockCmd (clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_FmtclockCmd (
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     int              useGMT = FALSE;
     long             clockVal;

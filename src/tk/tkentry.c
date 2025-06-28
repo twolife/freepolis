@@ -273,13 +273,14 @@ static int		EntryWidgetCmd _ANSI_ARGS_((ClientData clientData,
  *--------------------------------------------------------------
  */
 
-int
-Tk_EntryCmd(clientData, interp, argc, argv)
-    ClientData clientData;	/* Main window associated with
+int 
+Tk_EntryCmd (
+    ClientData clientData,	/* Main window associated with
 				 * interpreter. */
-    Tcl_Interp *interp;		/* Current interpreter. */
-    int argc;			/* Number of arguments. */
-    char **argv;		/* Argument strings. */
+    Tcl_Interp *interp,		/* Current interpreter. */
+    int argc,			/* Number of arguments. */
+    char **argv		/* Argument strings. */
+)
 {
     Tk_Window tkwin = (Tk_Window) clientData;
     register Entry *entryPtr;
@@ -336,7 +337,7 @@ Tk_EntryCmd(clientData, interp, argc, argv)
     Tk_CreateSelHandler(entryPtr->tkwin, XA_STRING, EntryFetchSelection,
 	    (ClientData) entryPtr, XA_STRING);
     Tcl_CreateCommand(interp, Tk_PathName(entryPtr->tkwin), EntryWidgetCmd,
-	    (ClientData) entryPtr, (void (*)()) NULL);
+	    (ClientData) entryPtr, (void (*)(int *)) NULL);
     if (ConfigureEntry(interp, entryPtr, argc-2, argv+2, 0) != TCL_OK) {
 	goto error;
     }
@@ -369,12 +370,13 @@ Tk_EntryCmd(clientData, interp, argc, argv)
  *--------------------------------------------------------------
  */
 
-static int
-EntryWidgetCmd(clientData, interp, argc, argv)
-    ClientData clientData;		/* Information about entry widget. */
-    Tcl_Interp *interp;			/* Current interpreter. */
-    int argc;				/* Number of arguments. */
-    char **argv;			/* Argument strings. */
+static int 
+EntryWidgetCmd (
+    ClientData clientData,		/* Information about entry widget. */
+    Tcl_Interp *interp,			/* Current interpreter. */
+    int argc,				/* Number of arguments. */
+    char **argv			/* Argument strings. */
+)
 {
     register Entry *entryPtr = (Entry *) clientData;
     int result = TCL_OK;
@@ -611,9 +613,10 @@ EntryWidgetCmd(clientData, interp, argc, argv)
  *----------------------------------------------------------------------
  */
 
-static void
-DestroyEntry(clientData)
-    ClientData clientData;			/* Info about entry widget. */
+static void 
+DestroyEntry (
+    ClientData clientData			/* Info about entry widget. */
+)
 {
     register Entry *entryPtr = (Entry *) clientData;
 
@@ -682,14 +685,15 @@ DestroyEntry(clientData)
  *----------------------------------------------------------------------
  */
 
-static int
-ConfigureEntry(interp, entryPtr, argc, argv, flags)
-    Tcl_Interp *interp;		/* Used for error reporting. */
-    register Entry *entryPtr;	/* Information about widget;  may or may
+static int 
+ConfigureEntry (
+    Tcl_Interp *interp,		/* Used for error reporting. */
+    register Entry *entryPtr,	/* Information about widget;  may or may
 				 * not already have values for some fields. */
-    int argc;			/* Number of valid entries in argv. */
-    char **argv;		/* Arguments. */
-    int flags;			/* Flags to pass to Tk_ConfigureWidget. */
+    int argc,			/* Number of valid entries in argv. */
+    char **argv,		/* Arguments. */
+    int flags			/* Flags to pass to Tk_ConfigureWidget. */
+)
 {
     XGCValues gcValues;
     GC new;
@@ -831,9 +835,10 @@ ConfigureEntry(interp, entryPtr, argc, argv, flags)
  *--------------------------------------------------------------
  */
 
-static void
-DisplayEntry(clientData)
-    ClientData clientData;	/* Information about window. */
+static void 
+DisplayEntry (
+    ClientData clientData	/* Information about window. */
+)
 {
     register Entry *entryPtr = (Entry *) clientData;
     register Tk_Window tkwin = entryPtr->tkwin;
@@ -1018,14 +1023,15 @@ DisplayEntry(clientData)
  *----------------------------------------------------------------------
  */
 
-static void
-InsertChars(entryPtr, index, string)
-    register Entry *entryPtr;	/* Entry that is to get the new
+static void 
+InsertChars (
+    register Entry *entryPtr,	/* Entry that is to get the new
 				 * elements. */
-    int index;			/* Add the new elements before this
+    int index,			/* Add the new elements before this
 				 * element. */
-    char *string;		/* New characters to add (NULL-terminated
+    char *string		/* New characters to add (NULL-terminated
 				 * string). */
+)
 {
     int length;
     char *new;
@@ -1089,11 +1095,12 @@ InsertChars(entryPtr, index, string)
  *----------------------------------------------------------------------
  */
 
-static void
-DeleteChars(entryPtr, index, count)
-    register Entry *entryPtr;	/* Entry widget to modify. */
-    int index;			/* Index of first character to delete. */
-    int count;			/* How many characters to delete. */
+static void 
+DeleteChars (
+    register Entry *entryPtr,	/* Entry widget to modify. */
+    int index,			/* Index of first character to delete. */
+    int count			/* How many characters to delete. */
+)
 {
     char *new;
 
@@ -1185,11 +1192,12 @@ DeleteChars(entryPtr, index, count)
  *----------------------------------------------------------------------
  */
 
-static void
-EntrySetValue(entryPtr, value)
-    register Entry *entryPtr;		/* Entry whose value is to be
+static void 
+EntrySetValue (
+    register Entry *entryPtr,		/* Entry whose value is to be
 					 * changed. */
-    char *value;			/* New text to display in entry. */
+    char *value			/* New text to display in entry. */
+)
 {
     ckfree(entryPtr->string);
     entryPtr->numChars = strlen(value);
@@ -1221,10 +1229,11 @@ EntrySetValue(entryPtr, value)
  *--------------------------------------------------------------
  */
 
-static void
-EntryEventProc(clientData, eventPtr)
-    ClientData clientData;	/* Information about window. */
-    XEvent *eventPtr;		/* Information about event. */
+static void 
+EntryEventProc (
+    ClientData clientData,	/* Information about window. */
+    XEvent *eventPtr		/* Information about event. */
+)
 {
     Entry *entryPtr = (Entry *) clientData;
     if (eventPtr->type == Expose) {
@@ -1266,13 +1275,14 @@ EntryEventProc(clientData, eventPtr)
  *--------------------------------------------------------------
  */
 
-static int
-GetEntryIndex(interp, entryPtr, string, indexPtr)
-    Tcl_Interp *interp;		/* For error messages. */
-    Entry *entryPtr;		/* Entry for which the index is being
+static int 
+GetEntryIndex (
+    Tcl_Interp *interp,		/* For error messages. */
+    Entry *entryPtr,		/* Entry for which the index is being
 				 * specified. */
-    char *string;		/* Specifies character in entryPtr. */
-    int *indexPtr;		/* Where to store converted index. */
+    char *string,		/* Specifies character in entryPtr. */
+    int *indexPtr		/* Where to store converted index. */
+)
 {
     int length;
 
@@ -1359,11 +1369,12 @@ GetEntryIndex(interp, entryPtr, string, indexPtr)
  *----------------------------------------------------------------------
  */
 
-static void
-EntryScanTo(entryPtr, x)
-    register Entry *entryPtr;		/* Information about widget. */
-    int x;				/* X-coordinate to use for scan
+static void 
+EntryScanTo (
+    register Entry *entryPtr,		/* Information about widget. */
+    int x				/* X-coordinate to use for scan
 					 * operation. */
+)
 {
     int newLeftIndex;
 
@@ -1412,12 +1423,13 @@ EntryScanTo(entryPtr, x)
  *----------------------------------------------------------------------
  */
 
-static void
-EntrySelectTo(entryPtr, index)
-    register Entry *entryPtr;		/* Information about widget. */
-    int index;				/* Index of element that is to
+static void 
+EntrySelectTo (
+    register Entry *entryPtr,		/* Information about widget. */
+    int index				/* Index of element that is to
 					 * become the "other" end of the
 					 * selection. */
+)
 {
     int newFirst, newLast;
 
@@ -1479,16 +1491,17 @@ EntrySelectTo(entryPtr, index)
  *----------------------------------------------------------------------
  */
 
-static int
-EntryFetchSelection(clientData, offset, buffer, maxBytes)
-    ClientData clientData;		/* Information about entry widget. */
-    int offset;				/* Offset within selection of first
+static int 
+EntryFetchSelection (
+    ClientData clientData,		/* Information about entry widget. */
+    int offset,				/* Offset within selection of first
 					 * character to be returned. */
-    char *buffer;			/* Location in which to place
+    char *buffer,			/* Location in which to place
 					 * selection. */
-    int maxBytes;			/* Maximum number of bytes to place
+    int maxBytes			/* Maximum number of bytes to place
 					 * at buffer, not including terminating
 					 * NULL character. */
+)
 {
     Entry *entryPtr = (Entry *) clientData;
     int count;
@@ -1526,9 +1539,10 @@ EntryFetchSelection(clientData, offset, buffer, maxBytes)
  *----------------------------------------------------------------------
  */
 
-static void
-EntryLostSelection(clientData)
-    ClientData clientData;		/* Information about entry widget. */
+static void 
+EntryLostSelection (
+    ClientData clientData		/* Information about entry widget. */
+)
 {
     Entry *entryPtr = (Entry *) clientData;
 
@@ -1558,9 +1572,10 @@ EntryLostSelection(clientData)
  *----------------------------------------------------------------------
  */
 
-static void
-EventuallyRedraw(entryPtr)
-    register Entry *entryPtr;		/* Information about widget. */
+static void 
+EventuallyRedraw (
+    register Entry *entryPtr		/* Information about widget. */
+)
 {
     if ((entryPtr->tkwin == NULL) || !Tk_IsMapped(entryPtr->tkwin)) {
 	return;
@@ -1598,9 +1613,10 @@ EventuallyRedraw(entryPtr)
  *----------------------------------------------------------------------
  */
 
-static void
-EntryUpdateScrollbar(entryPtr)
-    register Entry *entryPtr;		/* Information about widget. */
+static void 
+EntryUpdateScrollbar (
+    register Entry *entryPtr		/* Information about widget. */
+)
 {
     char args[100];
     int result, last, charsInWindow, endX;
@@ -1656,9 +1672,10 @@ EntryUpdateScrollbar(entryPtr)
  *----------------------------------------------------------------------
  */
 
-static void
-EntryBlinkProc(clientData)
-    ClientData clientData;	/* Pointer to record describing entry. */
+static void 
+EntryBlinkProc (
+    ClientData clientData	/* Pointer to record describing entry. */
+)
 {
     register Entry *entryPtr = (Entry *) clientData;
 
@@ -1695,11 +1712,12 @@ EntryBlinkProc(clientData)
  *----------------------------------------------------------------------
  */
 
-static void
-EntryFocusProc(clientData, gotFocus)
-    ClientData clientData;	/* Pointer to structure describing entry. */
-    int gotFocus;		/* 1 means window is getting focus, 0 means
+static void 
+EntryFocusProc (
+    ClientData clientData,	/* Pointer to structure describing entry. */
+    int gotFocus		/* 1 means window is getting focus, 0 means
 				 * it's losing it. */
+)
 {
     register Entry *entryPtr = (Entry *) clientData;
 
@@ -1741,12 +1759,13 @@ EntryFocusProc(clientData, gotFocus)
 
 	/* ARGSUSED */
 static char *
-EntryTextVarProc(clientData, interp, name1, name2, flags)
-    ClientData clientData;	/* Information about button. */
-    Tcl_Interp *interp;		/* Interpreter containing variable. */
-    char *name1;		/* Name of variable. */
-    char *name2;		/* Second part of variable name. */
-    int flags;			/* Information about what happened. */
+EntryTextVarProc (
+    ClientData clientData,	/* Information about button. */
+    Tcl_Interp *interp,		/* Interpreter containing variable. */
+    char *name1,		/* Name of variable. */
+    char *name2,		/* Second part of variable name. */
+    int flags			/* Information about what happened. */
+)
 {
     register Entry *entryPtr = (Entry *) clientData;
     char *value;

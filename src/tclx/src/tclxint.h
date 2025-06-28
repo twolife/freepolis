@@ -80,8 +80,8 @@
  * These should be take from an include file, but it got to be such a mess
  * to get the include files right that they are here for good measure.
  */
-struct tm *gmtime ();
-struct tm *localtime ();
+struct tm *gmtime (const time_t*);
+struct tm *localtime (const time_t*);
 
 #ifndef MAXINT
 #    define BITSPERBYTE   8

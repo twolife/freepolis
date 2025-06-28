@@ -96,11 +96,8 @@ HandleDecode _ANSI_ARGS_((Tcl_Interp   *interp,
  *   o numEntries (I) - The number of new entries.
  *-----------------------------------------------------------------------------
  */
-static void
-LinkInNewEntries (tblHdrPtr, newIdx, numEntries)
-    tblHeader_pt tblHdrPtr;
-    int          newIdx;
-    int          numEntries;
+static void 
+LinkInNewEntries (tblHeader_pt tblHdrPtr, int newIdx, int numEntries)
 {
     int            entIdx, lastIdx;
     entryHeader_pt entryPtr;
@@ -127,10 +124,8 @@ LinkInNewEntries (tblHdrPtr, newIdx, numEntries)
  *     entries specified on table creation.  MUST be smaller than this size.
  *-----------------------------------------------------------------------------
  */
-static void
-ExpandTable (tblHdrPtr, neededIdx)
-    tblHeader_pt tblHdrPtr;
-    int          neededIdx;
+static void 
+ExpandTable (tblHeader_pt tblHdrPtr, int neededIdx)
 {
     ubyte_pt oldBodyP = tblHdrPtr->bodyP;
     int      numNewEntries;
@@ -161,10 +156,8 @@ ExpandTable (tblHdrPtr, neededIdx)
  *    The a pointer to the entry.
  *-----------------------------------------------------------------------------
  */
-static entryHeader_pt
-AllocEntry (tblHdrPtr, entryIdxPtr)
-    tblHeader_pt  tblHdrPtr;
-    int          *entryIdxPtr;
+static entryHeader_pt 
+AllocEntry (tblHeader_pt tblHdrPtr, int *entryIdxPtr)
 {
     int            entryIdx;
     entryHeader_pt entryPtr;
@@ -195,11 +188,8 @@ AllocEntry (tblHdrPtr, entryIdxPtr)
  *   occured.
  *-----------------------------------------------------------------------------
  */
-static int
-HandleDecode (interp, tblHdrPtr, handle)
-    Tcl_Interp   *interp;
-    tblHeader_pt  tblHdrPtr;
-    CONST char   *handle;
+static int 
+HandleDecode (Tcl_Interp *interp, tblHeader_pt tblHdrPtr, CONST char *handle)
 {
     unsigned entryIdx;
 
@@ -228,11 +218,8 @@ HandleDecode (interp, tblHdrPtr, handle)
  *   A pointer to the table header.  
  *-----------------------------------------------------------------------------
  */
-void_pt
-Tcl_HandleTblInit (handleBase, entrySize, initEntries)
-    CONST char *handleBase;
-    int         entrySize;
-    int         initEntries;
+void_pt 
+Tcl_HandleTblInit (CONST char *handleBase, int entrySize, int initEntries)
 {
     tblHeader_pt tblHdrPtr;
     int          baseLength = strlen ((char *) handleBase);
@@ -269,10 +256,8 @@ Tcl_HandleTblInit (handleBase, entrySize, initEntries)
  *   The resulting use count.
  *-----------------------------------------------------------------------------
  */
-int
-Tcl_HandleTblUseCount (headerPtr, amount)
-    void_pt  headerPtr;
-    int      amount;
+int 
+Tcl_HandleTblUseCount (void_pt headerPtr, int amount)
 {
     tblHeader_pt   tblHdrPtr = (tblHeader_pt)headerPtr;
         
@@ -289,9 +274,8 @@ Tcl_HandleTblUseCount (headerPtr, amount)
  *   o headerPtr (I) - Pointer to the table header.
  *-----------------------------------------------------------------------------
  */
-void
-Tcl_HandleTblRelease (headerPtr)
-    void_pt headerPtr;
+void 
+Tcl_HandleTblRelease (void_pt headerPtr)
 {
     tblHeader_pt   tblHdrPtr = (tblHeader_pt)headerPtr;
 
@@ -314,10 +298,8 @@ Tcl_HandleTblRelease (headerPtr)
  *   A pointer to the allocated entry (user part).
  *-----------------------------------------------------------------------------
  */
-void_pt
-Tcl_HandleAlloc (headerPtr, handlePtr)
-    void_pt   headerPtr;
-    char     *handlePtr;
+void_pt 
+Tcl_HandleAlloc (void_pt headerPtr, char *handlePtr)
 {
     tblHeader_pt   tblHdrPtr = (tblHeader_pt)headerPtr;
     entryHeader_pt entryPtr;
@@ -342,11 +324,8 @@ Tcl_HandleAlloc (headerPtr, handlePtr)
  *   A pointer to the entry, or NULL if an error occured.
  *-----------------------------------------------------------------------------
  */
-void_pt
-Tcl_HandleXlate (interp, headerPtr, handle)
-    Tcl_Interp *interp;
-    void_pt     headerPtr;
-    CONST char *handle;
+void_pt 
+Tcl_HandleXlate (Tcl_Interp *interp, void_pt headerPtr, CONST char *handle)
 {
     tblHeader_pt   tblHdrPtr = (tblHeader_pt)headerPtr;
     entryHeader_pt entryPtr;
@@ -381,10 +360,8 @@ Tcl_HandleXlate (interp, headerPtr, handle)
  *   A pointer to the next allocated entry, or NULL if there are not more.
  *-----------------------------------------------------------------------------
  */
-void_pt
-Tcl_HandleWalk (headerPtr, walkKeyPtr)
-    void_pt   headerPtr;
-    int      *walkKeyPtr;
+void_pt 
+Tcl_HandleWalk (void_pt headerPtr, int *walkKeyPtr)
 {
     tblHeader_pt   tblHdrPtr = (tblHeader_pt)headerPtr;
     int            entryIdx;
@@ -418,11 +395,8 @@ Tcl_HandleWalk (headerPtr, walkKeyPtr)
  *     hold the name.
  *-----------------------------------------------------------------------------
  */
-void
-Tcl_WalkKeyToHandle (headerPtr, walkKey, handlePtr)
-    void_pt   headerPtr;
-    int       walkKey;
-    char     *handlePtr;
+void 
+Tcl_WalkKeyToHandle (void_pt headerPtr, int walkKey, char *handlePtr)
 {
     tblHeader_pt   tblHdrPtr = (tblHeader_pt)headerPtr;
 
@@ -439,10 +413,8 @@ Tcl_WalkKeyToHandle (headerPtr, walkKey, handlePtr)
  *   o entryPtr (I) - Entry to free.
  *-----------------------------------------------------------------------------
  */
-void
-Tcl_HandleFree (headerPtr, entryPtr)
-    void_pt headerPtr;
-    void_pt entryPtr;
+void 
+Tcl_HandleFree (void_pt headerPtr, void_pt entryPtr)
 {
     tblHeader_pt   tblHdrPtr = (tblHeader_pt)headerPtr;
     entryHeader_pt freeentryPtr;

@@ -205,13 +205,14 @@ static Tk_Uid bothUid = NULL;
  *--------------------------------------------------------------
  */
 
-static int
-CreateLine(canvasPtr, itemPtr, argc, argv)
-    register Tk_Canvas *canvasPtr;	/* Canvas to hold new item. */
-    Tk_Item *itemPtr;			/* Record to hold new item;  header
+static int 
+CreateLine (
+    register Tk_Canvas *canvasPtr,	/* Canvas to hold new item. */
+    Tk_Item *itemPtr,			/* Record to hold new item;  header
 					 * has been initialized by caller. */
-    int argc;				/* Number of arguments in argv. */
-    char **argv;			/* Arguments describing line. */
+    int argc,				/* Number of arguments in argv. */
+    char **argv			/* Arguments describing line. */
+)
 {
     register LineItem *linePtr = (LineItem *) itemPtr;
     int i;
@@ -296,15 +297,16 @@ CreateLine(canvasPtr, itemPtr, argc, argv)
  *--------------------------------------------------------------
  */
 
-static int
-LineCoords(canvasPtr, itemPtr, argc, argv)
-    register Tk_Canvas *canvasPtr;	/* Canvas containing item. */
-    Tk_Item *itemPtr;			/* Item whose coordinates are to be
+static int 
+LineCoords (
+    register Tk_Canvas *canvasPtr,	/* Canvas containing item. */
+    Tk_Item *itemPtr,			/* Item whose coordinates are to be
 					 * read or modified. */
-    int argc;				/* Number of coordinates supplied in
+    int argc,				/* Number of coordinates supplied in
 					 * argv. */
-    char **argv;			/* Array of coordinates: x1, y1,
+    char **argv			/* Array of coordinates: x1, y1,
 					 * x2, y2, ... */
+)
 {
     register LineItem *linePtr = (LineItem *) itemPtr;
     char buffer[300];
@@ -365,13 +367,14 @@ LineCoords(canvasPtr, itemPtr, argc, argv)
  *--------------------------------------------------------------
  */
 
-static int
-ConfigureLine(canvasPtr, itemPtr, argc, argv, flags)
-    Tk_Canvas *canvasPtr;	/* Canvas containing itemPtr. */
-    Tk_Item *itemPtr;		/* Line item to reconfigure. */
-    int argc;			/* Number of elements in argv.  */
-    char **argv;		/* Arguments describing things to configure. */
-    int flags;			/* Flags to pass to Tk_ConfigureWidget. */
+static int 
+ConfigureLine (
+    Tk_Canvas *canvasPtr,	/* Canvas containing itemPtr. */
+    Tk_Item *itemPtr,		/* Line item to reconfigure. */
+    int argc,			/* Number of elements in argv.  */
+    char **argv,		/* Arguments describing things to configure. */
+    int flags			/* Flags to pass to Tk_ConfigureWidget. */
+)
 {
     register LineItem *linePtr = (LineItem *) itemPtr;
     XGCValues gcValues;
@@ -485,9 +488,10 @@ ConfigureLine(canvasPtr, itemPtr, argc, argv, flags)
  *--------------------------------------------------------------
  */
 
-static void
-DeleteLine(itemPtr)
-    Tk_Item *itemPtr;			/* Item that is being deleted. */
+static void 
+DeleteLine (
+    Tk_Item *itemPtr			/* Item that is being deleted. */
+)
 {
     register LineItem *linePtr = (LineItem *) itemPtr;
 
@@ -529,11 +533,12 @@ DeleteLine(itemPtr)
  *--------------------------------------------------------------
  */
 
-static void
-ComputeLineBbox(canvasPtr, linePtr)
-    register Tk_Canvas *canvasPtr;	/* Canvas that contains item. */
-    LineItem *linePtr;			/* Item whose bbos is to be
+static void 
+ComputeLineBbox (
+    register Tk_Canvas *canvasPtr,	/* Canvas that contains item. */
+    LineItem *linePtr			/* Item whose bbos is to be
 					 * recomputed. */
+)
 {
     register double *coordPtr;
     int i;
@@ -630,12 +635,13 @@ ComputeLineBbox(canvasPtr, linePtr)
  *--------------------------------------------------------------
  */
 
-static void
-DisplayLine(canvasPtr, itemPtr, drawable)
-    register Tk_Canvas *canvasPtr;	/* Canvas that contains item. */
-    Tk_Item *itemPtr;			/* Item to be displayed. */
-    Drawable drawable;			/* Pixmap or window in which to draw
+static void 
+DisplayLine (
+    register Tk_Canvas *canvasPtr,	/* Canvas that contains item. */
+    Tk_Item *itemPtr,			/* Item to be displayed. */
+    Drawable drawable			/* Pixmap or window in which to draw
 					 * item. */
+)
 {
     register LineItem *linePtr = (LineItem *) itemPtr;
     XPoint staticPoints[MAX_STATIC_POINTS];
@@ -727,11 +733,12 @@ DisplayLine(canvasPtr, itemPtr, drawable)
  */
 
 	/* ARGSUSED */
-static double
-LineToPoint(canvasPtr, itemPtr, pointPtr)
-    Tk_Canvas *canvasPtr;	/* Canvas containing item. */
-    Tk_Item *itemPtr;		/* Item to check against point. */
-    double *pointPtr;		/* Pointer to x and y coordinates. */
+static double 
+LineToPoint (
+    Tk_Canvas *canvasPtr,	/* Canvas containing item. */
+    Tk_Item *itemPtr,		/* Item to check against point. */
+    double *pointPtr		/* Pointer to x and y coordinates. */
+)
 {
     register LineItem *linePtr = (LineItem *) itemPtr;
     register double *coordPtr, *linePoints;
@@ -929,11 +936,12 @@ LineToPoint(canvasPtr, itemPtr, pointPtr)
  */
 
 	/* ARGSUSED */
-static int
-LineToArea(canvasPtr, itemPtr, rectPtr)
-    Tk_Canvas *canvasPtr;	/* Canvas containing item. */
-    Tk_Item *itemPtr;		/* Item to check against line. */
-    double *rectPtr;
+static int 
+LineToArea (
+    Tk_Canvas *canvasPtr,	/* Canvas containing item. */
+    Tk_Item *itemPtr,		/* Item to check against line. */
+    double *rectPtr
+)
 {
     register LineItem *linePtr = (LineItem *) itemPtr;
     register double *coordPtr;
@@ -1131,13 +1139,15 @@ LineToArea(canvasPtr, itemPtr, rectPtr)
  *--------------------------------------------------------------
  */
 
-static void
-ScaleLine(canvasPtr, itemPtr, originX, originY, scaleX, scaleY)
-    Tk_Canvas *canvasPtr;		/* Canvas containing line. */
-    Tk_Item *itemPtr;			/* Line to be scaled. */
-    double originX, originY;		/* Origin about which to scale rect. */
-    double scaleX;			/* Amount to scale in X direction. */
-    double scaleY;			/* Amount to scale in Y direction. */
+static void 
+ScaleLine (
+    Tk_Canvas *canvasPtr,		/* Canvas containing line. */
+    Tk_Item *itemPtr,			/* Line to be scaled. */
+    double originX,
+    double originY,		/* Origin about which to scale rect. */
+    double scaleX,			/* Amount to scale in X direction. */
+    double scaleY			/* Amount to scale in Y direction. */
+)
 {
     LineItem *linePtr = (LineItem *) itemPtr;
     register double *coordPtr;
@@ -1183,12 +1193,14 @@ ScaleLine(canvasPtr, itemPtr, originX, originY, scaleX, scaleY)
  *--------------------------------------------------------------
  */
 
-static void
-TranslateLine(canvasPtr, itemPtr, deltaX, deltaY)
-    Tk_Canvas *canvasPtr;		/* Canvas containing item. */
-    Tk_Item *itemPtr;			/* Item that is being moved. */
-    double deltaX, deltaY;		/* Amount by which item is to be
+static void 
+TranslateLine (
+    Tk_Canvas *canvasPtr,		/* Canvas containing item. */
+    Tk_Item *itemPtr,			/* Item that is being moved. */
+    double deltaX,
+    double deltaY		/* Amount by which item is to be
 					 * moved. */
+)
 {
     LineItem *linePtr = (LineItem *) itemPtr;
     register double *coordPtr;
@@ -1236,16 +1248,17 @@ TranslateLine(canvasPtr, itemPtr, deltaX, deltaY)
  */
 
 	/* ARGSUSED */
-static int
-ParseArrowShape(clientData, interp, tkwin, value, recordPtr, offset)
-    ClientData clientData;	/* Not used. */
-    Tcl_Interp *interp;		/* Used for error reporting. */
-    Tk_Window tkwin;		/* Not used. */
-    char *value;		/* Textual specification of arrow shape. */
-    char *recordPtr;		/* Pointer to item record in which to
+static int 
+ParseArrowShape (
+    ClientData clientData,	/* Not used. */
+    Tcl_Interp *interp,		/* Used for error reporting. */
+    Tk_Window tkwin,		/* Not used. */
+    char *value,		/* Textual specification of arrow shape. */
+    char *recordPtr,		/* Pointer to item record in which to
 				 * store arrow information. */
-    int offset;			/* Offset of shape information in widget
+    int offset			/* Offset of shape information in widget
 				 * record. */
+)
 {
     LineItem *linePtr = (LineItem *) recordPtr;
     double a, b, c;
@@ -1300,14 +1313,15 @@ ParseArrowShape(clientData, interp, tkwin, value, recordPtr, offset)
 
     /* ARGSUSED */
 static char *
-PrintArrowShape(clientData, tkwin, recordPtr, offset, freeProcPtr)
-    ClientData clientData;	/* Not used. */
-    Tk_Window tkwin;		/* Window associated with linePtr's widget. */
-    char *recordPtr;		/* Pointer to item record containing current
+PrintArrowShape (
+    ClientData clientData,	/* Not used. */
+    Tk_Window tkwin,		/* Window associated with linePtr's widget. */
+    char *recordPtr,		/* Pointer to item record containing current
 				 * shape information. */
-    int offset;			/* Offset of arrow information in record. */
-    Tcl_FreeProc **freeProcPtr;	/* Store address of procedure to call to
+    int offset,			/* Offset of arrow information in record. */
+    Tcl_FreeProc **freeProcPtr	/* Store address of procedure to call to
 				 * free string here. */
+)
 {
     LineItem *linePtr = (LineItem *) recordPtr;
     char *buffer;
@@ -1342,12 +1356,13 @@ PrintArrowShape(clientData, tkwin, recordPtr, offset, freeProcPtr)
  */
 
 	/* ARGSUSED */
-static int
-ConfigureArrows(canvasPtr, linePtr)
-    Tk_Canvas *canvasPtr;		/* Canvas in which arrows will be
+static int 
+ConfigureArrows (
+    Tk_Canvas *canvasPtr,		/* Canvas in which arrows will be
 					 * displayed (interp and tkwin
 					 * fields are needed). */
-    register LineItem *linePtr;		/* Item to configure for arrows. */
+    register LineItem *linePtr		/* Item to configure for arrows. */
+)
 {
     double *poly, *coordPtr;
     double dx, dy, length, sinTheta, cosTheta, temp, shapeC;

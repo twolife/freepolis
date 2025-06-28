@@ -73,11 +73,8 @@ typedef struct {
  */
 
 /* ARGSUSED */
-void
-Tcp_MakeOpenFile(interp,fd,r,w)
-    Tcl_Interp *interp;
-    int fd;
-    int r,w;
+void 
+Tcp_MakeOpenFile (Tcl_Interp *interp, int fd, int r, int w)
 {/* Create an OpenFile structure using f and install it in the interpreter with
   * Readable and Writable set to r and w
   */
@@ -134,14 +131,9 @@ Tcp_MakeOpenFile(interp,fd,r,w)
  */
 
 /* ARGSUSED */
-int
-Tcp_ConnectCmd(notUsed, interp, argc, argv)
-    ClientData notUsed;
-    Tcl_Interp *interp;
-    int argc;
-    char **argv;
+int 
+Tcp_ConnectCmd (ClientData notUsed, Tcl_Interp *interp, int argc, char **argv)
 {
-    Interp *iPtr = (Interp *) interp;
     char *host,*port;
     int fd;
     int server=0;
@@ -206,7 +198,7 @@ Tcp_ConnectCmd(notUsed, interp, argc, argv)
 	Tcl_SetVar2(interp,"connect_info",interp->result,buf,TCL_GLOBAL_ONLY);
     }
 
-    Tcp_MakeOpenFile(iPtr,fd,1,1-server);
+    Tcp_MakeOpenFile(interp,fd,1,1-server);
 
     return TCL_OK;
 }
@@ -227,12 +219,8 @@ Tcp_ConnectCmd(notUsed, interp, argc, argv)
  */
 
 /* ARGSUSED */
-int
-Tcp_ShutdownCmd(notUsed, interp, argc, argv)
-    ClientData notUsed;
-    Tcl_Interp *interp;
-    int argc;
-    char **argv;
+int 
+Tcp_ShutdownCmd (ClientData notUsed, Tcl_Interp *interp, int argc, char **argv)
 {
     Interp *iPtr = (Interp *) interp;
     OpenFile *filePtr;
@@ -311,14 +299,9 @@ Tcp_ShutdownCmd(notUsed, interp, argc, argv)
  */
 
 /* ARGSUSED */
-int
-Tcp_AcceptCmd(notUsed, interp, argc, argv)
-    ClientData notUsed;
-    Tcl_Interp *interp;
-    int argc;
-    char **argv;
+int 
+Tcp_AcceptCmd (ClientData notUsed, Tcl_Interp *interp, int argc, char **argv)
 {
-    Interp *iPtr = (Interp *) interp;
     struct sockaddr_in sockaddr;
     int len = sizeof sockaddr;
     OpenFile *filePtr;
@@ -364,7 +347,7 @@ Tcp_AcceptCmd(notUsed, interp, argc, argv)
     /*
      * Create the FILE*
      */
-    Tcp_MakeOpenFile(iPtr,fd,1,1);
+    Tcp_MakeOpenFile(interp,fd,1,1);
 
     sprintf(interp->result, "file%d", fd);
     return TCL_OK;
@@ -385,10 +368,11 @@ Tcp_AcceptCmd(notUsed, interp, argc, argv)
  *----------------------------------------------------------------
  */
 
-static int
-unix_connect(path,server)
-    char *path;		/* Path name to create or use */
-    int  server;        /* 1->make server, 0->connect to server */
+static int 
+unix_connect (
+    char *path,		/* Path name to create or use */
+    int server        /* 1->make server, 0->connect to server */
+)
 {
     struct sockaddr_un sockaddr;
     int sock, status;
@@ -436,11 +420,12 @@ unix_connect(path,server)
  *----------------------------------------------------------------
  */
 
-static int
-inet_connect(host, service,server)
-    char *host;			/* Host to connect, name or IP address */
-    char *service;		/* Port to use, service name or port number */
-    int  server;
+static int 
+inet_connect (
+    char *host,			/* Host to connect, name or IP address */
+    char *service,		/* Port to use, service name or port number */
+    int server
+)
 {
     struct hostent *hostent, _hostent;
     struct servent *servent, _servent;
@@ -538,12 +523,8 @@ inet_connect(host, service,server)
  */
 
 /* ARGSUSED */
-int
-Tcp_FileHandlerCmd(notUsed, interp, argc, argv)
-    ClientData notUsed;
-    Tcl_Interp *interp;
-    int argc;
-    char **argv;
+int 
+Tcp_FileHandlerCmd (ClientData notUsed, Tcl_Interp *interp, int argc, char **argv)
 {
     FileCmd *cmdPtr;
     OpenFile *filePtr;
@@ -629,10 +610,8 @@ Tcp_FileHandlerCmd(notUsed, interp, argc, argv)
  *----------------------------------------------------------------
  */
 
-static void
-HandleSocket(clientData, mask)
-    ClientData clientData;
-    int mask;
+static void 
+HandleSocket (ClientData clientData, int mask)
 {
     int result;
     FileCmd *cmdPtr = (FileCmd *) clientData;

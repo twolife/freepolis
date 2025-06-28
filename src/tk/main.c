@@ -24,7 +24,7 @@ static char rcsid[] = "$Header: /user6/ouster/wish/RCS/main.c,v 1.68 92/05/07 08
  * Declarations for library procedures:
  */
 
-extern int isatty();
+extern int isatty(int);
 
 /*
  * Command used to initialize wish:
@@ -68,10 +68,11 @@ Tk_ArgvInfo argTable[] = {
 };
 
     /* ARGSUSED */
-void
-StdinProc(clientData, mask)
-    ClientData clientData;		/* Not used. */
-    int mask;
+void 
+StdinProc (
+    ClientData clientData,		/* Not used. */
+    int mask
+)
 {
     char line[200];
     static int gotPartial = 0;
@@ -112,10 +113,11 @@ StdinProc(clientData, mask)
 }
 
 	/* ARGSUSED */
-static void
-StructureProc(clientData, eventPtr)
-    ClientData clientData;	/* Information about window. */
-    XEvent *eventPtr;		/* Information about event. */
+static void 
+StructureProc (
+    ClientData clientData,	/* Information about window. */
+    XEvent *eventPtr		/* Information about event. */
+)
 {
     if (eventPtr->type == DestroyNotify) {
 	w = NULL;
@@ -130,9 +132,10 @@ StructureProc(clientData, eventPtr)
  */
 
 	/* ARGSUSED */
-static void
-DelayedMap(clientData)
-    ClientData clientData;	/* Not used. */
+static void 
+DelayedMap (
+    ClientData clientData	/* Not used. */
+)
 {
 
     while (Tk_DoOneEvent(TK_IDLE_EVENTS) != 0) {
@@ -145,12 +148,13 @@ DelayedMap(clientData)
 }
 
 	/* ARGSUSED */
-int
-DotCmd(dummy, interp, argc, argv)
-    ClientData dummy;			/* Not used. */
-    Tcl_Interp *interp;			/* Current interpreter. */
-    int argc;				/* Number of arguments. */
-    char **argv;			/* Argument strings. */
+int 
+DotCmd (
+    ClientData dummy,			/* Not used. */
+    Tcl_Interp *interp,			/* Current interpreter. */
+    int argc,				/* Number of arguments. */
+    char **argv			/* Argument strings. */
+)
 {
     int x, y;
 
@@ -168,12 +172,13 @@ DotCmd(dummy, interp, argc, argv)
 }
 
 	/* ARGSUSED */
-int
-MovetoCmd(dummy, interp, argc, argv)
-    ClientData dummy;			/* Not used. */
-    Tcl_Interp *interp;			/* Current interpreter. */
-    int argc;				/* Number of arguments. */
-    char **argv;			/* Argument strings. */
+int 
+MovetoCmd (
+    ClientData dummy,			/* Not used. */
+    Tcl_Interp *interp,			/* Current interpreter. */
+    int argc,				/* Number of arguments. */
+    char **argv			/* Argument strings. */
+)
 {
     if (argc != 3) {
 	Tcl_AppendResult(interp, "wrong # args: should be \"", argv[0],
@@ -185,12 +190,13 @@ MovetoCmd(dummy, interp, argc, argv)
     return TCL_OK;
 }
 	/* ARGSUSED */
-int
-LinetoCmd(dummy, interp, argc, argv)
-    ClientData dummy;			/* Not used. */
-    Tcl_Interp *interp;			/* Current interpreter. */
-    int argc;				/* Number of arguments. */
-    char **argv;			/* Argument strings. */
+int 
+LinetoCmd (
+    ClientData dummy,			/* Not used. */
+    Tcl_Interp *interp,			/* Current interpreter. */
+    int argc,				/* Number of arguments. */
+    char **argv			/* Argument strings. */
+)
 {
     int newX, newY;
 
@@ -209,10 +215,8 @@ LinetoCmd(dummy, interp, argc, argv)
     return TCL_OK;
 }
 
-int
-main(argc, argv)
-    int argc;
-    char **argv;
+int 
+main (int argc, char **argv)
 {
     char *args, *p, *msg;
     char buf[20];
@@ -285,14 +289,14 @@ main(argc, argv)
     XSetForeground(Tk_Display(w), DefaultGCOfScreen(Tk_Screen(w)),
 	    BlackPixelOfScreen(Tk_Screen(w)));
     Tcl_CreateCommand(interp, "dot", DotCmd, (ClientData) w,
-	    (void (*)()) NULL);
+	    (void (*)(int *)) NULL);
     Tcl_CreateCommand(interp, "lineto", LinetoCmd, (ClientData) w,
-	    (void (*)()) NULL);
+	    (void (*)(int *)) NULL);
     Tcl_CreateCommand(interp, "moveto", MovetoCmd, (ClientData) w,
-	    (void (*)()) NULL);
+	    (void (*)(int *)) NULL);
 #ifdef SQUARE_DEMO
     Tcl_CreateCommand(interp, "square", Tk_SquareCmd, (ClientData) w,
-	    (void (*)()) NULL);
+	    (void (*)(int *)) NULL);
 #endif
     if (geometry != NULL) {
 	Tcl_SetVar(interp, "geometry", geometry, TCL_GLOBAL_ONLY);

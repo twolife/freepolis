@@ -44,11 +44,8 @@ ConvSymMode _ANSI_ARGS_((Tcl_Interp  *interp,
  *
  *-----------------------------------------------------------------------------
  */
-static int
-ConvSymMode (interp, symMode, modeVal)
-    Tcl_Interp  *interp;
-    char        *symMode;
-    int          modeVal;
+static int 
+ConvSymMode (Tcl_Interp *interp, char *symMode, int modeVal)
 
 {
     int  user, group, other;
@@ -191,11 +188,12 @@ ConvSymMode (interp, symMode, modeVal)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_ChmodCmd (clientData, interp, argc, argv)
-    ClientData   clientData;
-    Tcl_Interp  *interp;
-    int          argc;
-    char       **argv;
+Tcl_ChmodCmd (
+    ClientData   clientData,
+    Tcl_Interp  *interp,
+    int          argc,
+    char       **argv
+)
 {
     int           idx, modeVal, fileArgc, absMode;
     char        **fileArgv;
@@ -259,11 +257,12 @@ Tcl_ChmodCmd (clientData, interp, argc, argv)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_ChownCmd (clientData, interp, argc, argv)
-    ClientData   clientData;
-    Tcl_Interp  *interp;
-    int          argc;
-    char       **argv;
+Tcl_ChownCmd (
+    ClientData   clientData,
+    Tcl_Interp  *interp,
+    int          argc,
+    char       **argv
+)
 {
     int            idx, ownArgc, fileArgc;
     char         **ownArgv, **fileArgv = NULL;
@@ -374,11 +373,12 @@ exitPoint:
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_ChgrpCmd (clientData, interp, argc, argv)
-    ClientData   clientData;
-    Tcl_Interp  *interp;
-    int          argc;
-    char       **argv;
+Tcl_ChgrpCmd (
+    ClientData   clientData,
+    Tcl_Interp  *interp,
+    int          argc,
+    char       **argv
+)
 {
     int            idx, fileArgc, groupId, result = TCL_ERROR;
     char         **fileArgv;

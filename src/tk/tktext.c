@@ -167,12 +167,13 @@ static int		TextWidgetCmd _ANSI_ARGS_((ClientData clientData,
  */
 
 int
-Tk_TextCmd(clientData, interp, argc, argv)
-    ClientData clientData;	/* Main window associated with
+Tk_TextCmd(
+    ClientData clientData,	/* Main window associated with
 				 * interpreter. */
-    Tcl_Interp *interp;		/* Current interpreter. */
-    int argc;			/* Number of arguments. */
-    char **argv;		/* Argument strings. */
+    Tcl_Interp *interp,		/* Current interpreter. */
+    int argc,			/* Number of arguments. */
+    char **argv			/* Argument strings. */
+)
 {
     Tk_Window tkwin = (Tk_Window) clientData;
     Tk_Window new;
@@ -259,7 +260,7 @@ Tk_TextCmd(clientData, interp, argc, argv)
     Tk_CreateSelHandler(textPtr->tkwin, XA_STRING, TextFetchSelection,
 	    (ClientData) textPtr, XA_STRING);
     Tcl_CreateCommand(interp, Tk_PathName(textPtr->tkwin),
-	    TextWidgetCmd, (ClientData) textPtr, (void (*)()) NULL);
+	    TextWidgetCmd, (ClientData) textPtr, (void (*)(int *)) NULL);
     if (ConfigureText(interp, textPtr, argc-2, argv+2, 0) != TCL_OK) {
 	Tk_DestroyWindow(textPtr->tkwin);
 	return TCL_ERROR;
@@ -289,11 +290,12 @@ Tk_TextCmd(clientData, interp, argc, argv)
  */
 
 static int
-TextWidgetCmd(clientData, interp, argc, argv)
-    ClientData clientData;	/* Information about text widget. */
-    Tcl_Interp *interp;		/* Current interpreter. */
-    int argc;			/* Number of arguments. */
-    char **argv;		/* Argument strings. */
+TextWidgetCmd(
+    ClientData clientData,	/* Information about text widget. */
+    Tcl_Interp *interp,		/* Current interpreter. */
+    int argc,			/* Number of arguments. */
+    char **argv			/* Argument strings. */
+)
 {
     register TkText *textPtr = (TkText *) clientData;
     int result = TCL_OK;
@@ -573,8 +575,9 @@ TextWidgetCmd(clientData, interp, argc, argv)
  */
 
 static void
-DestroyText(clientData)
-    ClientData clientData;	/* Info about text widget. */
+DestroyText(
+    ClientData clientData	/* Info about text widget. */
+)
 {
     register TkText *textPtr = (TkText *) clientData;
     Tcl_HashSearch search;
@@ -653,14 +656,15 @@ DestroyText(clientData)
  *----------------------------------------------------------------------
  */
 
-static int
-ConfigureText(interp, textPtr, argc, argv, flags)
-    Tcl_Interp *interp;		/* Used for error reporting. */
-    register TkText *textPtr;	/* Information about widget;  may or may
+static int 
+ConfigureText (
+    Tcl_Interp *interp,		/* Used for error reporting. */
+    register TkText *textPtr,	/* Information about widget;  may or may
 				 * not already have values for some fields. */
-    int argc;			/* Number of valid entries in argv. */
-    char **argv;		/* Arguments. */
-    int flags;			/* Flags to pass to Tk_ConfigureWidget. */
+    int argc,			/* Number of valid entries in argv. */
+    char **argv,		/* Arguments. */
+    int flags			/* Flags to pass to Tk_ConfigureWidget. */
+)
 {
     int oldExport = textPtr->exportSelection;
     int charWidth, charHeight;
@@ -773,9 +777,10 @@ ConfigureText(interp, textPtr, argc, argv, flags)
  */
 
 static void
-TextEventProc(clientData, eventPtr)
-    ClientData clientData;	/* Information about window. */
-    register XEvent *eventPtr;	/* Information about event. */
+TextEventProc(
+    ClientData clientData,	/* Information about window. */
+    register XEvent *eventPtr	/* Information about event. */
+)
 {
     register TkText *textPtr = (TkText *) clientData;
 
@@ -813,13 +818,15 @@ TextEventProc(clientData, eventPtr)
  *----------------------------------------------------------------------
  */
 
-static void
-InsertChars(textPtr, line, ch, string)
-    TkText *textPtr;		/* Overall information about text widget. */
-    int line, ch;		/* Identifies character just before which
+static void 
+InsertChars (
+    TkText *textPtr,		/* Overall information about text widget. */
+    int line,
+    int ch,		/* Identifies character just before which
 				 * new information is to be inserted. */
-    char *string;		/* Null-terminated string containing new
+    char *string		/* Null-terminated string containing new
 				 * information to add to text. */
+)
 {
     register TkTextLine *linePtr;
 
@@ -870,12 +877,15 @@ InsertChars(textPtr, line, ch, string)
  *----------------------------------------------------------------------
  */
 
-static void
-DeleteChars(textPtr, line1, ch1, line2, ch2)
-    TkText *textPtr;		/* Overall information about text widget. */
-    int line1, ch1;		/* Position of first character to delete. */
-    int line2, ch2;		/* Position of character just after last
+static void 
+DeleteChars (
+    TkText *textPtr,		/* Overall information about text widget. */
+    int line1,
+    int ch1,		/* Position of first character to delete. */
+    int line2,
+    int ch2		/* Position of character just after last
 				 * one to delete. */
+)
 {
     register TkTextLine *line1Ptr, *line2Ptr;
     int numLines, topLine;
@@ -1021,15 +1031,16 @@ DeleteChars(textPtr, line1, ch1, line2, ch2)
  */
 
 static int
-TextFetchSelection(clientData, offset, buffer, maxBytes)
-    ClientData clientData;		/* Information about text widget. */
-    int offset;				/* Offset within selection of first
+TextFetchSelection(
+    ClientData clientData,		/* Information about text widget. */
+    int offset,				/* Offset within selection of first
 					 * character to be returned. */
-    char *buffer;			/* Location in which to place
+    char *buffer,			/* Location in which to place
 					 * selection. */
-    int maxBytes;			/* Maximum number of bytes to place
+    int maxBytes			/* Maximum number of bytes to place
 					 * at buffer, not including terminating
 					 * NULL character. */
+)
 {
     register TkText *textPtr = (TkText *) clientData;
     register TkTextLine *linePtr;
@@ -1152,8 +1163,9 @@ TextFetchSelection(clientData, offset, buffer, maxBytes)
  */
 
 void
-TkTextLostSelection(clientData)
-    ClientData clientData;		/* Information about text widget. */
+TkTextLostSelection(
+    ClientData clientData		/* Information about text widget. */
+)
 {
     register TkText *textPtr = (TkText *) clientData;
 
@@ -1190,14 +1202,15 @@ TkTextLostSelection(clientData)
  *--------------------------------------------------------------
  */
 
-static int
-TextMarkCmd(textPtr, interp, argc, argv)
-    register TkText *textPtr;	/* Information about text widget. */
-    Tcl_Interp *interp;		/* Current interpreter. */
-    int argc;			/* Number of arguments. */
-    char **argv;		/* Argument strings.  Someone else has already
+static int 
+TextMarkCmd (
+    register TkText *textPtr,	/* Information about text widget. */
+    Tcl_Interp *interp,		/* Current interpreter. */
+    int argc,			/* Number of arguments. */
+    char **argv		/* Argument strings.  Someone else has already
 				 * parsed this command enough to know that
 				 * argv[1] is "mark". */
+)
 {
     int length, line, ch, i;
     char c;
@@ -1284,12 +1297,13 @@ TextMarkCmd(textPtr, interp, argc, argv)
  */
 
 TkAnnotation *
-TkTextSetMark(textPtr, name, line, ch)
-    TkText *textPtr;		/* Text widget in which to create mark. */
-    char *name;			/* Name of mark to set. */
-    int line;			/* Index of line at which to place mark. */
-    int ch;			/* Index of character within line at which
+TkTextSetMark (
+    TkText *textPtr,		/* Text widget in which to create mark. */
+    char *name,			/* Name of mark to set. */
+    int line,			/* Index of line at which to place mark. */
+    int ch			/* Index of character within line at which
 				 * to place mark. */
+)
 {
     Tcl_HashEntry *hPtr;
     TkAnnotation *markPtr;
@@ -1375,8 +1389,9 @@ TkTextSetMark(textPtr, name, line, ch)
  */
 
 static void
-TextBlinkProc(clientData)
-    ClientData clientData;	/* Pointer to record describing text. */
+TextBlinkProc(
+    ClientData clientData	/* Pointer to record describing text. */
+)
 {
     register TkText *textPtr = (TkText *) clientData;
     int lineNum;
@@ -1416,10 +1431,11 @@ TextBlinkProc(clientData)
  */
 
 static void
-TextFocusProc(clientData, gotFocus)
-    ClientData clientData;	/* Pointer to structure describing text. */
-    int gotFocus;		/* 1 means window is getting focus, 0 means
+TextFocusProc(
+    ClientData clientData,	/* Pointer to structure describing text. */
+    int gotFocus		/* 1 means window is getting focus, 0 means
 				 * it's losing it. */
+)
 {
     register TkText *textPtr = (TkText *) clientData;
     int lineNum;
@@ -1458,14 +1474,15 @@ TextFocusProc(clientData, gotFocus)
  *--------------------------------------------------------------
  */
 
-static int
-TextScanCmd(textPtr, interp, argc, argv)
-    register TkText *textPtr;	/* Information about text widget. */
-    Tcl_Interp *interp;		/* Current interpreter. */
-    int argc;			/* Number of arguments. */
-    char **argv;		/* Argument strings.  Someone else has already
+static int 
+TextScanCmd (
+    register TkText *textPtr,	/* Information about text widget. */
+    Tcl_Interp *interp,		/* Current interpreter. */
+    int argc,			/* Number of arguments. */
+    char **argv		/* Argument strings.  Someone else has already
 				 * parsed this command enough to know that
 				 * argv[1] is "tag". */
+)
 {
     int length, y, line, lastLine;
     char c;

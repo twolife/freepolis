@@ -117,7 +117,7 @@ extern int		gettimeofday _ANSI_ARGS_((struct timeval *tp,
 #if !(defined(_CRAY) || defined(sparc) || defined(_IBMR2) || defined(sgi))
 extern int		open _ANSI_ARGS_((CONST char *path, int flags, ...));
 #endif
-extern void		panic _ANSI_ARGS_(VARARGS);
+extern void		panic _ANSI_ARGS_((char *format, ...));
 #if 0
 extern int		read _ANSI_ARGS_((int fd, void *buf, unsigned int numBytes));
 extern int		select _ANSI_ARGS_((int nfds, SELECT_MASK *readfds,

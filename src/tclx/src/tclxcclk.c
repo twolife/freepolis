@@ -35,11 +35,12 @@
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_ConvertclockCmd (clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_ConvertclockCmd (
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     long        clockVal;
     time_t      baseClock;

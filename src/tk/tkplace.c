@@ -156,12 +156,13 @@ static void		UnlinkSlave _ANSI_ARGS_((Slave *slavePtr));
  *--------------------------------------------------------------
  */
 
-int
-Tk_PlaceCmd(clientData, interp, argc, argv)
-    ClientData clientData;	/* Main window associated with interpreter. */
-    Tcl_Interp *interp;		/* Current interpreter. */
-    int argc;			/* Number of arguments. */
-    char **argv;		/* Argument strings. */
+int 
+Tk_PlaceCmd (
+    ClientData clientData,	/* Main window associated with interpreter. */
+    Tcl_Interp *interp,		/* Current interpreter. */
+    int argc,			/* Number of arguments. */
+    char **argv		/* Argument strings. */
+)
 {
     Tk_Window tkwin;
     Slave *slavePtr;
@@ -330,8 +331,9 @@ Tk_PlaceCmd(clientData, interp, argc, argv)
  */
 
 static Slave *
-FindSlave(tkwin)
-    Tk_Window tkwin;		/* Token for desired slave. */
+FindSlave (
+    Tk_Window tkwin		/* Token for desired slave. */
+)
 {
     Tcl_HashEntry *hPtr;
     register Slave *slavePtr;
@@ -377,9 +379,10 @@ FindSlave(tkwin)
  *----------------------------------------------------------------------
  */
 
-static void
-UnlinkSlave(slavePtr)
-    Slave *slavePtr;		/* Slave structure to be unlinked. */
+static void 
+UnlinkSlave (
+    Slave *slavePtr		/* Slave structure to be unlinked. */
+)
 {
     register Master *masterPtr;
     register Slave *prevPtr;
@@ -423,8 +426,9 @@ UnlinkSlave(slavePtr)
  */
 
 static Master *
-FindMaster(tkwin)
-    Tk_Window tkwin;		/* Token for desired master. */
+FindMaster (
+    Tk_Window tkwin		/* Token for desired master. */
+)
 {
     Tcl_HashEntry *hPtr;
     register Master *masterPtr;
@@ -464,13 +468,14 @@ FindMaster(tkwin)
  *----------------------------------------------------------------------
  */
 
-static int
-ConfigureSlave(interp, slavePtr, argc, argv)
-    Tcl_Interp *interp;		/* Used for error reporting. */
-    Slave *slavePtr;		/* Pointer to current information
+static int 
+ConfigureSlave (
+    Tcl_Interp *interp,		/* Used for error reporting. */
+    Slave *slavePtr,		/* Pointer to current information
 				 * about slave. */
-    int argc;			/* Number of config arguments. */
-    char **argv;		/* String values for arguments. */
+    int argc,			/* Number of config arguments. */
+    char **argv		/* String values for arguments. */
+)
 {
     register Master *masterPtr;
     int c, length, result;
@@ -661,9 +666,10 @@ ConfigureSlave(interp, slavePtr, argc, argv)
  *----------------------------------------------------------------------
  */
 
-static void
-RecomputePlacement(clientData)
-    ClientData clientData;	/* Pointer to Master record. */
+static void 
+RecomputePlacement (
+    ClientData clientData	/* Pointer to Master record. */
+)
 {
     register Master *masterPtr = (Master *) clientData;
     register Slave *slavePtr;
@@ -831,11 +837,12 @@ RecomputePlacement(clientData)
  *----------------------------------------------------------------------
  */
 
-static void
-MasterStructureProc(clientData, eventPtr)
-    ClientData clientData;	/* Pointer to Master structure for window
+static void 
+MasterStructureProc (
+    ClientData clientData,	/* Pointer to Master structure for window
 				 * referred to by eventPtr. */
-    XEvent *eventPtr;		/* Describes what just happened. */
+    XEvent *eventPtr		/* Describes what just happened. */
+)
 {
     register Master *masterPtr = (Master *) clientData;
     register Slave *slavePtr, *nextPtr;
@@ -880,11 +887,12 @@ MasterStructureProc(clientData, eventPtr)
  *----------------------------------------------------------------------
  */
 
-static void
-SlaveStructureProc(clientData, eventPtr)
-    ClientData clientData;	/* Pointer to Slave structure for window
+static void 
+SlaveStructureProc (
+    ClientData clientData,	/* Pointer to Slave structure for window
 				 * referred to by eventPtr. */
-    XEvent *eventPtr;		/* Describes what just happened. */
+    XEvent *eventPtr		/* Describes what just happened. */
+)
 {
     register Slave *slavePtr = (Slave *) clientData;
 
@@ -915,11 +923,12 @@ SlaveStructureProc(clientData, eventPtr)
  */
 
 	/* ARGSUSED */
-static void
-PlaceRequestProc(clientData, tkwin)
-    ClientData clientData;		/* Pointer to our record for slave. */
-    Tk_Window tkwin;			/* Window that changed its desired
+static void 
+PlaceRequestProc (
+    ClientData clientData,		/* Pointer to our record for slave. */
+    Tk_Window tkwin			/* Window that changed its desired
 					 * size. */
+)
 {
     Slave *slavePtr = (Slave *) clientData;
     Master *masterPtr;

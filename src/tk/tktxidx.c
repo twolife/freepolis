@@ -58,13 +58,14 @@ static char *		StartEnd _ANSI_ARGS_((TkText *textPtr,
  *----------------------------------------------------------------------
  */
 
-int
-TkTextGetIndex(interp, textPtr, string, lineIndexPtr, chPtr)
-    Tcl_Interp *interp;		/* Use this for error reporting. */
-    TkText *textPtr;		/* Information about text widget. */
-    char *string;		/* Textual description of position. */
-    int *lineIndexPtr;		/* Store line number here. */
-    int *chPtr;			/* Store character position here. */
+int 
+TkTextGetIndex (
+    Tcl_Interp *interp,		/* Use this for error reporting. */
+    TkText *textPtr,		/* Information about text widget. */
+    char *string,		/* Textual description of position. */
+    int *lineIndexPtr,		/* Store line number here. */
+    int *chPtr			/* Store character position here. */
+)
 {
     register char *p;
     char *end, *endOfBase;
@@ -263,12 +264,13 @@ TkTextGetIndex(interp, textPtr, string, lineIndexPtr, chPtr)
  *----------------------------------------------------------------------
  */
 
-void
-TkTextPrintIndex(line, ch, string)
-    int line;			/* Line number. */
-    int ch;			/* Character position within line. */
-    char *string;		/* Place to store the position.  Must have
+void 
+TkTextPrintIndex (
+    int line,			/* Line number. */
+    int ch,			/* Character position within line. */
+    char *string		/* Place to store the position.  Must have
 				 * at least POS_CHARS characters. */
+)
 {
     sprintf(string, "%d.%d", line+1, ch);
 }
@@ -297,14 +299,15 @@ TkTextPrintIndex(line, ch, string)
 
 
 TkTextLine *
-TkTextRoundIndex(textPtr, lineIndexPtr, chPtr)
-    TkText *textPtr;			/* Information about text widget. */
-    int *lineIndexPtr;			/* Points to initial line index,
+TkTextRoundIndex (
+    TkText *textPtr,			/* Information about text widget. */
+    int *lineIndexPtr,			/* Points to initial line index,
 					 * which is overwritten with actual
 					 * line index. */
-    int *chPtr;				/* Points to initial character index,
+    int *chPtr				/* Points to initial character index,
 					 * which is overwritten with actual
 					 * character index. */
+)
 {
     int line, ch, lastLine;
     TkTextLine *linePtr;
@@ -361,17 +364,18 @@ TkTextRoundIndex(textPtr, lineIndexPtr, chPtr)
  */
 
 static char *
-ForwBack(textPtr, string, lineIndexPtr, chPtr)
-    TkText *textPtr;		/* Information about widget that index
+ForwBack (
+    TkText *textPtr,		/* Information about widget that index
 				 * refers to. */
-    char *string;		/* String to parse for additional info
+    char *string,		/* String to parse for additional info
 				 * about modifier (count and units). 
 				 * Points to "+" or "-" that starts
 				 * modifier. */
-    int *lineIndexPtr;		/* Points to current line index, which will
+    int *lineIndexPtr,		/* Points to current line index, which will
 				 * be updated to reflect modifier. */
-    int *chPtr;			/* Points to current character index, which
+    int *chPtr			/* Points to current character index, which
 				 * will be updated to reflect modifier. */
+)
 {
     register char *p;
     char *end, *units;
@@ -459,19 +463,20 @@ ForwBack(textPtr, string, lineIndexPtr, chPtr)
  */
 
 	/* ARGSUSED */
-static void
-ForwardChars(textPtr, linePtr, lineIndexPtr, chPtr, count)
-    TkText *textPtr;			/* Information about text widget. */
-    register TkTextLine *linePtr;	/* Text line corresponding to
+static void 
+ForwardChars (
+    TkText *textPtr,			/* Information about text widget. */
+    register TkTextLine *linePtr,	/* Text line corresponding to
 					 * *lineIndexPtr. */
-    int *lineIndexPtr;			/* Points to initial line index,
+    int *lineIndexPtr,			/* Points to initial line index,
 					 * which is overwritten with final
 					 * line index. */
-    int *chPtr;				/* Points to initial character index,
+    int *chPtr,				/* Points to initial character index,
 					 * which is overwritten with final
 					 * character index. */
-    int count;				/* How many characters forward to
+    int count				/* How many characters forward to
 					 * move.  Must not be negative. */
+)
 {
     TkTextLine *nextPtr;
     int bytesInLine;
@@ -513,19 +518,20 @@ ForwardChars(textPtr, linePtr, lineIndexPtr, chPtr, count)
  *----------------------------------------------------------------------
  */
 
-static void
-BackwardChars(textPtr, linePtr, lineIndexPtr, chPtr, count)
-    TkText *textPtr;			/* Information about text widget. */
-    register TkTextLine *linePtr;	/* Text line corresponding to
+static void 
+BackwardChars (
+    TkText *textPtr,			/* Information about text widget. */
+    register TkTextLine *linePtr,	/* Text line corresponding to
 					 * *lineIndexPtr. */
-    int *lineIndexPtr;			/* Points to initial line index,
+    int *lineIndexPtr,			/* Points to initial line index,
 					 * which is overwritten with final
 					 * line index. */
-    int *chPtr;				/* Points to initial character index,
+    int *chPtr,				/* Points to initial character index,
 					 * which is overwritten with final
 					 * character index. */
-    int count;				/* How many characters backward to
+    int count				/* How many characters backward to
 					 * move.  Must not be negative. */
+)
 {
     int bytesInLine;
 
@@ -567,17 +573,18 @@ BackwardChars(textPtr, linePtr, lineIndexPtr, chPtr, count)
  */
 
 static char *
-StartEnd(textPtr, string, lineIndexPtr, chPtr)
-    TkText *textPtr;		/* Information about widget that index
+StartEnd (
+    TkText *textPtr,		/* Information about widget that index
 				 * refers to. */
-    char *string;		/* String to parse for additional info
+    char *string,		/* String to parse for additional info
 				 * about modifier (count and units). 
 				 * Points to first character of modifer
 				 * word. */
-    int *lineIndexPtr;		/* Points to current line index, which will
+    int *lineIndexPtr,		/* Points to current line index, which will
 				 * be updated to reflect modifier. */
-    int *chPtr;			/* Points to current character index, which
+    int *chPtr			/* Points to current character index, which
 				 * will be updated to reflect modifier. */
+)
 {
     char *p, c;
     int length;

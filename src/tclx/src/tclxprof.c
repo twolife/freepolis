@@ -104,7 +104,7 @@ ProfTraceRoutine _ANSI_ARGS_((ClientData    clientData,
                               Tcl_Interp   *interp,
                               int           evalLevel,
                               char         *command,
-                              int           (*cmdProc)(),
+                              int           (*cmdProc)(int *, Tcl_Interp *, int,  char **),
                               ClientData    cmdClientData,
                               int           argc,
                               char        **argv));
@@ -145,12 +145,8 @@ CleanUpProfMon _ANSI_ARGS_((ClientData clientData));
  *     executing at.
  *-----------------------------------------------------------------------------
  */
-static void
-ProcEntry (infoPtr, procName, procLevel, evalLevel)
-    profInfo_t *infoPtr;
-    char       *procName;
-    int         procLevel;
-    int         evalLevel;
+static void 
+ProcEntry (profInfo_t *infoPtr, char *procName, int procLevel, int evalLevel)
 {
     profStackEntry_t *entryPtr;
 
@@ -186,9 +182,8 @@ ProcEntry (infoPtr, procName, procLevel, evalLevel)
  *   o infoPtr (I/O) - The global profiling info.
  *-----------------------------------------------------------------------------
  */
-static void
-ProcPopEntry (infoPtr)
-    profInfo_t *infoPtr;
+static void 
+ProcPopEntry (profInfo_t *infoPtr)
 {
     profStackEntry_t *entryPtr = infoPtr->stackPtr;
     profStackEntry_t *scanPtr;
@@ -257,11 +252,8 @@ ProcPopEntry (infoPtr)
  *   o evalLevel (I) - Eval call level to return to (zero to clear stack).
  *-----------------------------------------------------------------------------
  */
-static void
-StackSync (infoPtr, procLevel, evalLevel)
-    profInfo_t *infoPtr;
-    int         procLevel;
-    int         evalLevel;
+static void 
+StackSync (profInfo_t *infoPtr, int procLevel, int evalLevel)
 {
     saveStackEntry_t *saveEntryPtr;
     
@@ -307,10 +299,8 @@ StackSync (infoPtr, procLevel, evalLevel)
  *   o procLevel (I) - The upleveled procedure call level.
  *-----------------------------------------------------------------------------
  */
-static void
-DoUplevel (infoPtr, procLevel)
-    profInfo_t *infoPtr;
-    int         procLevel;
+static void 
+DoUplevel (profInfo_t *infoPtr, int procLevel)
 {
     profStackEntry_t *scanPtr, *bottomPtr;
     saveStackEntry_t *saveEntryPtr;
@@ -352,17 +342,8 @@ DoUplevel (infoPtr, procLevel)
  *
  *-----------------------------------------------------------------------------
  */
-static void
-ProfTraceRoutine (clientData, interp, evalLevel, command, cmdProc,
-                  cmdClientData, argc, argv)
-    ClientData    clientData;
-    Tcl_Interp   *interp;
-    int           evalLevel;
-    char         *command;
-    int           (*cmdProc)();
-    ClientData    cmdClientData;
-    int           argc;
-    char        **argv;
+static void 
+ProfTraceRoutine (ClientData clientData, Tcl_Interp *interp, int evalLevel, char *command, int (*cmdProc)(int *, Tcl_Interp *, int,  char **), ClientData cmdClientData, int argc, char **argv)
 {
     Interp      *iPtr      = (Interp *) interp;
     struct tms   cpuTimes;
@@ -440,9 +421,8 @@ ProfTraceRoutine (clientData, interp, evalLevel, command, cmdProc,
  *   o infoPtr (I/O) - The global profiling info.
  *-----------------------------------------------------------------------------
  */
-static void
-CleanDataTable (infoPtr)
-    profInfo_t *infoPtr;
+static void 
+CleanDataTable (profInfo_t *infoPtr)
 {
     Tcl_HashEntry    *hashEntryPtr;
     Tcl_HashSearch   searchCookie;
@@ -468,9 +448,8 @@ CleanDataTable (infoPtr)
  *   o infoPtr (I/O) - The global profiling info.
  *-----------------------------------------------------------------------------
  */
-static void
-DeleteProfTrace (infoPtr)
-    profInfo_t *infoPtr;
+static void 
+DeleteProfTrace (profInfo_t *infoPtr)
 {
     Tcl_DeleteTrace (infoPtr->interp, infoPtr->traceHolder);
     infoPtr->traceHolder = NULL;
@@ -495,11 +474,8 @@ DeleteProfTrace (infoPtr)
  *   Standard Tcl command results
  *-----------------------------------------------------------------------------
  */
-static int
-DumpTableData (interp, infoPtr, varName)
-    Tcl_Interp *interp;
-    profInfo_t *infoPtr;
-    char       *varName;
+static int 
+DumpTableData (Tcl_Interp *interp, profInfo_t *infoPtr, char *varName)
 {
     Tcl_HashEntry    *hashEntryPtr;
     Tcl_HashSearch    searchCookie;
@@ -554,12 +530,8 @@ DumpTableData (interp, infoPtr, varName)
  *
  *-----------------------------------------------------------------------------
  */
-static int
-Tcl_ProfileCmd (clientData, interp, argc, argv)
-    ClientData    clientData;
-    Tcl_Interp   *interp;
-    int           argc;
-    char        **argv;
+static int 
+Tcl_ProfileCmd (ClientData clientData, Tcl_Interp *interp, int argc, char **argv)
 {
     Interp      *iPtr = (Interp *) interp;
     profInfo_t  *infoPtr = (profInfo_t *) clientData;
@@ -660,9 +632,8 @@ Tcl_ProfileCmd (clientData, interp, argc, argv)
  *
  *-----------------------------------------------------------------------------
  */
-static void
-CleanUpProfMon (clientData)
-    ClientData clientData;
+static void 
+CleanUpProfMon (ClientData clientData)
 {
     profInfo_t *infoPtr = (profInfo_t *) clientData;
 
@@ -682,9 +653,8 @@ CleanUpProfMon (clientData)
  *
  *-----------------------------------------------------------------------------
  */
-void
-Tcl_InitProfile (interp)
-    Tcl_Interp *interp;
+void 
+Tcl_InitProfile (Tcl_Interp *interp)
 {
     profInfo_t *infoPtr;
 

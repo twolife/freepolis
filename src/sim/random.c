@@ -118,9 +118,9 @@ static int degrees[MAX_TYPES] =	{ DEG_0, DEG_1, DEG_2, DEG_3, DEG_4 };
 static int seps [MAX_TYPES] =	{ SEP_0, SEP_1, SEP_2, SEP_3, SEP_4 };
 
 QUAD sim_random();
-void sim_srandom();
-char *sim_initstate();
-char *sim_setstate();
+void sim_srandom (unsigned int x);
+char *sim_initstate (unsigned int seed, char *arg_state, int n);
+char *sim_setstate (char *arg_state);
 
 /*
  * Initially, everything is set up as if from:
@@ -191,9 +191,8 @@ static QUAD *end_ptr = &randtbl[DEG_3 + 1];
  * introduced by the L.C.R.N.G.  Note that the initialization of randtbl[]
  * for default usage relies on values produced by this routine.
  */
-void
-sim_srandom(x)
-	unsigned int x;
+void 
+sim_srandom (unsigned int x)
 {
 	register int i, j;
 
@@ -231,10 +230,11 @@ sim_srandom(x)
  * Returns a pointer to the old state.
  */
 char *
-sim_initstate(seed, arg_state, n)
-	unsigned int seed;		/* seed for R.N.G. */
-	char *arg_state;		/* pointer to state array */
-	int n;				/* # bytes of state info */
+sim_initstate (
+    unsigned int seed,		/* seed for R.N.G. */
+    char *arg_state,		/* pointer to state array */
+    int n				/* # bytes of state info */
+)
 {
 	register char *ostate = (char *)(&state[-1]);
 
@@ -294,8 +294,7 @@ sim_initstate(seed, arg_state, n)
  * Returns a pointer to the old state information.
  */
 char *
-sim_setstate(arg_state)
-	char *arg_state;
+sim_setstate (char *arg_state)
 {
 	register QUAD *new_state = (QUAD *)arg_state;
 	register int type = new_state[0] % MAX_TYPES;
@@ -346,8 +345,8 @@ sim_setstate(arg_state)
  *
  * Returns a 31-bit random number.
  */
-QUAD
-sim_random()
+QUAD 
+sim_random (void)
 {
 	QUAD i;
 

@@ -101,7 +101,7 @@ Tk_ConfigSpec GraphConfigSpecs[] = {
   };
 
 
-XDisplay *FindXDisplay();
+extern XDisplay *FindXDisplay(Tk_Window tkwin);
 
 
 static void
@@ -332,14 +332,14 @@ DoGraphCmd(CLIENT_ARGS)
   SimGraph *graph = (SimGraph *) clientData;
   Tcl_HashEntry *ent;
   int result = TCL_OK;
-  int (*cmd)();
+  int (*cmd)(SimGraph*, Tcl_Interp*, int, char**);
 
   if (argc < 2) {
     return TCL_ERROR;
   }
 
   if ((ent = Tcl_FindHashEntry(&GraphCmds, argv[1]))) {
-    cmd = (int (*)())ent->clientData;
+    cmd = (int (*)(SimGraph*, Tcl_Interp*, int, char**))ent->clientData;
     Tk_Preserve((ClientData) graph);
     result = cmd(graph, interp, argc, argv);
     Tk_Release((ClientData) graph);
@@ -383,7 +383,7 @@ GraphViewCmd(CLIENT_ARGS)
 			StructureNotifyMask,
 			SimGraphEventProc, (ClientData) graph);
   Tcl_CreateCommand(interp, Tk_PathName(graph->tkwin),
-		    DoGraphCmd, (ClientData) graph, (void (*)()) NULL);
+		    DoGraphCmd, (ClientData) graph, (void (*)(int *)) NULL);
 
 /*
   Tk_MakeWindowExist(graph->tkwin);
@@ -440,7 +440,7 @@ void
 graph_command_init(void)
 {
   Tcl_CreateCommand(tk_mainInterp, "graphview", GraphViewCmd,
-		    (ClientData)MainWindow, (void (*)()) NULL);
+		    (ClientData)MainWindow, (void (*)(int *)) NULL);
 
   Tcl_InitHashTable(&GraphCmds, TCL_STRING_KEYS);
 

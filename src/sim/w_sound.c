@@ -387,7 +387,7 @@ void
 sound_command_init(void)
 {
   Tcl_CreateCommand(tk_mainInterp, "playsound", SoundCmd,
-		    (ClientData)NULL, (void (*)()) NULL);
+		    (ClientData)NULL, (void (*)(int *)) NULL);
   Tcl_CreateCommand(tk_mainInterp, "stopdozer", DozerCmd,
-		    (ClientData)NULL, (void (*)()) NULL);
+		    (ClientData)NULL, (void (*)(int *)) NULL);
 }

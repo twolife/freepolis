@@ -41,7 +41,7 @@ static char rcsid[] = "$Header: /user6/ouster/tcl/RCS/tclUnixStr.c,v 1.12 92/04/
  */
 
 char *
-Tcl_ErrnoId()
+Tcl_ErrnoId (void)
 {
     switch (errno) {
 #ifdef E2BIG
@@ -484,8 +484,9 @@ Tcl_ErrnoId()
  */
 
 char *
-Tcl_SignalId(sig)
-    int sig;			/* Number of signal. */
+Tcl_SignalId (
+    int sig			/* Number of signal. */
+)
 {
     switch (sig) {
 #ifdef SIGABRT
@@ -616,8 +617,9 @@ Tcl_SignalId(sig)
  */
 
 char *
-Tcl_SignalMsg(sig)
-    int sig;			/* Number of signal. */
+Tcl_SignalMsg (
+    int sig			/* Number of signal. */
+)
 {
     switch (sig) {
 #ifdef SIGABRT

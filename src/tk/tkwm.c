@@ -238,9 +238,10 @@ static void		UpdateSizeHints _ANSI_ARGS_((TkWindow *winPtr));
  *--------------------------------------------------------------
  */
 
-void
-TkWmNewWindow(winPtr)
-    TkWindow *winPtr;		/* Newly-created top-level window. */
+void 
+TkWmNewWindow (
+    TkWindow *winPtr		/* Newly-created top-level window. */
+)
 {
     register WmInfo *wmPtr;
 
@@ -330,10 +331,11 @@ TkWmNewWindow(winPtr)
  *--------------------------------------------------------------
  */
 
-int
-TkWmMapWindow(winPtr)
-    TkWindow *winPtr;		/* Top-level window that's about to
+int 
+TkWmMapWindow (
+    TkWindow *winPtr		/* Top-level window that's about to
 				 * be mapped. */
+)
 {
     register WmInfo *wmPtr = winPtr->wmInfoPtr;
 #ifndef X11R3
@@ -407,9 +409,10 @@ TkWmMapWindow(winPtr)
  *--------------------------------------------------------------
  */
 
-void
-TkWmDeadWindow(winPtr)
-    TkWindow *winPtr;		/* Newly-created top-level window. */
+void 
+TkWmDeadWindow (
+    TkWindow *winPtr		/* Newly-created top-level window. */
+)
 {
     register WmInfo *wmPtr = winPtr->wmInfoPtr;
 
@@ -467,9 +470,10 @@ TkWmDeadWindow(winPtr)
  *--------------------------------------------------------------
  */
 
-void
-TkWmSetClass(winPtr)
-    TkWindow *winPtr;		/* Newly-created top-level window. */
+void 
+TkWmSetClass (
+    TkWindow *winPtr		/* Newly-created top-level window. */
+)
 {
     if (winPtr->wmInfoPtr->flags & WM_NEVER_MAPPED) {
 	return;
@@ -506,13 +510,14 @@ TkWmSetClass(winPtr)
  */
 
 	/* ARGSUSED */
-int
-Tk_WmCmd(clientData, interp, argc, argv)
-    ClientData clientData;	/* Main window associated with
+int 
+Tk_WmCmd (
+    ClientData clientData,	/* Main window associated with
 				 * interpreter. */
-    Tcl_Interp *interp;		/* Current interpreter. */
-    int argc;			/* Number of arguments. */
-    char **argv;		/* Argument strings. */
+    Tcl_Interp *interp,		/* Current interpreter. */
+    int argc,			/* Number of arguments. */
+    char **argv		/* Argument strings. */
+)
 {
     Tk_Window tkwin = (Tk_Window) clientData;
     TkWindow *winPtr;
@@ -1216,17 +1221,19 @@ Tk_WmCmd(clientData, interp, argc, argv)
  *----------------------------------------------------------------------
  */
 
-void
-Tk_SetGrid(tkwin, reqWidth, reqHeight, widthInc, heightInc)
-    Tk_Window tkwin;		/* Token for window.  New window mgr info
+void 
+Tk_SetGrid (
+    Tk_Window tkwin,		/* Token for window.  New window mgr info
 				 * will be posted for the top-level window
 				 * associated with this window. */
-    int reqWidth;		/* Width (in grid units) corresponding to
+    int reqWidth,		/* Width (in grid units) corresponding to
 				 * the requested geometry for tkwin. */
-    int reqHeight;		/* Height (in grid units) corresponding to
+    int reqHeight,		/* Height (in grid units) corresponding to
 				 * the requested geometry for tkwin. */
-    int widthInc, heightInc;	/* Pixel increments corresponding to a
+    int widthInc,
+    int heightInc	/* Pixel increments corresponding to a
 				 * change of one grid unit. */
+)
 {
     TkWindow *winPtr = (TkWindow *) tkwin;
     register WmInfo *wmPtr;
@@ -1299,10 +1306,11 @@ Tk_SetGrid(tkwin, reqWidth, reqHeight, widthInc, heightInc)
  *----------------------------------------------------------------------
  */
 
-static void
-TopLevelEventProc(clientData, eventPtr)
-    ClientData clientData;		/* Window for which event occurred. */
-    XEvent *eventPtr;			/* Event that just happened. */
+static void 
+TopLevelEventProc (
+    ClientData clientData,		/* Window for which event occurred. */
+    XEvent *eventPtr			/* Event that just happened. */
+)
 {
     register TkWindow *winPtr = (TkWindow *) clientData;
 
@@ -1619,10 +1627,11 @@ TopLevelEventProc(clientData, eventPtr)
  */
 
 	/* ARGSUSED */
-static void
-TopLevelReqProc(dummy, tkwin)
-    ClientData dummy;			/* Not used. */
-    Tk_Window tkwin;			/* Information about window. */
+static void 
+TopLevelReqProc (
+    ClientData dummy,			/* Not used. */
+    Tk_Window tkwin			/* Information about window. */
+)
 {
     TkWindow *winPtr = (TkWindow *) tkwin;
     WmInfo *wmPtr;
@@ -1661,9 +1670,10 @@ TopLevelReqProc(dummy, tkwin)
  *----------------------------------------------------------------------
  */
 
-static void
-UpdateGeometryInfo(clientData)
-    ClientData clientData;		/* Pointer to the window's record. */
+static void 
+UpdateGeometryInfo (
+    ClientData clientData		/* Pointer to the window's record. */
+)
 {
     register TkWindow *winPtr = (TkWindow *) clientData;
     register WmInfo *wmPtr = winPtr->wmInfoPtr;
@@ -1793,9 +1803,8 @@ UpdateGeometryInfo(clientData)
  *--------------------------------------------------------------
  */
 
-static void
-UpdateSizeHints(winPtr)
-    TkWindow *winPtr;
+static void 
+UpdateSizeHints (TkWindow *winPtr)
 {
     register WmInfo *wmPtr = winPtr->wmInfoPtr;
     XSizeHints *hintsPtr;
@@ -1909,9 +1918,8 @@ UpdateSizeHints(winPtr)
  *--------------------------------------------------------------
  */
 
-static void
-UpdateHints(winPtr)
-    TkWindow *winPtr;
+static void 
+UpdateHints (TkWindow *winPtr)
 {
     WmInfo *wmPtr = winPtr->wmInfoPtr;
 
@@ -1940,13 +1948,14 @@ UpdateHints(winPtr)
  *--------------------------------------------------------------
  */
 
-static int
-ParseGeometry(interp, string, winPtr)
-    Tcl_Interp *interp;		/* Used for error reporting. */
-    char *string;	/* String containing new geometry.  Has the
+static int 
+ParseGeometry (
+    Tcl_Interp *interp,		/* Used for error reporting. */
+    char *string,	/* String containing new geometry.  Has the
 				 * standard form "=wxh+x+y". */
-    TkWindow *winPtr;		/* Pointer to top-level window whose
+    TkWindow *winPtr		/* Pointer to top-level window whose
 				 * geometry is to be changed. */
+)
 {
     register WmInfo *wmPtr = winPtr->wmInfoPtr;
     int x, y, width, height, flags;
@@ -2065,11 +2074,12 @@ ParseGeometry(interp, string, winPtr)
  *----------------------------------------------------------------------
  */
 
-void
-Tk_GetRootCoords(tkwin, xPtr, yPtr)
-    Tk_Window tkwin;		/* Token for window. */
-    int *xPtr;			/* Where to store x-displacement of (0,0). */
-    int *yPtr;			/* Where to store y-displacement of (0,0). */
+void 
+Tk_GetRootCoords (
+    Tk_Window tkwin,		/* Token for window. */
+    int *xPtr,			/* Where to store x-displacement of (0,0). */
+    int *yPtr			/* Where to store y-displacement of (0,0). */
+)
 {
     int x, y;
     register TkWindow *winPtr = (TkWindow *) tkwin;
@@ -2111,9 +2121,10 @@ Tk_GetRootCoords(tkwin, xPtr, yPtr)
  *--------------------------------------------------------------
  */
 
-void
-TkWmSetWmProtocols(winPtr)
-    TkWindow *winPtr;		/* Newly-created top-level window. */
+void 
+TkWmSetWmProtocols (
+    TkWindow *winPtr		/* Newly-created top-level window. */
+)
 {
     if (winPtr->wmInfoPtr->flags & WM_NEVER_MAPPED) {
 	return;
@@ -2176,10 +2187,8 @@ TkWmSetWmProtocols(winPtr)
  *	
  *
  */
-void
-TkWmProtocolEventProc(winPtr, eventPtr)
-TkWindow *winPtr; 
-XEvent *eventPtr;
+void 
+TkWmProtocolEventProc (TkWindow *winPtr, XEvent *eventPtr)
 {
     if ((Atom)(eventPtr->xclient.data.l)[0] ==
 	Tk_InternAtom((Tk_Window) winPtr, "WM_DELETE_WINDOW")) {
@@ -2220,12 +2229,8 @@ XEvent *eventPtr;
  * Kind of artificial, But makes it easier to merge into new
  * versions of Stock Tk.
  */
-int
-WmProtocolCmd(interp, CmdPtr, argc, argv)
-Tcl_Interp *interp;
-char **CmdPtr;
-int argc;
-char **argv;
+int 
+WmProtocolCmd (Tcl_Interp *interp, char **CmdPtr, int argc, char **argv)
 {
 #define Cmd (*CmdPtr)
 
@@ -2301,11 +2306,13 @@ char **argv;
  *----------------------------------------------------------------------
  */
 
-Tk_Window
-Tk_CoordsToWindow(rootX, rootY, tkwin)
-    int rootX, rootY;		/* Coordinates of point in root window. */
-    Tk_Window tkwin;		/* Token for any window in application;
+Tk_Window 
+Tk_CoordsToWindow (
+    int rootX,
+    int rootY,		/* Coordinates of point in root window. */
+    Tk_Window tkwin		/* Token for any window in application;
 				 * used to identify the application. */
+)
 {
     Window rootChild, dummy3, dummy4;
     int i, dummy1, dummy2;

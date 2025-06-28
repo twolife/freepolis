@@ -291,14 +291,15 @@ DefPool(IdleHandler)
  */
 
 void
-Tk_CreateEventHandler(token, mask, proc, clientData)
-    Tk_Window token;		/* Token for window in which to
+Tk_CreateEventHandler(
+    Tk_Window token,		/* Token for window in which to
 				 * create handler. */
-    unsigned long mask;		/* Events for which proc should
+    unsigned long mask,		/* Events for which proc should
 				 * be called. */
-    Tk_EventProc *proc;		/* Procedure to call for each
+    Tk_EventProc *proc,		/* Procedure to call for each
 				 * selected event */
-    ClientData clientData;	/* Arbitrary data to pass to proc. */
+    ClientData clientData	/* Arbitrary data to pass to proc. */
+)
 {
     register TkEventHandler *handlerPtr;
     register TkWindow *winPtr = (TkWindow *) token;
@@ -370,12 +371,13 @@ Tk_CreateEventHandler(token, mask, proc, clientData)
  *--------------------------------------------------------------
  */
 
-void
-Tk_DeleteEventHandler(token, mask, proc, clientData)
-    Tk_Window token;		/* Same as corresponding arguments passed */
-    unsigned long mask;		/* previously to Tk_CreateEventHandler. */
-    Tk_EventProc *proc;
-    ClientData clientData;
+void 
+Tk_DeleteEventHandler (
+    Tk_Window token,		/* Same as corresponding arguments passed */
+    unsigned long mask,		/* previously to Tk_CreateEventHandler. */
+    Tk_EventProc *proc,
+    ClientData clientData
+)
 {
     register TkEventHandler *handlerPtr;
     register InProgress *ipPtr;
@@ -446,10 +448,11 @@ Tk_DeleteEventHandler(token, mask, proc, clientData)
  *--------------------------------------------------------------
  */
 
-void
-Tk_CreateGenericHandler(proc, clientData)
-     Tk_GenericProc *proc;	/* Procedure to call on every event. */
-     ClientData clientData;	/* One-word value to pass to proc. */
+void 
+Tk_CreateGenericHandler (
+    Tk_GenericProc *proc,	/* Procedure to call on every event. */
+    ClientData clientData	/* One-word value to pass to proc. */
+)
 {
     GenericHandler *handlerPtr;
     
@@ -486,10 +489,8 @@ Tk_CreateGenericHandler(proc, clientData)
  *--------------------------------------------------------------
  */
 
-void
-Tk_DeleteGenericHandler(proc, clientData)
-     Tk_GenericProc *proc;
-     ClientData clientData;
+void 
+Tk_DeleteGenericHandler (Tk_GenericProc *proc, ClientData clientData)
 {
     GenericHandler * handler;
     
@@ -517,9 +518,10 @@ Tk_DeleteGenericHandler(proc, clientData)
  *--------------------------------------------------------------
  */
 
-void
-Tk_HandleEvent(eventPtr)
-    XEvent *eventPtr;		/* Event to dispatch. */
+void 
+Tk_HandleEvent (
+    XEvent *eventPtr		/* Event to dispatch. */
+)
 {
     register TkEventHandler *handlerPtr;
     register GenericHandler *genericPtr;
@@ -730,20 +732,21 @@ Tk_HandleEvent(eventPtr)
  *--------------------------------------------------------------
  */
 
-void
-Tk_CreateFileHandler(fd, mask, proc, clientData)
-    int fd;			/* Integer identifier for stream. */
-    int mask;			/* OR'ed combination of TK_READABLE,
+void 
+Tk_CreateFileHandler (
+    int fd,			/* Integer identifier for stream. */
+    int mask,			/* OR'ed combination of TK_READABLE,
 				 * TK_WRITABLE, and TK_EXCEPTION:
 				 * indicates conditions under which
 				 * proc should be called. */
-    Tk_FileProc *proc;		/* Procedure to call for each
+    Tk_FileProc *proc,		/* Procedure to call for each
 				 * selected event.  NULL means that
 				 * this is a display, and that
 				 * clientData is the (Display *)
 				 * for it, and that events should
 				 * be handled automatically. */
-    ClientData clientData;	/* Arbitrary data to pass to proc. */
+    ClientData clientData	/* Arbitrary data to pass to proc. */
+)
 {
     register FileEvent *filePtr;
     int index;
@@ -841,10 +844,11 @@ Tk_CreateFileHandler(fd, mask, proc, clientData)
  *--------------------------------------------------------------
  */
 
-void
-Tk_DeleteFileHandler(fd)
-    int fd;			/* Stream id for which to remove
+void 
+Tk_DeleteFileHandler (
+    int fd			/* Stream id for which to remove
 				 * callback procedure. */
+)
 {
     register FileEvent *filePtr;
     FileEvent *prevPtr;
@@ -924,12 +928,13 @@ Tk_DeleteFileHandler(fd)
  *--------------------------------------------------------------
  */
 
-Tk_TimerToken
-Tk_CreateTimerHandler(milliseconds, proc, clientData)
-    int milliseconds;		/* How many milliseconds to wait
+Tk_TimerToken 
+Tk_CreateTimerHandler (
+    int milliseconds,		/* How many milliseconds to wait
 				 * before invoking proc. */
-    Tk_TimerProc *proc;		/* Procedure to invoke. */
-    ClientData clientData;	/* Arbitrary data to pass to proc. */
+    Tk_TimerProc *proc,		/* Procedure to invoke. */
+    ClientData clientData	/* Arbitrary data to pass to proc. */
+)
 {
     register TimerEvent *timerPtr, *tPtr2, *prevPtr;
     static int id = 0;
@@ -1000,14 +1005,15 @@ Tk_CreateTimerHandler(milliseconds, proc, clientData)
  *--------------------------------------------------------------
  */
 
-Tk_TimerToken
-Tk_CreateMicroTimerHandler(seconds, microseconds, proc, clientData)
-    int seconds;		/* How many seconds to wait
+Tk_TimerToken 
+Tk_CreateMicroTimerHandler (
+    int seconds,		/* How many seconds to wait
 				 * before invoking proc. */
-    int microseconds;		/* How many microseconds to wait
+    int microseconds,		/* How many microseconds to wait
 				 * before invoking proc. */
-    Tk_TimerProc *proc;		/* Procedure to invoke. */
-    ClientData clientData;	/* Arbitrary data to pass to proc. */
+    Tk_TimerProc *proc,		/* Procedure to invoke. */
+    ClientData clientData	/* Arbitrary data to pass to proc. */
+)
 {
     register TimerEvent *timerPtr, *tPtr2, *prevPtr;
     static int id = 0;
@@ -1078,10 +1084,11 @@ Tk_CreateMicroTimerHandler(seconds, microseconds, proc, clientData)
  *--------------------------------------------------------------
  */
 
-void
-Tk_DeleteTimerHandler(token)
-    Tk_TimerToken token;	/* Result previously returned by
+void 
+Tk_DeleteTimerHandler (
+    Tk_TimerToken token	/* Result previously returned by
 				 * Tk_DeleteTimerHandler. */
+)
 {
     register TimerEvent *timerPtr, *prevPtr;
 
@@ -1124,10 +1131,11 @@ Tk_DeleteTimerHandler(token)
  *--------------------------------------------------------------
  */
 
-void
-Tk_DoWhenIdle(proc, clientData)
-    Tk_IdleProc *proc;		/* Procedure to invoke. */
-    ClientData clientData;	/* Arbitrary value to pass to proc. */
+void 
+Tk_DoWhenIdle (
+    Tk_IdleProc *proc,		/* Procedure to invoke. */
+    ClientData clientData	/* Arbitrary value to pass to proc. */
+)
 {
     register IdleHandler *idlePtr;
 
@@ -1161,10 +1169,11 @@ Tk_DoWhenIdle(proc, clientData)
  *----------------------------------------------------------------------
  */
 
-void
-Tk_CancelIdleCall(proc, clientData)
-    Tk_IdleProc *proc;		/* Procedure that was previously registered. */
-    ClientData clientData;	/* Arbitrary value to pass to proc. */
+void 
+Tk_CancelIdleCall (
+    Tk_IdleProc *proc,		/* Procedure that was previously registered. */
+    ClientData clientData	/* Arbitrary value to pass to proc. */
+)
 {
     register IdleHandler *idlePtr, *prevPtr;
     IdleHandler *nextPtr;
@@ -1214,12 +1223,13 @@ Tk_CancelIdleCall(proc, clientData)
  *--------------------------------------------------------------
  */
 
-int
-Tk_DoOneEvent(flags)
-    int flags;			/* Miscellaneous flag values:  may be any
+int 
+Tk_DoOneEvent (
+    int flags			/* Miscellaneous flag values:  may be any
 				 * combination of TK_DONT_WAIT, TK_X_EVENTS,
 				 * TK_FILE_EVENTS, TK_TIMER_EVENTS, and
 				 * TK_IDLE_EVENTS. */
+)
 {
     register FileEvent *filePtr;
     struct timeval curTime, timeout, *timeoutPtr;
@@ -1285,9 +1295,9 @@ Tk_DoOneEvent(flags)
 		     * function to print a nice message.
 		     */
 
-		    void (*oldHandler)();
+		    void (*oldHandler)(int);
 
-		    oldHandler = (void (*)()) signal(SIGPIPE, SIG_IGN);
+		    oldHandler = (void (*)(int)) signal(SIGPIPE, SIG_IGN);
 		    XNoOp(display);
 		    XFlush(display);
 		    (void) signal(SIGPIPE, oldHandler);
@@ -1534,8 +1544,8 @@ Tk_DoOneEvent(flags)
  *--------------------------------------------------------------
  */
 
-void
-Tk_MainLoop()
+void 
+Tk_MainLoop (void)
 {
     while (!tkMustExit &&
 	   tk_NumMainWindows > 0) {
@@ -1559,9 +1569,10 @@ Tk_MainLoop()
  *----------------------------------------------------------------------
  */
 
-void
-Tk_Sleep(ms)
-    int ms;			/* Number of milliseconds to sleep. */
+void 
+Tk_Sleep (
+    int ms			/* Number of milliseconds to sleep. */
+)
 {
     static struct timeval delay;
 
@@ -1593,13 +1604,14 @@ Tk_Sleep(ms)
  */
 
 Tk_RestrictProc *
-Tk_RestrictEvents(proc, arg, prevArgPtr)
-    Tk_RestrictProc *proc;	/* X "if" procedure to call for each
+Tk_RestrictEvents (
+    Tk_RestrictProc *proc,	/* X "if" procedure to call for each
 				 * incoming event.  See "XIfEvent" doc.
 				 * for details. */
-    char *arg;			/* Arbitrary argument to pass to proc. */
-    char **prevArgPtr;		/* Place to store information about previous
+    char *arg,			/* Arbitrary argument to pass to proc. */
+    char **prevArgPtr		/* Place to store information about previous
 				 * argument. */
+)
 {
     Bool (*prev)  _ANSI_ARGS_((Display *display, XEvent *eventPtr, char *arg));
 
@@ -1641,12 +1653,13 @@ Tk_RestrictEvents(proc, arg, prevArgPtr)
  *--------------------------------------------------------------
  */
 
-void
-Tk_CreateFocusHandler(tkwin, proc, clientData)
-    Tk_Window tkwin;		/* Token for window. */
-    Tk_FocusProc *proc;		/* Procedure to call when tkwin gets
+void 
+Tk_CreateFocusHandler (
+    Tk_Window tkwin,		/* Token for window. */
+    Tk_FocusProc *proc,		/* Procedure to call when tkwin gets
 				 * or loses the input focus. */
-    ClientData clientData;	/* Arbitrary value to pass to proc. */
+    ClientData clientData	/* Arbitrary value to pass to proc. */
+)
 {
     register TkWindow *winPtr = (TkWindow *) tkwin;
 
@@ -1671,13 +1684,14 @@ Tk_CreateFocusHandler(tkwin, proc, clientData)
  *--------------------------------------------------------------
  */
 
-int
-Tk_FocusCmd(clientData, interp, argc, argv)
-    ClientData clientData;	/* Main window associated with
+int 
+Tk_FocusCmd (
+    ClientData clientData,	/* Main window associated with
 				 * interpreter. */
-    Tcl_Interp *interp;		/* Current interpreter. */
-    int argc;			/* Number of arguments. */
-    char **argv;		/* Argument strings. */
+    Tcl_Interp *interp,		/* Current interpreter. */
+    int argc,			/* Number of arguments. */
+    char **argv		/* Argument strings. */
+)
 {
     Tk_Window tkwin = (Tk_Window) clientData;
     register TkWindow *winPtr = (TkWindow *) clientData;
@@ -1774,10 +1788,11 @@ Tk_FocusCmd(clientData, interp, argc, argv)
  *--------------------------------------------------------------
  */
 
-void
-TkFocusEventProc(winPtr, eventPtr)
-    register TkWindow *winPtr;	/* Top-level window just entered or left. */
-    XEvent *eventPtr;		/* EnterWindow or LeaveWindow event. */
+void 
+TkFocusEventProc (
+    register TkWindow *winPtr,	/* Top-level window just entered or left. */
+    XEvent *eventPtr		/* EnterWindow or LeaveWindow event. */
+)
 {
     register TkWindow *focusPtr;
     TkWindow *newMouseMainPtr = NULL;
@@ -1823,10 +1838,11 @@ TkFocusEventProc(winPtr, eventPtr)
  *--------------------------------------------------------------
  */
 
-void
-TkEventDeadWindow(winPtr)
-    TkWindow *winPtr;		/* Information about the window
+void 
+TkEventDeadWindow (
+    TkWindow *winPtr		/* Information about the window
 				 * that is being deleted. */
+)
 {
     register TkEventHandler *handlerPtr;
     register InProgress *ipPtr;
@@ -1877,9 +1893,10 @@ TkEventDeadWindow(winPtr)
  *----------------------------------------------------------------------
  */
 
-Time
-TkCurrentTime(dispPtr)
-    TkDisplay *dispPtr;		/* Display for which the time is desired. */
+Time 
+TkCurrentTime (
+    TkDisplay *dispPtr		/* Display for which the time is desired. */
+)
 {
     register XEvent *eventPtr;
 

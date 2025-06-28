@@ -49,11 +49,12 @@ static void	AtomInit _ANSI_ARGS_((TkDisplay *dispPtr));
  *--------------------------------------------------------------
  */
 
-Atom
-Tk_InternAtom(tkwin, name)
-    Tk_Window tkwin;		/* Window token;  map name to atom
+Atom 
+Tk_InternAtom (
+    Tk_Window tkwin,		/* Window token;  map name to atom
 				 * for this window's display. */
-    char *name;			/* Name to turn into atom. */
+    char *name			/* Name to turn into atom. */
+)
 {
     register TkDisplay *dispPtr;
     register Tcl_HashEntry *hPtr;
@@ -101,11 +102,12 @@ Tk_InternAtom(tkwin, name)
  */
 
 char *
-Tk_GetAtomName(tkwin, atom)
-    Tk_Window tkwin;		/* Window token;  map atom to name
+Tk_GetAtomName (
+    Tk_Window tkwin,		/* Window token;  map atom to name
 				 * relative to this window's
 				 * display. */
-    Atom atom;			/* Atom whose name is wanted. */
+    Atom atom			/* Atom whose name is wanted. */
+)
 {
     register TkDisplay *dispPtr;
     register Tcl_HashEntry *hPtr;
@@ -122,7 +124,7 @@ Tk_GetAtomName(tkwin, atom)
 	int new;
 
 	handler= Tk_CreateErrorHandler(dispPtr->display, BadAtom,
-		-1, -1, (int (*)()) NULL, (ClientData) NULL);
+		-1, -1, (int (*)(int *, XErrorEvent *)) NULL, (ClientData) NULL);
 	name = XGetAtomName(dispPtr->display, atom);
 	if (name == NULL) {
 	    name = "?bad atom?";
@@ -155,9 +157,10 @@ Tk_GetAtomName(tkwin, atom)
  *--------------------------------------------------------------
  */
 
-static void
-AtomInit(dispPtr)
-    register TkDisplay *dispPtr;	/* Display to initialize. */
+static void 
+AtomInit (
+    register TkDisplay *dispPtr	/* Display to initialize. */
+)
 {
     dispPtr->atomInit = 1;
     Tcl_InitHashTable(&dispPtr->nameTable, TCL_STRING_KEYS);

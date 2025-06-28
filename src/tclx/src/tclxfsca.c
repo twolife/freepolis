@@ -95,10 +95,8 @@ FileScanCleanUp _ANSI_ARGS_((ClientData clientData));
  *     entry.  The entry itself is not released.
  *-----------------------------------------------------------------------------
  */
-static int
-CleanUpContext (scanGlobPtr, contextPtr)
-    scanGlob_pt    scanGlobPtr;
-    scanContext_pt contextPtr;
+static int 
+CleanUpContext (scanGlob_pt scanGlobPtr, scanContext_pt contextPtr)
 {
     matchDef_pt  matchPtr, oldMatchPtr;
 
@@ -128,10 +126,8 @@ CleanUpContext (scanGlobPtr, contextPtr)
  *
  *-----------------------------------------------------------------------------
  */
-static int
-CreateScanContext (interp, scanGlobPtr)
-    Tcl_Interp  *interp;
-    scanGlob_pt  scanGlobPtr;
+static int 
+CreateScanContext (Tcl_Interp *interp, scanGlob_pt scanGlobPtr)
 {
     scanContext_pt contextPtr;
 
@@ -155,11 +151,8 @@ CreateScanContext (interp, scanGlobPtr)
  *
  *-----------------------------------------------------------------------------
  */
-static int
-DeleteScanContext (interp, scanGlobPtr, contextHandle)
-    Tcl_Interp  *interp;
-    scanGlob_pt  scanGlobPtr;
-    char        *contextHandle;
+static int 
+DeleteScanContext (Tcl_Interp *interp, scanGlob_pt scanGlobPtr, char *contextHandle)
 {
     scanContext_pt contextPtr;
 
@@ -187,12 +180,8 @@ DeleteScanContext (interp, scanGlobPtr, contextHandle)
  *
  *-----------------------------------------------------------------------------
  */
-static int
-Tcl_ScancontextCmd (clientData, interp, argc, argv)
-    char       *clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+static int 
+Tcl_ScancontextCmd (int *clientData, Tcl_Interp *interp, int argc, char **argv)
 {
     scanGlob_pt  scanGlobPtr = (scanGlob_pt) clientData;
 
@@ -243,12 +232,8 @@ Tcl_ScancontextCmd (clientData, interp, argc, argv)
  *
  *-----------------------------------------------------------------------------
  */
-static int
-Tcl_ScanmatchCmd (clientData, interp, argc, argv)
-    char       *clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+static int 
+Tcl_ScanmatchCmd (int *clientData, Tcl_Interp *interp, int argc, char **argv)
 {
     scanGlob_pt     scanGlobPtr = (scanGlob_pt) clientData;
     scanContext_pt  contextPtr;
@@ -344,13 +329,8 @@ argError:
  * 
  *-----------------------------------------------------------------------------
  */
-static int
-SetMatchVar (interp, fileLine, fileOffset, scanLineNum, fileHandle)
-    Tcl_Interp *interp;
-    char       *fileLine;
-    long        fileOffset;
-    long        scanLineNum;
-    char       *fileHandle;
+static int 
+SetMatchVar (Tcl_Interp *interp, char *fileLine, long fileOffset, long scanLineNum, char *fileHandle)
 {
     char numBuf [20];
 
@@ -386,12 +366,8 @@ SetMatchVar (interp, fileLine, fileOffset, scanLineNum, fileHandle)
  *
  *-----------------------------------------------------------------------------
  */
-static int
-Tcl_ScanfileCmd (clientData, interp, argc, argv)
-    char       *clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+static int 
+Tcl_ScanfileCmd (int *clientData, Tcl_Interp *interp, int argc, char **argv)
 {
     scanGlob_pt     scanGlobPtr = (scanGlob_pt) clientData;
     scanContext_pt  contextPtr;
@@ -528,8 +504,9 @@ scanExit:
  *-----------------------------------------------------------------------------
  */
 static void
-FileScanCleanUp (clientData)
-    ClientData clientData;
+FileScanCleanUp (
+    ClientData clientData
+)
 {
     scanGlob_pt    scanGlobPtr = (scanGlob_pt) clientData;
     scanContext_pt contextPtr;
@@ -556,9 +533,8 @@ FileScanCleanUp (clientData)
  *
  *-----------------------------------------------------------------------------
  */
-void
-Tcl_InitFilescan (interp)
-Tcl_Interp *interp;
+void 
+Tcl_InitFilescan (Tcl_Interp *interp)
 {
     scanGlob_pt    scanGlobPtr;
     void_pt        fileCbTblPtr;

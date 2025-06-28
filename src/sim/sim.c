@@ -229,7 +229,7 @@ sim_init(void)
 int triedToBailOnce = 0;
 
 void
-SignalExitHandler()
+SignalExitHandler(int sig)
 {
   if (triedToBailOnce) {
     exit(-1);
@@ -246,10 +246,10 @@ SignalExitHandler()
 void
 signal_init()
 {
-  signal(SIGHUP, (void (*)())SignalExitHandler);
-  signal(SIGINT, (void (*)())SignalExitHandler);
-  signal(SIGQUIT, (void (*)())SignalExitHandler);
-  signal(SIGTERM, (void (*)())SignalExitHandler);
+  signal(SIGHUP, (void (*)(int))SignalExitHandler);
+  signal(SIGINT, (void (*)(int))SignalExitHandler);
+  signal(SIGQUIT, (void (*)(int))SignalExitHandler);
+  signal(SIGTERM, (void (*)(int))SignalExitHandler);
 }
 
 
@@ -627,7 +627,7 @@ int
 main(int argc, char *argv[])
 { 
   int c, errflg = 0;
-  extern int isatty();
+  extern int isatty(int);
 
   printf("Welcome to X11 Multi Player Micropolis version %s by Will Wright, Don Hopkins.\n",
 	 MicropolisVersion);

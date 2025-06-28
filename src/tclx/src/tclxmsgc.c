@@ -58,9 +58,10 @@ static void_pt msgCatTblPtr = NULL;
  *-----------------------------------------------------------------------------
  */
 static nl_catd
-catopen (name, oflag)
-    char *name;
-    int   oflag;
+catopen (
+    char *name,
+    int   oflag
+)
 {
     return (nl_catd) -1;
 }
@@ -77,10 +78,12 @@ catopen (name, oflag)
  *-----------------------------------------------------------------------------
  */
 static char *
-catgets (catd, set_num, msg_num, defaultStr)
-    nl_catd catd;
-    int     set_num, msg_num;
-    char   *defaultStr;
+catgets (
+    nl_catd catd,
+    int     set_num,
+    int     msg_num,
+    char   *defaultStr
+)
 {
     return defaultStr;
 }
@@ -97,8 +100,7 @@ catgets (catd, set_num, msg_num, defaultStr)
  *-----------------------------------------------------------------------------
  */
 static int
-catclose (catd)
-    nl_catd catd;
+catclose (nl_catd catd)
 {
     return -1;
 }
@@ -115,11 +117,8 @@ catclose (catd)
  *
  *-----------------------------------------------------------------------------
  */
-static int
-ParseFailOption (interp, optionStr, failPtr)
-    Tcl_Interp *interp;
-    CONST char *optionStr;
-    int        *failPtr;
+static int 
+ParseFailOption (Tcl_Interp *interp, CONST char *optionStr, int *failPtr)
 {
     if (STREQU ("-fail", ((char *) optionStr)))
         *failPtr = TRUE;
@@ -149,10 +148,8 @@ ParseFailOption (interp, optionStr, failPtr)
  *
  *-----------------------------------------------------------------------------
  */
-static int
-CatOpFailed (interp, errorMsg)
-    Tcl_Interp *interp;
-    CONST char *errorMsg;
+static int 
+CatOpFailed (Tcl_Interp *interp, CONST char *errorMsg)
 {
 #ifdef TCL_HAVE_CATGETS
 
@@ -181,11 +178,12 @@ CatOpFailed (interp, errorMsg)
  *-----------------------------------------------------------------------------
  */
 static int
-Tcl_CatopenCmd (clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_CatopenCmd (
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     int      fail;
     nl_catd  catDesc;
@@ -225,11 +223,12 @@ Tcl_CatopenCmd (clientData, interp, argc, argv)
  *-----------------------------------------------------------------------------
  */
 static int
-Tcl_CatgetsCmd (clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_CatgetsCmd (
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     nl_catd   *catDescPtr;
     int        msgSetNum, msgNum;
@@ -267,11 +266,12 @@ Tcl_CatgetsCmd (clientData, interp, argc, argv)
  *-----------------------------------------------------------------------------
  */
 static int
-Tcl_CatcloseCmd (clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_CatcloseCmd (
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     int      fail;
     nl_catd *catDescPtr;
@@ -308,8 +308,9 @@ Tcl_CatcloseCmd (clientData, interp, argc, argv)
  *-----------------------------------------------------------------------------
  */
 static void
-MsgCatCleanUp (clientData)
-    ClientData clientData;
+MsgCatCleanUp (
+    ClientData clientData
+)
 {
     nl_catd *catDescPtr;
     int      walkKey;
@@ -332,9 +333,8 @@ MsgCatCleanUp (clientData)
  *
  *-----------------------------------------------------------------------------
  */
-void
-Tcl_InitMsgCat (interp)
-    Tcl_Interp *interp;
+void 
+Tcl_InitMsgCat (Tcl_Interp *interp)
 {
 
     if (msgCatTblPtr == NULL)

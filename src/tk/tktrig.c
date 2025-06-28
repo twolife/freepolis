@@ -49,11 +49,12 @@ static char rcsid[] = "$Header: /user6/ouster/wish/RCS/tkTrig.c,v 1.8 92/08/24 0
  *--------------------------------------------------------------
  */
 
-double
-TkLineToPoint(end1Ptr, end2Ptr, pointPtr)
-    double end1Ptr[2];		/* Coordinates of first end-point of line. */
-    double end2Ptr[2];		/* Coordinates of second end-point of line. */
-    double pointPtr[2];		/* Points to coords for point. */
+double 
+TkLineToPoint (
+    double end1Ptr[2],		/* Coordinates of first end-point of line. */
+    double end2Ptr[2],		/* Coordinates of second end-point of line. */
+    double pointPtr[2]		/* Points to coords for point. */
+)
 {
     double x, y;
 
@@ -153,15 +154,16 @@ TkLineToPoint(end1Ptr, end2Ptr, pointPtr)
  *--------------------------------------------------------------
  */
 
-int
-TkLineToArea(end1Ptr, end2Ptr, rectPtr)
-    double end1Ptr[2];		/* X and y coordinates for one endpoint
+int 
+TkLineToArea (
+    double end1Ptr[2],		/* X and y coordinates for one endpoint
 				 * of line. */
-    double end2Ptr[2];		/* X and y coordinates for other endpoint
+    double end2Ptr[2],		/* X and y coordinates for other endpoint
 				 * of line. */
-    double rectPtr[4];		/* Points to coords for rectangle, in the
+    double rectPtr[4]		/* Points to coords for rectangle, in the
 				 * order x1, y1, x2, y2.  X1 must be no
 				 * larger than x2, and y1 no larger than y2. */
+)
 {
     int inside1, inside2;
 
@@ -291,13 +293,14 @@ TkLineToArea(end1Ptr, end2Ptr, rectPtr)
  *--------------------------------------------------------------
  */
 
-double
-TkPolygonToPoint(polyPtr, numPoints, pointPtr)
-    double *polyPtr;		/* Points to an array coordinates for
+double 
+TkPolygonToPoint (
+    double *polyPtr,		/* Points to an array coordinates for
 				 * closed polygon:  x0, y0, x1, y1, ...
 				 * The polygon may be self-intersecting. */
-    int numPoints;		/* Total number of points at *polyPtr. */
-    double *pointPtr;		/* Points to coords for point. */
+    int numPoints,		/* Total number of points at *polyPtr. */
+    double *pointPtr		/* Points to coords for point. */
+)
 {
     double bestDist;		/* Closest distance between point and
 				 * any edge in polygon. */
@@ -449,15 +452,16 @@ TkPolygonToPoint(polyPtr, numPoints, pointPtr)
  *--------------------------------------------------------------
  */
 
-int
-TkPolygonToArea(polyPtr, numPoints, rectPtr)
-    double *polyPtr;		/* Points to an array coordinates for
+int 
+TkPolygonToArea (
+    double *polyPtr,		/* Points to an array coordinates for
 				 * closed polygon:  x0, y0, x1, y1, ...
 				 * The polygon may be self-intersecting. */
-    int numPoints;		/* Total number of points at *polyPtr. */
-    register double *rectPtr;	/* Points to coords for rectangle, in the
+    int numPoints,		/* Total number of points at *polyPtr. */
+    register double *rectPtr	/* Points to coords for rectangle, in the
 				 * order x1, y1, x2, y2.  X1 and y1 must
 				 * be lower-left corner. */
+)
 {
     int state;			/* State of all edges seen so far (-1 means
 				 * outside, 1 means inside, won't ever be
@@ -522,15 +526,16 @@ TkPolygonToArea(polyPtr, numPoints, rectPtr)
  */
 
 	/* ARGSUSED */
-double
-TkOvalToPoint(ovalPtr, width, filled, pointPtr)
-    double ovalPtr[4];		/* Pointer to array of four coordinates
+double 
+TkOvalToPoint (
+    double ovalPtr[4],		/* Pointer to array of four coordinates
 				 * (x1, y1, x2, y2) defining oval's bounding
 				 * box. */
-    double width;		/* Width of outline for oval. */
-    int filled;			/* Non-zero means oval should be treated as
+    double width,		/* Width of outline for oval. */
+    int filled,			/* Non-zero means oval should be treated as
 				 * filled;  zero means only consider outline. */
-    double pointPtr[2];		/* Coordinates of point. */
+    double pointPtr[2]		/* Coordinates of point. */
+)
 {
     double xDelta, yDelta, scaledDistance, distToOutline, distToCenter;
 
@@ -601,15 +606,16 @@ TkOvalToPoint(ovalPtr, width, filled, pointPtr)
  *--------------------------------------------------------------
  */
 
-int
-TkOvalToArea(ovalPtr, rectPtr)
-    register double *ovalPtr;	/* Points to coordinates definining the
+int 
+TkOvalToArea (
+    register double *ovalPtr,	/* Points to coordinates definining the
 				 * bounding rectangle for the oval: x1, y1,
 				 * x2, y2.  X1 must be less than x2 and y1
 				 * less than y2. */
-    register double *rectPtr;	/* Points to coords for rectangle, in the
+    register double *rectPtr	/* Points to coords for rectangle, in the
 				 * order x1, y1, x2, y2.  X1 and y1 must
 				 * be lower-left corner. */
+)
 {
     double centerX, centerY, radX, radY, deltaX, deltaY;
 
@@ -721,13 +727,14 @@ TkOvalToArea(ovalPtr, rectPtr)
  */
 
 	/* ARGSUSED */
-void
-TkIncludePoint(canvasPtr, itemPtr, pointPtr)
-    Tk_Canvas *canvasPtr;		/* Canvas containing item. */
-    register Tk_Item *itemPtr;		/* Item whose bounding box is
+void 
+TkIncludePoint (
+    Tk_Canvas *canvasPtr,		/* Canvas containing item. */
+    register Tk_Item *itemPtr,		/* Item whose bounding box is
 					 * being calculated. */
-    double *pointPtr;			/* Address of two doubles giving
+    double *pointPtr			/* Address of two doubles giving
 					 * x and y coordinates of point. */
+)
 {
     int tmp;
 
@@ -768,16 +775,17 @@ TkIncludePoint(canvasPtr, itemPtr, pointPtr)
  *--------------------------------------------------------------
  */
 
-void
-TkBezierScreenPoints(canvasPtr, control, numSteps, xPointPtr)
-    Tk_Canvas *canvasPtr;		/* Canvas in which curve is to be
+void 
+TkBezierScreenPoints (
+    Tk_Canvas *canvasPtr,		/* Canvas in which curve is to be
 					 * drawn. */
-    double control[];			/* Array of coordinates for four
+    double control[],			/* Array of coordinates for four
 					 * control points:  x0, y0, x1, y1,
 					 * ... x3 y3. */
-    int numSteps;			/* Number of curve points to
+    int numSteps,			/* Number of curve points to
 					 * generate.  */
-    register XPoint *xPointPtr;		/* Where to put new points. */
+    register XPoint *xPointPtr		/* Where to put new points. */
+)
 {
     int i;
     double u, u2, u3, t, t2, t3;
@@ -817,14 +825,15 @@ TkBezierScreenPoints(canvasPtr, control, numSteps, xPointPtr)
  *--------------------------------------------------------------
  */
 
-void
-TkBezierPoints(control, numSteps, coordPtr)
-    double control[];			/* Array of coordinates for four
+void 
+TkBezierPoints (
+    double control[],			/* Array of coordinates for four
 					 * control points:  x0, y0, x1, y1,
 					 * ... x3 y3. */
-    int numSteps;			/* Number of curve points to
+    int numSteps,			/* Number of curve points to
 					 * generate.  */
-    register double *coordPtr;		/* Where to put new points. */
+    register double *coordPtr		/* Where to put new points. */
+)
 {
     int i;
     double u, u2, u3, t, t2, t3;
@@ -865,25 +874,26 @@ TkBezierPoints(control, numSteps, coordPtr)
  *--------------------------------------------------------------
  */
 
-int
-TkMakeBezierCurve(canvasPtr, pointPtr, numPoints, numSteps, xPoints, dblPoints)
-    Tk_Canvas *canvasPtr;		/* Canvas in which curve is to be
+int 
+TkMakeBezierCurve (
+    Tk_Canvas *canvasPtr,		/* Canvas in which curve is to be
 					 * drawn. */
-    double *pointPtr;			/* Array of input coordinates:  x0,
+    double *pointPtr,			/* Array of input coordinates:  x0,
 					 * y0, x1, y1, etc.. */
-    int numPoints;			/* Number of points at pointPtr. */
-    int numSteps;			/* Number of steps to use for each
+    int numPoints,			/* Number of points at pointPtr. */
+    int numSteps,			/* Number of steps to use for each
 					 * spline segments (determines
 					 * smoothness of curve). */
-    XPoint xPoints[];			/* Array of XPoints to fill in (e.g.
+    XPoint xPoints[],			/* Array of XPoints to fill in (e.g.
 					 * for display.  NULL means don't
 					 * fill in any XPoints. */
-    double dblPoints[];			/* Array of points to fill in as
+    double dblPoints[]			/* Array of points to fill in as
 					 * doubles, in the form x0, y0,
 					 * x1, y1, ....  NULL means don't
 					 * fill in anything in this form. 
 					 * Caller must make sure that this
 					 * array has enough space. */
+)
 {
     int closed, outputPoints, i;
     int numCoords = numPoints*2;
@@ -1037,19 +1047,20 @@ TkMakeBezierCurve(canvasPtr, pointPtr, numPoints, numSteps, xPoints, dblPoints)
  *--------------------------------------------------------------
  */
 
-int
-TkGetMiterPoints(p1, p2, p3, width, m1, m2)
-    double p1[];		/* Points to x- and y-coordinates of point
+int 
+TkGetMiterPoints (
+    double p1[],		/* Points to x- and y-coordinates of point
 				 * before vertex. */
-    double p2[];		/* Points to x- and y-coordinates of vertex
+    double p2[],		/* Points to x- and y-coordinates of vertex
 				 * for mitered joint. */
-    double p3[];		/* Points to x- and y-coordinates of point
+    double p3[],		/* Points to x- and y-coordinates of point
 				 * after vertex. */
-    double width;		/* Width of line.  */
-    double m1[];		/* Points to place to put "left" vertex
+    double width,		/* Width of line.  */
+    double m1[],		/* Points to place to put "left" vertex
 				 * point (see as you face from p1 to p2). */
-    double m2[];		/* Points to place to put "right" vertex
+    double m2[]		/* Points to place to put "right" vertex
 				 * point. */
+)
 {
     double theta1;		/* Angle of segment p2-p1. */
     double theta2;		/* Angle of segment p2-p3. */
@@ -1146,19 +1157,20 @@ TkGetMiterPoints(p1, p2, p3, width, m1, m2)
  *--------------------------------------------------------------
  */
 
-void
-TkGetButtPoints(p1, p2, width, project, m1, m2)
-    double p1[];		/* Points to x- and y-coordinates of point
+void 
+TkGetButtPoints (
+    double p1[],		/* Points to x- and y-coordinates of point
 				 * before vertex. */
-    double p2[];		/* Points to x- and y-coordinates of vertex
+    double p2[],		/* Points to x- and y-coordinates of vertex
 				 * for mitered joint. */
-    double width;		/* Width of line.  */
-    int project;		/* Non-zero means project p2 by an additional
+    double width,		/* Width of line.  */
+    int project,		/* Non-zero means project p2 by an additional
 				 * width/2 before computing m1 and m2. */
-    double m1[];		/* Points to place to put "left" result
+    double m1[],		/* Points to place to put "left" result
 				 * point, as you face from p1 to p2. */
-    double m2[];		/* Points to place to put "right" result
+    double m2[]		/* Points to place to put "right" result
 				 * point. */
+)
 {
     double length;		/* Length of p1-p2 segment. */
     double deltaX, deltaY;	/* Increments in coords. */

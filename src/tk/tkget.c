@@ -52,12 +52,13 @@ static int initialized = 0;
  *--------------------------------------------------------------
  */
 
-int
-Tk_GetAnchor(interp, string, anchorPtr)
-    Tcl_Interp *interp;		/* Use this for error reporting. */
-    char *string;		/* String describing a direction. */
-    Tk_Anchor *anchorPtr;	/* Where to store Tk_Anchor corresponding
+int 
+Tk_GetAnchor (
+    Tcl_Interp *interp,		/* Use this for error reporting. */
+    char *string,		/* String describing a direction. */
+    Tk_Anchor *anchorPtr	/* Where to store Tk_Anchor corresponding
 				 * to string. */
+)
 {
     switch (string[0]) {
 	case 'n':
@@ -130,9 +131,10 @@ Tk_GetAnchor(interp, string, anchorPtr)
  */
 
 char *
-Tk_NameOfAnchor(anchor)
-    Tk_Anchor anchor;		/* Anchor for which identifying string
+Tk_NameOfAnchor (
+    Tk_Anchor anchor		/* Anchor for which identifying string
 				 * is desired. */
+)
 {
     switch (anchor) {
 	case TK_ANCHOR_N: return "n";
@@ -168,12 +170,13 @@ Tk_NameOfAnchor(anchor)
  *--------------------------------------------------------------
  */
 
-int
-Tk_GetJoinStyle(interp, string, joinPtr)
-    Tcl_Interp *interp;		/* Use this for error reporting. */
-    char *string;		/* String describing a justification style. */
-    int *joinPtr;		/* Where to store join style corresponding
+int 
+Tk_GetJoinStyle (
+    Tcl_Interp *interp,		/* Use this for error reporting. */
+    char *string,		/* String describing a justification style. */
+    int *joinPtr		/* Where to store join style corresponding
 				 * to string. */
+)
 {
     int c, length;
 
@@ -217,9 +220,10 @@ Tk_GetJoinStyle(interp, string, joinPtr)
  */
 
 char *
-Tk_NameOfJoinStyle(join)
-    int join;			/* Join style for which identifying string
+Tk_NameOfJoinStyle (
+    int join			/* Join style for which identifying string
 				 * is desired. */
+)
 {
     switch (join) {
 	case JoinBevel: return "bevel";
@@ -249,12 +253,13 @@ Tk_NameOfJoinStyle(join)
  *--------------------------------------------------------------
  */
 
-int
-Tk_GetCapStyle(interp, string, capPtr)
-    Tcl_Interp *interp;		/* Use this for error reporting. */
-    char *string;		/* String describing a justification style. */
-    int *capPtr;		/* Where to store cap style corresponding
+int 
+Tk_GetCapStyle (
+    Tcl_Interp *interp,		/* Use this for error reporting. */
+    char *string,		/* String describing a justification style. */
+    int *capPtr		/* Where to store cap style corresponding
 				 * to string. */
+)
 {
     int c, length;
 
@@ -298,9 +303,10 @@ Tk_GetCapStyle(interp, string, capPtr)
  */
 
 char *
-Tk_NameOfCapStyle(cap)
-    int cap;			/* Cap style for which identifying string
+Tk_NameOfCapStyle (
+    int cap			/* Cap style for which identifying string
 				 * is desired. */
+)
 {
     switch (cap) {
 	case CapButt: return "butt";
@@ -330,12 +336,13 @@ Tk_NameOfCapStyle(cap)
  *--------------------------------------------------------------
  */
 
-int
-Tk_GetJustify(interp, string, justifyPtr)
-    Tcl_Interp *interp;		/* Use this for error reporting. */
-    char *string;		/* String describing a justification style. */
-    Tk_Justify *justifyPtr;	/* Where to store Tk_Justify corresponding
+int 
+Tk_GetJustify (
+    Tcl_Interp *interp,		/* Use this for error reporting. */
+    char *string,		/* String describing a justification style. */
+    Tk_Justify *justifyPtr	/* Where to store Tk_Justify corresponding
 				 * to string. */
+)
 {
     int c, length;
 
@@ -383,9 +390,10 @@ Tk_GetJustify(interp, string, justifyPtr)
  */
 
 char *
-Tk_NameOfJustify(justify)
-    Tk_Justify justify;		/* Justification style for which
+Tk_NameOfJustify (
+    Tk_Justify justify		/* Justification style for which
 				 * identifying string is desired. */
+)
 {
     switch (justify) {
 	case TK_JUSTIFY_LEFT: return "left";
@@ -419,9 +427,10 @@ Tk_NameOfJustify(justify)
  *----------------------------------------------------------------------
  */
 
-Tk_Uid
-Tk_GetUid(string)
-    char *string;		/* String to convert. */
+Tk_Uid 
+Tk_GetUid (
+    char *string		/* String to convert. */
+)
 {
     int dummy;
 
@@ -454,14 +463,15 @@ Tk_GetUid(string)
  *--------------------------------------------------------------
  */
 
-int
-Tk_GetScreenMM(interp, tkwin, string, doublePtr)
-    Tcl_Interp *interp;		/* Use this for error reporting. */
-    Tk_Window tkwin;		/* Window whose screen determines conversion
+int 
+Tk_GetScreenMM (
+    Tcl_Interp *interp,		/* Use this for error reporting. */
+    Tk_Window tkwin,		/* Window whose screen determines conversion
 				 * from centimeters and other absolute
 				 * units. */
-    char *string;		/* String describing a screen distance. */
-    double *doublePtr;		/* Place to store converted result. */
+    char *string,		/* String describing a screen distance. */
+    double *doublePtr		/* Place to store converted result. */
+)
 {
     char *end;
     double d;
@@ -530,14 +540,15 @@ Tk_GetScreenMM(interp, tkwin, string, doublePtr)
  *--------------------------------------------------------------
  */
 
-int
-Tk_GetPixels(interp, tkwin, string, intPtr)
-    Tcl_Interp *interp;		/* Use this for error reporting. */
-    Tk_Window tkwin;		/* Window whose screen determines conversion
+int 
+Tk_GetPixels (
+    Tcl_Interp *interp,		/* Use this for error reporting. */
+    Tk_Window tkwin,		/* Window whose screen determines conversion
 				 * from centimeters and other absolute
 				 * units. */
-    char *string;		/* String describing a justification style. */
-    int *intPtr;		/* Place to store converted result. */
+    char *string,		/* String describing a justification style. */
+    int *intPtr		/* Place to store converted result. */
+)
 {
     char *end;
     double d;

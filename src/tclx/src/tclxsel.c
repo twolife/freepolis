@@ -25,7 +25,7 @@ typedef struct {
 #endif
 
 extern
-double floor ();
+double floor (double);
 
 #ifdef TCL_USE_BZERO_MACRO
 #    define bzero(to,length)    memset(to,'\0',length)
@@ -96,14 +96,8 @@ ReturnSelectedFileList _ANSI_ARGS_((fd_set     *fileDescSetPtr,
  *   The number of files in the list, or -1 if an error occured.
  *-----------------------------------------------------------------------------
  */
-static int
-ParseSelectFileList (interp, handleList, fileDescSetPtr, fileDescListPtr,
-                     maxFileIdPtr)
-    Tcl_Interp *interp;
-    char       *handleList;
-    fd_set     *fileDescSetPtr;
-    FILE     ***fileDescListPtr;
-    int        *maxFileIdPtr;
+static int 
+ParseSelectFileList (Tcl_Interp *interp, char *handleList, fd_set *fileDescSetPtr, FILE ***fileDescListPtr, int *maxFileIdPtr)
 {
     int    handleCnt, idx;
     char **handleArgv;
@@ -171,11 +165,8 @@ ParseSelectFileList (interp, handleList, fileDescSetPtr, fileDescListPtr,
  *   TRUE if any where found that had pending data, FALSE if none were found.
  *-----------------------------------------------------------------------------
  */
-static int
-FindPendingData (fileDescCnt, fileDescList, fileDescSetPtr)
-    int         fileDescCnt;
-    FILE      **fileDescList;
-    fd_set     *fileDescSetPtr;
+static int 
+FindPendingData (int fileDescCnt, FILE **fileDescList, fd_set *fileDescSetPtr)
 {
     int idx, found = FALSE;
 
@@ -213,12 +204,7 @@ FindPendingData (fileDescCnt, fileDescList, fileDescSetPtr)
  *-----------------------------------------------------------------------------
  */
 static char *
-ReturnSelectedFileList (fileDescSetPtr, fileDescSet2Ptr, fileDescCnt,
-                        fileDescList) 
-    fd_set     *fileDescSetPtr;
-    fd_set     *fileDescSet2Ptr;
-    int         fileDescCnt;
-    FILE      **fileDescList;
+ReturnSelectedFileList (fd_set *fileDescSetPtr, fd_set *fileDescSet2Ptr, int fileDescCnt, FILE **fileDescList)
 {
     int    idx, handleCnt, fileNum;
     char  *fileHandleList;
@@ -278,11 +264,12 @@ ReturnSelectedFileList (fileDescSetPtr, fileDescSet2Ptr, fileDescCnt,
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_SelectCmd (clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_SelectCmd (
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
 
     fd_set readFdSet,            writeFdSet,            exceptFdSet;

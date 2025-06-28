@@ -85,8 +85,8 @@ cmdEcho(clientData, interp, argc, argv)
     return TCL_OK;
 }
 
-int
-main()
+int 
+main (void)
 {
     char line[1000], *cmd;
     int result, gotPartial;

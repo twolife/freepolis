@@ -84,13 +84,14 @@ static void		MovePointer2 _ANSI_ARGS_((TkWindow *sourcePtr,
  */
 
 	/* ARGSUSED */
-int
-Tk_GrabCmd(clientData, interp, argc, argv)
-    ClientData clientData;	/* Main window associated with
+int 
+Tk_GrabCmd (
+    ClientData clientData,	/* Main window associated with
 				 * interpreter. */
-    Tcl_Interp *interp;		/* Current interpreter. */
-    int argc;			/* Number of arguments. */
-    char **argv;		/* Argument strings. */
+    Tcl_Interp *interp,		/* Current interpreter. */
+    int argc,			/* Number of arguments. */
+    char **argv		/* Argument strings. */
+)
 {
     TkWindow *winPtr = (TkWindow *) clientData;
     int length, lockScreen;
@@ -169,16 +170,17 @@ Tk_GrabCmd(clientData, interp, argc, argv)
  *----------------------------------------------------------------------
  */
 
-int
-Tk_Grab(interp, tkwin, grabGlobal)
-    Tcl_Interp *interp;			/* Used for error reporting. */
-    Tk_Window tkwin;			/* Window on whose behalf the pointer
+int 
+Tk_Grab (
+    Tcl_Interp *interp,			/* Used for error reporting. */
+    Tk_Window tkwin,			/* Window on whose behalf the pointer
 					 * is to be grabbed. */
-    int grabGlobal;			/* Non-zero means issue a grab to the
+    int grabGlobal			/* Non-zero means issue a grab to the
 					 * server so that no other application
 					 * gets mouse or keyboard events.
 					 * Zero means the grab only applies
 					 * within this application. */
+)
 {
     int grabResult;
     TkWindow *winPtr = (TkWindow *) tkwin;
@@ -354,10 +356,11 @@ Tk_Grab(interp, tkwin, grabGlobal)
  *----------------------------------------------------------------------
  */
 
-void
-Tk_Ungrab(tkwin)
-    Tk_Window tkwin;			/* Window that identifies display
+void 
+Tk_Ungrab (
+    Tk_Window tkwin			/* Window that identifies display
 					 * for grab to be released. */
+)
 {
     TkDisplay *dispPtr = ((TkWindow *) tkwin)->dispPtr;
     int inSequence, ignoring, ungrabRequest, numEvents, i, j, diff;
@@ -485,11 +488,12 @@ Tk_Ungrab(tkwin)
  *----------------------------------------------------------------------
  */
 
-int
-TkPointerEvent(eventPtr, winPtr)
-    register XEvent *eventPtr;		/* Pointer to the event. */
-    TkWindow *winPtr;			/* Tk's information for window
+int 
+TkPointerEvent (
+    register XEvent *eventPtr,		/* Pointer to the event. */
+    TkWindow *winPtr			/* Tk's information for window
 					 * where event was reported. */
+)
 {
     register TkWindow *winPtr2;
     TkDisplay *dispPtr = winPtr->dispPtr;
@@ -737,13 +741,14 @@ TkPointerEvent(eventPtr, winPtr)
  *----------------------------------------------------------------------
  */
 
-static void
-ChangeEventWindow(eventPtr, winPtr)
-    register XEvent *eventPtr;	/* Event to retarget.  Must have
+static void 
+ChangeEventWindow (
+    register XEvent *eventPtr,	/* Event to retarget.  Must have
 				 * type ButtonPress, ButtonRelease, KeyPress,
 				 * KeyRelease, MotionNotify, EnterNotify,
 				 * or LeaveNotify. */
-    TkWindow *winPtr;		/* New target window for event. */
+    TkWindow *winPtr		/* New target window for event. */
+)
 {
     int x, y, sameScreen, bd;
     register TkWindow *childPtr;
@@ -801,20 +806,21 @@ ChangeEventWindow(eventPtr, winPtr)
  *----------------------------------------------------------------------
  */
 
-static void
-MovePointer(eventPtr, sourcePtr, destPtr)
-    XEvent *eventPtr;		/* A template X event.  Must have all fields
+static void 
+MovePointer (
+    XEvent *eventPtr,		/* A template X event.  Must have all fields
 				 * properly set for EnterNotify and LeaveNotify
 				 * events except window, subwindow, x, y,
 				 * detail, and same_screen.  (x_root and y_root
 				 * must be valid, even though x and y needn't
 				 * be valid). */
-    TkWindow *sourcePtr;	/* Window currently containing pointer (NULL
+    TkWindow *sourcePtr,	/* Window currently containing pointer (NULL
 				 * means it's not one managed by this
 				 * process). */
-    TkWindow *destPtr;		/* Window that is to end up containing the
+    TkWindow *destPtr		/* Window that is to end up containing the
 				 * pointer (NULL means it's not one managed
 				 * by this process). */
+)
 {
     TkDisplay *dispPtr;
     register TkWindow *ancestorPtr;	/* Lowest ancestor shared between
@@ -1009,16 +1015,17 @@ MovePointer(eventPtr, sourcePtr, destPtr)
  *----------------------------------------------------------------------
  */
 
-static void
-MovePointer2(sourcePtr, destPtr, mode)
-    TkWindow *sourcePtr;	/* Window currently containing pointer (NULL
+static void 
+MovePointer2 (
+    TkWindow *sourcePtr,	/* Window currently containing pointer (NULL
 				 * means it's not one managed by this
 				 * process). */
-    TkWindow *destPtr;		/* Window that is to end up containing the
+    TkWindow *destPtr,		/* Window that is to end up containing the
 				 * pointer (NULL means it's not one managed
 				 * by this process). */
-    int mode;			/* Mode for enter/leave events, such as
+    int mode			/* Mode for enter/leave events, such as
 				 * NotifyNormal or NotifyUngrab. */
+)
 {
     XEvent event;
     Window dummy1, dummy2;
@@ -1065,10 +1072,11 @@ MovePointer2(sourcePtr, destPtr, mode)
  *----------------------------------------------------------------------
  */
 
-void
-TkGrabDeadWindow(winPtr)
-    register TkWindow *winPtr;		/* Window that is in the process
+void 
+TkGrabDeadWindow (
+    register TkWindow *winPtr		/* Window that is in the process
 					 * of being deleted. */
+)
 {
     TkDisplay *dispPtr = winPtr->dispPtr;
 

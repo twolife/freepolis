@@ -114,8 +114,8 @@ int DoMapCmd(CLIENT_ARGS);
 int GraphViewCmd(CLIENT_ARGS);
 int DoGraphCmd(CLIENT_ARGS);
 int SpriteCmd(CLIENT_ARGS);
-extern int Tk_PieMenuCmd();
-extern int Tk_IntervalCmd();
+extern int Tk_PieMenuCmd(CLIENT_ARGS);
+extern int Tk_IntervalCmd(CLIENT_ARGS);
 
 
 int
@@ -163,7 +163,7 @@ TileViewCmd(CLIENT_ARGS)
 			  PointerMotionMask,
 			  TileViewEventProc, (ClientData) view);
     Tcl_CreateCommand(interp, Tk_PathName(view->tkwin),
-		      DoEditorCmd, (ClientData) view, (void (*)()) NULL);
+		      DoEditorCmd, (ClientData) view, (void (*)(int *)) NULL);
   } else {
     Tk_SetClass(view->tkwin, "MapView");
 
@@ -176,7 +176,7 @@ TileViewCmd(CLIENT_ARGS)
 			  PointerMotionMask */ ,
 			  TileViewEventProc, (ClientData) view);
     Tcl_CreateCommand(interp, Tk_PathName(view->tkwin),
-		      DoMapCmd, (ClientData) view, (void (*)()) NULL);
+		      DoMapCmd, (ClientData) view, (void (*)(int *)) NULL);
   }
 
   Tk_MakeWindowExist(view->tkwin);
@@ -703,7 +703,7 @@ DoEarthQuake(void)
   if (earthquake_timer_set) {
     Tk_DeleteTimerHandler(earthquake_timer_token);
   }
-  Tk_CreateTimerHandler(earthquake_delay, (void (*)())StopEarthquake, (ClientData) 0);
+  Tk_CreateTimerHandler(earthquake_delay, (void (*)(int *))StopEarthquake, (ClientData) 0);
   earthquake_timer_set = 1;
 }
 
@@ -787,9 +787,9 @@ void tk_main(void)
 #endif
 
   Tcl_CreateCommand(tk_mainInterp, "piemenu", Tk_PieMenuCmd,
-		    (ClientData)MainWindow, (void (*)()) NULL);
+		    (ClientData)MainWindow, (void (*)(int *)) NULL);
   Tcl_CreateCommand(tk_mainInterp, "interval", Tk_IntervalCmd,
-		    (ClientData)MainWindow, (void (*)()) NULL);
+		    (ClientData)MainWindow, (void (*)(int *)) NULL);
 
   sim = MakeNewSim();
 

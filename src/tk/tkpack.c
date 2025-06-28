@@ -129,13 +129,14 @@ static void		Unlink _ANSI_ARGS_((Packer *packPtr));
  *--------------------------------------------------------------
  */
 
-int
-Tk_PackCmd(clientData, interp, argc, argv)
-    ClientData clientData;	/* Main window associated with
+int 
+Tk_PackCmd (
+    ClientData clientData,	/* Main window associated with
 				 * interpreter. */
-    Tcl_Interp *interp;		/* Current interpreter. */
-    int argc;			/* Number of arguments. */
-    char **argv;		/* Argument strings. */
+    Tcl_Interp *interp,		/* Current interpreter. */
+    int argc,			/* Number of arguments. */
+    char **argv		/* Argument strings. */
+)
 {
     Tk_Window tkwin = (Tk_Window) clientData;
     int length;
@@ -305,13 +306,14 @@ Tk_PackCmd(clientData, interp, argc, argv)
  */
 
 	/* ARGSUSED */
-static void
-PackReqProc(clientData, tkwin)
-    ClientData clientData;	/* Packer's information about
+static void 
+PackReqProc (
+    ClientData clientData,	/* Packer's information about
 				 * window that got new preferred
 				 * geometry.  */
-    Tk_Window tkwin;		/* Other Tk-related information
+    Tk_Window tkwin		/* Other Tk-related information
 				 * about the window. */
+)
 {
     register Packer *packPtr = (Packer *) clientData;
 
@@ -343,11 +345,12 @@ PackReqProc(clientData, tkwin)
  *--------------------------------------------------------------
  */
 
-static void
-ArrangePacking(clientData)
-    ClientData clientData;	/* Structure describing parent
+static void 
+ArrangePacking (
+    ClientData clientData	/* Structure describing parent
 				 * whose children are to be
 				 * re-layed out. */
+)
 {
     register Packer *parentPtr = (Packer *) clientData;
     register Packer *childPtr;	
@@ -671,9 +674,10 @@ ArrangePacking(clientData)
  */
 
 static Packer *
-GetPacker(tkwin)
-    Tk_Window tkwin;		/* Token for window for which
+GetPacker (
+    Tk_Window tkwin		/* Token for window for which
 				 * packer structure is desired. */
+)
 {
     register Packer *packPtr;
     Tcl_HashEntry *hPtr;
@@ -728,17 +732,18 @@ GetPacker(tkwin)
  *--------------------------------------------------------------
  */
 
-static int
-PackAfter(interp, prevPtr, parentPtr, argc, argv)
-    Tcl_Interp *interp;		/* Interpreter for error reporting. */
-    Packer *prevPtr;		/* Pack windows in argv just after this
+static int 
+PackAfter (
+    Tcl_Interp *interp,		/* Interpreter for error reporting. */
+    Packer *prevPtr,		/* Pack windows in argv just after this
 				 * window;  NULL means pack as first
 				 * child of parentPtr. */
-    Packer *parentPtr;		/* Parent in which to pack windows. */
-    int argc;			/* Number of elements in argv. */
-    char **argv;		/* Array of lists, each containing 2
+    Packer *parentPtr,		/* Parent in which to pack windows. */
+    int argc,			/* Number of elements in argv. */
+    char **argv		/* Array of lists, each containing 2
 				 * elements:  window name and side
 				 * against which to pack. */
+)
 {
     register Packer *packPtr;
     Tk_Window tkwin;
@@ -930,9 +935,10 @@ PackAfter(interp, prevPtr, parentPtr, argc, argv)
  *----------------------------------------------------------------------
  */
 
-static void
-Unlink(packPtr)
-    register Packer *packPtr;		/* Window to unlink. */
+static void 
+Unlink (
+    register Packer *packPtr		/* Window to unlink. */
+)
 {
     register Packer *parentPtr, *packPtr2;
 
@@ -982,10 +988,11 @@ Unlink(packPtr)
  *----------------------------------------------------------------------
  */
 
-static void
-DestroyPacker(clientData)
-    ClientData clientData;		/* Info about packed window that
+static void 
+DestroyPacker (
+    ClientData clientData		/* Info about packed window that
 					 * is now dead. */
+)
 {
     register Packer *packPtr = (Packer *) clientData;
     ckfree((char *) packPtr);
@@ -1010,11 +1017,12 @@ DestroyPacker(clientData)
  *----------------------------------------------------------------------
  */
 
-static void
-PackStructureProc(clientData, eventPtr)
-    ClientData clientData;		/* Our information about window
+static void 
+PackStructureProc (
+    ClientData clientData,		/* Our information about window
 					 * referred to by eventPtr. */
-    XEvent *eventPtr;			/* Describes what just happened. */
+    XEvent *eventPtr			/* Describes what just happened. */
+)
 {
     register Packer *packPtr = (Packer *) clientData;
     if (eventPtr->type == ConfigureNotify) {

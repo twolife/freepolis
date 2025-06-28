@@ -24,10 +24,10 @@
 #define TCL_USECS_PER_SEC (1000L * 1000L)
 
 extern
-double floor ();
+double floor (double);
 
 extern
-double ceil ();
+double ceil (double);
 
 /*
  *-----------------------------------------------------------------------------
@@ -42,11 +42,12 @@ double ceil ();
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_AlarmCmd (clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_AlarmCmd (
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
 #ifdef TCL_NO_ITIMER
     double            seconds;
@@ -119,11 +120,12 @@ Tcl_AlarmCmd (clientData, interp, argc, argv)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_SleepCmd (clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_SleepCmd (
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     unsigned time;
 
@@ -154,11 +156,12 @@ Tcl_SleepCmd (clientData, interp, argc, argv)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_SystemCmd (clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_SystemCmd (
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     int exitCode;
 
@@ -188,11 +191,12 @@ Tcl_SystemCmd (clientData, interp, argc, argv)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_TimesCmd (clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_TimesCmd (
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     struct tms tm;
 
@@ -231,11 +235,12 @@ Tcl_TimesCmd (clientData, interp, argc, argv)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_UmaskCmd (clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_UmaskCmd (
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     int mask;
 
@@ -275,11 +280,12 @@ Tcl_UmaskCmd (clientData, interp, argc, argv)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_LinkCmd (clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_LinkCmd (
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     char *tmppath, *srcpath, *destpath;
 
@@ -344,11 +350,12 @@ errorExit:
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_UnlinkCmd (clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_UnlinkCmd (
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     int    idx, fileArgc;
     char **fileArgv, *fileName;
@@ -409,11 +416,12 @@ badArgs:
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_MkdirCmd (clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_MkdirCmd (
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     int           idx, dirArgc, result;
     char        **dirArgv, *scanPtr;
@@ -485,11 +493,12 @@ usageError:
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_RmdirCmd (clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_RmdirCmd (
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     int    idx, dirArgc;
     char **dirArgv, *dirName;

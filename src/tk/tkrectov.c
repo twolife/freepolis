@@ -163,13 +163,14 @@ Tk_ItemType TkOvalType = {
  *--------------------------------------------------------------
  */
 
-static int
-CreateRectOval(canvasPtr, itemPtr, argc, argv)
-    register Tk_Canvas *canvasPtr;	/* Canvas to hold new item. */
-    Tk_Item *itemPtr;			/* Record to hold new item;  header
+static int 
+CreateRectOval (
+    register Tk_Canvas *canvasPtr,	/* Canvas to hold new item. */
+    Tk_Item *itemPtr,			/* Record to hold new item;  header
 					 * has been initialized by caller. */
-    int argc;				/* Number of arguments in argv. */
-    char **argv;			/* Arguments describing rectangle. */
+    int argc,				/* Number of arguments in argv. */
+    char **argv			/* Arguments describing rectangle. */
+)
 {
     register RectOvalItem *rectOvalPtr = (RectOvalItem *) itemPtr;
 
@@ -232,15 +233,16 @@ CreateRectOval(canvasPtr, itemPtr, argc, argv)
  *--------------------------------------------------------------
  */
 
-static int
-RectOvalCoords(canvasPtr, itemPtr, argc, argv)
-    register Tk_Canvas *canvasPtr;	/* Canvas containing item. */
-    Tk_Item *itemPtr;			/* Item whose coordinates are to be
+static int 
+RectOvalCoords (
+    register Tk_Canvas *canvasPtr,	/* Canvas containing item. */
+    Tk_Item *itemPtr,			/* Item whose coordinates are to be
 					 * read or modified. */
-    int argc;				/* Number of coordinates supplied in
+    int argc,				/* Number of coordinates supplied in
 					 * argv. */
-    char **argv;			/* Array of coordinates: x1, y1,
+    char **argv			/* Array of coordinates: x1, y1,
 					 * x2, y2, ... */
+)
 {
     register RectOvalItem *rectOvalPtr = (RectOvalItem *) itemPtr;
     char buffer[500];
@@ -291,13 +293,14 @@ RectOvalCoords(canvasPtr, itemPtr, argc, argv)
  *--------------------------------------------------------------
  */
 
-static int
-ConfigureRectOval(canvasPtr, itemPtr, argc, argv, flags)
-    Tk_Canvas *canvasPtr;	/* Canvas containing itemPtr. */
-    Tk_Item *itemPtr;		/* Rectangle item to reconfigure. */
-    int argc;			/* Number of elements in argv.  */
-    char **argv;		/* Arguments describing things to configure. */
-    int flags;			/* Flags to pass to Tk_ConfigureWidget. */
+static int 
+ConfigureRectOval (
+    Tk_Canvas *canvasPtr,	/* Canvas containing itemPtr. */
+    Tk_Item *itemPtr,		/* Rectangle item to reconfigure. */
+    int argc,			/* Number of elements in argv.  */
+    char **argv,		/* Arguments describing things to configure. */
+    int flags			/* Flags to pass to Tk_ConfigureWidget. */
+)
 {
     register RectOvalItem *rectOvalPtr = (RectOvalItem *) itemPtr;
     XGCValues gcValues;
@@ -370,9 +373,10 @@ ConfigureRectOval(canvasPtr, itemPtr, argc, argv, flags)
  *--------------------------------------------------------------
  */
 
-static void
-DeleteRectOval(itemPtr)
-    Tk_Item *itemPtr;			/* Item that is being deleted. */
+static void 
+DeleteRectOval (
+    Tk_Item *itemPtr			/* Item that is being deleted. */
+)
 {
     register RectOvalItem *rectOvalPtr = (RectOvalItem *) itemPtr;
 
@@ -413,11 +417,12 @@ DeleteRectOval(itemPtr)
  */
 
 	/* ARGSUSED */
-static void
-ComputeRectOvalBbox(canvasPtr, rectOvalPtr)
-    Tk_Canvas *canvasPtr;		/* Canvas that contains item. */
-    register RectOvalItem *rectOvalPtr;	/* Item whose bbox is to be
+static void 
+ComputeRectOvalBbox (
+    Tk_Canvas *canvasPtr,		/* Canvas that contains item. */
+    register RectOvalItem *rectOvalPtr	/* Item whose bbox is to be
 					 * recomputed. */
+)
 {
     int bloat;
 
@@ -463,12 +468,13 @@ ComputeRectOvalBbox(canvasPtr, rectOvalPtr)
  *--------------------------------------------------------------
  */
 
-static void
-DisplayRectOval(canvasPtr, itemPtr, drawable)
-    register Tk_Canvas *canvasPtr;	/* Canvas that contains item. */
-    Tk_Item *itemPtr;			/* Item to be displayed. */
-    Drawable drawable;			/* Pixmap or window in which to draw
+static void 
+DisplayRectOval (
+    register Tk_Canvas *canvasPtr,	/* Canvas that contains item. */
+    Tk_Item *itemPtr,			/* Item to be displayed. */
+    Drawable drawable			/* Pixmap or window in which to draw
 					 * item. */
+)
 {
     register RectOvalItem *rectOvalPtr = (RectOvalItem *) itemPtr;
     Display *display = Tk_Display(canvasPtr->tkwin);
@@ -539,11 +545,12 @@ DisplayRectOval(canvasPtr, itemPtr, drawable)
  */
 
 	/* ARGSUSED */
-static double
-RectToPoint(canvasPtr, itemPtr, pointPtr)
-    Tk_Canvas *canvasPtr;	/* Canvas containing item. */
-    Tk_Item *itemPtr;		/* Item to check against point. */
-    double *pointPtr;		/* Pointer to x and y coordinates. */
+static double 
+RectToPoint (
+    Tk_Canvas *canvasPtr,	/* Canvas containing item. */
+    Tk_Item *itemPtr,		/* Item to check against point. */
+    double *pointPtr		/* Pointer to x and y coordinates. */
+)
 {
     register RectOvalItem *rectPtr = (RectOvalItem *) itemPtr;
     double xDiff, yDiff, x1, y1, x2, y2, inc, tmp;
@@ -644,11 +651,12 @@ RectToPoint(canvasPtr, itemPtr, pointPtr)
  */
 
 	/* ARGSUSED */
-static double
-OvalToPoint(canvasPtr, itemPtr, pointPtr)
-    Tk_Canvas *canvasPtr;	/* Canvas containing item. */
-    Tk_Item *itemPtr;		/* Item to check against point. */
-    double *pointPtr;		/* Pointer to x and y coordinates. */
+static double 
+OvalToPoint (
+    Tk_Canvas *canvasPtr,	/* Canvas containing item. */
+    Tk_Item *itemPtr,		/* Item to check against point. */
+    double *pointPtr		/* Pointer to x and y coordinates. */
+)
 {
     register RectOvalItem *ovalPtr = (RectOvalItem *) itemPtr;
     double width;
@@ -684,13 +692,14 @@ OvalToPoint(canvasPtr, itemPtr, pointPtr)
  */
 
 	/* ARGSUSED */
-static int
-RectToArea(canvasPtr, itemPtr, areaPtr)
-    Tk_Canvas *canvasPtr;	/* Canvas containing item. */
-    Tk_Item *itemPtr;		/* Item to check against rectangle. */
-    double *areaPtr;		/* Pointer to array of four coordinates
+static int 
+RectToArea (
+    Tk_Canvas *canvasPtr,	/* Canvas containing item. */
+    Tk_Item *itemPtr,		/* Item to check against rectangle. */
+    double *areaPtr		/* Pointer to array of four coordinates
 				 * (x1, y1, x2, y2) describing rectangular
 				 * area.  */
+)
 {
     register RectOvalItem *rectPtr = (RectOvalItem *) itemPtr;
     double halfWidth;
@@ -743,13 +752,14 @@ RectToArea(canvasPtr, itemPtr, areaPtr)
  */
 
 	/* ARGSUSED */
-static int
-OvalToArea(canvasPtr, itemPtr, areaPtr)
-    Tk_Canvas *canvasPtr;	/* Canvas containing item. */
-    Tk_Item *itemPtr;		/* Item to check against oval. */
-    double *areaPtr;		/* Pointer to array of four coordinates
+static int 
+OvalToArea (
+    Tk_Canvas *canvasPtr,	/* Canvas containing item. */
+    Tk_Item *itemPtr,		/* Item to check against oval. */
+    double *areaPtr		/* Pointer to array of four coordinates
 				 * (x1, y1, x2, y2) describing rectangular
 				 * area.  */
+)
 {
     register RectOvalItem *ovalPtr = (RectOvalItem *) itemPtr;
     double oval[4], halfWidth;
@@ -825,13 +835,15 @@ OvalToArea(canvasPtr, itemPtr, areaPtr)
  *--------------------------------------------------------------
  */
 
-static void
-ScaleRectOval(canvasPtr, itemPtr, originX, originY, scaleX, scaleY)
-    Tk_Canvas *canvasPtr;		/* Canvas containing rectangle. */
-    Tk_Item *itemPtr;			/* Rectangle to be scaled. */
-    double originX, originY;		/* Origin about which to scale rect. */
-    double scaleX;			/* Amount to scale in X direction. */
-    double scaleY;			/* Amount to scale in Y direction. */
+static void 
+ScaleRectOval (
+    Tk_Canvas *canvasPtr,		/* Canvas containing rectangle. */
+    Tk_Item *itemPtr,			/* Rectangle to be scaled. */
+    double originX,
+    double originY,		/* Origin about which to scale rect. */
+    double scaleX,			/* Amount to scale in X direction. */
+    double scaleY			/* Amount to scale in Y direction. */
+)
 {
     register RectOvalItem *rectOvalPtr = (RectOvalItem *) itemPtr;
 
@@ -861,12 +873,14 @@ ScaleRectOval(canvasPtr, itemPtr, originX, originY, scaleX, scaleY)
  *--------------------------------------------------------------
  */
 
-static void
-TranslateRectOval(canvasPtr, itemPtr, deltaX, deltaY)
-    Tk_Canvas *canvasPtr;		/* Canvas containing item. */
-    Tk_Item *itemPtr;			/* Item that is being moved. */
-    double deltaX, deltaY;		/* Amount by which item is to be
+static void 
+TranslateRectOval (
+    Tk_Canvas *canvasPtr,		/* Canvas containing item. */
+    Tk_Item *itemPtr,			/* Item that is being moved. */
+    double deltaX,
+    double deltaY		/* Amount by which item is to be
 					 * moved. */
+)
 {
     register RectOvalItem *rectOvalPtr = (RectOvalItem *) itemPtr;
 

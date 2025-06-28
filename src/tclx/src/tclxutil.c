@@ -28,7 +28,7 @@
  */
 char *tclXWrongArgs = "wrong # args: ";
 
-extern double pow ();
+extern double pow (double, double);
 
 
 /*
@@ -49,11 +49,8 @@ extern double pow ();
  *      Returns 1 if the string was a valid number, 0 invalid.
  *-----------------------------------------------------------------------------
  */
-int
-Tcl_StrToLong (string, base, longPtr)
-    CONST char *string;
-    int         base;
-    long       *longPtr;
+int 
+Tcl_StrToLong (CONST char *string, int base, long *longPtr)
 {
     char *end;
     long  num;
@@ -87,11 +84,8 @@ Tcl_StrToLong (string, base, longPtr)
  *      Returns 1 if the string was a valid number, 0 invalid.
  *-----------------------------------------------------------------------------
  */
-int
-Tcl_StrToInt (string, base, intPtr)
-    CONST char *string;
-    int         base;
-    int        *intPtr;
+int 
+Tcl_StrToInt (CONST char *string, int base, int *intPtr)
 {
     char *end;
     int   num;
@@ -125,11 +119,8 @@ Tcl_StrToInt (string, base, intPtr)
  *      Returns 1 if the string was a valid number, 0 invalid.
  *-----------------------------------------------------------------------------
  */
-int
-Tcl_StrToUnsigned (string, base, unsignedPtr)
-    CONST char *string;
-    int         base;
-    unsigned   *unsignedPtr;
+int 
+Tcl_StrToUnsigned (CONST char *string, int base, unsigned *unsignedPtr)
 {
     char          *end;
     unsigned long  num;
@@ -158,10 +149,8 @@ Tcl_StrToUnsigned (string, base, unsignedPtr)
  *   TRUE if the number is ok, FALSE if it is illegal.
  *-----------------------------------------------------------------------------
  */
-int
-Tcl_StrToDouble (string, doublePtr)
-    CONST char *string;
-    double     *doublePtr;
+int 
+Tcl_StrToDouble (CONST char *string, double *doublePtr)
 {
     char   *end;
     double  num;
@@ -198,9 +187,7 @@ Tcl_StrToDouble (string, doublePtr)
  *-----------------------------------------------------------------------------
  */
 char *
-Tcl_DownShift (targetStr, sourceStr)
-    char       *targetStr;
-    CONST char *sourceStr;
+Tcl_DownShift (char *targetStr, CONST char *sourceStr)
 {
     register char theChar;
 
@@ -235,9 +222,7 @@ Tcl_DownShift (targetStr, sourceStr)
  *-----------------------------------------------------------------------------
  */
 char *
-Tcl_UpShift (targetStr, sourceStr)
-    char       *targetStr;
-    CONST char *sourceStr;
+Tcl_UpShift (char *targetStr, CONST char *sourceStr)
 {
     register char theChar;
 
@@ -264,10 +249,8 @@ Tcl_UpShift (targetStr, sourceStr)
  *
  *-----------------------------------------------------------------------------
  */
-void
-Tcl_ExpandDynBuf (dynBufPtr, appendSize)
-    dynamicBuf_t *dynBufPtr;
-    int           appendSize;
+void 
+Tcl_ExpandDynBuf (dynamicBuf_t *dynBufPtr, int appendSize)
 {
     int   newSize, minSize;
     char *oldBufPtr;
@@ -294,9 +277,8 @@ Tcl_ExpandDynBuf (dynBufPtr, appendSize)
  *
  *-----------------------------------------------------------------------------
  */
-void
-Tcl_DynBufInit (dynBufPtr)
-    dynamicBuf_t *dynBufPtr;
+void 
+Tcl_DynBufInit (dynamicBuf_t *dynBufPtr)
 {
     dynBufPtr->buf [0] = '\0';
     dynBufPtr->ptr = dynBufPtr->buf;
@@ -314,9 +296,8 @@ Tcl_DynBufInit (dynBufPtr)
  *
  *-----------------------------------------------------------------------------
  */
-void
-Tcl_DynBufFree (dynBufPtr)
-    dynamicBuf_t *dynBufPtr;
+void 
+Tcl_DynBufFree (dynamicBuf_t *dynBufPtr)
 {
     if (dynBufPtr->ptr != dynBufPtr->buf)
         ckfree (dynBufPtr->ptr);
@@ -333,10 +314,8 @@ Tcl_DynBufFree (dynBufPtr)
  *
  *-----------------------------------------------------------------------------
  */
-void
-Tcl_DynBufReturn (interp, dynBufPtr)
-    Tcl_Interp    *interp;
-    dynamicBuf_t *dynBufPtr;
+void 
+Tcl_DynBufReturn (Tcl_Interp *interp, dynamicBuf_t *dynBufPtr)
 {
     if (dynBufPtr->ptr != dynBufPtr->buf)
         Tcl_SetResult (interp, dynBufPtr->ptr, TCL_DYNAMIC);
@@ -354,10 +333,8 @@ Tcl_DynBufReturn (interp, dynBufPtr)
  *
  *-----------------------------------------------------------------------------
  */
-void
-Tcl_DynBufAppend (dynBufPtr, newStr)
-    dynamicBuf_t *dynBufPtr;
-    char         *newStr;
+void 
+Tcl_DynBufAppend (dynamicBuf_t *dynBufPtr, char *newStr)
 {
     int newLen, currentUsed;
 
@@ -385,11 +362,8 @@ Tcl_DynBufAppend (dynBufPtr, newStr)
  *
  *-----------------------------------------------------------------------------
  */
-int
-Tcl_DynamicFgets (dynBufPtr, filePtr, append)
-    dynamicBuf_t *dynBufPtr;
-    FILE         *filePtr;
-    int           append;
+int 
+Tcl_DynamicFgets (dynamicBuf_t *dynBufPtr, FILE *filePtr, int append)
 {
     int   readVal;
 
@@ -433,12 +407,13 @@ Tcl_DynamicFgets (dynBufPtr, filePtr, append)
  *
  *-----------------------------------------------------------------------------
  */
-int
-Tcl_GetLong(interp, string, longPtr)
-    Tcl_Interp *interp;         /* Interpreter to use for error reporting. */
-    CONST char *string;         /* String containing a (possibly signed)
+int 
+Tcl_GetLong (
+    Tcl_Interp *interp,         /* Interpreter to use for error reporting. */
+    CONST char *string,         /* String containing a (possibly signed)
                                  * integer in a form acceptable to strtol. */
-    long       *longPtr;        /* Place to store converted result. */
+    long *longPtr        /* Place to store converted result. */
+)
 {
     char *end;
     long  i;
@@ -474,12 +449,13 @@ Tcl_GetLong(interp, string, longPtr)
  *
  *-----------------------------------------------------------------------------
  */
-int
-Tcl_GetUnsigned(interp, string, unsignedPtr)
-    Tcl_Interp *interp;         /* Interpreter to use for error reporting. */
-    CONST char *string;         /* String containing a (possibly signed)
+int 
+Tcl_GetUnsigned (
+    Tcl_Interp *interp,         /* Interpreter to use for error reporting. */
+    CONST char *string,         /* String containing a (possibly signed)
                                  * integer in a form acceptable to strtoul. */
-    unsigned   *unsignedPtr;    /* Place to store converted result. */
+    unsigned *unsignedPtr    /* Place to store converted result. */
+)
 {
     char          *end;
     unsigned long  i;
@@ -522,10 +498,8 @@ Tcl_GetUnsigned(interp, string, unsignedPtr)
  *
  *-----------------------------------------------------------------------------
  */
-int
-Tcl_ConvertFileHandle (interp, handle)
-    Tcl_Interp *interp;
-    char       *handle;
+int 
+Tcl_ConvertFileHandle (Tcl_Interp *interp, char *handle)
 {
     int fileId = -1;
 
@@ -563,12 +537,8 @@ Tcl_ConvertFileHandle (interp, handle)
  *   TCL_OK or TCL_ERROR;
  *-----------------------------------------------------------------------------
  */
-int
-Tcl_SetupFileEntry (interp, fileNum, readable, writable)
-    Tcl_Interp *interp;
-    int         fileNum;
-    int         readable;
-    int         writable;
+int 
+Tcl_SetupFileEntry (Tcl_Interp *interp, int fileNum, int readable, int writable)
 {
     Interp   *iPtr = (Interp *) interp;
     char     *mode;
@@ -627,9 +597,7 @@ Tcl_SetupFileEntry (interp, fileNum, readable, writable)
  *-----------------------------------------------------------------------------
  */
 int 
-Tcl_System (interp, command)
-    Tcl_Interp *interp;
-    char       *command;
+Tcl_System (Tcl_Interp *interp, char *command)
 {
     int processID, waitStatus, processStatus;
 
@@ -686,10 +654,11 @@ Tcl_System (interp, command)
  *--------------------------------------------------------------
  */
 
-int
-Tcl_ReturnDouble(interp, number)
-    Tcl_Interp *interp;			/* ->result gets converted number */
-    double number;			/* Number to convert */
+int 
+Tcl_ReturnDouble (
+    Tcl_Interp *interp,			/* ->result gets converted number */
+    double number			/* Number to convert */
+)
 {
     static int precision = 0;
     register char *scanPtr;

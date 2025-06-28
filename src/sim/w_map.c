@@ -298,7 +298,7 @@ map_command_init(void)
   extern int TileViewCmd(CLIENT_ARGS);
 
   Tcl_CreateCommand(tk_mainInterp, "mapview", TileViewCmd,
-		    (ClientData)MainWindow, (void (*)()) NULL);
+		    (ClientData)MainWindow, (void (*)(int *)) NULL);
 
   Tcl_InitHashTable(&MapCmds, TCL_STRING_KEYS);
 
@@ -322,14 +322,14 @@ DoMapCmd(CLIENT_ARGS)
   SimView *view = (SimView *) clientData;
   Tcl_HashEntry *ent;
   int result = TCL_OK;
-  int (*cmd)();
+  int (*cmd)(SimView*, Tcl_Interp*, int, char**);
 
   if (argc < 2) {
     return TCL_ERROR;
   }
 
   if ((ent = Tcl_FindHashEntry(&MapCmds, argv[1]))) {
-    cmd = (int (*)())ent->clientData;
+    cmd = (int (*)(SimView*, Tcl_Interp*, int, char**))ent->clientData;
     Tk_Preserve((ClientData) view);
     result = cmd(view, interp, argc, argv);
     Tk_Release((ClientData) view);

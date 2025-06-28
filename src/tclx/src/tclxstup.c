@@ -69,10 +69,8 @@ ProcessInitFile _ANSI_ARGS_((Tcl_Interp  *interp));
  *   o exitCode - The code to pass to exit.
  *-----------------------------------------------------------------------------
  */
-void
-Tcl_ErrorAbort (interp, exitCode)
-    Tcl_Interp  *interp;
-    int          exitCode;
+void 
+Tcl_ErrorAbort (Tcl_Interp *interp, int exitCode)
 {
     char *errorStack;
 
@@ -97,11 +95,8 @@ Tcl_ErrorAbort (interp, exitCode)
  *   o tclParmsPtr - Results of the parsed Tcl shell command line.
  *-----------------------------------------------------------------------------
  */
-static void
-ParseCmdArgs (argc, argv, tclParmsPtr)
-    int          argc;
-    char       **argv;
-    tclParms_t  *tclParmsPtr;
+static void 
+ParseCmdArgs (int argc, char **argv, tclParms_t *tclParmsPtr)
 {
     char   *scanPtr, *programName;
     int     programNameLen;
@@ -194,10 +189,8 @@ usageError:
  *     TCL_OK if all is ok, TCL_ERROR if a error occured.
  *-----------------------------------------------------------------------------
  */
-static int
-FindDefaultFile (interp, defaultFile)
-    Tcl_Interp  *interp;
-    char        *defaultFile;
+static int 
+FindDefaultFile (Tcl_Interp *interp, char *defaultFile)
 {
     char        *defaultFileToUse;
     struct stat  statBuf;
@@ -233,10 +226,8 @@ FindDefaultFile (interp, defaultFile)
  *   TCL_OK if all is ok, TCL_ERROR if an error occured.
  *-----------------------------------------------------------------------------
  */
-static int
-ProcessDefaultFile (interp, defaultFile)
-    Tcl_Interp  *interp;
-    char        *defaultFile;
+static int 
+ProcessDefaultFile (Tcl_Interp *interp, char *defaultFile)
 {
     char *defaultFileToUse;
 
@@ -271,9 +262,8 @@ ProcessDefaultFile (interp, defaultFile)
  *   TCL_OK if all is ok, TCL_ERROR if an error occured.
  *-----------------------------------------------------------------------------
  */
-static int
-ProcessInitFile (interp)
-    Tcl_Interp  *interp;
+static int 
+ProcessInitFile (Tcl_Interp *interp)
 {
     char *initFile;
 
@@ -329,16 +319,8 @@ ProcessInitFile (interp)
  *   TCL_OK if all is ok, TCL_ERROR if an error occured.
  *-----------------------------------------------------------------------------
  */
-int
-Tcl_ShellEnvInit (interp, options, programName, argc, argv, interactive,
-                  defaultFile)
-    Tcl_Interp  *interp;
-    unsigned     options;
-    CONST char  *programName; 
-    int          argc;
-    CONST char **argv;
-    int          interactive;
-    CONST char	*defaultFile;
+int 
+Tcl_ShellEnvInit (Tcl_Interp *interp, unsigned options, CONST char *programName, int argc, CONST char **argv, int interactive, CONST char *defaultFile)
 {
     int   result = TCL_OK;
     char *defaultFilePath;
@@ -453,13 +435,8 @@ errorExit:
  * must be set before calling thus routine if special values are desired.
  *-----------------------------------------------------------------------------
  */
-void
-Tcl_Startup (interp, argc, argv, defaultFile, options)
-    Tcl_Interp  *interp;
-    int          argc;
-    CONST char **argv;
-    CONST char  *defaultFile;
-    unsigned     options;
+void 
+Tcl_Startup (Tcl_Interp *interp, int argc, CONST char **argv, CONST char *defaultFile, unsigned options)
 {
     char       *cmdBuf;
     tclParms_t  tclParms;

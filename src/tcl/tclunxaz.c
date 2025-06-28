@@ -60,12 +60,13 @@ static int		StoreStatData _ANSI_ARGS_((Tcl_Interp *interp,
  */
 
 	/* ARGSUSED */
-int
-Tcl_CdCmd(dummy, interp, argc, argv)
-    ClientData dummy;			/* Not used. */
-    Tcl_Interp *interp;			/* Current interpreter. */
-    int argc;				/* Number of arguments. */
-    char **argv;			/* Argument strings. */
+int 
+Tcl_CdCmd (
+    ClientData dummy,			/* Not used. */
+    Tcl_Interp *interp,			/* Current interpreter. */
+    int argc,				/* Number of arguments. */
+    char **argv			/* Argument strings. */
+)
 {
     char *dirName;
 
@@ -114,12 +115,13 @@ Tcl_CdCmd(dummy, interp, argc, argv)
  */
 
 	/* ARGSUSED */
-int
-Tcl_CloseCmd(dummy, interp, argc, argv)
-    ClientData dummy;			/* Not used. */
-    Tcl_Interp *interp;			/* Current interpreter. */
-    int argc;				/* Number of arguments. */
-    char **argv;			/* Argument strings. */
+int 
+Tcl_CloseCmd (
+    ClientData dummy,			/* Not used. */
+    Tcl_Interp *interp,			/* Current interpreter. */
+    int argc,				/* Number of arguments. */
+    char **argv			/* Argument strings. */
+)
 {
     OpenFile *filePtr;
     int result = TCL_OK;
@@ -186,12 +188,13 @@ Tcl_CloseCmd(dummy, interp, argc, argv)
  */
 
 	/* ARGSUSED */
-int
-Tcl_EofCmd(notUsed, interp, argc, argv)
-    ClientData notUsed;			/* Not used. */
-    Tcl_Interp *interp;			/* Current interpreter. */
-    int argc;				/* Number of arguments. */
-    char **argv;			/* Argument strings. */
+int 
+Tcl_EofCmd (
+    ClientData notUsed,			/* Not used. */
+    Tcl_Interp *interp,			/* Current interpreter. */
+    int argc,				/* Number of arguments. */
+    char **argv			/* Argument strings. */
+)
 {
     OpenFile *filePtr;
 
@@ -229,12 +232,13 @@ Tcl_EofCmd(notUsed, interp, argc, argv)
  */
 
 	/* ARGSUSED */
-int
-Tcl_ExecCmd(dummy, interp, argc, argv)
-    ClientData dummy;			/* Not used. */
-    Tcl_Interp *interp;			/* Current interpreter. */
-    int argc;				/* Number of arguments. */
-    char **argv;			/* Argument strings. */
+int 
+Tcl_ExecCmd (
+    ClientData dummy,			/* Not used. */
+    Tcl_Interp *interp,			/* Current interpreter. */
+    int argc,				/* Number of arguments. */
+    char **argv			/* Argument strings. */
+)
 {
     int outputId;			/* File id for output pipe.  -1
 					 * means command overrode. */
@@ -325,12 +329,13 @@ Tcl_ExecCmd(dummy, interp, argc, argv)
  */
 
 	/* ARGSUSED */
-int
-Tcl_ExitCmd(dummy, interp, argc, argv)
-    ClientData dummy;			/* Not used. */
-    Tcl_Interp *interp;			/* Current interpreter. */
-    int argc;				/* Number of arguments. */
-    char **argv;			/* Argument strings. */
+int 
+Tcl_ExitCmd (
+    ClientData dummy,			/* Not used. */
+    Tcl_Interp *interp,			/* Current interpreter. */
+    int argc,				/* Number of arguments. */
+    char **argv			/* Argument strings. */
+)
 {
     int value;
 
@@ -369,12 +374,13 @@ Tcl_ExitCmd(dummy, interp, argc, argv)
  */
 
 	/* ARGSUSED */
-int
-Tcl_FileCmd(dummy, interp, argc, argv)
-    ClientData dummy;			/* Not used. */
-    Tcl_Interp *interp;			/* Current interpreter. */
-    int argc;				/* Number of arguments. */
-    char **argv;			/* Argument strings. */
+int 
+Tcl_FileCmd (
+    ClientData dummy,			/* Not used. */
+    Tcl_Interp *interp,			/* Current interpreter. */
+    int argc,				/* Number of arguments. */
+    char **argv			/* Argument strings. */
+)
 {
     char *p;
     int length, statOp;
@@ -706,12 +712,13 @@ Tcl_FileCmd(dummy, interp, argc, argv)
  */
 
 static int
-StoreStatData(interp, varName, statPtr)
-    Tcl_Interp *interp;			/* Interpreter for error reports. */
-    char *varName;			/* Name of associative array variable
+StoreStatData(
+    Tcl_Interp *interp,			/* Interpreter for error reports. */
+    char *varName,			/* Name of associative array variable
 					 * in which to store stat results. */
-    struct stat *statPtr;		/* Pointer to buffer containing
+    struct stat *statPtr		/* Pointer to buffer containing
 					 * stat data to store in varName. */
+)
 {
     char string[30];
 
@@ -790,8 +797,7 @@ StoreStatData(interp, varName, statPtr)
  */
 
 static char *
-GetFileType(mode)
-    int mode;
+GetFileType (int mode)
 {
     if (S_ISREG(mode)) {
 	return "file";
@@ -829,12 +835,13 @@ GetFileType(mode)
  */
 
 	/* ARGSUSED */
-int
-Tcl_FlushCmd(notUsed, interp, argc, argv)
-    ClientData notUsed;			/* Not used. */
-    Tcl_Interp *interp;			/* Current interpreter. */
-    int argc;				/* Number of arguments. */
-    char **argv;			/* Argument strings. */
+int 
+Tcl_FlushCmd (
+    ClientData notUsed,			/* Not used. */
+    Tcl_Interp *interp,			/* Current interpreter. */
+    int argc,				/* Number of arguments. */
+    char **argv			/* Argument strings. */
+)
 {
     OpenFile *filePtr;
     FILE *f;
@@ -883,12 +890,13 @@ Tcl_FlushCmd(notUsed, interp, argc, argv)
  */
 
 	/* ARGSUSED */
-int
-Tcl_GetsCmd(notUsed, interp, argc, argv)
-    ClientData notUsed;			/* Not used. */
-    Tcl_Interp *interp;			/* Current interpreter. */
-    int argc;				/* Number of arguments. */
-    char **argv;			/* Argument strings. */
+int 
+Tcl_GetsCmd (
+    ClientData notUsed,			/* Not used. */
+    Tcl_Interp *interp,			/* Current interpreter. */
+    int argc,				/* Number of arguments. */
+    char **argv			/* Argument strings. */
+)
 {
 #   define BUF_SIZE 200
     char buffer[BUF_SIZE+1];
@@ -983,12 +991,13 @@ Tcl_GetsCmd(notUsed, interp, argc, argv)
  */
 
 	/* ARGSUSED */
-int
-Tcl_OpenCmd(notUsed, interp, argc, argv)
-    ClientData notUsed;			/* Not used. */
-    Tcl_Interp *interp;			/* Current interpreter. */
-    int argc;				/* Number of arguments. */
-    char **argv;			/* Argument strings. */
+int 
+Tcl_OpenCmd (
+    ClientData notUsed,			/* Not used. */
+    Tcl_Interp *interp,			/* Current interpreter. */
+    int argc,				/* Number of arguments. */
+    char **argv			/* Argument strings. */
+)
 {
     Interp *iPtr = (Interp *) interp;
     int pipeline, fd;
@@ -1158,12 +1167,13 @@ Tcl_OpenCmd(notUsed, interp, argc, argv)
  */
 
 	/* ARGSUSED */
-int
-Tcl_PwdCmd(dummy, interp, argc, argv)
-    ClientData dummy;			/* Not used. */
-    Tcl_Interp *interp;			/* Current interpreter. */
-    int argc;				/* Number of arguments. */
-    char **argv;			/* Argument strings. */
+int 
+Tcl_PwdCmd (
+    ClientData dummy,			/* Not used. */
+    Tcl_Interp *interp,			/* Current interpreter. */
+    int argc,				/* Number of arguments. */
+    char **argv			/* Argument strings. */
+)
 {
     char buffer[MAXPATHLEN+1];
 
@@ -1216,12 +1226,13 @@ Tcl_PwdCmd(dummy, interp, argc, argv)
  */
 
 	/* ARGSUSED */
-int
-Tcl_PutsCmd(dummy, interp, argc, argv)
-    ClientData dummy;			/* Not used. */
-    Tcl_Interp *interp;			/* Current interpreter. */
-    int argc;				/* Number of arguments. */
-    char **argv;			/* Argument strings. */
+int 
+Tcl_PutsCmd (
+    ClientData dummy,			/* Not used. */
+    Tcl_Interp *interp,			/* Current interpreter. */
+    int argc,				/* Number of arguments. */
+    char **argv			/* Argument strings. */
+)
 {
     OpenFile *filePtr;
     FILE *f;
@@ -1281,12 +1292,13 @@ Tcl_PutsCmd(dummy, interp, argc, argv)
  */
 
 	/* ARGSUSED */
-int
-Tcl_ReadCmd(dummy, interp, argc, argv)
-    ClientData dummy;			/* Not used. */
-    Tcl_Interp *interp;			/* Current interpreter. */
-    int argc;				/* Number of arguments. */
-    char **argv;			/* Argument strings. */
+int 
+Tcl_ReadCmd (
+    ClientData dummy,			/* Not used. */
+    Tcl_Interp *interp,			/* Current interpreter. */
+    int argc,				/* Number of arguments. */
+    char **argv			/* Argument strings. */
+)
 {
     OpenFile *filePtr;
     int bytesLeft, bytesRead, count;
@@ -1381,12 +1393,13 @@ Tcl_ReadCmd(dummy, interp, argc, argv)
  */
 
 	/* ARGSUSED */
-int
-Tcl_SeekCmd(notUsed, interp, argc, argv)
-    ClientData notUsed;			/* Not used. */
-    Tcl_Interp *interp;			/* Current interpreter. */
-    int argc;				/* Number of arguments. */
-    char **argv;			/* Argument strings. */
+int 
+Tcl_SeekCmd (
+    ClientData notUsed,			/* Not used. */
+    Tcl_Interp *interp,			/* Current interpreter. */
+    int argc,				/* Number of arguments. */
+    char **argv			/* Argument strings. */
+)
 {
     OpenFile *filePtr;
     int offset, mode;
@@ -1449,12 +1462,13 @@ Tcl_SeekCmd(notUsed, interp, argc, argv)
  */
 
 	/* ARGSUSED */
-int
-Tcl_SourceCmd(dummy, interp, argc, argv)
-    ClientData dummy;			/* Not used. */
-    Tcl_Interp *interp;			/* Current interpreter. */
-    int argc;				/* Number of arguments. */
-    char **argv;			/* Argument strings. */
+int 
+Tcl_SourceCmd (
+    ClientData dummy,			/* Not used. */
+    Tcl_Interp *interp,			/* Current interpreter. */
+    int argc,				/* Number of arguments. */
+    char **argv			/* Argument strings. */
+)
 {
     if (argc != 2) {
 	Tcl_AppendResult(interp, "wrong # args: should be \"", argv[0],
@@ -1482,12 +1496,13 @@ Tcl_SourceCmd(dummy, interp, argc, argv)
  */
 
 	/* ARGSUSED */
-int
-Tcl_TellCmd(notUsed, interp, argc, argv)
-    ClientData notUsed;			/* Not used. */
-    Tcl_Interp *interp;			/* Current interpreter. */
-    int argc;				/* Number of arguments. */
-    char **argv;			/* Argument strings. */
+int 
+Tcl_TellCmd (
+    ClientData notUsed,			/* Not used. */
+    Tcl_Interp *interp,			/* Current interpreter. */
+    int argc,				/* Number of arguments. */
+    char **argv			/* Argument strings. */
+)
 {
     OpenFile *filePtr;
 
@@ -1521,12 +1536,13 @@ Tcl_TellCmd(notUsed, interp, argc, argv)
  */
 
 	/* ARGSUSED */
-int
-Tcl_TimeCmd(dummy, interp, argc, argv)
-    ClientData dummy;			/* Not used. */
-    Tcl_Interp *interp;			/* Current interpreter. */
-    int argc;				/* Number of arguments. */
-    char **argv;			/* Argument strings. */
+int 
+Tcl_TimeCmd (
+    ClientData dummy,			/* Not used. */
+    Tcl_Interp *interp,			/* Current interpreter. */
+    int argc,				/* Number of arguments. */
+    char **argv			/* Argument strings. */
+)
 {
     int count, i, result;
     double timePer;
@@ -1603,14 +1619,15 @@ Tcl_TimeCmd(dummy, interp, argc, argv)
  *----------------------------------------------------------------------
  */
 
-static int
-CleanupChildren(interp, numPids, pidPtr, errorId)
-    Tcl_Interp *interp;		/* Used for error messages. */
-    int numPids;		/* Number of entries in pidPtr array. */
-    int *pidPtr;		/* Array of process ids of children. */
-    int errorId;		/* File descriptor index for file containing
+static int 
+CleanupChildren (
+    Tcl_Interp *interp,		/* Used for error messages. */
+    int numPids,		/* Number of entries in pidPtr array. */
+    int *pidPtr,		/* Array of process ids of children. */
+    int errorId		/* File descriptor index for file containing
 				 * stderr output from pipeline.  -1 means
 				 * there isn't any stderr output. */
+)
 {
     int result = TCL_OK;
     int i, pid, length;

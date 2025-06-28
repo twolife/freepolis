@@ -51,7 +51,7 @@ static int
 Tcl_UnaryFloatFunction _ANSI_ARGS_((Tcl_Interp *interp,
                                     int         argc,
                                     char      **argv,
-                                    double (*function)()));
+                                    double (*function)(double)));
 
 
 #ifdef TCL_IEEE_FP_MATH
@@ -75,10 +75,8 @@ Tcl_UnaryFloatFunction _ANSI_ARGS_((Tcl_Interp *interp,
  * argument to `return'.
  *-----------------------------------------------------------------------------
  */
-static int
-ReturnIEEEMathError (interp, dbResult)
-    Tcl_Interp *interp;
-    double      dbResult;
+static int 
+ReturnIEEEMathError (Tcl_Interp *interp, double dbResult)
 {
     char *errorMsg;
 
@@ -115,9 +113,8 @@ ReturnIEEEMathError (interp, dbResult)
  * argument to `return'.
  *-----------------------------------------------------------------------------
  */
-static int
-ReturnFPMathError (interp)
-    Tcl_Interp *interp;
+static int 
+ReturnFPMathError (Tcl_Interp *interp)
 {
 
     Tcl_AppendResult (interp, "floating point error",
@@ -150,10 +147,8 @@ ReturnFPMathError (interp)
  *
  *-----------------------------------------------------------------------------
  */
-int
-Tcl_MathError (functionName, errorType)
-    char *functionName;
-    int   errorType;
+int 
+Tcl_MathError (char *functionName, int errorType)
 {
 
   if (G_inTclFPMath) {
@@ -183,12 +178,8 @@ Tcl_MathError (functionName, errorType)
  *
  *-----------------------------------------------------------------------------
  */
-static int
-Tcl_UnaryFloatFunction(interp, argc, argv, function)
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
-    double    (*function)();
+static int 
+Tcl_UnaryFloatFunction (Tcl_Interp *interp, int argc, char **argv, double (*function)(double))
 {
     double dbVal, dbResult;
 
@@ -232,11 +223,12 @@ Tcl_UnaryFloatFunction(interp, argc, argv, function)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_AcosCmd(clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_AcosCmd(
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     return Tcl_UnaryFloatFunction(interp, argc, argv, acos);
 }
@@ -254,11 +246,12 @@ Tcl_AcosCmd(clientData, interp, argc, argv)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_AsinCmd(clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_AsinCmd(
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     return Tcl_UnaryFloatFunction(interp, argc, argv, asin);
 }
@@ -276,11 +269,12 @@ Tcl_AsinCmd(clientData, interp, argc, argv)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_AtanCmd(clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_AtanCmd(
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     return Tcl_UnaryFloatFunction(interp, argc, argv, atan);
 }
@@ -298,11 +292,12 @@ Tcl_AtanCmd(clientData, interp, argc, argv)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_CosCmd(clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_CosCmd(
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     return Tcl_UnaryFloatFunction(interp, argc, argv, cos);
 }
@@ -320,11 +315,12 @@ Tcl_CosCmd(clientData, interp, argc, argv)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_SinCmd(clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_SinCmd(
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     return Tcl_UnaryFloatFunction(interp, argc, argv, sin);
 }
@@ -342,11 +338,12 @@ Tcl_SinCmd(clientData, interp, argc, argv)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_TanCmd(clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_TanCmd(
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     return Tcl_UnaryFloatFunction(interp, argc, argv, tan);
 }
@@ -364,11 +361,12 @@ Tcl_TanCmd(clientData, interp, argc, argv)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_CoshCmd(clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_CoshCmd(
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     return Tcl_UnaryFloatFunction(interp, argc, argv, cosh);
 }
@@ -386,11 +384,12 @@ Tcl_CoshCmd(clientData, interp, argc, argv)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_SinhCmd(clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_SinhCmd(
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     return Tcl_UnaryFloatFunction(interp, argc, argv, sinh);
 }
@@ -408,11 +407,12 @@ Tcl_SinhCmd(clientData, interp, argc, argv)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_TanhCmd(clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_TanhCmd(
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     return Tcl_UnaryFloatFunction(interp, argc, argv, tanh);
 }
@@ -430,11 +430,12 @@ Tcl_TanhCmd(clientData, interp, argc, argv)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_ExpCmd(clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_ExpCmd(
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     return Tcl_UnaryFloatFunction(interp, argc, argv, exp);
 }
@@ -452,11 +453,12 @@ Tcl_ExpCmd(clientData, interp, argc, argv)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_LogCmd(clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_LogCmd(
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     return Tcl_UnaryFloatFunction(interp, argc, argv, log);
 }
@@ -474,11 +476,12 @@ Tcl_LogCmd(clientData, interp, argc, argv)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_Log10Cmd(clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_Log10Cmd(
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     return Tcl_UnaryFloatFunction(interp, argc, argv, log10);
 }
@@ -496,11 +499,12 @@ Tcl_Log10Cmd(clientData, interp, argc, argv)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_SqrtCmd(clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_SqrtCmd(
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     return Tcl_UnaryFloatFunction(interp, argc, argv, sqrt);
 }
@@ -518,11 +522,12 @@ Tcl_SqrtCmd(clientData, interp, argc, argv)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_FabsCmd(clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_FabsCmd(
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     return Tcl_UnaryFloatFunction(interp, argc, argv, fabs);
 }
@@ -540,11 +545,12 @@ Tcl_FabsCmd(clientData, interp, argc, argv)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_FloorCmd(clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_FloorCmd(
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     return Tcl_UnaryFloatFunction(interp, argc, argv, floor);
 }
@@ -562,11 +568,12 @@ Tcl_FloorCmd(clientData, interp, argc, argv)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_CeilCmd(clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_CeilCmd(
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     return Tcl_UnaryFloatFunction(interp, argc, argv, ceil);
 }
@@ -584,11 +591,12 @@ Tcl_CeilCmd(clientData, interp, argc, argv)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_FmodCmd(clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_FmodCmd(
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     double dbVal, dbDivisor, dbResult;
 
@@ -635,11 +643,12 @@ Tcl_FmodCmd(clientData, interp, argc, argv)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_PowCmd(clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_PowCmd(
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     double dbVal, dbExp, dbResult;
 

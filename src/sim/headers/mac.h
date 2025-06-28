@@ -73,11 +73,11 @@ typedef unsigned char Byte;
 typedef Byte * Ptr;
 typedef char **Handle;
 
-extern Ptr NewPtr();
-extern Handle GetResource();
-extern QUAD ResourceSize();
-extern char *ResourceName();
-extern QUAD ResourceID();
+extern Ptr NewPtr(int size);
+extern Handle GetResource(char *name, QUAD id);
+extern QUAD ResourceSize(Handle h);
+extern char *ResourceName(Handle h);
+extern QUAD ResourceID(Handle h);
 
 struct Resource {
   char *buf;

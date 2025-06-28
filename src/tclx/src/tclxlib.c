@@ -157,12 +157,8 @@ LoadProc _ANSI_ARGS_((Tcl_Interp  *interp,
  *   A standard Tcl result.
  *-----------------------------------------------------------------------------
  */
-static int
-EvalFilePart (interp, fileName, offset, length)
-    Tcl_Interp  *interp;
-    char        *fileName;
-    long         offset;
-    unsigned     length;
+static int 
+EvalFilePart (Tcl_Interp *interp, char *fileName, long offset, unsigned length)
 {
     Interp       *iPtr = (Interp *) interp;
     int           fileNum, result;
@@ -254,11 +250,7 @@ EvalFilePart (interp, fileName, offset, length)
  *-----------------------------------------------------------------------------
  */
 static char *
-MakeAbsFile (interp, fileName, buffer, bufferSize)
-    Tcl_Interp  *interp;
-    char        *fileName;
-    char        *buffer;
-    int          bufferSize;
+MakeAbsFile (Tcl_Interp *interp, char *fileName, char *buffer, int bufferSize)
 {
     char   curDir [MAXPATHLEN+1];
     char  *pathName;
@@ -317,11 +309,8 @@ MakeAbsFile (interp, fileName, buffer, bufferSize)
  *   TCL_OK or TCL_ERROR.
  *-----------------------------------------------------------------------------
  */
-static int
-GenerateFileId (interp, filePath, fileId)
-     Tcl_Interp *interp;
-     char       *filePath;
-     fileId_t    fileId;
+static int 
+GenerateFileId (Tcl_Interp *interp, char *filePath, fileId_t fileId)
 {
     struct stat  statInfo;
 
@@ -355,11 +344,8 @@ GenerateFileId (interp, filePath, fileId)
  *   TCL_OK or TCL_ERROR.
  *-----------------------------------------------------------------------------
  */
-static int
-SetTCLENVFileIdEntry (interp, fileId, filePath)
-     Tcl_Interp *interp;
-     fileId_t    fileId;
-     char       *filePath;
+static int 
+SetTCLENVFileIdEntry (Tcl_Interp *interp, fileId_t fileId, char *filePath)
 {
 
     if (Tcl_SetVar2 (interp, "TCLENV", fileId, filePath,
@@ -383,10 +369,8 @@ SetTCLENVFileIdEntry (interp, fileId, filePath)
  *   TRUE is returned if the entry exists, FALSE if it doesn't.
  *-----------------------------------------------------------------------------
  */
-static int
-CheckTCLENVFileIdEntry (interp, filePath)
-    Tcl_Interp *interp;
-    char       *filePath;
+static int 
+CheckTCLENVFileIdEntry (Tcl_Interp *interp, char *filePath)
 {
     fileId_t fileId;
 
@@ -422,9 +406,7 @@ CheckTCLENVFileIdEntry (interp, filePath)
  *-----------------------------------------------------------------------------
  */
 static char *
-GetTCLENVFileIdEntry (interp, fileId)
-    Tcl_Interp  *interp;
-    fileId_t     fileId;
+GetTCLENVFileIdEntry (Tcl_Interp *interp, fileId_t fileId)
 {
     char *filePath;
 
@@ -460,13 +442,8 @@ GetTCLENVFileIdEntry (interp, fileId)
  * and should be skipped.
  *-----------------------------------------------------------------------------
  */
-static int
-SetTCLENVPkgEntry (interp, packageName, fileId, offset, length)
-     Tcl_Interp *interp;
-     char       *packageName;
-     fileId_t    fileId;
-     char       *offset;
-     char       *length;
+static int 
+SetTCLENVPkgEntry (Tcl_Interp *interp, char *packageName, fileId_t fileId, char *offset, char *length)
 {
     int   nameLen;
     char  indexBuffer [64], *indexPtr;
@@ -521,13 +498,8 @@ SetTCLENVPkgEntry (interp, packageName, fileId, offset, length)
  *   TCL_OK or TCL_ERROR.
  *-----------------------------------------------------------------------------
  */
-static int
-GetTCLENVPkgEntry (interp, packageName, fileId, offsetPtr, lengthPtr)
-     Tcl_Interp *interp;
-     char       *packageName;
-     fileId_t    fileId;
-     long       *offsetPtr;
-     unsigned   *lengthPtr;
+static int 
+GetTCLENVPkgEntry (Tcl_Interp *interp, char *packageName, fileId_t fileId, long *offsetPtr, unsigned *lengthPtr)
 {
     int            nameLen, pkgDataArgc;
     char           indexBuffer [64], *indexPtr;
@@ -609,12 +581,8 @@ GetTCLENVPkgEntry (interp, packageName, fileId, offsetPtr, lengthPtr)
  *   TCL_OK or TCL_ERROR.
  *-----------------------------------------------------------------------------
  */
-static int
-SetTCLENVProcEntry (interp, procName, type, location)
-    Tcl_Interp *interp;
-    char       *procName;
-    char       *type;
-    char       *location;
+static int 
+SetTCLENVProcEntry (Tcl_Interp *interp, char *procName, char *type, char *location)
 {
     int   nameLen;
     char  indexBuffer [64], *indexPtr;
@@ -661,12 +629,8 @@ SetTCLENVProcEntry (interp, procName, type, location)
  *   TCL_OK or TCL_ERROR.
  *-----------------------------------------------------------------------------
  */
-static int
-GetTCLENVProcEntry (interp, procName, typePtr, locationPtr)
-    Tcl_Interp *interp;
-    char       *procName;
-    char       *typePtr;
-    char      **locationPtr;
+static int 
+GetTCLENVProcEntry (Tcl_Interp *interp, char *procName, char *typePtr, char **locationPtr)
 {
     int            nameLen, procDataArgc;
     char           indexBuffer [64], *indexPtr;
@@ -757,11 +721,8 @@ GetTCLENVProcEntry (interp, procName, typePtr, locationPtr)
  *   TCL_OK or TCL_ERROR.
  *-----------------------------------------------------------------------------
  */
-static int
-ProcessIndexFile (interp, tlibFilePath, tndxFilePath)
-     Tcl_Interp *interp;
-     char       *tlibFilePath;
-     char       *tndxFilePath;
+static int 
+ProcessIndexFile (Tcl_Interp *interp, char *tlibFilePath, char *tndxFilePath)
 {
     fileId_t      fileId;
     FILE         *indexFilePtr;
@@ -864,10 +825,8 @@ ProcessIndexFile (interp, tlibFilePath, tndxFilePath)
  *   TCL_OK or TCL_ERROR.
  *-----------------------------------------------------------------------------
  */
-static int
-BuildPackageIndex (interp, tlibFilePath)
-     Tcl_Interp *interp;
-     char       *tlibFilePath;
+static int 
+BuildPackageIndex (Tcl_Interp *interp, char *tlibFilePath)
 {
     char *cmdPtr, *initCmd;
 
@@ -926,12 +885,8 @@ BuildPackageIndex (interp, tlibFilePath)
  *   TCL_OK or TCL_ERROR.
  *-----------------------------------------------------------------------------
  */
-static int
-LoadPackageIndex (interp, tlibFilePath, pathLen, dirLen)
-     Tcl_Interp *interp;
-     char       *tlibFilePath;
-     int         pathLen;
-     int         dirLen;
+static int 
+LoadPackageIndex (Tcl_Interp *interp, char *tlibFilePath, int pathLen, int dirLen)
 {
     char        *tndxFilePath, tndxPathBuf [64], *msg;
     struct stat  tlibStat;
@@ -999,11 +954,8 @@ LoadPackageIndex (interp, tlibFilePath, pathLen, dirLen)
  *   TCL_OK or TCL_ERROR.
  *-----------------------------------------------------------------------------
  */
-static int
-LoadOusterIndex (interp, indexFilePath, dirLen)
-     Tcl_Interp *interp;
-     char       *indexFilePath;
-     int         dirLen;
+static int 
+LoadOusterIndex (Tcl_Interp *interp, char *indexFilePath, int dirLen)
 {
     FILE         *indexFilePtr;
     fileId_t      fileId;
@@ -1115,10 +1067,8 @@ LoadOusterIndex (interp, indexFilePath, dirLen)
  *   A standard Tcl result.
  *-----------------------------------------------------------------------------
  */
-static int
-LoadDirIndexes (interp, dirName)
-    Tcl_Interp  *interp;
-    char        *dirName;
+static int 
+LoadDirIndexes (Tcl_Interp *interp, char *dirName)
 {
     DIR           *dirPtr;
     struct dirent *entryPtr;
@@ -1203,10 +1153,8 @@ LoadDirIndexes (interp, dirName)
  *
  *-----------------------------------------------------------------------------
  */
-static int
-LoadPackageIndexes (interp, path)
-    Tcl_Interp  *interp;
-    char        *path;
+static int 
+LoadPackageIndexes (Tcl_Interp *interp, char *path)
 {
     char  *dirName, dirNameBuf [64];
     int    idx, dirLen, pathArgc, status;
@@ -1265,11 +1213,8 @@ LoadPackageIndexes (interp, path)
  *
  *-----------------------------------------------------------------------------
  */
-static int
-LoadProc (interp, procName, foundPtr)
-    Tcl_Interp  *interp;
-    char        *procName;
-    int         *foundPtr;
+static int 
+LoadProc (Tcl_Interp *interp, char *procName, int *foundPtr)
 {
     Interp        *iPtr = (Interp *) interp;
     char           type, *location, *filePath, *cmdPtr, cmdBuf [80];
@@ -1357,11 +1302,12 @@ LoadProc (interp, procName, foundPtr)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_LoadlibindexCmd (dummy, interp, argc, argv)
-    ClientData   dummy;
-    Tcl_Interp  *interp;
-    int          argc;
-    char       **argv;
+Tcl_LoadlibindexCmd (
+    ClientData   dummy,
+    Tcl_Interp  *interp,
+    int          argc,
+    char       **argv
+)
 {
     char *pathName, pathNameBuf [64];
     int   pathLen, dirLen;
@@ -1435,11 +1381,12 @@ Tcl_LoadlibindexCmd (dummy, interp, argc, argv)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_Demand_loadCmd (dummy, interp, argc, argv)
-    ClientData   dummy;
-    Tcl_Interp  *interp;
-    int          argc;
-    char       **argv;
+Tcl_Demand_loadCmd (
+    ClientData   dummy,
+    Tcl_Interp  *interp,
+    int          argc,
+    char       **argv
+)
 {
     int   found;
     char *path, *msg;

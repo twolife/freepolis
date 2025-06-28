@@ -111,7 +111,7 @@ Tk_ConfigSpec DateConfigSpecs[] = {
   };
 
 
-XDisplay *FindXDisplay();
+extern XDisplay *FindXDisplay(Tk_Window tkwin);
 
 
 static void
@@ -374,14 +374,14 @@ DoDateCmd(CLIENT_ARGS)
   SimDate *date = (SimDate *) clientData;
   Tcl_HashEntry *ent;
   int result = TCL_OK;
-  int (*cmd)();
+  int (*cmd)(SimDate*, Tcl_Interp*, int, char**);
 
   if (argc < 2) {
     return TCL_ERROR;
   }
 
   if ((ent = Tcl_FindHashEntry(&DateCmds, argv[1]))) {
-    cmd = (int (*)())ent->clientData;
+    cmd = (int (*)(SimDate*, Tcl_Interp*, int, char**))ent->clientData;
     Tk_Preserve((ClientData) date);
     result = cmd(date, interp, argc, argv);
     Tk_Release((ClientData) date);
@@ -430,7 +430,7 @@ DateViewCmd(CLIENT_ARGS)
 			StructureNotifyMask,
 			SimDateEventProc, (ClientData) date);
   Tcl_CreateCommand(interp, Tk_PathName(date->tkwin),
-		    DoDateCmd, (ClientData) date, (void (*)()) NULL);
+		    DoDateCmd, (ClientData) date, (void (*)(int *)) NULL);
 
 /*
   Tk_MakeWindowExist(date->tkwin);
@@ -477,7 +477,7 @@ void
 date_command_init(void)
 {
   Tcl_CreateCommand(tk_mainInterp, "dateview", DateViewCmd,
-		    (ClientData)MainWindow, (void (*)()) NULL);
+		    (ClientData)MainWindow, (void (*)(int *)) NULL);
 
   Tcl_InitHashTable(&DateCmds, TCL_STRING_KEYS);
 

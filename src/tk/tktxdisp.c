@@ -247,9 +247,10 @@ static void		UpdateDisplayInfo _ANSI_ARGS_((TkText *textPtr));
  *----------------------------------------------------------------------
  */
 
-void
-TkTextCreateDInfo(textPtr)
-    TkText *textPtr;		/* Overall information for text widget. */
+void 
+TkTextCreateDInfo (
+    TkText *textPtr		/* Overall information for text widget. */
+)
 {
     register DInfo *dInfoPtr;
     XGCValues gcValues;
@@ -284,9 +285,10 @@ TkTextCreateDInfo(textPtr)
  *----------------------------------------------------------------------
  */
 
-void
-TkTextFreeDInfo(textPtr)
-    TkText *textPtr;		/* Overall information for text widget. */
+void 
+TkTextFreeDInfo (
+    TkText *textPtr		/* Overall information for text widget. */
+)
 {
     register DInfo *dInfoPtr = textPtr->dInfoPtr;
 
@@ -332,9 +334,10 @@ TkTextFreeDInfo(textPtr)
  */
 
 static Style *
-GetStyle(textPtr, sValuePtr)
-    TkText *textPtr;		/* Overall information about text widget. */
-    StyleValues *sValuePtr;	/* Information about desired style. */
+GetStyle(
+    TkText *textPtr,		/* Overall information about text widget. */
+    StyleValues *sValuePtr	/* Information about desired style. */
+)
 {
     Style *stylePtr;
     Tcl_HashEntry *hPtr;
@@ -404,9 +407,10 @@ GetStyle(textPtr, sValuePtr)
  *----------------------------------------------------------------------
  */
 
-static void
-FreeStyle(stylePtr)
-    register Style *stylePtr;	/* Information about style to be freed. */
+static void 
+FreeStyle (
+    register Style *stylePtr	/* Information about style to be freed. */
+)
 
 {
     stylePtr->refCount--;
@@ -440,11 +444,12 @@ FreeStyle(stylePtr)
  */
 
 static void
-ComputeStyleValues(textPtr, numTags, tagPtrPtr, sValuePtr)
-    TkText *textPtr;			/* Overall information for widget. */
-    int numTags;			/* Number of tags at *tagPtr. */
-    register TkTextTag **tagPtrPtr;	/* Pointer to array of tag pointers. */
-    register StyleValues *sValuePtr;	/* Pointer to structure to fill in. */
+ComputeStyleValues(
+    TkText *textPtr,			/* Overall information for widget. */
+    int numTags,			/* Number of tags at *tagPtr. */
+    register TkTextTag **tagPtrPtr,	/* Pointer to array of tag pointers. */
+    register StyleValues *sValuePtr	/* Pointer to structure to fill in. */
+)
 {
     register TkTextTag *tagPtr;
 
@@ -522,13 +527,14 @@ ComputeStyleValues(textPtr, numTags, tagPtrPtr, sValuePtr)
  */
 
 static DLine *
-LayoutLine(textPtr, line, linePtr, tInfoPtr)
-    TkText *textPtr;		/* Overall information about text widget. */
-    int line;			/* Index of line to layout. */
-    TkTextLine *linePtr;	/* Line to layout (corresponds to line). */
-    TagInfo *tInfoPtr;		/* Information to help keep track of tags.
+LayoutLine (
+    TkText *textPtr,		/* Overall information about text widget. */
+    int line,			/* Index of line to layout. */
+    TkTextLine *linePtr,	/* Line to layout (corresponds to line). */
+    TagInfo *tInfoPtr		/* Information to help keep track of tags.
 				 * Caller must have initialized to correspond
 				 * to state just before start of line. */
+)
 {
     DLine *firstLinePtr;
     DLine *lastLinePtr = NULL;	/* Initializations needed only to stop */
@@ -767,11 +773,12 @@ LayoutLine(textPtr, line, linePtr, tInfoPtr)
  *----------------------------------------------------------------------
  */
 
-static void
-ToggleTag(tInfoPtr, tagPtr)
-    register TagInfo *tInfoPtr;		/* Tag information to be updated. */
-    TkTextTag *tagPtr;			/* Tag to be toggled into or out of
+static void 
+ToggleTag (
+    register TagInfo *tInfoPtr,		/* Tag information to be updated. */
+    TkTextTag *tagPtr			/* Tag to be toggled into or out of
 					 * *tInfoPtr. */
+)
 {
     register TkTextTag **tagPtrPtr;
     int i;
@@ -830,9 +837,10 @@ ToggleTag(tInfoPtr, tagPtr)
  *----------------------------------------------------------------------
  */
 
-static void
-UpdateDisplayInfo(textPtr)
-    TkText *textPtr;		/* Text widget to update. */
+static void 
+UpdateDisplayInfo (
+    TkText *textPtr		/* Text widget to update. */
+)
 {
     register DInfo *dInfoPtr = textPtr->dInfoPtr;
     register DLine *dlPtr, *prevPtr, *dlPtr2;
@@ -980,19 +988,20 @@ UpdateDisplayInfo(textPtr)
  *----------------------------------------------------------------------
  */
 
-static void
-FreeDLines(textPtr, firstPtr, lastPtr, unlink)
-    TkText *textPtr;			/* Information about overall text
+static void 
+FreeDLines (
+    TkText *textPtr,			/* Information about overall text
 					 * widget. */
-    register DLine *firstPtr;		/* Pointer to first DLine to free up. */
-    DLine *lastPtr;			/* Pointer to DLine just after last
+    register DLine *firstPtr,		/* Pointer to first DLine to free up. */
+    DLine *lastPtr,			/* Pointer to DLine just after last
 					 * one to free (NULL means everything
 					 * starting with firstPtr). */
-    int unlink;				/* 1 means DLines are currently linked
+    int unlink				/* 1 means DLines are currently linked
 					 * into the list rooted at
 					 * textPtr->dInfoPtr->dLinePtr and
 					 * they have to be unlinked.  0 means
 					 * just free without unlinking. */
+)
 {
     register Chunk *chunkPtr, *nextChunkPtr;
     register DLine *nextDLinePtr;
@@ -1041,13 +1050,14 @@ FreeDLines(textPtr, firstPtr, lastPtr, unlink)
  *----------------------------------------------------------------------
  */
 
-static void
-DisplayDLine(textPtr, dlPtr, pixmap)
-    TkText *textPtr;		/* Text widget in which to draw line. */
-    register DLine *dlPtr;	/* Information about line to draw. */
-    Pixmap pixmap;		/* Pixmap to use for double-buffering.
+static void 
+DisplayDLine (
+    TkText *textPtr,		/* Text widget in which to draw line. */
+    register DLine *dlPtr,	/* Information about line to draw. */
+    Pixmap pixmap		/* Pixmap to use for double-buffering.
 				 * Caller must make sure it's large enough
 				 * to hold line. */
+)
 {
     register Style *stylePtr;
     register StyleValues *sValuePtr;
@@ -1228,9 +1238,10 @@ DisplayDLine(textPtr, dlPtr, pixmap)
  *----------------------------------------------------------------------
  */
 
-static void
-DisplayText(clientData)
-    ClientData clientData;	/* Information about widget. */
+static void 
+DisplayText (
+    ClientData clientData	/* Information about widget. */
+)
 {
     register TkText *textPtr = (TkText *) clientData;
     DInfo *dInfoPtr = textPtr->dInfoPtr;
@@ -1458,13 +1469,16 @@ DisplayText(clientData)
  */
 
 	/* ARGSUSED */
-void
-TkTextRedrawRegion(textPtr, x, y, width, height)
-    TkText *textPtr;		/* Widget record for text widget. */
-    int x, y;			/* Coordinates of upper-left corner of area
+void 
+TkTextRedrawRegion (
+    TkText *textPtr,		/* Widget record for text widget. */
+    int x,
+    int y,			/* Coordinates of upper-left corner of area
 				 * to be redrawn, in pixels relative to
 				 * textPtr's window. */
-    int width, height;		/* Width and height of area to be redrawn. */
+    int width,
+    int height		/* Width and height of area to be redrawn. */
+)
 {
     register DLine *dlPtr;
     DInfo *dInfoPtr = textPtr->dInfoPtr;
@@ -1531,12 +1545,13 @@ TkTextRedrawRegion(textPtr, x, y, width, height)
  *----------------------------------------------------------------------
  */
 
-void
-TkTextLinesChanged(textPtr, first, last)
-    TkText *textPtr;		/* Widget record for text widget. */
-    int first;			/* Index of first line that must be
+void 
+TkTextLinesChanged (
+    TkText *textPtr,		/* Widget record for text widget. */
+    int first,			/* Index of first line that must be
 				 * redisplayed. */
-    int last;			/* Index of last line to redisplay. */
+    int last			/* Index of last line to redisplay. */
+)
 {
     DInfo *dInfoPtr = textPtr->dInfoPtr;
     DLine *firstPtr, *lastPtr;
@@ -1599,16 +1614,19 @@ TkTextLinesChanged(textPtr, first, last)
  *----------------------------------------------------------------------
  */
 
-void
-TkTextRedrawTag(textPtr, line1, ch1, line2, ch2, tagPtr, withTag)
-    TkText *textPtr;		/* Widget record for text widget. */
-    int line1, ch1;		/* Index of first character in range of
+void 
+TkTextRedrawTag (
+    TkText *textPtr,		/* Widget record for text widget. */
+    int line1,
+    int ch1,		/* Index of first character in range of
 				 * interest. */
-    int line2, ch2;		/* Index of character just after last one
+    int line2,
+    int ch2,		/* Index of character just after last one
 				 * in range of interest. */
-    TkTextTag *tagPtr;		/* Information about tag. */
-    int withTag;		/* 1 means redraw characters that have the
+    TkTextTag *tagPtr,		/* Information about tag. */
+    int withTag		/* 1 means redraw characters that have the
 				 * tag, 0 means redraw those without. */
+)
 {
     register DLine *dlPtr;
     DLine *endPtr;
@@ -1732,9 +1750,10 @@ TkTextRedrawTag(textPtr, line1, ch1, line2, ch2, tagPtr, withTag)
  *----------------------------------------------------------------------
  */
 
-void
-TkTextRelayoutWindow(textPtr)
-    TkText *textPtr;		/* Widget record for text widget. */
+void 
+TkTextRelayoutWindow (
+    TkText *textPtr		/* Widget record for text widget. */
+)
 {
     DInfo *dInfoPtr = textPtr->dInfoPtr;
 
@@ -1788,16 +1807,17 @@ TkTextRelayoutWindow(textPtr)
  *----------------------------------------------------------------------
  */
 
-void
-TkTextSetView(textPtr, line, pickPlace)
-    TkText *textPtr;		/* Widget record for text widget. */
-    int line;			/* Number of line that is to appear somewhere
+void 
+TkTextSetView (
+    TkText *textPtr,		/* Widget record for text widget. */
+    int line,			/* Number of line that is to appear somewhere
 				 * in the window.  This line number must
 				 * be a valid one in the file. */
-    int pickPlace;		/* 0 means topLine must appear at top of
+    int pickPlace		/* 0 means topLine must appear at top of
 				 * screen.  1 means we get to pick where it
 				 * appears:  minimize screen motion or else
 				 * display line at center of screen. */
+)
 {
     DInfo *dInfoPtr = textPtr->dInfoPtr;
     register DLine *dlPtr, *dlPtr2;
@@ -1950,10 +1970,11 @@ TkTextSetView(textPtr, line, pickPlace)
  */
 
 static DLine *
-FindDLine(dlPtr, line)
-    register DLine *dlPtr;	/* Pointer to first in list of DLines
+FindDLine (
+    register DLine *dlPtr,	/* Pointer to first in list of DLines
 				 * to search. */
-    int line;			/* Line number in text that is desired. */
+    int line			/* Line number in text that is desired. */
+)
 {
     TkTextLine *linePtr;
     int thisLine;
@@ -2014,12 +2035,14 @@ FindDLine(dlPtr, line)
  */
 
 TkTextLine *
-TkTextCharAtLoc(textPtr, x, y, chPtr)
-    TkText *textPtr;		/* Widget record for text widget. */
-    int x, y;			/* Pixel coordinates of point in widget's
+TkTextCharAtLoc (
+    TkText *textPtr,		/* Widget record for text widget. */
+    int x,
+    int y,			/* Pixel coordinates of point in widget's
 				 * window. */
-    int *chPtr;			/* Place to store index-within-line of
+    int *chPtr			/* Place to store index-within-line of
 				 * closest character. */
+)
 {
     DInfo *dInfoPtr = textPtr->dInfoPtr;
     register DLine *dlPtr;

@@ -140,13 +140,14 @@ Tk_ItemType TkWindowType = {
  *--------------------------------------------------------------
  */
 
-static int
-CreateWinItem(canvasPtr, itemPtr, argc, argv)
-    register Tk_Canvas *canvasPtr;	/* Canvas to hold new item. */
-    Tk_Item *itemPtr;			/* Record to hold new item;  header
+static int 
+CreateWinItem (
+    register Tk_Canvas *canvasPtr,	/* Canvas to hold new item. */
+    Tk_Item *itemPtr,			/* Record to hold new item;  header
 					 * has been initialized by caller. */
-    int argc;				/* Number of arguments in argv. */
-    char **argv;			/* Arguments describing rectangle. */
+    int argc,				/* Number of arguments in argv. */
+    char **argv			/* Arguments describing rectangle. */
+)
 {
     register WindowItem *winItemPtr = (WindowItem *) itemPtr;
 
@@ -203,15 +204,16 @@ CreateWinItem(canvasPtr, itemPtr, argc, argv)
  *--------------------------------------------------------------
  */
 
-static int
-WinItemCoords(canvasPtr, itemPtr, argc, argv)
-    register Tk_Canvas *canvasPtr;	/* Canvas containing item. */
-    Tk_Item *itemPtr;			/* Item whose coordinates are to be
+static int 
+WinItemCoords (
+    register Tk_Canvas *canvasPtr,	/* Canvas containing item. */
+    Tk_Item *itemPtr,			/* Item whose coordinates are to be
 					 * read or modified. */
-    int argc;				/* Number of coordinates supplied in
+    int argc,				/* Number of coordinates supplied in
 					 * argv. */
-    char **argv;			/* Array of coordinates: x1, y1,
+    char **argv			/* Array of coordinates: x1, y1,
 					 * x2, y2, ... */
+)
 {
     register WindowItem *winItemPtr = (WindowItem *) itemPtr;
 
@@ -252,13 +254,14 @@ WinItemCoords(canvasPtr, itemPtr, argc, argv)
  *--------------------------------------------------------------
  */
 
-static int
-ConfigureWinItem(canvasPtr, itemPtr, argc, argv, flags)
-    Tk_Canvas *canvasPtr;	/* Canvas containing itemPtr. */
-    Tk_Item *itemPtr;		/* Window item to reconfigure. */
-    int argc;			/* Number of elements in argv.  */
-    char **argv;		/* Arguments describing things to configure. */
-    int flags;			/* Flags to pass to Tk_ConfigureWidget. */
+static int 
+ConfigureWinItem (
+    Tk_Canvas *canvasPtr,	/* Canvas containing itemPtr. */
+    Tk_Item *itemPtr,		/* Window item to reconfigure. */
+    int argc,			/* Number of elements in argv.  */
+    char **argv,		/* Arguments describing things to configure. */
+    int flags			/* Flags to pass to Tk_ConfigureWidget. */
+)
 {
     register WindowItem *winItemPtr = (WindowItem *) itemPtr;
     Tk_Window oldWindow;
@@ -341,9 +344,10 @@ ConfigureWinItem(canvasPtr, itemPtr, argc, argv, flags)
  *--------------------------------------------------------------
  */
 
-static void
-DeleteWinItem(itemPtr)
-    Tk_Item *itemPtr;			/* Item that is being deleted. */
+static void 
+DeleteWinItem (
+    Tk_Item *itemPtr			/* Item that is being deleted. */
+)
 {
     register WindowItem *winItemPtr = (WindowItem *) itemPtr;
 
@@ -377,11 +381,12 @@ DeleteWinItem(itemPtr)
  */
 
 	/* ARGSUSED */
-static void
-ComputeWindowBbox(canvasPtr, winItemPtr)
-    Tk_Canvas *canvasPtr;		/* Canvas that contains item. */
-    register WindowItem *winItemPtr;	/* Item whose bbox is to be
+static void 
+ComputeWindowBbox (
+    Tk_Canvas *canvasPtr,		/* Canvas that contains item. */
+    register WindowItem *winItemPtr	/* Item whose bbox is to be
 					 * recomputed. */
+)
 {
     int width, height, x, y;
 
@@ -481,12 +486,13 @@ ComputeWindowBbox(canvasPtr, winItemPtr)
  */
 
 	/* ARGSUSED */
-static void
-DisplayWinItem(canvasPtr, itemPtr, drawable)
-    register Tk_Canvas *canvasPtr;	/* Canvas that contains item. */
-    Tk_Item *itemPtr;			/* Item to be displayed. */
-    Drawable drawable;			/* Pixmap or window in which to draw
+static void 
+DisplayWinItem (
+    register Tk_Canvas *canvasPtr,	/* Canvas that contains item. */
+    Tk_Item *itemPtr,			/* Item to be displayed. */
+    Drawable drawable			/* Pixmap or window in which to draw
 					 * item. */
+)
 {
     register WindowItem *winItemPtr = (WindowItem *) itemPtr;
     int x,y, width, height;
@@ -549,11 +555,12 @@ DisplayWinItem(canvasPtr, itemPtr, drawable)
  */
 
 	/* ARGSUSED */
-static double
-WinItemToPoint(canvasPtr, itemPtr, pointPtr)
-    Tk_Canvas *canvasPtr;	/* Canvas containing item. */
-    Tk_Item *itemPtr;		/* Item to check against point. */
-    double *pointPtr;		/* Pointer to x and y coordinates. */
+static double 
+WinItemToPoint (
+    Tk_Canvas *canvasPtr,	/* Canvas containing item. */
+    Tk_Item *itemPtr,		/* Item to check against point. */
+    double *pointPtr		/* Pointer to x and y coordinates. */
+)
 {
     register WindowItem *winItemPtr = (WindowItem *) itemPtr;
     double x1, x2, y1, y2, xDiff, yDiff;
@@ -607,13 +614,14 @@ WinItemToPoint(canvasPtr, itemPtr, pointPtr)
  */
 
 	/* ARGSUSED */
-static int
-WinItemToArea(canvasPtr, itemPtr, rectPtr)
-    Tk_Canvas *canvasPtr;	/* Canvas containing item. */
-    Tk_Item *itemPtr;		/* Item to check against rectangle. */
-    double *rectPtr;		/* Pointer to array of four coordinates
+static int 
+WinItemToArea (
+    Tk_Canvas *canvasPtr,	/* Canvas containing item. */
+    Tk_Item *itemPtr,		/* Item to check against rectangle. */
+    double *rectPtr		/* Pointer to array of four coordinates
 				 * (x1, y1, x2, y2) describing rectangular
 				 * area.  */
+)
 {
     register WindowItem *winItemPtr = (WindowItem *) itemPtr;
 
@@ -653,13 +661,15 @@ WinItemToArea(canvasPtr, itemPtr, rectPtr)
  *--------------------------------------------------------------
  */
 
-static void
-ScaleWinItem(canvasPtr, itemPtr, originX, originY, scaleX, scaleY)
-    Tk_Canvas *canvasPtr;		/* Canvas containing rectangle. */
-    Tk_Item *itemPtr;			/* Rectangle to be scaled. */
-    double originX, originY;		/* Origin about which to scale rect. */
-    double scaleX;			/* Amount to scale in X direction. */
-    double scaleY;			/* Amount to scale in Y direction. */
+static void 
+ScaleWinItem (
+    Tk_Canvas *canvasPtr,		/* Canvas containing rectangle. */
+    Tk_Item *itemPtr,			/* Rectangle to be scaled. */
+    double originX,
+    double originY,		/* Origin about which to scale rect. */
+    double scaleX,			/* Amount to scale in X direction. */
+    double scaleY			/* Amount to scale in Y direction. */
+)
 {
     register WindowItem *winItemPtr = (WindowItem *) itemPtr;
 
@@ -693,12 +703,14 @@ ScaleWinItem(canvasPtr, itemPtr, originX, originY, scaleX, scaleY)
  *--------------------------------------------------------------
  */
 
-static void
-TranslateWinItem(canvasPtr, itemPtr, deltaX, deltaY)
-    Tk_Canvas *canvasPtr;		/* Canvas containing item. */
-    Tk_Item *itemPtr;			/* Item that is being moved. */
-    double deltaX, deltaY;		/* Amount by which item is to be
+static void 
+TranslateWinItem (
+    Tk_Canvas *canvasPtr,		/* Canvas containing item. */
+    Tk_Item *itemPtr,			/* Item that is being moved. */
+    double deltaX,
+    double deltaY		/* Amount by which item is to be
 					 * moved. */
+)
 {
     register WindowItem *winItemPtr = (WindowItem *) itemPtr;
 
@@ -727,10 +739,11 @@ TranslateWinItem(canvasPtr, itemPtr, deltaX, deltaY)
  *--------------------------------------------------------------
  */
 
-static void
-WinItemStructureProc(clientData, eventPtr)
-    ClientData clientData;	/* Pointer to record describing window item. */
-    XEvent *eventPtr;		/* Describes what just happened. */
+static void 
+WinItemStructureProc (
+    ClientData clientData,	/* Pointer to record describing window item. */
+    XEvent *eventPtr		/* Describes what just happened. */
+)
 {
     register WindowItem *winItemPtr = (WindowItem *) clientData;
 
@@ -758,11 +771,12 @@ WinItemStructureProc(clientData, eventPtr)
  */
 
 	/* ARGSUSED */
-static void
-WinItemRequestProc(clientData, tkwin)
-    ClientData clientData;		/* Pointer to record for window item. */
-    Tk_Window tkwin;			/* Window that changed its desired
+static void 
+WinItemRequestProc (
+    ClientData clientData,		/* Pointer to record for window item. */
+    Tk_Window tkwin			/* Window that changed its desired
 					 * size. */
+)
 {
     WindowItem *winItemPtr = (WindowItem *) clientData;
 

@@ -173,13 +173,14 @@ static void		DisplayMessage _ANSI_ARGS_((ClientData clientData));
  *--------------------------------------------------------------
  */
 
-int
-Tk_MessageCmd(clientData, interp, argc, argv)
-    ClientData clientData;	/* Main window associated with
+int 
+Tk_MessageCmd (
+    ClientData clientData,	/* Main window associated with
 				 * interpreter. */
-    Tcl_Interp *interp;		/* Current interpreter. */
-    int argc;			/* Number of arguments. */
-    char **argv;		/* Argument strings. */
+    Tcl_Interp *interp,		/* Current interpreter. */
+    int argc,			/* Number of arguments. */
+    char **argv		/* Argument strings. */
+)
 {
     register Message *msgPtr;
     Tk_Window new;
@@ -219,7 +220,7 @@ Tk_MessageCmd(clientData, interp, argc, argv)
     Tk_CreateEventHandler(msgPtr->tkwin, ExposureMask|StructureNotifyMask,
 	    MessageEventProc, (ClientData) msgPtr);
     Tcl_CreateCommand(interp, Tk_PathName(msgPtr->tkwin), MessageWidgetCmd,
-	    (ClientData) msgPtr, (void (*)()) NULL);
+	    (ClientData) msgPtr, (void (*)(int *)) NULL);
     if (ConfigureMessage(interp, msgPtr, argc-2, argv+2, 0) != TCL_OK) {
 	goto error;
     }
@@ -250,12 +251,13 @@ Tk_MessageCmd(clientData, interp, argc, argv)
  *--------------------------------------------------------------
  */
 
-static int
-MessageWidgetCmd(clientData, interp, argc, argv)
-    ClientData clientData;	/* Information about message widget. */
-    Tcl_Interp *interp;		/* Current interpreter. */
-    int argc;			/* Number of arguments. */
-    char **argv;		/* Argument strings. */
+static int 
+MessageWidgetCmd (
+    ClientData clientData,	/* Information about message widget. */
+    Tcl_Interp *interp,		/* Current interpreter. */
+    int argc,			/* Number of arguments. */
+    char **argv		/* Argument strings. */
+)
 {
     register Message *msgPtr = (Message *) clientData;
     int length;
@@ -304,9 +306,10 @@ MessageWidgetCmd(clientData, interp, argc, argv)
  *----------------------------------------------------------------------
  */
 
-static void
-DestroyMessage(clientData)
-    ClientData clientData;	/* Info about message widget. */
+static void 
+DestroyMessage (
+    ClientData clientData	/* Info about message widget. */
+)
 {
     register Message *msgPtr = (Message *) clientData;
 
@@ -358,14 +361,15 @@ DestroyMessage(clientData)
  *----------------------------------------------------------------------
  */
 
-static int
-ConfigureMessage(interp, msgPtr, argc, argv, flags)
-    Tcl_Interp *interp;		/* Used for error reporting. */
-    register Message *msgPtr;	/* Information about widget;  may or may
+static int 
+ConfigureMessage (
+    Tcl_Interp *interp,		/* Used for error reporting. */
+    register Message *msgPtr,	/* Information about widget;  may or may
 				 * not already have values for some fields. */
-    int argc;			/* Number of valid entries in argv. */
-    char **argv;		/* Arguments. */
-    int flags;			/* Flags to pass to Tk_ConfigureWidget. */
+    int argc,			/* Number of valid entries in argv. */
+    char **argv,		/* Arguments. */
+    int flags			/* Flags to pass to Tk_ConfigureWidget. */
+)
 {
     XGCValues gcValues;
     GC newGC;
@@ -476,9 +480,10 @@ ConfigureMessage(interp, msgPtr, argc, argv, flags)
  *--------------------------------------------------------------
  */
 
-static void
-ComputeMessageGeometry(msgPtr)
-    register Message *msgPtr;	/* Information about window. */
+static void 
+ComputeMessageGeometry (
+    register Message *msgPtr	/* Information about window. */
+)
 {
     char *p;
     int width, inc, height, numLines;
@@ -582,9 +587,10 @@ ComputeMessageGeometry(msgPtr)
  *--------------------------------------------------------------
  */
 
-static void
-DisplayMessage(clientData)
-    ClientData clientData;	/* Information about window. */
+static void 
+DisplayMessage (
+    ClientData clientData	/* Information about window. */
+)
 {
     register Message *msgPtr = (Message *) clientData;
     register Tk_Window tkwin = msgPtr->tkwin;
@@ -698,10 +704,11 @@ DisplayMessage(clientData)
  *--------------------------------------------------------------
  */
 
-static void
-MessageEventProc(clientData, eventPtr)
-    ClientData clientData;	/* Information about window. */
-    XEvent *eventPtr;		/* Information about event. */
+static void 
+MessageEventProc (
+    ClientData clientData,	/* Information about window. */
+    XEvent *eventPtr		/* Information about event. */
+)
 {
     Message *msgPtr = (Message *) clientData;
 
@@ -740,12 +747,13 @@ MessageEventProc(clientData, eventPtr)
 
 	/* ARGSUSED */
 static char *
-MessageTextVarProc(clientData, interp, name1, name2, flags)
-    ClientData clientData;	/* Information about message. */
-    Tcl_Interp *interp;		/* Interpreter containing variable. */
-    char *name1;		/* Name of variable. */
-    char *name2;		/* Second part of variable name. */
-    int flags;			/* Information about what happened. */
+MessageTextVarProc (
+    ClientData clientData,	/* Information about message. */
+    Tcl_Interp *interp,		/* Interpreter containing variable. */
+    char *name1,		/* Name of variable. */
+    char *name2,		/* Second part of variable name. */
+    int flags			/* Information about what happened. */
+)
 {
     register Message *msgPtr = (Message *) clientData;
     char *value;

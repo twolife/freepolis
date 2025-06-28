@@ -84,14 +84,12 @@ static void		GCInit _ANSI_ARGS_((void));
  *----------------------------------------------------------------------
  */
 
-GC
-Tk_GetGC(tkwin, valueMask, valuePtr)
-    Tk_Window tkwin;		/* Window in which GC will be used. */
-    register unsigned long valueMask;
-				/* 1 bits correspond to values specified
-				 * in *valuesPtr;  other values are set
-				 * from defaults. */
-    register XGCValues *valuePtr;
+GC 
+Tk_GetGC (
+    Tk_Window tkwin,		/* Window in which GC will be used. */
+    register unsigned long valueMask,
+    register XGCValues *valuePtr
+)
 				/* Values are specified here for bits set
 				 * in valueMask. */
 {
@@ -284,9 +282,10 @@ Tk_GetGC(tkwin, valueMask, valuePtr)
  *----------------------------------------------------------------------
  */
 
-void
-Tk_FreeGC(gc)
-    GC gc;			/* Graphics context to be released. */
+void 
+Tk_FreeGC (
+    GC gc			/* Graphics context to be released. */
+)
 {
     Tcl_HashEntry *idHashPtr;
     register TkGC *gcPtr;
@@ -325,8 +324,8 @@ Tk_FreeGC(gc)
  *----------------------------------------------------------------------
  */
 
-static void
-GCInit()
+static void 
+GCInit (void)
 {
     initialized = 1;
     Tcl_InitHashTable(&valueTable, sizeof(ValueKey)/sizeof(int));

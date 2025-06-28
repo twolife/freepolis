@@ -139,13 +139,14 @@ Tk_ItemType TkBitmapType = {
  *--------------------------------------------------------------
  */
 
-static int
-CreateBitmap(canvasPtr, itemPtr, argc, argv)
-    register Tk_Canvas *canvasPtr;	/* Canvas to hold new item. */
-    Tk_Item *itemPtr;			/* Record to hold new item;  header
+static int 
+CreateBitmap (
+    register Tk_Canvas *canvasPtr,	/* Canvas to hold new item. */
+    Tk_Item *itemPtr,			/* Record to hold new item;  header
 					 * has been initialized by caller. */
-    int argc;				/* Number of arguments in argv. */
-    char **argv;			/* Arguments describing rectangle. */
+    int argc,				/* Number of arguments in argv. */
+    char **argv			/* Arguments describing rectangle. */
+)
 {
     register BitmapItem *bmapPtr = (BitmapItem *) itemPtr;
 
@@ -202,15 +203,16 @@ CreateBitmap(canvasPtr, itemPtr, argc, argv)
  *--------------------------------------------------------------
  */
 
-static int
-BitmapCoords(canvasPtr, itemPtr, argc, argv)
-    register Tk_Canvas *canvasPtr;	/* Canvas containing item. */
-    Tk_Item *itemPtr;			/* Item whose coordinates are to be
+static int 
+BitmapCoords (
+    register Tk_Canvas *canvasPtr,	/* Canvas containing item. */
+    Tk_Item *itemPtr,			/* Item whose coordinates are to be
 					 * read or modified. */
-    int argc;				/* Number of coordinates supplied in
+    int argc,				/* Number of coordinates supplied in
 					 * argv. */
-    char **argv;			/* Array of coordinates: x1, y1,
+    char **argv			/* Array of coordinates: x1, y1,
 					 * x2, y2, ... */
+)
 {
     register BitmapItem *bmapPtr = (BitmapItem *) itemPtr;
 
@@ -250,13 +252,14 @@ BitmapCoords(canvasPtr, itemPtr, argc, argv)
  *--------------------------------------------------------------
  */
 
-static int
-ConfigureBitmap(canvasPtr, itemPtr, argc, argv, flags)
-    Tk_Canvas *canvasPtr;	/* Canvas containing itemPtr. */
-    Tk_Item *itemPtr;		/* Bitmap item to reconfigure. */
-    int argc;			/* Number of elements in argv.  */
-    char **argv;		/* Arguments describing things to configure. */
-    int flags;			/* Flags to pass to Tk_ConfigureWidget. */
+static int 
+ConfigureBitmap (
+    Tk_Canvas *canvasPtr,	/* Canvas containing itemPtr. */
+    Tk_Item *itemPtr,		/* Bitmap item to reconfigure. */
+    int argc,			/* Number of elements in argv.  */
+    char **argv,		/* Arguments describing things to configure. */
+    int flags			/* Flags to pass to Tk_ConfigureWidget. */
+)
 {
     register BitmapItem *bmapPtr = (BitmapItem *) itemPtr;
     XGCValues gcValues;
@@ -306,9 +309,10 @@ ConfigureBitmap(canvasPtr, itemPtr, argc, argv, flags)
  *--------------------------------------------------------------
  */
 
-static void
-DeleteBitmap(itemPtr)
-    Tk_Item *itemPtr;			/* Item that is being deleted. */
+static void 
+DeleteBitmap (
+    Tk_Item *itemPtr			/* Item that is being deleted. */
+)
 {
     register BitmapItem *bmapPtr = (BitmapItem *) itemPtr;
 
@@ -351,11 +355,12 @@ DeleteBitmap(itemPtr)
  */
 
 	/* ARGSUSED */
-static void
-ComputeBitmapBbox(canvasPtr, bmapPtr)
-    Tk_Canvas *canvasPtr;		/* Canvas that contains item. */
-    register BitmapItem *bmapPtr;	/* Item whose bbox is to be
+static void 
+ComputeBitmapBbox (
+    Tk_Canvas *canvasPtr,		/* Canvas that contains item. */
+    register BitmapItem *bmapPtr	/* Item whose bbox is to be
 					 * recomputed. */
+)
 {
     unsigned int width, height;
     int x, y;
@@ -439,12 +444,13 @@ ComputeBitmapBbox(canvasPtr, bmapPtr)
  *--------------------------------------------------------------
  */
 
-static void
-DisplayBitmap(canvasPtr, itemPtr, drawable)
-    register Tk_Canvas *canvasPtr;	/* Canvas that contains item. */
-    Tk_Item *itemPtr;			/* Item to be displayed. */
-    Drawable drawable;			/* Pixmap or window in which to draw
+static void 
+DisplayBitmap (
+    register Tk_Canvas *canvasPtr,	/* Canvas that contains item. */
+    Tk_Item *itemPtr,			/* Item to be displayed. */
+    Drawable drawable			/* Pixmap or window in which to draw
 					 * item. */
+)
 {
     register BitmapItem *bmapPtr = (BitmapItem *) itemPtr;
 
@@ -488,11 +494,12 @@ DisplayBitmap(canvasPtr, itemPtr, drawable)
  */
 
 	/* ARGSUSED */
-static double
-BitmapToPoint(canvasPtr, itemPtr, coordPtr)
-    Tk_Canvas *canvasPtr;	/* Canvas containing item. */
-    Tk_Item *itemPtr;		/* Item to check against point. */
-    double *coordPtr;		/* Pointer to x and y coordinates. */
+static double 
+BitmapToPoint (
+    Tk_Canvas *canvasPtr,	/* Canvas containing item. */
+    Tk_Item *itemPtr,		/* Item to check against point. */
+    double *coordPtr		/* Pointer to x and y coordinates. */
+)
 {
     register BitmapItem *bmapPtr = (BitmapItem *) itemPtr;
     double x1, x2, y1, y2, xDiff, yDiff;
@@ -546,13 +553,14 @@ BitmapToPoint(canvasPtr, itemPtr, coordPtr)
  */
 
 	/* ARGSUSED */
-static int
-BitmapToArea(canvasPtr, itemPtr, rectPtr)
-    Tk_Canvas *canvasPtr;	/* Canvas containing item. */
-    Tk_Item *itemPtr;		/* Item to check against rectangle. */
-    double *rectPtr;		/* Pointer to array of four coordinates
+static int 
+BitmapToArea (
+    Tk_Canvas *canvasPtr,	/* Canvas containing item. */
+    Tk_Item *itemPtr,		/* Item to check against rectangle. */
+    double *rectPtr		/* Pointer to array of four coordinates
 				 * (x1, y1, x2, y2) describing rectangular
 				 * area.  */
+)
 {
     register BitmapItem *bmapPtr = (BitmapItem *) itemPtr;
 
@@ -592,13 +600,15 @@ BitmapToArea(canvasPtr, itemPtr, rectPtr)
  *--------------------------------------------------------------
  */
 
-static void
-ScaleBitmap(canvasPtr, itemPtr, originX, originY, scaleX, scaleY)
-    Tk_Canvas *canvasPtr;		/* Canvas containing rectangle. */
-    Tk_Item *itemPtr;			/* Rectangle to be scaled. */
-    double originX, originY;		/* Origin about which to scale rect. */
-    double scaleX;			/* Amount to scale in X direction. */
-    double scaleY;			/* Amount to scale in Y direction. */
+static void 
+ScaleBitmap (
+    Tk_Canvas *canvasPtr,		/* Canvas containing rectangle. */
+    Tk_Item *itemPtr,			/* Rectangle to be scaled. */
+    double originX,
+    double originY,		/* Origin about which to scale rect. */
+    double scaleX,			/* Amount to scale in X direction. */
+    double scaleY			/* Amount to scale in Y direction. */
+)
 {
     register BitmapItem *bmapPtr = (BitmapItem *) itemPtr;
 
@@ -626,12 +636,14 @@ ScaleBitmap(canvasPtr, itemPtr, originX, originY, scaleX, scaleY)
  *--------------------------------------------------------------
  */
 
-static void
-TranslateBitmap(canvasPtr, itemPtr, deltaX, deltaY)
-    Tk_Canvas *canvasPtr;		/* Canvas containing item. */
-    Tk_Item *itemPtr;			/* Item that is being moved. */
-    double deltaX, deltaY;		/* Amount by which item is to be
+static void 
+TranslateBitmap (
+    Tk_Canvas *canvasPtr,		/* Canvas containing item. */
+    Tk_Item *itemPtr,			/* Item that is being moved. */
+    double deltaX,
+    double deltaY		/* Amount by which item is to be
 					 * moved. */
+)
 {
     register BitmapItem *bmapPtr = (BitmapItem *) itemPtr;
 

@@ -247,13 +247,14 @@ static int		ValueToPixel _ANSI_ARGS_((Scale *scalePtr, int value));
  *--------------------------------------------------------------
  */
 
-int
-Tk_ScaleCmd(clientData, interp, argc, argv)
-    ClientData clientData;		/* Main window associated with
+int 
+Tk_ScaleCmd (
+    ClientData clientData,		/* Main window associated with
 				 * interpreter. */
-    Tcl_Interp *interp;		/* Current interpreter. */
-    int argc;			/* Number of arguments. */
-    char **argv;		/* Argument strings. */
+    Tcl_Interp *interp,		/* Current interpreter. */
+    int argc,			/* Number of arguments. */
+    char **argv		/* Argument strings. */
+)
 {
     Tk_Window tkwin = (Tk_Window) clientData;
     register Scale *scalePtr;
@@ -299,7 +300,7 @@ Tk_ScaleCmd(clientData, interp, argc, argv)
 	    |PointerMotionMask|ButtonPressMask|ButtonReleaseMask,
 	    ScaleMouseProc, (ClientData) scalePtr);
     Tcl_CreateCommand(interp, Tk_PathName(scalePtr->tkwin), ScaleWidgetCmd,
-	    (ClientData) scalePtr, (void (*)()) NULL);
+	    (ClientData) scalePtr, (void (*)(int *)) NULL);
     if (ConfigureScale(interp, scalePtr, argc-2, argv+2, 0) != TCL_OK) {
 	goto error;
     }
@@ -330,13 +331,14 @@ Tk_ScaleCmd(clientData, interp, argc, argv)
  *--------------------------------------------------------------
  */
 
-static int
-ScaleWidgetCmd(clientData, interp, argc, argv)
-    ClientData clientData;		/* Information about scale
+static int 
+ScaleWidgetCmd (
+    ClientData clientData,		/* Information about scale
 					 * widget. */
-    Tcl_Interp *interp;			/* Current interpreter. */
-    int argc;				/* Number of arguments. */
-    char **argv;			/* Argument strings. */
+    Tcl_Interp *interp,			/* Current interpreter. */
+    int argc,				/* Number of arguments. */
+    char **argv			/* Argument strings. */
+)
 {
     register Scale *scalePtr = (Scale *) clientData;
     int result = TCL_OK;
@@ -422,9 +424,10 @@ ScaleWidgetCmd(clientData, interp, argc, argv)
  *----------------------------------------------------------------------
  */
 
-static void
-DestroyScale(clientData)
-    ClientData clientData;	/* Info about scale widget. */
+static void 
+DestroyScale (
+    ClientData clientData	/* Info about scale widget. */
+)
 {
     register Scale *scalePtr = (Scale *) clientData;
 
@@ -479,14 +482,15 @@ DestroyScale(clientData)
  *----------------------------------------------------------------------
  */
 
-static int
-ConfigureScale(interp, scalePtr, argc, argv, flags)
-    Tcl_Interp *interp;		/* Used for error reporting. */
-    register Scale *scalePtr;	/* Information about widget;  may or may
+static int 
+ConfigureScale (
+    Tcl_Interp *interp,		/* Used for error reporting. */
+    register Scale *scalePtr,	/* Information about widget;  may or may
 				 * not already have values for some fields. */
-    int argc;			/* Number of valid entries in argv. */
-    char **argv;		/* Arguments. */
-    int flags;			/* Flags to pass to Tk_ConfigureWidget. */
+    int argc,			/* Number of valid entries in argv. */
+    char **argv,		/* Arguments. */
+    int flags			/* Flags to pass to Tk_ConfigureWidget. */
+)
 {
     XGCValues gcValues;
     GC newGC;
@@ -597,9 +601,10 @@ ConfigureScale(interp, scalePtr, argc, argv, flags)
  *----------------------------------------------------------------------
  */
 
-static void
-ComputeScaleGeometry(scalePtr)
-    register Scale *scalePtr;		/* Information about widget. */
+static void 
+ComputeScaleGeometry (
+    register Scale *scalePtr		/* Information about widget. */
+)
 {
     XCharStruct bbox;
     char valueString[30];
@@ -701,9 +706,10 @@ ComputeScaleGeometry(scalePtr)
  *--------------------------------------------------------------
  */
 
-static void
-DisplayVerticalScale(clientData)
-    ClientData clientData;	/* Information about widget. */
+static void 
+DisplayVerticalScale (
+    ClientData clientData	/* Information about widget. */
+)
 {
     register Scale *scalePtr = (Scale *) clientData;
     register Tk_Window tkwin = scalePtr->tkwin;
@@ -866,15 +872,16 @@ DisplayVerticalScale(clientData)
  *----------------------------------------------------------------------
  */
 
-static void
-DisplayVerticalValue(scalePtr, value, rightEdge)
-    register Scale *scalePtr;	/* Information about widget in which to
+static void 
+DisplayVerticalValue (
+    register Scale *scalePtr,	/* Information about widget in which to
 				 * display value. */
-    int value;			/* Y-coordinate of number to display,
+    int value,			/* Y-coordinate of number to display,
 				 * specified in application coords, not
 				 * in pixels (we'll compute pixels). */
-    int rightEdge;		/* X-coordinate of right edge of text,
+    int rightEdge		/* X-coordinate of right edge of text,
 				 * specified in pixels. */
+)
 {
     register Tk_Window tkwin = scalePtr->tkwin;
     int y, dummy, length;
@@ -921,9 +928,10 @@ DisplayVerticalValue(scalePtr, value, rightEdge)
  *--------------------------------------------------------------
  */
 
-static void
-DisplayHorizontalScale(clientData)
-    ClientData clientData;	/* Information about widget. */
+static void 
+DisplayHorizontalScale (
+    ClientData clientData	/* Information about widget. */
+)
 {
     register Scale *scalePtr = (Scale *) clientData;
     register Tk_Window tkwin = scalePtr->tkwin;
@@ -1085,15 +1093,16 @@ DisplayHorizontalScale(clientData)
  *----------------------------------------------------------------------
  */
 
-static void
-DisplayHorizontalValue(scalePtr, value, bottom)
-    register Scale *scalePtr;	/* Information about widget in which to
+static void 
+DisplayHorizontalValue (
+    register Scale *scalePtr,	/* Information about widget in which to
 				 * display value. */
-    int value;			/* Y-coordinate of number to display,
+    int value,			/* Y-coordinate of number to display,
 				 * specified in application coords, not
 				 * in pixels (we'll compute pixels). */
-    int bottom;			/* Y-coordinate of bottom edge of text,
+    int bottom			/* Y-coordinate of bottom edge of text,
 				 * specified in pixels. */
+)
 {
     register Tk_Window tkwin = scalePtr->tkwin;
     int x, y, dummy, length;
@@ -1140,11 +1149,13 @@ DisplayHorizontalValue(scalePtr, value, bottom)
  *----------------------------------------------------------------------
  */
 
-static int
-PixelToValue(scalePtr, x, y)
-    register Scale *scalePtr;		/* Information about widget. */
-    int x, y;				/* Coordinates of point within
+static int 
+PixelToValue (
+    register Scale *scalePtr,		/* Information about widget. */
+    int x,
+    int y				/* Coordinates of point within
 					 * window. */
+)
 {
     int value, pixelRange;
 
@@ -1207,10 +1218,11 @@ PixelToValue(scalePtr, x, y)
  *----------------------------------------------------------------------
  */
 
-static int
-ValueToPixel(scalePtr, value)
-    register Scale *scalePtr;		/* Information about widget. */
-    int value;				/* Reading of the widget. */
+static int 
+ValueToPixel (
+    register Scale *scalePtr,		/* Information about widget. */
+    int value				/* Reading of the widget. */
+)
 {
     int y, pixelRange, valueRange;
 
@@ -1247,10 +1259,11 @@ ValueToPixel(scalePtr, value)
  *--------------------------------------------------------------
  */
 
-static void
-ScaleEventProc(clientData, eventPtr)
-    ClientData clientData;	/* Information about window. */
-    XEvent *eventPtr;		/* Information about event. */
+static void 
+ScaleEventProc (
+    ClientData clientData,	/* Information about window. */
+    XEvent *eventPtr		/* Information about event. */
+)
 {
     Scale *scalePtr = (Scale *) clientData;
 
@@ -1293,10 +1306,11 @@ ScaleEventProc(clientData, eventPtr)
  *--------------------------------------------------------------
  */
 
-static void
-ScaleMouseProc(clientData, eventPtr)
-    ClientData clientData;		/* Information about window. */
-    register XEvent *eventPtr;		/* Information about event. */
+static void 
+ScaleMouseProc (
+    ClientData clientData,		/* Information about window. */
+    register XEvent *eventPtr		/* Information about event. */
+)
 {
     register Scale *scalePtr = (Scale *) clientData;
 
@@ -1349,11 +1363,12 @@ ScaleMouseProc(clientData, eventPtr)
  *--------------------------------------------------------------
  */
 
-static void
-SetScaleValue(scalePtr, value)
-    register Scale *scalePtr;	/* Info about widget. */
-    int value;			/* New value for scale.  Gets
+static void 
+SetScaleValue (
+    register Scale *scalePtr,	/* Info about widget. */
+    int value			/* New value for scale.  Gets
 				 * adjusted if it's off the scale. */
+)
 {
     int result;
     char string[20];
@@ -1399,11 +1414,12 @@ SetScaleValue(scalePtr, value)
  *--------------------------------------------------------------
  */
 
-static void
-EventuallyRedrawScale(scalePtr, what)
-    register Scale *scalePtr;	/* Information about widget. */
-    int what;			/* What to redraw:  REDRAW_SLIDER
+static void 
+EventuallyRedrawScale (
+    register Scale *scalePtr,	/* Information about widget. */
+    int what			/* What to redraw:  REDRAW_SLIDER
 				 * or REDRAW_ALL. */
+)
 {
     if ((what == 0) || (scalePtr->tkwin == NULL)
 	    || !Tk_IsMapped(scalePtr->tkwin)) {

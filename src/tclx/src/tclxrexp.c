@@ -175,9 +175,7 @@ struct compiled_search_struct {
 
 
 static char *
-BoyerMooreCompile (pat, patlen)
-    char *pat;
-    int   patlen;
+BoyerMooreCompile (char *pat, int patlen)
 {
         register unsigned char *p, *t;
         register unsigned i, p1, j, *delta;
@@ -210,11 +208,7 @@ BoyerMooreCompile (pat, patlen)
 }
 
 static char *
-BoyerMooreExecute (text, textlen, compPtr, patLenP)
-        char     *text;
-        unsigned  textlen;
-        char     *compPtr;
-        unsigned *patLenP;
+BoyerMooreExecute (char *text, unsigned textlen, char *compPtr, unsigned *patLenP)
 {
         register unsigned char *p, *t;
         struct compiled_search_struct *csp = 
@@ -263,9 +257,8 @@ BoyerMooreExecute (text, textlen, compPtr, patLenP)
  *
  *-----------------------------------------------------------------------------
  */
-void
-Tcl_RegExpClean (regExpPtr)
-    regexp_pt regExpPtr;
+void 
+Tcl_RegExpClean (regexp_pt regExpPtr)
 {
     if (regExpPtr->progPtr != NULL)
     	ckfree ((char *) regExpPtr->progPtr);
@@ -285,10 +278,8 @@ Tcl_RegExpClean (regExpPtr)
  *     into the regular expression code.
  *-----------------------------------------------------------------------------
  */
-static int
-FindNonRegExpSubStr (expression, subStrPtrPtr)
-    char  *expression;
-    char **subStrPtrPtr;
+static int 
+FindNonRegExpSubStr (char *expression, char **subStrPtrPtr)
 {
     register char *subStrPtr = NULL;
     register char  subStrLen = 0;
@@ -345,12 +336,8 @@ FindNonRegExpSubStr (expression, subStrPtrPtr)
  *     Standard TCL results.
  *-----------------------------------------------------------------------------
  */
-int
-Tcl_RegExpCompile (interp, regExpPtr, expression, flags)
-    Tcl_Interp  *interp;
-    regexp_pt    regExpPtr;
-    char        *expression;
-    int          flags;
+int 
+Tcl_RegExpCompile (Tcl_Interp *interp, regexp_pt regExpPtr, char *expression, int flags)
 {
     char *expBuf;
     int   anyMeta;
@@ -438,12 +425,8 @@ okExitPoint:
  *
  *-----------------------------------------------------------------------------
  */
-int
-Tcl_RegExpExecute (interp, regExpPtr, matchStrIn, matchStrLower)
-    Tcl_Interp  *interp;
-    regexp_pt    regExpPtr;
-    char        *matchStrIn;
-    char        *matchStrLower;
+int 
+Tcl_RegExpExecute (Tcl_Interp *interp, regexp_pt regExpPtr, char *matchStrIn, char *matchStrLower)
 {
     char *matchStr;
     int   result;

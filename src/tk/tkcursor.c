@@ -207,12 +207,13 @@ static void		CursorInit _ANSI_ARGS_((void));
  *----------------------------------------------------------------------
  */
 
-Cursor
-Tk_GetCursor(interp, tkwin, string)
-    Tcl_Interp *interp;		/* Interpreter to use for error reporting. */
-    Tk_Window tkwin;		/* Window in which cursor will be used. */
-    Tk_Uid string;		/* Description of cursor.  See manual entry
+Cursor 
+Tk_GetCursor (
+    Tcl_Interp *interp,		/* Interpreter to use for error reporting. */
+    Tk_Window tkwin,		/* Window in which cursor will be used. */
+    Tk_Uid string		/* Description of cursor.  See manual entry
 				 * for details on legal syntax. */
+)
 {
     NameKey key;
     Tcl_HashEntry *nameHashPtr, *idHashPtr;
@@ -444,17 +445,19 @@ Tk_GetCursor(interp, tkwin, string)
  *----------------------------------------------------------------------
  */
 
-Cursor
-Tk_GetCursorFromData(interp, tkwin, source, mask, width, height,
-	xHot, yHot, fg, bg)
-    Tcl_Interp *interp;		/* Interpreter to use for error reporting. */
-    Tk_Window tkwin;		/* Window in which cursor will be used. */
-    char *source;		/* Bitmap data for cursor shape. */
-    char *mask;			/* Bitmap data for cursor mask. */
-    unsigned int width, height;	/* Dimensions of cursor. */
-    int xHot, yHot;		/* Location of hot-spot in cursor. */
-    Tk_Uid fg;			/* Foreground color for cursor. */
-    Tk_Uid bg;			/* Background color for cursor. */
+Cursor 
+Tk_GetCursorFromData (
+    Tcl_Interp *interp,		/* Interpreter to use for error reporting. */
+    Tk_Window tkwin,		/* Window in which cursor will be used. */
+    char *source,		/* Bitmap data for cursor shape. */
+    char *mask,			/* Bitmap data for cursor mask. */
+    unsigned int width,
+    unsigned int height,	/* Dimensions of cursor. */
+    int xHot,
+    int yHot,		/* Location of hot-spot in cursor. */
+    Tk_Uid fg,			/* Foreground color for cursor. */
+    Tk_Uid bg			/* Background color for cursor. */
+)
 {
     DataKey key;
     Tcl_HashEntry *dataHashPtr, *idHashPtr;
@@ -551,8 +554,9 @@ Tk_GetCursorFromData(interp, tkwin, source, mask, width, height,
  */
 
 char *
-Tk_NameOfCursor(cursor)
-    Cursor cursor;			/* Cursor to be released. */
+Tk_NameOfCursor (
+    Cursor cursor			/* Cursor to be released. */
+)
 {
     Tcl_HashEntry *idHashPtr;
     TkCursor *cursorPtr;
@@ -592,9 +596,10 @@ Tk_NameOfCursor(cursor)
  *----------------------------------------------------------------------
  */
 
-void
-Tk_FreeCursor(cursor)
-    Cursor cursor;			/* Cursor to be released. */
+void 
+Tk_FreeCursor (
+    Cursor cursor			/* Cursor to be released. */
+)
 {
     Tcl_HashEntry *idHashPtr;
     register TkCursor *cursorPtr;
@@ -633,8 +638,8 @@ Tk_FreeCursor(cursor)
  *----------------------------------------------------------------------
  */
 
-static void
-CursorInit()
+static void 
+CursorInit (void)
 {
     initialized = 1;
     Tcl_InitHashTable(&nameTable, sizeof(NameKey)/sizeof(long));

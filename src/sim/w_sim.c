@@ -1487,14 +1487,14 @@ SimCmd(CLIENT_ARGS)
 {
   Tcl_HashEntry *ent;
   int result = TCL_OK;
-  int (*cmd)();
+  int (*cmd)(Tcl_Interp*, int, char**);
 
   if (argc < 2) {
     return TCL_ERROR;
   }
 
   if ((ent = Tcl_FindHashEntry(&SimCmds, argv[1]))) {
-    cmd = (int (*)())ent->clientData;
+    cmd = (int (*)(Tcl_Interp*, int, char**))ent->clientData;
     result = cmd(interp, argc, argv);
   } else {
     result = TCL_ERROR;
@@ -1507,7 +1507,7 @@ void
 sim_command_init(void)
 {
   Tcl_CreateCommand(tk_mainInterp, "sim", SimCmd,
-		    (ClientData)MainWindow, (void (*)()) NULL);
+		    (ClientData)MainWindow, (void (*)(int *)) NULL);
 
   Tcl_InitHashTable(&SimCmds, TCL_STRING_KEYS);
 

@@ -83,7 +83,7 @@ short valGrayMap[] = {
 };
 
 
-void (*mapProcs[NMAPS])();
+void (*mapProcs[NMAPS])(SimView *);
 
 void drawPopDensity(SimView *view);
 void drawRateOfGrowth(SimView *view);

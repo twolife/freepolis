@@ -75,23 +75,24 @@ static int	ErrorProc _ANSI_ARGS_((Display *display,
  */
 
 Tk_ErrorHandler
-Tk_CreateErrorHandler(display, error, request, minorCode, errorProc, clientData)
-    Display *display;		/* Display for which to handle
+Tk_CreateErrorHandler(
+    Display *display,		/* Display for which to handle
 				 * errors. */
-    int error;			/* Consider only errors with this
+    int error,			/* Consider only errors with this
 				 * error_code (-1 means consider
 				 * all errors). */
-    int request;		/* Consider only errors with this
+    int request,		/* Consider only errors with this
 				 * major request code (-1 means
 				 * consider all major codes). */
-    int minorCode;		/* Consider only errors with this
+    int minorCode,		/* Consider only errors with this
 				 * minor request code (-1 means
 				 * consider all minor codes). */
-    Tk_ErrorProc *errorProc;	/* Procedure to invoke when a
+    Tk_ErrorProc *errorProc,	/* Procedure to invoke when a
 				 * matching error occurs.  NULL means
 				 * just ignore matching errors. */
-    ClientData clientData;	/* Arbitrary value to pass to
+    ClientData clientData	/* Arbitrary value to pass to
 				 * errorProc. */
+)
 {
     register TkErrorHandler *errorPtr;
     register TkDisplay *dispPtr;
@@ -161,10 +162,11 @@ Tk_CreateErrorHandler(display, error, request, minorCode, errorProc, clientData)
  */
 
 void
-Tk_DeleteErrorHandler(handler)
-    Tk_ErrorHandler handler;	/* Token for handler to delete;
+Tk_DeleteErrorHandler(
+    Tk_ErrorHandler handler	/* Token for handler to delete;
 				 * was previous return value from
 				 * Tk_CreateErrorHandler. */
+)
 {
     register TkErrorHandler *errorPtr = (TkErrorHandler *) handler;
     register TkDisplay *dispPtr = errorPtr->dispPtr;
@@ -234,15 +236,16 @@ Tk_DeleteErrorHandler(handler)
  *--------------------------------------------------------------
  */
 
-static int
-ErrorProc(display, errEventPtr)
-    Display *display;			/* Display for which error
+static int 
+ErrorProc (
+    Display *display,			/* Display for which error
 					 * occurred. */
-    register XErrorEvent *errEventPtr;	/* Information about error. */
+    register XErrorEvent *errEventPtr	/* Information about error. */
+)
 {
     register TkDisplay *dispPtr;
     register TkErrorHandler *errorPtr;
-    extern int _XDefaultError();
+    extern int _XDefaultError(Display *, XErrorEvent *);
 
     /*
      * See if we know anything about the display.  If not, then

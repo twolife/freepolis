@@ -43,15 +43,9 @@
         static int month, day, year;
         static int ourzone;
 
-#if 0
 	static time_t timeconv(int hh, int mm, int ss, int mer);
 	static time_t daylcorr(time_t future, time_t now);
 	static int lookup(char *id);
-#else
-	static time_t timeconv();
-	static time_t daylcorr();
-	static int lookup();
-#endif
 
 #define AM 1
 #define PM 2
@@ -146,15 +140,13 @@ static int mdays[12] =
         {31, 0, 31,  30, 31, 30,  31, 31, 30,  31, 30, 31};
 #define epoch 1970
 
-extern struct tm *localtime();
+extern struct tm *localtime(const time_t*);
 
 static
-time_t dateconv(mm, dd, yy, h, m, s, mer, zone, dayflag)
-int mm, dd, yy, h, m, s, mer, zone, dayflag;
+time_t dateconv(int mm, int dd, int yy, int h, int m, int s, int mer, int zone, int dayflag)
 {
         time_t tod, jdate;
         register int i;
-        time_t timeconv();
 
         if (yy < 0) yy = -yy;
         if (yy < 100) yy += 1900;
@@ -174,11 +166,10 @@ int mm, dd, yy, h, m, s, mer, zone, dayflag;
 }
 
 static
-time_t dayconv(ord, day, now) int ord, day; time_t now;
+time_t dayconv(int ord, int day, time_t now)
 {
         register struct tm *loctime;
         time_t tod;
-        time_t daylcorr();
 
         tod = now;
         loctime = localtime(&tod);
@@ -188,7 +179,7 @@ time_t dayconv(ord, day, now) int ord, day; time_t now;
 }
 
 static
-time_t timeconv(hh, mm, ss, mer) register int hh, mm, ss, mer;
+time_t timeconv(register int hh, register int mm, register int ss, register int mer)
 {
         if (mm < 0 || mm > 59 || ss < 0 || ss > 59) return (-1);
         switch (mer) {
@@ -203,11 +194,9 @@ time_t timeconv(hh, mm, ss, mer) register int hh, mm, ss, mer;
 }
 
 static
-time_t monthadd(sdate, relmonth) time_t sdate, relmonth;
+time_t monthadd(time_t sdate, time_t relmonth)
 {
         struct tm *ltime;
-        time_t dateconv();
-        time_t daylcorr();
         int mm, yy;
 
         if (relmonth == 0) return 0;
@@ -220,7 +209,7 @@ time_t monthadd(sdate, relmonth) time_t sdate, relmonth;
 }
 
 static
-time_t daylcorr(future, now) time_t future, now;
+time_t daylcorr(time_t future, time_t now)
 {
         int fdayl, nowdayl;
 
@@ -463,7 +452,7 @@ struct table milzone[] = {
         {0, 0, 0}};
 
 static
-int lookup(id) char *id;
+int lookup(char *id)
 {
 #define gotit (yylval=i->value,  i->type)
 #define getid for(j=idvar, k=id; *j++ = *k++; )
@@ -524,13 +513,13 @@ int lookup(id) char *id;
 }
 
 time_t
-Tcl_GetDate (p, now, zone)
-    char   *p;
-    time_t  now;
-    long    zone;
+Tcl_GetDate (
+    char   *p,
+    time_t  now,
+    long    zone
+)
 {
 #define mcheck(f)       if (f>1) err++
-        time_t monthadd();
         int err;
         struct tm *lt;
         time_t sdate, tod;
@@ -585,7 +574,6 @@ Tcl_GetDate (p, now, zone)
  */
 
 void
-yyerror(msg)
-    const char *msg;
+yyerror(const char *msg)
 {
 }

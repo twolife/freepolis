@@ -65,21 +65,22 @@ static char *		FormatConfigInfo _ANSI_ARGS_ ((Tk_Window tkwin,
  *--------------------------------------------------------------
  */
 
-int
-Tk_ConfigureWidget(interp, tkwin, specs, argc, argv, widgRec, flags)
-    Tcl_Interp *interp;		/* Interpreter for error reporting. */
-    Tk_Window tkwin;		/* Window containing widget (needed to
+int 
+Tk_ConfigureWidget (
+    Tcl_Interp *interp,		/* Interpreter for error reporting. */
+    Tk_Window tkwin,		/* Window containing widget (needed to
 				 * set up X resources). */
-    Tk_ConfigSpec *specs;	/* Describes legal options. */
-    int argc;			/* Number of elements in argv. */
-    char **argv;		/* Command-line options. */
-    char *widgRec;		/* Record whose fields are to be
+    Tk_ConfigSpec *specs,	/* Describes legal options. */
+    int argc,			/* Number of elements in argv. */
+    char **argv,		/* Command-line options. */
+    char *widgRec,		/* Record whose fields are to be
 				 * modified.  Values must be properly
 				 * initialized. */
-    int flags;			/* Used to specify additional flags
+    int flags			/* Used to specify additional flags
 				 * that must be present in config specs
 				 * for them to be considered.  Also,
 				 * may have TK_CONFIG_ARGV_ONLY set. */
+)
 {
     register Tk_ConfigSpec *specPtr;
     Tk_Uid value;		/* Value of option from database. */
@@ -224,16 +225,17 @@ Tk_ConfigureWidget(interp, tkwin, specs, argc, argv, widgRec, flags)
  */
 
 static Tk_ConfigSpec *
-FindConfigSpec(interp, specs, argvName, needFlags, hateFlags)
-    Tcl_Interp *interp;		/* Used for reporting errors. */
-    Tk_ConfigSpec *specs;	/* Pointer to table of configuration
+FindConfigSpec (
+    Tcl_Interp *interp,		/* Used for reporting errors. */
+    Tk_ConfigSpec *specs,	/* Pointer to table of configuration
 				 * specifications for a widget. */
-    char *argvName;		/* Name (suitable for use in a "config"
+    char *argvName,		/* Name (suitable for use in a "config"
 				 * command) identifying particular option. */
-    int needFlags;		/* Flags that must be present in matching
+    int needFlags,		/* Flags that must be present in matching
 				 * entry. */
-    int hateFlags;		/* Flags that must NOT be present in
+    int hateFlags		/* Flags that must NOT be present in
 				 * matching entry. */
+)
 {
     register Tk_ConfigSpec *specPtr;
     register char c;		/* First character of current argument. */
@@ -318,18 +320,19 @@ FindConfigSpec(interp, specs, argvName, needFlags, hateFlags)
  *--------------------------------------------------------------
  */
 
-static int
-DoConfig(interp, tkwin, specPtr, value, valueIsUid, widgRec)
-    Tcl_Interp *interp;		/* Interpreter for error reporting. */
-    Tk_Window tkwin;		/* Window containing widget (needed to
+static int 
+DoConfig (
+    Tcl_Interp *interp,		/* Interpreter for error reporting. */
+    Tk_Window tkwin,		/* Window containing widget (needed to
 				 * set up X resources). */
-    Tk_ConfigSpec *specPtr;	/* Specifier to apply. */
-    char *value;		/* Value to use to fill in widgRec. */
-    int valueIsUid;		/* Non-zero means value is a Tk_Uid;
+    Tk_ConfigSpec *specPtr,	/* Specifier to apply. */
+    char *value,		/* Value to use to fill in widgRec. */
+    int valueIsUid,		/* Non-zero means value is a Tk_Uid;
 				 * zero means it's an ordinary string. */
-    char *widgRec;		/* Record whose fields are to be
+    char *widgRec		/* Record whose fields are to be
 				 * modified.  Values must be properly
 				 * initialized. */
+)
 {
     char *ptr;
     Tk_Uid uid;
@@ -606,19 +609,20 @@ DoConfig(interp, tkwin, specPtr, value, valueIsUid, widgRec)
  *--------------------------------------------------------------
  */
 
-int
-Tk_ConfigureInfo(interp, tkwin, specs, widgRec, argvName, flags)
-    Tcl_Interp *interp;		/* Interpreter for error reporting. */
-    Tk_Window tkwin;		/* Window corresponding to widgRec. */
-    Tk_ConfigSpec *specs;	/* Describes legal options. */
-    char *widgRec;		/* Record whose fields contain current
+int 
+Tk_ConfigureInfo (
+    Tcl_Interp *interp,		/* Interpreter for error reporting. */
+    Tk_Window tkwin,		/* Window corresponding to widgRec. */
+    Tk_ConfigSpec *specs,	/* Describes legal options. */
+    char *widgRec,		/* Record whose fields contain current
 				 * values for options. */
-    char *argvName;		/* If non-NULL, indicates a single option
+    char *argvName,		/* If non-NULL, indicates a single option
 				 * whose info is to be returned.  Otherwise
 				 * info is returned for all options. */
-    int flags;			/* Used to specify additional flags
+    int flags			/* Used to specify additional flags
 				 * that must be present in config specs
 				 * for them to be considered. */
+)
 {
     register Tk_ConfigSpec *specPtr;
     int needFlags, hateFlags;
@@ -692,12 +696,13 @@ Tk_ConfigureInfo(interp, tkwin, specs, widgRec, argvName, flags)
  */
 
 static char *
-FormatConfigInfo(tkwin, specPtr, widgRec)
-    Tk_Window tkwin;			/* Window corresponding to widget. */
-    register Tk_ConfigSpec *specPtr;	/* Pointer to information describing
+FormatConfigInfo (
+    Tk_Window tkwin,			/* Window corresponding to widget. */
+    register Tk_ConfigSpec *specPtr,	/* Pointer to information describing
 					 * option. */
-    char *widgRec;			/* Pointer to record holding current
+    char *widgRec			/* Pointer to record holding current
 					 * values of info for widget. */
+)
 {
     char *argv[6], *ptr, *result;
     char buffer[200];

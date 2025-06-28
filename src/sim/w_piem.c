@@ -391,13 +391,14 @@ static int	CalcPieMenuItem(PieMenu *menu, int x, int y);
  *--------------------------------------------------------------
  */
 
-int
-Tk_PieMenuCmd(clientData, interp, argc, argv)
-    ClientData clientData;	/* Main window associated with
+int 
+Tk_PieMenuCmd (
+    ClientData clientData,	/* Main window associated with
 				 * interpreter. */
-    Tcl_Interp *interp;		/* Current interpreter. */
-    int argc;			/* Number of arguments. */
-    char **argv;		/* Argument strings. */
+    Tcl_Interp *interp,		/* Current interpreter. */
+    int argc,			/* Number of arguments. */
+    char **argv		/* Argument strings. */
+)
 {
     Tk_Window tkwin = (Tk_Window) clientData;
     Tk_Window new;
@@ -478,7 +479,7 @@ Tk_PieMenuCmd(clientData, interp, argc, argv)
 			  PointerMotionMask,
 			  PieMenuEventProc, (ClientData) menuPtr);
     Tcl_CreateCommand(interp, Tk_PathName(menuPtr->tkwin), PieMenuWidgetCmd,
-	    (ClientData) menuPtr, (void (*)()) NULL);
+	    (ClientData) menuPtr, (void (*)(int *)) NULL);
     if (ConfigurePieMenu(interp, menuPtr, argc-2, argv+2, 0) != TCL_OK) {
 	goto error;
     }
@@ -509,12 +510,13 @@ Tk_PieMenuCmd(clientData, interp, argc, argv)
  *--------------------------------------------------------------
  */
 
-static int
-PieMenuWidgetCmd(clientData, interp, argc, argv)
-    ClientData clientData;	/* Information about menu widget. */
-    Tcl_Interp *interp;		/* Current interpreter. */
-    int argc;			/* Number of arguments. */
-    char **argv;		/* Argument strings. */
+static int 
+PieMenuWidgetCmd (
+    ClientData clientData,	/* Information about menu widget. */
+    Tcl_Interp *interp,		/* Current interpreter. */
+    int argc,			/* Number of arguments. */
+    char **argv		/* Argument strings. */
+)
 {
     register PieMenu *menuPtr = (PieMenu *) clientData;
     register PieMenuEntry *mePtr;
@@ -955,9 +957,10 @@ PieMenuWidgetCmd(clientData, interp, argc, argv)
  *----------------------------------------------------------------------
  */
 
-static void
-DestroyPieMenu(clientData)
-    ClientData clientData;	/* Info about menu widget. */
+static void 
+DestroyPieMenu (
+    ClientData clientData	/* Info about menu widget. */
+)
 {
     register PieMenu *menuPtr = (PieMenu *) clientData;
     int i;
@@ -1015,9 +1018,10 @@ DestroyPieMenu(clientData)
  *----------------------------------------------------------------------
  */
 
-static void
-DestroyPieMenuEntry(clientData)
-    ClientData clientData;		/* Pointer to entry to be freed. */
+static void 
+DestroyPieMenuEntry (
+    ClientData clientData		/* Pointer to entry to be freed. */
+)
 {
     register PieMenuEntry *mePtr = (PieMenuEntry *) clientData;
     PieMenu *menuPtr = mePtr->piemenuPtr;
@@ -1078,14 +1082,15 @@ DestroyPieMenuEntry(clientData)
  *----------------------------------------------------------------------
  */
 
-static int
-ConfigurePieMenu(interp, menuPtr, argc, argv, flags)
-    Tcl_Interp *interp;		/* Used for error reporting. */
-    register PieMenu *menuPtr;	/* Information about widget;  may or may
+static int 
+ConfigurePieMenu (
+    Tcl_Interp *interp,		/* Used for error reporting. */
+    register PieMenu *menuPtr,	/* Information about widget;  may or may
 				 * not already have values for some fields. */
-    int argc;			/* Number of valid entries in argv. */
-    char **argv;		/* Arguments. */
-    int flags;			/* Flags to pass to Tk_ConfigureWidget. */
+    int argc,			/* Number of valid entries in argv. */
+    char **argv,		/* Arguments. */
+    int flags			/* Flags to pass to Tk_ConfigureWidget. */
+)
 {
     XGCValues gcValues;
     GC newGC;
@@ -1173,19 +1178,20 @@ ConfigurePieMenu(interp, menuPtr, argc, argv, flags)
  *----------------------------------------------------------------------
  */
 
-static int
-ConfigurePieMenuEntry(interp, menuPtr, mePtr, index, argc, argv, flags)
-    Tcl_Interp *interp;			/* Used for error reporting. */
-    PieMenu *menuPtr;			/* Information about whole menu. */
-    register PieMenuEntry *mePtr;	/* Information about menu entry;  may
+static int 
+ConfigurePieMenuEntry (
+    Tcl_Interp *interp,			/* Used for error reporting. */
+    PieMenu *menuPtr,			/* Information about whole menu. */
+    register PieMenuEntry *mePtr,	/* Information about menu entry;  may
 					 * or may not already have values for
 					 * some fields. */
-    int index;				/* Index of mePtr within menuPtr's
+    int index,				/* Index of mePtr within menuPtr's
 					 * entries. */
-    int argc;				/* Number of valid entries in argv. */
-    char **argv;			/* Arguments. */
-    int flags;				/* Additional flags to pass to
+    int argc,				/* Number of valid entries in argv. */
+    char **argv,			/* Arguments. */
+    int flags				/* Additional flags to pass to
 					 * Tk_ConfigureWidget. */
+)
 {
     XGCValues gcValues;
     GC newGC, newActiveGC;
@@ -1302,9 +1308,10 @@ ConfigurePieMenuEntry(interp, menuPtr, mePtr, index, argc, argv, flags)
  *--------------------------------------------------------------
  */
 
-static void
-ComputePieMenuGeometry(clientData)
-    ClientData clientData;		/* Structure describing menu. */
+static void 
+ComputePieMenuGeometry (
+    ClientData clientData		/* Structure describing menu. */
+)
 {
     PieMenu *menuPtr = (PieMenu *) clientData;
 
@@ -1348,9 +1355,10 @@ ComputePieMenuGeometry(clientData)
  *----------------------------------------------------------------------
  */
 
-static void
-DisplayPieMenu(clientData)
-    ClientData clientData;	/* Information about widget. */
+static void 
+DisplayPieMenu (
+    ClientData clientData	/* Information about widget. */
+)
 {
     register PieMenu *menuPtr = (PieMenu *) clientData;
     register Tk_Window tkwin = menuPtr->tkwin;
@@ -1412,9 +1420,10 @@ DisplayPieMenu(clientData)
  *----------------------------------------------------------------------
  */
 
-static void
-UpdatePieMenu(clientData)
-    ClientData clientData;	/* Information about widget. */
+static void 
+UpdatePieMenu (
+    ClientData clientData	/* Information about widget. */
+)
 {
     register PieMenu *menuPtr = (PieMenu *) clientData;
 
@@ -1511,14 +1520,15 @@ UpdatePieMenuEntries(PieMenu *menuPtr)
  *--------------------------------------------------------------
  */
 
-static int
-GetPieMenuIndex(interp, menuPtr, string, indexPtr)
-    Tcl_Interp *interp;		/* For error messages. */
-    PieMenu *menuPtr;		/* Menu for which the index is being
+static int 
+GetPieMenuIndex (
+    Tcl_Interp *interp,		/* For error messages. */
+    PieMenu *menuPtr,		/* Menu for which the index is being
 				 * specified. */
-    char *string;		/* Specification of an entry in menu.  See
+    char *string,		/* Specification of an entry in menu.  See
 				 * manual entry for valid .*/
-    int *indexPtr;		/* Where to store converted relief. */
+    int *indexPtr		/* Where to store converted relief. */
+)
 {
     int i;
 
@@ -1596,10 +1606,11 @@ GetPieMenuIndex(interp, menuPtr, string, indexPtr)
  *--------------------------------------------------------------
  */
 
-static void
-PieMenuEventProc(clientData, eventPtr)
-    ClientData clientData;	/* Information about window. */
-    XEvent *eventPtr;		/* Information about event. */
+static void 
+PieMenuEventProc (
+    ClientData clientData,	/* Information about window. */
+    XEvent *eventPtr		/* Information about event. */
+)
 {
     PieMenu *menuPtr = (PieMenu *) clientData;
     switch (eventPtr->type) {
@@ -1663,11 +1674,12 @@ PieMenuEventProc(clientData, eventPtr)
  *----------------------------------------------------------------------
  */
 
-static void
-EventuallyRedrawPieMenu(menuPtr, index)
-    register PieMenu *menuPtr;	/* Information about menu to redraw. */
-    int index;			/* Which entry to redraw.  If -1, then
+static void 
+EventuallyRedrawPieMenu (
+    register PieMenu *menuPtr,	/* Information about menu to redraw. */
+    int index			/* Which entry to redraw.  If -1, then
 				 * all the entries in the menu are redrawn. */
+)
 {
     if (menuPtr->tkwin == NULL) {
 	return;
@@ -1698,9 +1710,10 @@ EventuallyRedrawPieMenu(menuPtr, index)
 }
 
 
-static void
-PopupPieMenu(clientData)
-    ClientData clientData;	/* Information about widget. */
+static void 
+PopupPieMenu (
+    ClientData clientData	/* Information about widget. */
+)
 {
   register PieMenu *menuPtr = (PieMenu *) clientData;
 
@@ -1715,17 +1728,15 @@ PopupPieMenu(clientData)
 }
 
 
-static void
-NowPopupPieMenu(menuPtr)
-    register PieMenu *menuPtr;
+static void 
+NowPopupPieMenu (register PieMenu *menuPtr)
 {
   PopupPieMenu((ClientData)menuPtr);
 }
 
 
-static void
-NeverPopupPieMenu(menuPtr)
-    register PieMenu *menuPtr;
+static void 
+NeverPopupPieMenu (register PieMenu *menuPtr)
 {
   if (menuPtr->flags & POPUP_PENDING) {
     Tk_DeleteTimerHandler(menuPtr->popup_timer_token);
@@ -1735,9 +1746,8 @@ NeverPopupPieMenu(menuPtr)
 }
 
 
-static void
-EventuallyPopupPieMenu(menuPtr)
-    register PieMenu *menuPtr;
+static void 
+EventuallyPopupPieMenu (register PieMenu *menuPtr)
 {
   NeverPopupPieMenu(menuPtr);
 
@@ -1752,9 +1762,8 @@ EventuallyPopupPieMenu(menuPtr)
 }
 
 
-static void
-DeferPopupPieMenu(menuPtr)
-    register PieMenu *menuPtr;
+static void 
+DeferPopupPieMenu (register PieMenu *menuPtr)
 {
   if (menuPtr->flags & POPUP_PENDING) {
     EventuallyPopupPieMenu(menuPtr);
@@ -1780,11 +1789,12 @@ DeferPopupPieMenu(menuPtr)
  *--------------------------------------------------------------
  */
 
-static int
-UnpostSubPieMenu(interp, menuPtr)
-    Tcl_Interp *interp;		/* Used for invoking sub-commands and
+static int 
+UnpostSubPieMenu (
+    Tcl_Interp *interp,		/* Used for invoking sub-commands and
 				 * reporting errors. */
-    register PieMenu *menuPtr;	/* Information about menu as a whole. */
+    register PieMenu *menuPtr	/* Information about menu as a whole. */
+)
 {
     int result;
 
@@ -1819,12 +1829,13 @@ UnpostSubPieMenu(interp, menuPtr)
  *----------------------------------------------------------------------
  */
 
-static int
-ActivatePieMenuEntry(menuPtr, index, preview)
-    register PieMenu *menuPtr;		/* Menu in which to activate. */
-    int index;				/* Index of entry to activate, or
+static int 
+ActivatePieMenuEntry (
+    register PieMenu *menuPtr,		/* Menu in which to activate. */
+    int index,				/* Index of entry to activate, or
 					 * -1 to deactivate all entries. */
-    int preview;			/* 1 to execute previewer */
+    int preview			/* 1 to execute previewer */
+)
 {
     register PieMenuEntry *mePtr;
     int result = TCL_OK;
@@ -2295,9 +2306,8 @@ LayoutPieMenu(PieMenu *menu)
 }
 
 
-static void
-ShapePieMenu(menuPtr)
-PieMenu *menuPtr;
+static void 
+ShapePieMenu (PieMenu *menuPtr)
 {
   Display *dpy;
   Window win, shape;

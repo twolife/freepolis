@@ -73,10 +73,8 @@ GroupnameToGroupidResult _ANSI_ARGS_((Tcl_Interp *interp,
  *-----------------------------------------------------------------------------
  */
 
-static int
-UseridToUsernameResult (interp, userId)
-    Tcl_Interp *interp;
-    int         userId;
+static int 
+UseridToUsernameResult (Tcl_Interp *interp, int userId)
 {
     struct passwd *pw = getpwuid (userId);
     if (pw == NULL) {
@@ -90,10 +88,8 @@ UseridToUsernameResult (interp, userId)
     return TCL_OK;
 }
 
-static int
-UsernameToUseridResult (interp, userName)
-    Tcl_Interp *interp;
-    char       *userName;
+static int 
+UsernameToUseridResult (Tcl_Interp *interp, char *userName)
 {
     struct passwd *pw = getpwnam (userName);
     if (pw == NULL) {
@@ -105,10 +101,8 @@ UsernameToUseridResult (interp, userName)
     return TCL_OK;
 }
 
-static int
-GroupidToGroupnameResult (interp, groupId)
-    Tcl_Interp *interp;
-    int         groupId;
+static int 
+GroupidToGroupnameResult (Tcl_Interp *interp, int groupId)
 {
     struct group *grp = getgrgid (groupId);
     if (grp == NULL) {
@@ -122,10 +116,8 @@ GroupidToGroupnameResult (interp, groupId)
     return TCL_OK;
 }
 
-static int
-GroupnameToGroupidResult (interp, groupName)
-    Tcl_Interp *interp;
-    char       *groupName;
+static int 
+GroupnameToGroupidResult (Tcl_Interp *interp, char *groupName)
 {
     struct group *grp = getgrnam (groupName);
     if (grp == NULL) {
@@ -138,11 +130,12 @@ GroupnameToGroupidResult (interp, groupName)
 }
 
 int
-Tcl_IdCmd (clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_IdCmd (
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     struct passwd *pw;
     struct group *grp;

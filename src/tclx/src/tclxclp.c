@@ -26,7 +26,7 @@
  * to no history, set this variable to Tcl_RecordAndEval to use history.
  */
 
-int (*tclShellCmdEvalProc) () = Tcl_Eval;
+int (*tclShellCmdEvalProc) (Tcl_Interp *, char *, int, char**) = Tcl_Eval;
 
 /*
  * Prototypes of internal functions.
@@ -66,10 +66,8 @@ SetPromptVar _ANSI_ARGS_((Tcl_Interp  *interp,
  *
  *-----------------------------------------------------------------------------
  */
-static int
-IsSetVarCmd (interp, command)
-    Tcl_Interp *interp;
-    char       *command;
+static int 
+IsSetVarCmd (Tcl_Interp *interp, char *command)
 {
     char  *nextPtr;
 
@@ -100,9 +98,8 @@ IsSetVarCmd (interp, command)
  *
  *-----------------------------------------------------------------------------
  */
-static void
-OutFlush (filePtr)
-    FILE *filePtr;
+static void 
+OutFlush (FILE *filePtr)
 {
     int stat;
 
@@ -131,11 +128,8 @@ OutFlush (filePtr)
  *
  *-----------------------------------------------------------------------------
  */
-static void
-Tcl_PrintResult (fp, returnval, resultText)
-    FILE   *fp;
-    int     returnval;
-    char   *resultText;
+static void 
+Tcl_PrintResult (FILE *fp, int returnval, char *resultText)
 {
 
     if (returnval == TCL_OK) {
@@ -162,11 +156,8 @@ Tcl_PrintResult (fp, returnval, resultText)
  *
  *-----------------------------------------------------------------------------
  */
-static void
-OutputPrompt (interp, outFP, topLevel)
-    Tcl_Interp *interp;
-    FILE       *outFP;
-    int         topLevel;
+static void 
+OutputPrompt (Tcl_Interp *interp, FILE *outFP, int topLevel)
 {
     char *hookName;
     char *promptHook;
@@ -222,13 +213,8 @@ OutputPrompt (interp, outFP, topLevel)
  *   o options (I) - Currently unused.
  *-----------------------------------------------------------------------------
  */
-void
-Tcl_CommandLoop (interp, inFile, outFile, evalProc, options)
-    Tcl_Interp *interp;
-    FILE       *inFile;
-    FILE       *outFile;
-    int         (*evalProc) ();
-    unsigned    options;
+void 
+Tcl_CommandLoop (Tcl_Interp *interp, FILE *inFile, FILE *outFile, int (*evalProc)(Tcl_Interp *, char *, int, char**), unsigned options)
 {
     Tcl_CmdBuf cmdBuf;
     char       inputBuf[256];
@@ -303,12 +289,8 @@ endOfFile:
  *   TCL_OK if the hook variable was set ok, TCL_ERROR if an error occured.
  *-----------------------------------------------------------------------------
  */
-static int
-SetPromptVar (interp, hookVarName, newHookValue, oldHookValuePtr)
-    Tcl_Interp *interp;
-    char       *hookVarName;
-    char       *newHookValue;
-    char      **oldHookValuePtr;
+static int 
+SetPromptVar (Tcl_Interp *interp, char *hookVarName, char *newHookValue, char **oldHookValuePtr)
 {
     char *hookValue;    
     char *oldHookPtr = NULL;
@@ -345,11 +327,12 @@ SetPromptVar (interp, hookVarName, newHookValue, oldHookValuePtr)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_CommandloopCmd(clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_CommandloopCmd(
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     char *oldTopLevelHook  = NULL;
     char *oldDownLevelHook = NULL;

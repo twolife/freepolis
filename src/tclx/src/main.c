@@ -21,10 +21,22 @@
 
 #include "tclxtend.h"
 
-int
-main(argc, argv)
-    int		argc;
-    CONST char	**argv;
+int 
+TclX_RecordAndEval (
+    Tcl_Interp *interp,		/* Token for interpreter in which command
+				 * will be executed. */
+    char *cmd,			/* Command to record. */
+    int flags,			/* Additional flags to pass to Tcl_Eval. 
+				 * TCL_NO_EVAL means only record: don't
+				 * execute command. */
+    char **dummy
+)
+{
+	return Tcl_RecordAndEval(interp, cmd, flags);
+}
+
+int 
+main (int argc, CONST char **argv)
 {
     Tcl_Interp *interp;
 
@@ -34,7 +46,7 @@ main(argc, argv)
      * also brings in history from libtcl.a.
      */
 #ifndef TCL_NOHISTORY
-     tclShellCmdEvalProc = Tcl_RecordAndEval;
+     tclShellCmdEvalProc = TclX_RecordAndEval;
 #endif
 
     /* 

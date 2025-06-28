@@ -403,11 +403,12 @@ static PatSeq *		MatchPatterns _ANSI_ARGS_((TkDisplay *dispPtr,
  *--------------------------------------------------------------
  */
 
-Tk_BindingTable
-Tk_CreateBindingTable(interp)
-    Tcl_Interp *interp;		/* Interpreter to associate with the binding
+Tk_BindingTable 
+Tk_CreateBindingTable (
+    Tcl_Interp *interp		/* Interpreter to associate with the binding
 				 * table:  commands are executed in this
 				 * interpreter. */
+)
 {
     register BindingTable *bindPtr;
     int i;
@@ -479,10 +480,11 @@ Tk_CreateBindingTable(interp)
  *--------------------------------------------------------------
  */
 
-void
-Tk_DeleteBindingTable(bindingTable)
-    Tk_BindingTable bindingTable;	/* Token for the binding table to
+void 
+Tk_DeleteBindingTable (
+    Tk_BindingTable bindingTable	/* Token for the binding table to
 					 * destroy. */
+)
 {
     BindingTable *bindPtr = (BindingTable *) bindingTable;
     PatSeq *psPtr, *nextPtr;
@@ -539,19 +541,20 @@ Tk_DeleteBindingTable(bindingTable)
  *--------------------------------------------------------------
  */
 
-unsigned long
-Tk_CreateBinding(interp, bindingTable, object, eventString, command, append)
-    Tcl_Interp *interp;			/* Used for error reporting. */
-    Tk_BindingTable bindingTable;	/* Table in which to create binding. */
-    ClientData object;			/* Token for object with which binding
+unsigned long 
+Tk_CreateBinding (
+    Tcl_Interp *interp,			/* Used for error reporting. */
+    Tk_BindingTable bindingTable,	/* Table in which to create binding. */
+    ClientData object,			/* Token for object with which binding
 					 * is associated. */
-    char *eventString;			/* String describing event sequence
+    char *eventString,			/* String describing event sequence
 					 * that triggers binding. */
-    char *command;			/* Contains Tcl command to execute
+    char *command,			/* Contains Tcl command to execute
 					 * when binding triggers. */
-    int append;				/* 0 means replace any existing
+    int append				/* 0 means replace any existing
 					 * binding for eventString;  1 means
 					 * append to that binding. */
+)
 {
     BindingTable *bindPtr = (BindingTable *) bindingTable;
     register PatSeq *psPtr;
@@ -608,14 +611,15 @@ Tk_CreateBinding(interp, bindingTable, object, eventString, command, append)
  *--------------------------------------------------------------
  */
 
-int
-Tk_DeleteBinding(interp, bindingTable, object, eventString)
-    Tcl_Interp *interp;			/* Used for error reporting. */
-    Tk_BindingTable bindingTable;	/* Table in which to delete binding. */
-    ClientData object;			/* Token for object with which binding
+int 
+Tk_DeleteBinding (
+    Tcl_Interp *interp,			/* Used for error reporting. */
+    Tk_BindingTable bindingTable,	/* Table in which to delete binding. */
+    ClientData object,			/* Token for object with which binding
 					 * is associated. */
-    char *eventString;			/* String describing event sequence
+    char *eventString			/* String describing event sequence
 					 * that triggers binding. */
+)
 {
     BindingTable *bindPtr = (BindingTable *) bindingTable;
     register PatSeq *psPtr, *prevPtr;
@@ -697,14 +701,15 @@ Tk_DeleteBinding(interp, bindingTable, object, eventString)
  */
 
 char *
-Tk_GetBinding(interp, bindingTable, object, eventString)
-    Tcl_Interp *interp;			/* Interpreter for error reporting. */
-    Tk_BindingTable bindingTable;	/* Table in which to look for
+Tk_GetBinding (
+    Tcl_Interp *interp,			/* Interpreter for error reporting. */
+    Tk_BindingTable bindingTable,	/* Table in which to look for
 					 * binding. */
-    ClientData object;			/* Token for object with which binding
+    ClientData object,			/* Token for object with which binding
 					 * is associated. */
-    char *eventString;			/* String describing event sequence
+    char *eventString			/* String describing event sequence
 					 * that triggers binding. */
+)
 {
     BindingTable *bindPtr = (BindingTable *) bindingTable;
     register PatSeq *psPtr;
@@ -737,12 +742,13 @@ Tk_GetBinding(interp, bindingTable, object, eventString)
  *--------------------------------------------------------------
  */
 
-void
-Tk_GetAllBindings(interp, bindingTable, object)
-    Tcl_Interp *interp;			/* Interpreter for error reporting. */
-    Tk_BindingTable bindingTable;	/* Table in which to look for
+void 
+Tk_GetAllBindings (
+    Tcl_Interp *interp,			/* Interpreter for error reporting. */
+    Tk_BindingTable bindingTable,	/* Table in which to look for
 					 * bindings. */
-    ClientData object;			/* Token for object. */
+    ClientData object			/* Token for object. */
+)
 
 {
     BindingTable *bindPtr = (BindingTable *) bindingTable;
@@ -892,11 +898,12 @@ Tk_GetAllBindings(interp, bindingTable, object)
  *--------------------------------------------------------------
  */
 
-void
-Tk_DeleteAllBindings(bindingTable, object)
-    Tk_BindingTable bindingTable;	/* Table in which to delete
+void 
+Tk_DeleteAllBindings (
+    Tk_BindingTable bindingTable,	/* Table in which to delete
 					 * bindings. */
-    ClientData object;			/* Token for object. */
+    ClientData object			/* Token for object. */
+)
 {
     BindingTable *bindPtr = (BindingTable *) bindingTable;
     register PatSeq *psPtr, *prevPtr;
@@ -963,17 +970,18 @@ Tk_DeleteAllBindings(bindingTable, object)
  *--------------------------------------------------------------
  */
 
-void
-Tk_BindEvent(bindingTable, eventPtr, tkwin, numObjects, objectPtr)
-    Tk_BindingTable bindingTable;	/* Table in which to look for
+void 
+Tk_BindEvent (
+    Tk_BindingTable bindingTable,	/* Table in which to look for
 					 * bindings. */
-    XEvent *eventPtr;			/* What actually happened. */
-    Tk_Window tkwin;			/* Window on display where event
+    XEvent *eventPtr,			/* What actually happened. */
+    Tk_Window tkwin,			/* Window on display where event
 					 * occurred (needed in order to
 					 * locate display information). */
-    int numObjects;			/* Number of objects at *objectPtr. */
-    ClientData *objectPtr;		/* Array of one or more objects
+    int numObjects,			/* Number of objects at *objectPtr. */
+    ClientData *objectPtr		/* Array of one or more objects
 					 * to check for a matching binding. */
+)
 {
     BindingTable *bindPtr = (BindingTable *) bindingTable;
     TkDisplay *dispPtr = ((TkWindow *) tkwin)->dispPtr;
@@ -1121,21 +1129,22 @@ Tk_BindEvent(bindingTable, eventPtr, tkwin, numObjects, objectPtr)
  */
 
 static PatSeq *
-FindSequence(interp, bindPtr, object, eventString, create, maskPtr)
-    Tcl_Interp *interp;		/* Interpreter to use for error
+FindSequence (
+    Tcl_Interp *interp,		/* Interpreter to use for error
 				 * reporting. */
-    BindingTable *bindPtr;	/* Table to use for lookup. */
-    ClientData object;		/* Token for object(s) with which binding
+    BindingTable *bindPtr,	/* Table to use for lookup. */
+    ClientData object,		/* Token for object(s) with which binding
 				 * is associated. */
-    char *eventString;		/* String description of pattern to
+    char *eventString,		/* String description of pattern to
 				 * match on.  See user documentation
 				 * for details. */
-    int create;			/* 0 means don't create the entry if
+    int create,			/* 0 means don't create the entry if
 				 * it doesn't already exist.   Non-zero
 				 * means create. */
-    unsigned long *maskPtr;	/* *maskPtr is filled in with the event
+    unsigned long *maskPtr	/* *maskPtr is filled in with the event
 				 * types on which this pattern sequence
 				 * depends. */
+)
 
 {
     Pattern pats[EVENT_BUFFER_SIZE];
@@ -1436,11 +1445,12 @@ FindSequence(interp, bindPtr, object, eventString, create, maskPtr)
  */
 
 static char *
-GetField(p, copy, size)
-    register char *p;		/* Pointer to part of pattern. */
-    register char *copy;	/* Place to copy field. */
-    int size;			/* Maximum number of characters to
+GetField (
+    register char *p,		/* Pointer to part of pattern. */
+    register char *copy,	/* Place to copy field. */
+    int size			/* Maximum number of characters to
 				 * copy. */
+)
 {
     while ((*p != '\0') && !isspace(*p) && (*p != '>')
 	    && (*p != '-') && (size > 1)) {
@@ -1473,11 +1483,12 @@ GetField(p, copy, size)
  *----------------------------------------------------------------------
  */
 
-static KeySym
-GetKeySym(dispPtr, eventPtr)
-    register TkDisplay *dispPtr;	/* Display in which to
+static KeySym 
+GetKeySym (
+    register TkDisplay *dispPtr,	/* Display in which to
 					 * map keycode. */
-    register XEvent *eventPtr;		/* Description of X event. */
+    register XEvent *eventPtr		/* Description of X event. */
+)
 {
     KeySym *symPtr;
     KeySym sym;
@@ -1576,11 +1587,12 @@ GetKeySym(dispPtr, eventPtr)
  */
 
 static PatSeq *
-MatchPatterns(dispPtr, bindPtr, psPtr)
-    TkDisplay *dispPtr;
-    BindingTable *bindPtr;	/* Information about binding table, such
+MatchPatterns (
+    TkDisplay *dispPtr,
+    BindingTable *bindPtr,	/* Information about binding table, such
 				 * as ring of recent events. */
-    register PatSeq *psPtr;	/* List of pattern sequences. */
+    register PatSeq *psPtr	/* List of pattern sequences. */
+)
 {
     register PatSeq *bestPtr = NULL;
 
@@ -1805,18 +1817,19 @@ MatchPatterns(dispPtr, bindPtr, psPtr)
  */
 
 static char *
-ExpandPercents(before, eventPtr, keySym, after, afterSize)
-    register char *before;	/* Command containing percent
+ExpandPercents (
+    register char *before,	/* Command containing percent
 				 * expressions to be replaced. */
-    register XEvent *eventPtr;	/* X event containing information
+    register XEvent *eventPtr,	/* X event containing information
 				 * to be used in % replacements. */
-    KeySym keySym;		/* KeySym: only relevant for
+    KeySym keySym,		/* KeySym: only relevant for
 				 * KeyPress and KeyRelease events). */
-    char *after;		/* Place to generate new expanded
+    char *after,		/* Place to generate new expanded
 				 * command.  Must contain at least
 				 * "afterSize" bytes of space. */
-    int afterSize;		/* Number of bytes of space available at
+    int afterSize		/* Number of bytes of space available at
 				 * after. */
+)
 {
     register char *buffer;	/* Pointer to buffer currently being used
 				 * as destination. */
@@ -2178,10 +2191,11 @@ ExpandPercents(before, eventPtr, keySym, after, afterSize)
  *----------------------------------------------------------------------
  */
 
-void
-TkBindError(interp)
-    Tcl_Interp *interp;		/* Interpreter in which an error has
+void 
+TkBindError (
+    Tcl_Interp *interp		/* Interpreter in which an error has
 				 * occurred. */
+)
 {
     char *argv[2];
     char *command;

@@ -84,10 +84,11 @@ void			unsetenv_tcl _ANSI_ARGS_((char *name));
  *----------------------------------------------------------------------
  */
 
-void
-TclSetupEnv(interp)
-    Tcl_Interp *interp;		/* Interpreter whose "env" array is to be
+void 
+TclSetupEnv (
+    Tcl_Interp *interp		/* Interpreter whose "env" array is to be
 				 * managed. */
+)
 {
     EnvInterp *eiPtr;
     int i;
@@ -156,13 +157,14 @@ TclSetupEnv(interp)
  *----------------------------------------------------------------------
  */
 
-static int
-FindVariable(name, lengthPtr)
-    char *name;			/* Name of desired environment variable. */
-    int *lengthPtr;		/* Used to return length of name (for
+static int 
+FindVariable (
+    char *name,			/* Name of desired environment variable. */
+    int *lengthPtr		/* Used to return length of name (for
 				 * successful searches) or number of non-NULL
 				 * entries in environ (for unsuccessful
 				 * searches). */
+)
 {
     int i;
     register char *p1, *p2;
@@ -199,11 +201,12 @@ FindVariable(name, lengthPtr)
  *----------------------------------------------------------------------
  */
 
-void
-setenv_tcl(name, value)
-    char *name;			/* Name of variable whose value is to be
+void 
+setenv_tcl (
+    char *name,			/* Name of variable whose value is to be
 				 * set. */
-    char *value;		/* New value for variable. */
+    char *value		/* New value for variable. */
+)
 {
     int index, length, nameLength;
     char *p;
@@ -277,9 +280,10 @@ setenv_tcl(name, value)
  *----------------------------------------------------------------------
  */
 
-void
-unsetenv_tcl(name)
-    char *name;			/* Name of variable to remove. */
+void 
+unsetenv_tcl (
+    char *name			/* Name of variable to remove. */
+)
 {
     int index, dummy;
     char **envPtr;
@@ -338,14 +342,15 @@ unsetenv_tcl(name)
 
 	/* ARGSUSED */
 static char *
-EnvTraceProc(clientData, interp, name1, name2, flags)
-    ClientData clientData;	/* Not used. */
-    Tcl_Interp *interp;		/* Interpreter whose "env" variable is
+EnvTraceProc (
+    ClientData clientData,	/* Not used. */
+    Tcl_Interp *interp,		/* Interpreter whose "env" variable is
 				 * being modified. */
-    char *name1;		/* Better be "env". */
-    char *name2;		/* Name of variable being modified, or
+    char *name1,		/* Better be "env". */
+    char *name2,		/* Name of variable being modified, or
 				 * NULL if whole array is being deleted. */
-    int flags;			/* Indicates what's happening. */
+    int flags			/* Indicates what's happening. */
+)
 {
     /*
      * First see if the whole "env" variable is being deleted.  If
@@ -411,8 +416,8 @@ EnvTraceProc(clientData, interp, name1, name2, flags)
  *----------------------------------------------------------------------
  */
 
-static void
-EnvInit()
+static void 
+EnvInit (void)
 {
     char **newEnviron;
     int i, length;

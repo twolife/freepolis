@@ -764,7 +764,7 @@ editor_command_init(void)
   extern int TileViewCmd(CLIENT_ARGS);
 
   Tcl_CreateCommand(tk_mainInterp, "editorview", TileViewCmd,
-		    (ClientData)MainWindow, (void (*)()) NULL);
+		    (ClientData)MainWindow, (void (*)(int *)) NULL);
 
   Tcl_InitHashTable(&EditorCmds, TCL_STRING_KEYS);
 
@@ -813,14 +813,14 @@ DoEditorCmd(CLIENT_ARGS)
   SimView *view = (SimView *) clientData;
   Tcl_HashEntry *ent;
   int result = TCL_OK;
-  int (*cmd)();
+  int (*cmd)(SimView*, Tcl_Interp*, int, char**);
 
   if (argc < 2) {
     return TCL_ERROR;
   }
 
   if ((ent = Tcl_FindHashEntry(&EditorCmds, argv[1]))) {
-    cmd = (int (*)())ent->clientData;
+    cmd = (int (*)(SimView*, Tcl_Interp*, int, char**))ent->clientData;
     Tk_Preserve((ClientData) view);
     result = cmd(view, interp, argc, argv);
     Tk_Release((ClientData) view);
@@ -968,7 +968,7 @@ HandleAutoGoto(SimView *view)
       NewMap = 1;
       DidStopPan(view);
     } else {
-      double atan2(), cos(), sin();
+      double atan2(double, double), cos(double), sin(double);
       double direction, vx, vy;
       double co, si;
 

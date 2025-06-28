@@ -67,8 +67,9 @@ static int inUse = 0;		/* Count of structures currently in use
  */
 
 void
-Tk_Preserve(clientData)
-    ClientData clientData;	/* Pointer to malloc'ed block of memory. */
+Tk_Preserve(
+    ClientData clientData	/* Pointer to malloc'ed block of memory. */
+)
 {
     register Reference *refPtr;
     int i;
@@ -139,8 +140,9 @@ Tk_Preserve(clientData)
  */
 
 void
-Tk_Release(clientData)
-    ClientData clientData;	/* Pointer to malloc'ed block of memory. */
+Tk_Release(
+    ClientData clientData	/* Pointer to malloc'ed block of memory. */
+)
 {
     register Reference *refPtr;
     int i;
@@ -200,9 +202,10 @@ Tk_Release(clientData)
  */
 
 void
-Tk_EventuallyFree(clientData, freeProc)
-    ClientData clientData;	/* Pointer to malloc'ed block of memory. */
-    Tk_FreeProc *freeProc;	/* Procedure to actually do free. */
+Tk_EventuallyFree(
+    ClientData clientData,	/* Pointer to malloc'ed block of memory. */
+    Tk_FreeProc *freeProc	/* Procedure to actually do free. */
+)
 {
     register Reference *refPtr;
     int i;

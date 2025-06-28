@@ -131,12 +131,13 @@ static void		BitmapInit _ANSI_ARGS_((void));
  *----------------------------------------------------------------------
  */
 
-Pixmap
-Tk_GetBitmap(interp, tkwin, string)
-    Tcl_Interp *interp;		/* Interpreter to use for error reporting. */
-    Tk_Window tkwin;		/* Window in which bitmap will be used. */
-    Tk_Uid string;		/* Description of bitmap.  See manual entry
+Pixmap 
+Tk_GetBitmap (
+    Tcl_Interp *interp,		/* Interpreter to use for error reporting. */
+    Tk_Window tkwin,		/* Window in which bitmap will be used. */
+    Tk_Uid string		/* Description of bitmap.  See manual entry
 				 * for details on legal syntax. */
+)
 {
     NameKey key;
     Tcl_HashEntry *nameHashPtr, *idHashPtr, *predefHashPtr;
@@ -243,14 +244,15 @@ Tk_GetBitmap(interp, tkwin, string)
  *----------------------------------------------------------------------
  */
 
-int
-Tk_DefineBitmap(interp, name, source, width, height)
-    Tcl_Interp *interp;		/* Interpreter to use for error reporting. */
-    Tk_Uid name;		/* Name to use for bitmap.  Must not already
+int 
+Tk_DefineBitmap (
+    Tcl_Interp *interp,		/* Interpreter to use for error reporting. */
+    Tk_Uid name,		/* Name to use for bitmap.  Must not already
 				 * be defined as a bitmap. */
-    char *source;		/* Address of bits for bitmap. */
-    unsigned int width;		/* Width of bitmap. */
-    unsigned int height;	/* Height of bitmap. */
+    char *source,		/* Address of bits for bitmap. */
+    unsigned int width,		/* Width of bitmap. */
+    unsigned int height	/* Height of bitmap. */
+)
 {
     int new;
     Tcl_HashEntry *predefHashPtr;
@@ -291,9 +293,10 @@ Tk_DefineBitmap(interp, name, source, width, height)
  *--------------------------------------------------------------
  */
 
-Tk_Uid
-Tk_NameOfBitmap(bitmap)
-    Pixmap bitmap;			/* Bitmap whose name is wanted. */
+Tk_Uid 
+Tk_NameOfBitmap (
+    Pixmap bitmap			/* Bitmap whose name is wanted. */
+)
 {
     Tcl_HashEntry *idHashPtr;
     TkBitmap *bitmapPtr;
@@ -330,11 +333,12 @@ Tk_NameOfBitmap(bitmap)
  *--------------------------------------------------------------
  */
 
-void
-Tk_SizeOfBitmap(bitmap, widthPtr, heightPtr)
-    Pixmap bitmap;			/* Bitmap whose size is wanted. */
-    unsigned int *widthPtr;		/* Store bitmap width here. */
-    unsigned int *heightPtr;		/* Store bitmap height here. */
+void 
+Tk_SizeOfBitmap (
+    Pixmap bitmap,			/* Bitmap whose size is wanted. */
+    unsigned int *widthPtr,		/* Store bitmap width here. */
+    unsigned int *heightPtr		/* Store bitmap height here. */
+)
 {
     Tcl_HashEntry *idHashPtr;
     TkBitmap *bitmapPtr;
@@ -371,9 +375,10 @@ Tk_SizeOfBitmap(bitmap, widthPtr, heightPtr)
  *----------------------------------------------------------------------
  */
 
-void
-Tk_FreeBitmap(bitmap)
-    Pixmap bitmap;			/* Bitmap to be released. */
+void 
+Tk_FreeBitmap (
+    Pixmap bitmap			/* Bitmap to be released. */
+)
 {
     Tcl_HashEntry *idHashPtr;
     register TkBitmap *bitmapPtr;
@@ -422,12 +427,14 @@ Tk_FreeBitmap(bitmap)
  */
 
 	/* ARGSUSED */
-Pixmap
-Tk_GetBitmapFromData(interp, tkwin, source, width, height)
-    Tcl_Interp *interp;		/* Interpreter to use for error reporting. */
-    Tk_Window tkwin;		/* Window in which bitmap will be used. */
-    char *source;		/* Bitmap data for bitmap shape. */
-    unsigned int width, height;	/* Dimensions of bitmap. */
+Pixmap 
+Tk_GetBitmapFromData (
+    Tcl_Interp *interp,		/* Interpreter to use for error reporting. */
+    Tk_Window tkwin,		/* Window in which bitmap will be used. */
+    char *source,		/* Bitmap data for bitmap shape. */
+    unsigned int width,
+    unsigned int height	/* Dimensions of bitmap. */
+)
 {
     DataKey key;
     Tcl_HashEntry *dataHashPtr;
@@ -476,8 +483,8 @@ Tk_GetBitmapFromData(interp, tkwin, source, width, height)
  *----------------------------------------------------------------------
  */
 
-static void
-BitmapInit()
+static void 
+BitmapInit (void)
 {
     Tcl_Interp *dummy;
 

@@ -67,10 +67,8 @@ BinSearch _ANSI_ARGS_((binSearchCB_t *searchCBPtr));
  *   o > 0 if key > line-key.
  *-----------------------------------------------------------------------------
  */
-static int
-StandardKeyCompare (key, line)
-    char *key;
-    char *line;
+static int 
+StandardKeyCompare (char *key, char *line)
 {
     int  cmpResult, fieldLen;
     char saveChar;
@@ -100,9 +98,8 @@ StandardKeyCompare (key, line)
  *   TCL_OK or TCL_ERROR.
  *-----------------------------------------------------------------------------
  */
-static int
-TclProcKeyCompare (searchCBPtr)
-    binSearchCB_t *searchCBPtr;
+static int 
+TclProcKeyCompare (binSearchCB_t *searchCBPtr)
 {
     char *cmdArgv [3];
     char *command;
@@ -159,10 +156,8 @@ TclProcKeyCompare (searchCBPtr)
  *   TCL_OK or TCL_ERROR.
  *-----------------------------------------------------------------------------
  */
-static int
-ReadAndCompare (fileOffset, searchCBPtr)
-    long           fileOffset;
-    binSearchCB_t *searchCBPtr;
+static int 
+ReadAndCompare (long fileOffset, binSearchCB_t *searchCBPtr)
 {
     int  recChar, status;
 
@@ -237,9 +232,8 @@ unixError:
  *
  *-----------------------------------------------------------------------------
  */
-static int
-BinSearch (searchCBPtr)
-    binSearchCB_t *searchCBPtr;
+static int 
+BinSearch (binSearchCB_t *searchCBPtr)
 {
     OpenFile   *filePtr;
     long        middle, high, low;
@@ -304,11 +298,12 @@ unixError:
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_BsearchCmd (clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_BsearchCmd (
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     int           status;
     binSearchCB_t searchCB;

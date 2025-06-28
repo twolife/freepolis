@@ -90,14 +90,15 @@ static void		TextDoEvent _ANSI_ARGS_((TkText *textPtr,
  *--------------------------------------------------------------
  */
 
-int
-TkTextTagCmd(textPtr, interp, argc, argv)
-    register TkText *textPtr;	/* Information about text widget. */
-    Tcl_Interp *interp;		/* Current interpreter. */
-    int argc;			/* Number of arguments. */
-    char **argv;		/* Argument strings.  Someone else has already
+int 
+TkTextTagCmd (
+    register TkText *textPtr,	/* Information about text widget. */
+    Tcl_Interp *interp,		/* Current interpreter. */
+    int argc,			/* Number of arguments. */
+    char **argv		/* Argument strings.  Someone else has already
 				 * parsed this command enough to know that
 				 * argv[1] is "tag". */
+)
 {
     int length, line1, ch1, line2, ch2, i, addTag;
     char c;
@@ -504,9 +505,10 @@ TkTextTagCmd(textPtr, interp, argc, argv)
  */
 
 TkTextTag *
-TkTextCreateTag(textPtr, tagName)
-    TkText *textPtr;		/* Widget in which tag is being used. */
-    char *tagName;		/* Name of desired tag. */
+TkTextCreateTag (
+    TkText *textPtr,		/* Widget in which tag is being used. */
+    char *tagName		/* Name of desired tag. */
+)
 {
     register TkTextTag *tagPtr;
     Tcl_HashEntry *hPtr;
@@ -558,12 +560,13 @@ TkTextCreateTag(textPtr, tagName)
  */
 
 static TkTextTag *
-FindTag(interp, textPtr, tagName)
-    Tcl_Interp *interp;		/* Interpreter to use for error message;
+FindTag (
+    Tcl_Interp *interp,		/* Interpreter to use for error message;
 				 * if NULL, then don't record an error
 				 * message. */
-    TkText *textPtr;		/* Widget in which tag is being used. */
-    char *tagName;		/* Name of desired tag. */
+    TkText *textPtr,		/* Widget in which tag is being used. */
+    char *tagName		/* Name of desired tag. */
+)
 {
     Tcl_HashEntry *hPtr;
 
@@ -595,9 +598,10 @@ FindTag(interp, textPtr, tagName)
  *----------------------------------------------------------------------
  */
 
-void
-TkTextFreeTag(tagPtr)
-    register TkTextTag *tagPtr;		/* Tag being deleted. */
+void 
+TkTextFreeTag (
+    register TkTextTag *tagPtr		/* Tag being deleted. */
+)
 {
     if (tagPtr->border != None) {
 	Tk_Free3DBorder(tagPtr->border);
@@ -632,10 +636,11 @@ TkTextFreeTag(tagPtr)
  *----------------------------------------------------------------------
  */
 
-static void
-SortTags(numTags, tagArrayPtr)
-    int numTags;		/* Number of tag pointers at *tagArrayPtr. */
-    TkTextTag **tagArrayPtr;	/* Pointer to array of pointers. */
+static void 
+SortTags (
+    int numTags,		/* Number of tag pointers at *tagArrayPtr. */
+    TkTextTag **tagArrayPtr	/* Pointer to array of pointers. */
+)
 {
     int i, j, prio;
     register TkTextTag **tagPtrPtr;
@@ -684,9 +689,11 @@ SortTags(numTags, tagArrayPtr)
  *----------------------------------------------------------------------
  */
 
-static int
-TagSortProc(first, second)
-    CONST VOID *first, *second;		/* Elements to be compared. */
+static int 
+TagSortProc (
+    CONST VOID *first,
+    CONST VOID *second		/* Elements to be compared. */
+)
 {
     TkTextTag *tagPtr1, *tagPtr2;
 
@@ -716,12 +723,13 @@ TagSortProc(first, second)
  *----------------------------------------------------------------------
  */
 
-static void
-ChangeTagPriority(textPtr, tagPtr, prio)
-    TkText *textPtr;			/* Information about text widget. */
-    TkTextTag *tagPtr;			/* Tag whose priority is to be
+static void 
+ChangeTagPriority (
+    TkText *textPtr,			/* Information about text widget. */
+    TkTextTag *tagPtr,			/* Tag whose priority is to be
 					 * changed. */
-    int prio;				/* New priority for tag. */
+    int prio				/* New priority for tag. */
+)
 {
     int low, high, delta;
     register TkTextTag *tagPtr2;
@@ -774,10 +782,11 @@ ChangeTagPriority(textPtr, tagPtr, prio)
  */
 
 void
-TkTextBindProc(clientData, eventPtr)
-    ClientData clientData;		/* Pointer to canvas structure. */
-    XEvent *eventPtr;			/* Pointer to X event that just
+TkTextBindProc(
+    ClientData clientData,		/* Pointer to canvas structure. */
+    XEvent *eventPtr			/* Pointer to X event that just
 					 * happened. */
+)
 {
     TkText *textPtr = (TkText *) clientData;
     int repick  = 0;
@@ -864,14 +873,15 @@ TkTextBindProc(clientData, eventPtr)
  *--------------------------------------------------------------
  */
 
-void
-TkTextPickCurrent(textPtr, eventPtr)
-    register TkText *textPtr;		/* Text widget in which to select
+void 
+TkTextPickCurrent (
+    register TkText *textPtr,		/* Text widget in which to select
 					 * current character. */
-    XEvent *eventPtr;			/* Event describing location of
+    XEvent *eventPtr			/* Event describing location of
 					 * mouse cursor.  Must be EnterWindow,
 					 * LeaveWindow, ButtonRelease, or
 					 * MotionNotify. */
+)
 {
     TkTextLine *linePtr;
     int ch;
@@ -984,9 +994,10 @@ TkTextPickCurrent(textPtr, eventPtr)
  *----------------------------------------------------------------------
  */
 
-void
-TkTextUnpickCurrent(textPtr)
-    TkText *textPtr;		/* Text widget information. */
+void 
+TkTextUnpickCurrent (
+    TkText *textPtr		/* Text widget information. */
+)
 {
     if (textPtr->flags & IN_CURRENT) {
 	XEvent event;
@@ -1016,12 +1027,13 @@ TkTextUnpickCurrent(textPtr)
  *--------------------------------------------------------------
  */
 
-static void
-TextDoEvent(textPtr, eventPtr)
-    TkText *textPtr;			/* Text widget in which event
+static void 
+TextDoEvent (
+    TkText *textPtr,			/* Text widget in which event
 					 * occurred. */
-    XEvent *eventPtr;			/* Real or simulated X event that
+    XEvent *eventPtr			/* Real or simulated X event that
 					 * is to be processed. */
+)
 {
     TkTextTag **tagArrayPtr, **p1, **p2, *tmp;
     int numTags;

@@ -193,13 +193,14 @@ Tk_ItemType TkTextType = {
  *--------------------------------------------------------------
  */
 
-static int
-CreateText(canvasPtr, itemPtr, argc, argv)
-    register Tk_Canvas *canvasPtr;	/* Canvas to hold new item. */
-    Tk_Item *itemPtr;			/* Record to hold new item;  header
+static int 
+CreateText (
+    register Tk_Canvas *canvasPtr,	/* Canvas to hold new item. */
+    Tk_Item *itemPtr,			/* Record to hold new item;  header
 					 * has been initialized by caller. */
-    int argc;				/* Number of arguments in argv. */
-    char **argv;			/* Arguments describing rectangle. */
+    int argc,				/* Number of arguments in argv. */
+    char **argv			/* Arguments describing rectangle. */
+)
 {
     register TextItem *textPtr = (TextItem *) itemPtr;
 
@@ -262,15 +263,16 @@ CreateText(canvasPtr, itemPtr, argc, argv)
  *--------------------------------------------------------------
  */
 
-static int
-TextCoords(canvasPtr, itemPtr, argc, argv)
-    register Tk_Canvas *canvasPtr;	/* Canvas containing item. */
-    Tk_Item *itemPtr;			/* Item whose coordinates are to be
+static int 
+TextCoords (
+    register Tk_Canvas *canvasPtr,	/* Canvas containing item. */
+    Tk_Item *itemPtr,			/* Item whose coordinates are to be
 					 * read or modified. */
-    int argc;				/* Number of coordinates supplied in
+    int argc,				/* Number of coordinates supplied in
 					 * argv. */
-    char **argv;			/* Array of coordinates: x1, y1,
+    char **argv			/* Array of coordinates: x1, y1,
 					 * x2, y2, ... */
+)
 {
     register TextItem *textPtr = (TextItem *) itemPtr;
 
@@ -311,13 +313,14 @@ TextCoords(canvasPtr, itemPtr, argc, argv)
  *--------------------------------------------------------------
  */
 
-static int
-ConfigureText(canvasPtr, itemPtr, argc, argv, flags)
-    Tk_Canvas *canvasPtr;	/* Canvas containing itemPtr. */
-    Tk_Item *itemPtr;		/* Rectangle item to reconfigure. */
-    int argc;			/* Number of elements in argv.  */
-    char **argv;		/* Arguments describing things to configure. */
-    int flags;			/* Flags to pass to Tk_ConfigureWidget. */
+static int 
+ConfigureText (
+    Tk_Canvas *canvasPtr,	/* Canvas containing itemPtr. */
+    Tk_Item *itemPtr,		/* Rectangle item to reconfigure. */
+    int argc,			/* Number of elements in argv.  */
+    char **argv,		/* Arguments describing things to configure. */
+    int flags			/* Flags to pass to Tk_ConfigureWidget. */
+)
 {
     register TextItem *textPtr = (TextItem *) itemPtr;
     XGCValues gcValues;
@@ -401,9 +404,10 @@ ConfigureText(canvasPtr, itemPtr, argc, argv, flags)
  *--------------------------------------------------------------
  */
 
-static void
-DeleteText(itemPtr)
-    Tk_Item *itemPtr;			/* Item that is being deleted. */
+static void 
+DeleteText (
+    Tk_Item *itemPtr			/* Item that is being deleted. */
+)
 {
     register TextItem *textPtr = (TextItem *) itemPtr;
 
@@ -451,11 +455,12 @@ DeleteText(itemPtr)
  *--------------------------------------------------------------
  */
 
-static void
-ComputeTextBbox(canvasPtr, textPtr)
-    register Tk_Canvas *canvasPtr;	/* Canvas that contains item. */
-    register TextItem *textPtr;		/* Item whose bbos is to be
+static void 
+ComputeTextBbox (
+    register Tk_Canvas *canvasPtr,	/* Canvas that contains item. */
+    register TextItem *textPtr		/* Item whose bbos is to be
 					 * recomputed. */
+)
 {
     register TextLine *linePtr;
 #define MAX_LINES 100
@@ -644,12 +649,13 @@ ComputeTextBbox(canvasPtr, textPtr)
  *--------------------------------------------------------------
  */
 
-static void
-DisplayText(canvasPtr, itemPtr, drawable)
-    register Tk_Canvas *canvasPtr;	/* Canvas that contains item. */
-    Tk_Item *itemPtr;			/* Item to be displayed. */
-    Drawable drawable;			/* Pixmap or window in which to draw
+static void 
+DisplayText (
+    register Tk_Canvas *canvasPtr,	/* Canvas that contains item. */
+    Tk_Item *itemPtr,			/* Item to be displayed. */
+    Drawable drawable			/* Pixmap or window in which to draw
 					 * item. */
+)
 {
     register TextItem *textPtr = (TextItem *) itemPtr;
     Display *display = Tk_Display(canvasPtr->tkwin);
@@ -809,13 +815,14 @@ DisplayText(canvasPtr, itemPtr, drawable)
  *--------------------------------------------------------------
  */
 
-static int
-TextInsert(canvasPtr, itemPtr, beforeThis, string)
-    Tk_Canvas *canvasPtr;	/* Canvas containing text item. */
-    Tk_Item *itemPtr;		/* Text item to be modified. */
-    int beforeThis;		/* Index of character before which text is
+static int 
+TextInsert (
+    Tk_Canvas *canvasPtr,	/* Canvas containing text item. */
+    Tk_Item *itemPtr,		/* Text item to be modified. */
+    int beforeThis,		/* Index of character before which text is
 				 * to be inserted. */
-    char *string;		/* New characters to be inserted. */
+    char *string		/* New characters to be inserted. */
+)
 {
     register TextItem *textPtr = (TextItem *) itemPtr;
     int length;
@@ -882,12 +889,13 @@ TextInsert(canvasPtr, itemPtr, beforeThis, string)
  *--------------------------------------------------------------
  */
 
-static int
-TextDeleteChars(canvasPtr, itemPtr, first, last)
-    Tk_Canvas *canvasPtr;	/* Canvas containing itemPtr. */
-    Tk_Item *itemPtr;		/* Item in which to delete characters. */
-    int first;			/* Index of first character to delete. */
-    int last;			/* Index of last character to delete. */
+static int 
+TextDeleteChars (
+    Tk_Canvas *canvasPtr,	/* Canvas containing itemPtr. */
+    Tk_Item *itemPtr,		/* Item in which to delete characters. */
+    int first,			/* Index of first character to delete. */
+    int last			/* Index of last character to delete. */
+)
 {
     register TextItem *textPtr = (TextItem *) itemPtr;
     int count;
@@ -971,11 +979,12 @@ TextDeleteChars(canvasPtr, itemPtr, first, last)
  */
 
 	/* ARGSUSED */
-static double
-TextToPoint(canvasPtr, itemPtr, pointPtr)
-    Tk_Canvas *canvasPtr;	/* Canvas containing itemPtr. */
-    Tk_Item *itemPtr;		/* Item to check against point. */
-    double *pointPtr;		/* Pointer to x and y coordinates. */
+static double 
+TextToPoint (
+    Tk_Canvas *canvasPtr,	/* Canvas containing itemPtr. */
+    Tk_Item *itemPtr,		/* Item to check against point. */
+    double *pointPtr		/* Pointer to x and y coordinates. */
+)
 {
     TextItem *textPtr = (TextItem *) itemPtr;
     register TextLine *linePtr;
@@ -1055,13 +1064,14 @@ TextToPoint(canvasPtr, itemPtr, pointPtr)
  */
 
 	/* ARGSUSED */
-static int
-TextToArea(canvasPtr, itemPtr, rectPtr)
-    Tk_Canvas *canvasPtr;	/* Canvas containing itemPtr. */
-    Tk_Item *itemPtr;		/* Item to check against rectangle. */
-    double *rectPtr;		/* Pointer to array of four coordinates
+static int 
+TextToArea (
+    Tk_Canvas *canvasPtr,	/* Canvas containing itemPtr. */
+    Tk_Item *itemPtr,		/* Item to check against rectangle. */
+    double *rectPtr		/* Pointer to array of four coordinates
 				 * (x1, y1, x2, y2) describing rectangular
 				 * area.  */
+)
 {
     TextItem *textPtr = (TextItem *) itemPtr;
     register TextLine *linePtr;
@@ -1116,13 +1126,15 @@ TextToArea(canvasPtr, itemPtr, rectPtr)
  */
 
 	/* ARGSUSED */
-static void
-ScaleText(canvasPtr, itemPtr, originX, originY, scaleX, scaleY)
-    Tk_Canvas *canvasPtr;		/* Canvas containing rectangle. */
-    Tk_Item *itemPtr;			/* Rectangle to be scaled. */
-    double originX, originY;		/* Origin about which to scale rect. */
-    double scaleX;			/* Amount to scale in X direction. */
-    double scaleY;			/* Amount to scale in Y direction. */
+static void 
+ScaleText (
+    Tk_Canvas *canvasPtr,		/* Canvas containing rectangle. */
+    Tk_Item *itemPtr,			/* Rectangle to be scaled. */
+    double originX,
+    double originY,		/* Origin about which to scale rect. */
+    double scaleX,			/* Amount to scale in X direction. */
+    double scaleY			/* Amount to scale in Y direction. */
+)
 {
     register TextItem *textPtr = (TextItem *) itemPtr;
 
@@ -1151,12 +1163,14 @@ ScaleText(canvasPtr, itemPtr, originX, originY, scaleX, scaleY)
  *--------------------------------------------------------------
  */
 
-static void
-TranslateText(canvasPtr, itemPtr, deltaX, deltaY)
-    Tk_Canvas *canvasPtr;		/* Canvas containing item. */
-    Tk_Item *itemPtr;			/* Item that is being moved. */
-    double deltaX, deltaY;		/* Amount by which item is to be
+static void 
+TranslateText (
+    Tk_Canvas *canvasPtr,		/* Canvas containing item. */
+    Tk_Item *itemPtr,			/* Item that is being moved. */
+    double deltaX,
+    double deltaY		/* Amount by which item is to be
 					 * moved. */
+)
 {
     register TextItem *textPtr = (TextItem *) itemPtr;
 
@@ -1185,14 +1199,15 @@ TranslateText(canvasPtr, itemPtr, deltaX, deltaY)
  *--------------------------------------------------------------
  */
 
-static int
-GetTextIndex(canvasPtr, itemPtr, string, indexPtr)
-    Tk_Canvas *canvasPtr;	/* Canvas containing item. */
-    Tk_Item *itemPtr;		/* Item for which the index is being
+static int 
+GetTextIndex (
+    Tk_Canvas *canvasPtr,	/* Canvas containing item. */
+    Tk_Item *itemPtr,		/* Item for which the index is being
 				 * specified. */
-    char *string;		/* Specification of a particular character
+    char *string,		/* Specification of a particular character
 				 * in itemPtr's text. */
-    int *indexPtr;		/* Where to store converted index. */
+    int *indexPtr		/* Where to store converted index. */
+)
 {
     register TextItem *textPtr = (TextItem *) itemPtr;
     int length;
@@ -1298,13 +1313,14 @@ GetTextIndex(canvasPtr, itemPtr, string, indexPtr)
  */
 
 	/* ARGSUSED */
-static void
-SetTextCursor(canvasPtr, itemPtr, index)
-    Tk_Canvas *canvasPtr;		/* Record describing canvas widget. */
-    Tk_Item *itemPtr;			/* Text item in which cursor position
+static void 
+SetTextCursor (
+    Tk_Canvas *canvasPtr,		/* Record describing canvas widget. */
+    Tk_Item *itemPtr,			/* Text item in which cursor position
 					 * is to be set. */
-    int index;				/* Index of character just before which
+    int index				/* Index of character just before which
 					 * cursor is to be positioned. */
+)
 {
     register TextItem *textPtr = (TextItem *) itemPtr;
 
@@ -1338,17 +1354,18 @@ SetTextCursor(canvasPtr, itemPtr, index)
  *--------------------------------------------------------------
  */
 
-static int
-GetSelText(canvasPtr, itemPtr, offset, buffer, maxBytes)
-    Tk_Canvas *canvasPtr;		/* Canvas containing selection. */
-    Tk_Item *itemPtr;			/* Text item containing selection. */
-    int offset;				/* Offset within selection of first
+static int 
+GetSelText (
+    Tk_Canvas *canvasPtr,		/* Canvas containing selection. */
+    Tk_Item *itemPtr,			/* Text item containing selection. */
+    int offset,				/* Offset within selection of first
 					 * character to be returned. */
-    char *buffer;			/* Location in which to place
+    char *buffer,			/* Location in which to place
 					 * selection. */
-    int maxBytes;			/* Maximum number of bytes to place
+    int maxBytes			/* Maximum number of bytes to place
 					 * at buffer, not including terminating
 					 * NULL character. */
+)
 {
     TextItem *textPtr = (TextItem *) itemPtr;
     int count;

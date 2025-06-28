@@ -40,11 +40,12 @@ ExpandString _ANSI_ARGS_((unsigned char *s,
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_CindexCmd (clientData, interp, argc, argv)
-    ClientData   clientData;
-    Tcl_Interp  *interp;
-    int          argc;
-    char       **argv;
+Tcl_CindexCmd (
+    ClientData   clientData,
+    Tcl_Interp  *interp,
+    int          argc,
+    char       **argv
+)
 {
     long index;
 
@@ -78,11 +79,12 @@ Tcl_CindexCmd (clientData, interp, argc, argv)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_ClengthCmd (clientData, interp, argc, argv)
-    ClientData   clientData;
-    Tcl_Interp  *interp;
-    int          argc;
-    char       **argv;
+Tcl_ClengthCmd (
+    ClientData   clientData,
+    Tcl_Interp  *interp,
+    int          argc,
+    char       **argv
+)
 {
 
     if (argc != 2) {
@@ -109,11 +111,12 @@ Tcl_ClengthCmd (clientData, interp, argc, argv)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_CrangeCmd (clientData, interp, argc, argv)
-    ClientData   clientData;
-    Tcl_Interp  *interp;
-    int          argc;
-    char       **argv;
+Tcl_CrangeCmd (
+    ClientData   clientData,
+    Tcl_Interp  *interp,
+    int          argc,
+    char       **argv
+)
 {
     long      fullLen, first;
     long      subLen;
@@ -180,11 +183,12 @@ Tcl_CrangeCmd (clientData, interp, argc, argv)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_ReplicateCmd (clientData, interp, argc, argv)
-    ClientData   clientData;
-    Tcl_Interp  *interp;
-    int          argc;
-    char       **argv;
+Tcl_ReplicateCmd (
+    ClientData   clientData,
+    Tcl_Interp  *interp,
+    int          argc,
+    char       **argv
+)
 {
     long           repCount;
     register char *srcPtr, *scanPtr, *newPtr;
@@ -228,10 +232,8 @@ Tcl_ReplicateCmd (clientData, interp, argc, argv)
  */
 #define MAX_EXPANSION 255
 
-static unsigned int
-ExpandString (s, buf)
-    unsigned char *s;
-    unsigned char  buf[];
+static unsigned int 
+ExpandString (unsigned char *s, unsigned char buf[])
 {
     int i, j;
 
@@ -261,11 +263,12 @@ ExpandString (s, buf)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_TranslitCmd (clientData, interp, argc, argv)
-    ClientData   clientData;
-    Tcl_Interp  *interp;
-    int          argc;
-    char       **argv;
+Tcl_TranslitCmd (
+    ClientData   clientData,
+    Tcl_Interp  *interp,
+    int          argc,
+    char       **argv
+)
 {
     unsigned char from [MAX_EXPANSION+1];
     unsigned char to   [MAX_EXPANSION+1];
@@ -337,11 +340,12 @@ Tcl_TranslitCmd (clientData, interp, argc, argv)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_CtypeCmd (clientData, interp, argc, argv)
-    ClientData   clientData;
-    Tcl_Interp  *interp;
-    int          argc;
-    char       **argv;
+Tcl_CtypeCmd (
+    ClientData   clientData,
+    Tcl_Interp  *interp,
+    int          argc,
+    char       **argv
+)
 {
     register char *class;
     register char *scanPtr = argv [2];

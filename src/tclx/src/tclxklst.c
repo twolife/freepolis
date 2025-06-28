@@ -69,13 +69,8 @@ SplitAndFindField _ANSI_ARGS_((Tcl_Interp  *interp,
  *    TCL_ERROR -  If the list has an invalid format.
  *-----------------------------------------------------------------------------
  */
-static int
-CompareKeyListField (interp, fieldName, field, valuePtr, valueSizePtr)
-    Tcl_Interp   *interp;
-    CONST char   *fieldName;
-    CONST char   *field;
-    char        **valuePtr;
-    int          *valueSizePtr; 
+static int 
+CompareKeyListField (Tcl_Interp *interp, CONST char *fieldName, CONST char *field, char **valuePtr, int *valueSizePtr) 
 {
     char *elementPtr, *nextPtr;
     int   fieldNameSize, elementSize;
@@ -148,16 +143,12 @@ CompareKeyListField (interp, fieldName, field, valuePtr, valueSizePtr)
  *   Standard Tcl result.
  *-----------------------------------------------------------------------------
  */
-static int
-SplitAndFindField (interp, fieldName, keyedList, fieldInfoPtr)
-    Tcl_Interp  *interp;
-    CONST char  *fieldName;
-    CONST char  *keyedList;
-    fieldInfo_t *fieldInfoPtr;
+static int 
+SplitAndFindField (Tcl_Interp *interp, CONST char *fieldName, CONST char *keyedList, fieldInfo_t *fieldInfoPtr)
 {
     int  idx, result;
 
-    if (fieldName == '\0') {
+    if (fieldName == NULL) {
         interp->result = "null key not allowed";
         return TCL_ERROR;
     }
@@ -220,14 +211,8 @@ errorExit:
  *   TCL_ERROR - If an error occured.
  *-----------------------------------------------------------------------------
  */
-int
-Tcl_GetKeyedListKeys (interp, subFieldName, keyedList, keyesArgcPtr,
-                      keyesArgvPtr)
-    Tcl_Interp  *interp;
-    CONST char  *subFieldName;
-    CONST char  *keyedList;
-    int         *keyesArgcPtr;
-    char      ***keyesArgvPtr;
+int 
+Tcl_GetKeyedListKeys (Tcl_Interp *interp, CONST char *subFieldName, CONST char *keyedList, int *keyesArgcPtr, char ***keyesArgvPtr)
 {
     char  *scanPtr, *subFieldList;
     int    result, keyCount, totalKeySize, idx;
@@ -330,17 +315,13 @@ Tcl_GetKeyedListKeys (interp, subFieldName, keyedList, keyesArgcPtr,
  *   TCL_ERROR - If an error occured.
  *-----------------------------------------------------------------------------
  */
-int
-Tcl_GetKeyedListField (interp, fieldName, keyedList, fieldValuePtr)
-    Tcl_Interp  *interp;
-    CONST char  *fieldName;
-    CONST char  *keyedList;
-    char       **fieldValuePtr;
+int 
+Tcl_GetKeyedListField (Tcl_Interp *interp, CONST char *fieldName, CONST char *keyedList, char **fieldValuePtr)
 {
     char *nameSeparPtr, *scanPtr, *valuePtr;
     int   valueSize, result;
 
-    if (fieldName == '\0') {
+    if (fieldName == NULL) {
         interp->result = "null key not allowed";
         return TCL_ERROR;
     }
@@ -429,11 +410,7 @@ exitPoint:
  *-----------------------------------------------------------------------------
  */
 char *
-Tcl_SetKeyedListField (interp, fieldName, fieldValue, keyedList)
-    Tcl_Interp  *interp;
-    CONST char  *fieldName;
-    CONST char  *fieldValue;
-    CONST char  *keyedList;
+Tcl_SetKeyedListField (Tcl_Interp *interp, CONST char *fieldName, CONST char *fieldValue, CONST char *keyedList)
 {
     char        *nameSeparPtr;
     char        *newField = NULL, *newList;
@@ -526,10 +503,7 @@ errorExit:
  *-----------------------------------------------------------------------------
  */
 char *
-Tcl_DeleteKeyedListField (interp, fieldName, keyedList)
-    Tcl_Interp  *interp;
-    CONST char  *fieldName;
-    CONST char  *keyedList;
+Tcl_DeleteKeyedListField (Tcl_Interp *interp, CONST char *fieldName, CONST char *keyedList)
 {
     char        *nameSeparPtr;
     char        *newList;
@@ -617,11 +591,12 @@ errorExit:
  *----------------------------------------------------------------------------
  */
 int
-Tcl_KeyldelCmd (clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_KeyldelCmd (
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     char  *keyedList, *newList;
     int    listArgc, fieldIdx, idx;
@@ -661,11 +636,12 @@ Tcl_KeyldelCmd (clientData, interp, argc, argv)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_KeylgetCmd (clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_KeylgetCmd (
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     char   *keyedList;
     char   *fieldValue;
@@ -690,7 +666,7 @@ Tcl_KeylgetCmd (clientData, interp, argc, argv)
     /*
      * Handle retrieving a value for a specified key.
      */
-    if (argv [2] == '\0') {
+    if (argv [2] == NULL) {
         interp->result = "null key not allowed";
         return TCL_ERROR;
     }
@@ -759,11 +735,12 @@ Tcl_KeylgetCmd (clientData, interp, argc, argv)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_KeylkeysCmd (clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_KeylkeysCmd (
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     char   *keyedList, **keyesArgv;
     int    result, keyesArgc;
@@ -809,11 +786,12 @@ Tcl_KeylkeysCmd (clientData, interp, argc, argv)
  *-----------------------------------------------------------------------------
  */
 int
-Tcl_KeylsetCmd (clientData, interp, argc, argv)
-    ClientData  clientData;
-    Tcl_Interp *interp;
-    int         argc;
-    char      **argv;
+Tcl_KeylsetCmd (
+    ClientData  clientData,
+    Tcl_Interp *interp,
+    int         argc,
+    char      **argv
+)
 {
     char *keyedList, *newList, *prevList;
     char *varPtr;

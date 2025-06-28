@@ -380,13 +380,14 @@ static int		PostSubmenu _ANSI_ARGS_((Tcl_Interp *interp,
  *--------------------------------------------------------------
  */
 
-int
-Tk_MenuCmd(clientData, interp, argc, argv)
-    ClientData clientData;	/* Main window associated with
+int 
+Tk_MenuCmd (
+    ClientData clientData,	/* Main window associated with
 				 * interpreter. */
-    Tcl_Interp *interp;		/* Current interpreter. */
-    int argc;			/* Number of arguments. */
-    char **argv;		/* Argument strings. */
+    Tcl_Interp *interp,		/* Current interpreter. */
+    int argc,			/* Number of arguments. */
+    char **argv		/* Argument strings. */
+)
 {
     Tk_Window tkwin = (Tk_Window) clientData;
     Tk_Window new;
@@ -445,7 +446,7 @@ Tk_MenuCmd(clientData, interp, argc, argv)
     Tk_CreateEventHandler(menuPtr->tkwin, ExposureMask|StructureNotifyMask,
 	    MenuEventProc, (ClientData) menuPtr);
     Tcl_CreateCommand(interp, Tk_PathName(menuPtr->tkwin), MenuWidgetCmd,
-	    (ClientData) menuPtr, (void (*)()) NULL);
+	    (ClientData) menuPtr, (void (*)(int *)) NULL);
     if (ConfigureMenu(interp, menuPtr, argc-2, argv+2, 0) != TCL_OK) {
 	goto error;
     }
@@ -476,12 +477,13 @@ Tk_MenuCmd(clientData, interp, argc, argv)
  *--------------------------------------------------------------
  */
 
-static int
-MenuWidgetCmd(clientData, interp, argc, argv)
-    ClientData clientData;	/* Information about menu widget. */
-    Tcl_Interp *interp;		/* Current interpreter. */
-    int argc;			/* Number of arguments. */
-    char **argv;		/* Argument strings. */
+static int 
+MenuWidgetCmd (
+    ClientData clientData,	/* Information about menu widget. */
+    Tcl_Interp *interp,		/* Current interpreter. */
+    int argc,			/* Number of arguments. */
+    char **argv		/* Argument strings. */
+)
 {
     register Menu *menuPtr = (Menu *) clientData;
     register MenuEntry *mePtr;
@@ -858,9 +860,10 @@ MenuWidgetCmd(clientData, interp, argc, argv)
  *----------------------------------------------------------------------
  */
 
-static void
-DestroyMenu(clientData)
-    ClientData clientData;	/* Info about menu widget. */
+static void 
+DestroyMenu (
+    ClientData clientData	/* Info about menu widget. */
+)
 {
     register Menu *menuPtr = (Menu *) clientData;
     int i;
@@ -931,9 +934,10 @@ DestroyMenu(clientData)
  *----------------------------------------------------------------------
  */
 
-static void
-DestroyMenuEntry(clientData)
-    ClientData clientData;		/* Pointer to entry to be freed. */
+static void 
+DestroyMenuEntry (
+    ClientData clientData		/* Pointer to entry to be freed. */
+)
 {
     register MenuEntry *mePtr = (MenuEntry *) clientData;
     Menu *menuPtr = mePtr->menuPtr;
@@ -1015,14 +1019,15 @@ DestroyMenuEntry(clientData)
  *----------------------------------------------------------------------
  */
 
-static int
-ConfigureMenu(interp, menuPtr, argc, argv, flags)
-    Tcl_Interp *interp;		/* Used for error reporting. */
-    register Menu *menuPtr;	/* Information about widget;  may or may
+static int 
+ConfigureMenu (
+    Tcl_Interp *interp,		/* Used for error reporting. */
+    register Menu *menuPtr,	/* Information about widget;  may or may
 				 * not already have values for some fields. */
-    int argc;			/* Number of valid entries in argv. */
-    char **argv;		/* Arguments. */
-    int flags;			/* Flags to pass to Tk_ConfigureWidget. */
+    int argc,			/* Number of valid entries in argv. */
+    char **argv,		/* Arguments. */
+    int flags			/* Flags to pass to Tk_ConfigureWidget. */
+)
 {
     XGCValues gcValues;
     GC newGC;
@@ -1134,19 +1139,20 @@ ConfigureMenu(interp, menuPtr, argc, argv, flags)
  *----------------------------------------------------------------------
  */
 
-static int
-ConfigureMenuEntry(interp, menuPtr, mePtr, index, argc, argv, flags)
-    Tcl_Interp *interp;			/* Used for error reporting. */
-    Menu *menuPtr;			/* Information about whole menu. */
-    register MenuEntry *mePtr;		/* Information about menu entry;  may
+static int 
+ConfigureMenuEntry (
+    Tcl_Interp *interp,			/* Used for error reporting. */
+    Menu *menuPtr,			/* Information about whole menu. */
+    register MenuEntry *mePtr,		/* Information about menu entry;  may
 					 * or may not already have values for
 					 * some fields. */
-    int index;				/* Index of mePtr within menuPtr's
+    int index,				/* Index of mePtr within menuPtr's
 					 * entries. */
-    int argc;				/* Number of valid entries in argv. */
-    char **argv;			/* Arguments. */
-    int flags;				/* Additional flags to pass to
+    int argc,				/* Number of valid entries in argv. */
+    char **argv,			/* Arguments. */
+    int flags				/* Additional flags to pass to
 					 * Tk_ConfigureWidget. */
+)
 {
     XGCValues gcValues;
     GC newGC, newActiveGC, newDisabledGC;
@@ -1336,9 +1342,10 @@ ConfigureMenuEntry(interp, menuPtr, mePtr, index, argc, argv, flags)
  *--------------------------------------------------------------
  */
 
-static void
-ComputeMenuGeometry(clientData)
-    ClientData clientData;		/* Structure describing menu. */
+static void 
+ComputeMenuGeometry (
+    ClientData clientData		/* Structure describing menu. */
+)
 {
     Menu *menuPtr = (Menu *) clientData;
     register MenuEntry *mePtr;
@@ -1493,9 +1500,10 @@ ComputeMenuGeometry(clientData)
  *----------------------------------------------------------------------
  */
 
-static void
-DisplayMenu(clientData)
-    ClientData clientData;	/* Information about widget. */
+static void 
+DisplayMenu (
+    ClientData clientData	/* Information about widget. */
+)
 {
     register Menu *menuPtr = (Menu *) clientData;
     register MenuEntry *mePtr;
@@ -1720,14 +1728,15 @@ DisplayMenu(clientData)
  *--------------------------------------------------------------
  */
 
-static int
-GetMenuIndex(interp, menuPtr, string, indexPtr)
-    Tcl_Interp *interp;		/* For error messages. */
-    Menu *menuPtr;		/* Menu for which the index is being
+static int 
+GetMenuIndex (
+    Tcl_Interp *interp,		/* For error messages. */
+    Menu *menuPtr,		/* Menu for which the index is being
 				 * specified. */
-    char *string;		/* Specification of an entry in menu.  See
+    char *string,		/* Specification of an entry in menu.  See
 				 * manual entry for valid .*/
-    int *indexPtr;		/* Where to store converted relief. */
+    int *indexPtr		/* Where to store converted relief. */
+)
 {
     int i, y;
 
@@ -1813,10 +1822,11 @@ GetMenuIndex(interp, menuPtr, string, indexPtr)
  *--------------------------------------------------------------
  */
 
-static void
-MenuEventProc(clientData, eventPtr)
-    ClientData clientData;	/* Information about window. */
-    XEvent *eventPtr;		/* Information about event. */
+static void 
+MenuEventProc (
+    ClientData clientData,	/* Information about window. */
+    XEvent *eventPtr		/* Information about event. */
+)
 {
     Menu *menuPtr = (Menu *) clientData;
     if ((eventPtr->type == Expose) && (eventPtr->xexpose.count == 0)) {
@@ -1864,12 +1874,13 @@ MenuEventProc(clientData, eventPtr)
 
 	/* ARGSUSED */
 static char *
-MenuVarProc(clientData, interp, name1, name2, flags)
-    ClientData clientData;	/* Information about menu entry. */
-    Tcl_Interp *interp;		/* Interpreter containing variable. */
-    char *name1;		/* First part of variable's name. */
-    char *name2;		/* Second part of variable's name. */
-    int flags;			/* Describes what just happened. */
+MenuVarProc (
+    ClientData clientData,	/* Information about menu entry. */
+    Tcl_Interp *interp,		/* Interpreter containing variable. */
+    char *name1,		/* First part of variable's name. */
+    char *name2,		/* Second part of variable's name. */
+    int flags			/* Describes what just happened. */
+)
 {
     MenuEntry *mePtr = (MenuEntry *) clientData;
     Menu *menuPtr;
@@ -1931,11 +1942,12 @@ MenuVarProc(clientData, interp, name1, name2, flags)
  *----------------------------------------------------------------------
  */
 
-static void
-EventuallyRedrawMenu(menuPtr, index)
-    register Menu *menuPtr;	/* Information about menu to redraw. */
-    int index;			/* Which entry to redraw.  If -1, then
+static void 
+EventuallyRedrawMenu (
+    register Menu *menuPtr,	/* Information about menu to redraw. */
+    int index			/* Which entry to redraw.  If -1, then
 				 * all the entries in the menu are redrawn. */
+)
 {
     if (menuPtr->tkwin == NULL) {
 	return;
@@ -1975,14 +1987,15 @@ EventuallyRedrawMenu(menuPtr, index)
  *--------------------------------------------------------------
  */
 
-static int
-PostSubmenu(interp, menuPtr, mePtr)
-    Tcl_Interp *interp;		/* Used for invoking sub-commands and
+static int 
+PostSubmenu (
+    Tcl_Interp *interp,		/* Used for invoking sub-commands and
 				 * reporting errors. */
-    register Menu *menuPtr;	/* Information about menu as a whole. */
-    register MenuEntry *mePtr;	/* Info about submenu that is to be
+    register Menu *menuPtr,	/* Information about menu as a whole. */
+    register MenuEntry *mePtr	/* Info about submenu that is to be
 				 * posted.  NULL means make sure that
 				 * no submenu is posted. */
+)
 {
     char string[30];
     int result, x, y;
@@ -2035,11 +2048,12 @@ PostSubmenu(interp, menuPtr, mePtr)
  *----------------------------------------------------------------------
  */
 
-static int
-ActivateMenuEntry(menuPtr, index)
-    register Menu *menuPtr;		/* Menu in which to activate. */
-    int index;				/* Index of entry to activate, or
+static int 
+ActivateMenuEntry (
+    register Menu *menuPtr,		/* Menu in which to activate. */
+    int index				/* Index of entry to activate, or
 					 * -1 to deactivate all entries. */
+)
 {
     register MenuEntry *mePtr;
     int result = TCL_OK;

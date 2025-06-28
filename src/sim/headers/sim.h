@@ -675,9 +675,9 @@ extern short RandInt(void);
 
 extern Sim *MakeNewSim();
 extern SimView *MakeNewView();
-extern SimSprite *GetSprite();
-extern SimSprite *MakeSprite();
-extern SimSprite *MakeNewSprite();
+extern SimSprite *GetSprite(int type);
+extern SimSprite *MakeSprite(int type, int x, int y);
+extern SimSprite *MakeNewSprite(int type, int x, int y);
 
 extern struct XDisplay *XDisplays;
 
