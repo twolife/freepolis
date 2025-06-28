@@ -4,15 +4,19 @@ Linux Micropolis for X11.
 
 ========================================================================
 
+Micropolis is a registered trademark of Micropolis Corporation
+(Micropolis GmbH) and is licensed here as a courtesy of the owner.
+
+See https://micropolis.com/ for Micropolis Corporation (Micropolis GmbH)
+
+========================================================================
+
 Micropolis designed and implemented by Will Wright, 
 Copyright (C) 2002 by Electronic Arts.
 Unix porting, optimization and TCL/Tk user interface design 
 by Don Hopkins (dhopkins@DonHopkins.com, http://www.DonHopkins.com),
 developed for DUX Software under license from Maxis.
 Ported to OLPC Fedora Linux by Don Hopkins.
-
-Micropolis is a registered trademark of Micropolis Corporation
-(Micropolis GmbH) and is licensed here as a courtesy of the owner.
 
 ========================================================================
 
