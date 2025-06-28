@@ -106,8 +106,6 @@ xo:  install
 	rm -rf BUILDIT
 	mkdir BUILDIT
 	tar cf - -C ../.. $(TARFILES) | (cd BUILDIT; tar xf -)
-	# The DejaVu fonts are not needed on the XO, only other platforms.
-	rm -rf BUILDIT/micropolis-activity/res/dejavu-lgc
 	mv BUILDIT/micropolis-activity BUILDIT/micropolis.activity
 	(cd BUILDIT; zip -r ../../../micropolis.xo micropolis.activity)
 	rm -rf BUILDIT

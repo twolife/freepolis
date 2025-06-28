@@ -261,7 +261,7 @@ set ScenarioDescX 232
 set ScenarioDescY 170
 set ScenarioDescWidth 280
 set ScenarioDescHeight 285
-set ScenarioDescFont Large
+set ScenarioDescFont Medium
 set EventLines 5
 
 set screenwidth [winfo screenwidth .]
@@ -298,30 +298,39 @@ if {($screenwidth < $ScenarioPanelWidth) ||
 
 set FontInfo {
   {Big {
+	{-*-helvetica-medium-r-normal-*-20-*-*-*-*-*-*-*}
 	{-*-dejavu lgc sans-medium-r-normal-*-90-*}
   }}
   {Large {
+	{-*-helvetica-medium-r-normal-*-18-*-*-*-*-*-*-*}
 	{-*-dejavu lgc sans-medium-r-normal-*-80-*}
   }}
   {Medium {
+	{-*-helvetica-medium-r-normal-*-14-*-*-*-*-*-*-*}
 	{-*-dejavu lgc sans-medium-r-normal-*-70-*}
   }}
   {Small {
+	{-*-helvetica-medium-r-normal-*-12-*-*-*-*-*-*-*}
 	{-*-dejavu lgc sans-medium-r-normal-*-60-*}
   }}
   {Narrow {
+	{-*-helvetica-medium-r-normal-*-12-*-*-*-*-*-*-*}
 	{-*-dejavu lgc sans-medium-r-normal-*-60-*}
   }}
   {Tiny {
+	{-*-helvetica-medium-r-normal-*-12-*-*-*-*-*-*-*}
 	{-*-dejavu lgc sans-medium-r-normal-*-60-*}
   }}
   {Text {
+	{-*-helvetica-medium-r-normal-*-14-*-*-*-*-*-*-*}
 	{-*-dejavu lgc sans-medium-r-normal-*-70-*}
   }}
   {Message {
+	{-*-helvetica-medium-r-normal-*-14-*-*-*-*-*-*-*}
 	{-*-dejavu lgc sans-medium-r-normal-*-70-*}
   }}
   {Alert {
+	{-*-helvetica-medium-r-normal-*-14-*-*-*-*-*-*-*}
 	{-*-dejavu lgc sans-medium-r-normal-*-70-*}
   }}
 }
@@ -471,13 +480,6 @@ sprite bus 8
 sprite train 1
 
 sim ResetDynamic
-
-# The next three lines have no effect on the OLPC, where we don't provide
-# the font in res (because it's already in the system fonts).  These lines
-# are for other systems that lack the font.
-set FontPath "[pwd]/res/dejavu-lgc"
-system "xset -fp \"$FontPath\" >/dev/null 2>&1"
-system "xset +fp \"$FontPath\" >/dev/null 2>&1"
 
 # Ignore SIGCHLD for spawned sound-player childs, this should lead to them
 # being reaped by init

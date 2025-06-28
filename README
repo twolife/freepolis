@@ -101,12 +101,6 @@ by other people.  We gratefully acknowledge the authors and thank them
 for their generosity in sharing their software with us and the world.
 Such software includes:
 
-	res/dejavu-lgc/		Font for use in Sugar Micropolis
-		
-http://dejavu.sourceforge.net
-Fonts are (c) Bitstream (see below). DejaVu changes are in public
-domain. Glyphs imported from Arev fonts are (c) Tavmjung Bah.
-
 	src/sim/rand.c		Random Number Generator
 	src/sim/random.c	Random Number Generator
 

@@ -8,7 +8,7 @@ APPLICATIONSDIR=$(PREFIX)/share/applications
 
 INSTALL=install
 
-DIRS=	$(DESTDIR)/$(DATADIR)/res/sounds $(DESTDIR)/$(DATADIR)/res/dejavu-lgc \
+DIRS=	$(DESTDIR)/$(DATADIR)/res/sounds \
 	$(DESTDIR)/$(DATADIR)/images $(DESTDIR)/$(DATADIR)/cities \
 	$(DESTDIR)/$(LIBEXECDIR) $(DESTDIR)/$(BINDIR) $(DESTDIR)/$(DOCDIR) \
 	$(DESTDIR)/$(PIXMAPDIR) $(DESTDIR)/$(APPLICATIONSDIR)
@@ -70,16 +70,13 @@ install-bin:
 	echo "cd $(DATADIR) && exec $(LIBEXECDIR)/sim \"\$$@\"" >>$(DESTDIR)/$(BINDIR)/micropolis
 	chmod 755 $(DESTDIR)/$(BINDIR)/micropolis
 
-install-res: install-res-sounds install-res-dejavu-lgc
+install-res: install-res-sounds
 	for file in $(RES); do \
 		install -m 0644 $$file $(DESTDIR)/$(DATADIR)/$$file; \
 	done
 
 install-res-sounds:
 	find res/sounds -type f -name \*.wav -exec $(INSTALL) -m 0644 {} $(DESTDIR)/$(DATADIR)/res/sounds/ \;
-
-install-res-dejavu-lgc:
-	find res/dejavu-lgc -type f -exec $(INSTALL) -m 0644 {} $(DESTDIR)/$(DATADIR)/res/dejavu-lgc/ \;
 
 install-images:
 	find images -type f -exec $(INSTALL) -m 0644 {} $(DESTDIR)/$(DATADIR)/images/ \;
@@ -101,11 +98,6 @@ uninstall:
 	rm -f $(DESTDIR)/$(DATADIR)/res/sounds/player
 	rm -f $(DESTDIR)/$(DATADIR)/res/sounds/*.wav
 	-rmdir $(DESTDIR)/$(DATADIR)/res/sounds
-	rm -f $(DESTDIR)/$(DATADIR)/res/dejavu-lgc/*ttf \
-		$(DESTDIR)/$(DATADIR)/res/dejavu-lgc/fonts.alias \
-		$(DESTDIR)/$(DATADIR)/res/dejavu-lgc/fonts.dir \
-		$(DESTDIR)/$(DATADIR)/res/dejavu-lgc/fonts.scale
-	-rmdir $(DESTDIR)/$(DATADIR)/res/dejavu-lgc
 	for file in $(RES); do \
 		rm $(DESTDIR)/$(DATADIR)/$$file; \
 	done
@@ -121,5 +113,5 @@ uninstall:
 	rm -f $(DESTDIR)/$(PIXMAPDIR)/micropolis.png
 
 .PHONY: all clean install install-dirs install-bin install-res \
-	install-res-sounds install-res-dejavu-lgc install-images \
+	install-res-sounds install-images \
 	install-cities install-doc install-desktop uninstall tcl tk tclx sim
