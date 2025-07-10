@@ -33,16 +33,16 @@ res/sim: src/sim/sim
 	cp src/sim/sim $@
 	strip $@
 
-src/sim/sim: tcl tk tclx sim
+src/sim/sim: sim
 	@#
 
 tcl:
 	cd src/tcl && $(MAKE) MAKEFLAGS=
 
-tk:
+tk: tcl
 	cd src/tk && $(MAKE) MAKEFLAGS=
 
-tclx: tcl tk
+tclx: tk
 	cd src/tclx && $(MAKE) MAKEFLAGS=
 
 sim: tclx
