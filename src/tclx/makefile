@@ -65,7 +65,7 @@ libtcl.a: $(TCL_UCB_DIR)/libtcl.a
 
 wish: TKX_MAKES runwish
 
-TKX_MAKES: libtk.a
+TKX_MAKES: libtk.a tcl
 	cd tkucbsrc; $(MAKE) -$(MAKEFLAGS) all
 	cd tksrc;    $(MAKE) -$(MAKEFLAGS) all
 
@@ -83,7 +83,7 @@ libtk.a: $(TCL_TK_DIR)/libtk.a
 # Also generate a script to point the TCLDEFAULT environment variable
 # at this file for testing Tcl before its installed.
 
-tcldef:
+tcldef: tcl
 	@echo "	-       Generating temporary TCLDEFAULT file.     -"
 	@echo "	- Use runtcl script to test Tcl before installing -"
 	@echo "	- Use runwish script to test Tk before installing -"
@@ -91,7 +91,7 @@ tcldef:
 	@echo "set TCLPATH `pwd`/tcllib"                  >>tcldef
 	@echo "set TCLINIT `pwd`/tcllib/tclinit.tcl"      >>tcldef
 
-runtcl:
+runtcl: tcldef
 	@echo ':'                                              >runtcl
 	@echo '# script for testing Tcl before installation'  >>runtcl
 	@echo "TCLDEFAULT=`pwd`/tcldef"                       >>runtcl

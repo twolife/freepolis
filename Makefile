@@ -42,10 +42,10 @@ tcl:
 tk:
 	cd src/tk && $(MAKE) MAKEFLAGS=
 
-tclx:
+tclx: tcl tk
 	cd src/tclx && $(MAKE) MAKEFLAGS=
 
-sim:
+sim: tclx
 	cd src/sim && $(MAKE) MAKEFLAGS=
 
 clean: 
