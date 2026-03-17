@@ -1,12 +1,11 @@
 [Desktop Entry]
 Type=Application
 Version=1.0
-Encoding=UTF-8
-Name=Micropolis
-GenericName=Micropolis City Simulation Game
+Name=Freepolis
+GenericName=Freepolis City Simulation Game
 Comment=City simulation game, open sourced from original SimCity(tm)
-Icon=micropolis.png
-Exec=micropolis
+Icon=freepolis
+Exec=freepolis
 Terminal=false
 StartupNotify=false
 Categories=Game;Simulation;

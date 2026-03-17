@@ -1,10 +1,8 @@
-# Help system, for Unix Micropolis.
+# Help system, for Unix Freepolis.
 #
-# Micropolis, Unix Version.  This game was released for the Unix platform
+# Freepolis, Unix Version.  This game was released for the Unix platform
 # in or about 1990 and has been modified for inclusion in the One Laptop
-# Per Child program.  Copyright (C) 1989 - 2007 Electronic Arts Inc.  If
-# you need assistance with this program, you may contact:
-#   http://wiki.laptop.org/go/Micropolis  or email  micropolis@laptop.org.
+# Per Child program.  Copyright (C) 1989 - 2007 Electronic Arts Inc.
 # 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -60,12 +58,12 @@
 # NOT APPLY TO YOU.
 
 # Help messages to do:
-# MicropolisMenu
+# FreepolisMenu
 
 # backstop help message
 
-Help Window {Micropolis Window} \
-{This is one of Micropolis's windows.
+Help Window {Freepolis Window} \
+{This is one of Freepolis's windows.
 Press Help or Meta-Click on the other controls and graphics for more information about them.
 [More help to come in a later version!  Sorry!]}
 
@@ -77,17 +75,17 @@ Help SelectCity.No {Keep Playing} \
 Help SelectCity.Yes {Another City} \
 {Press this vote button to abandon this city and choose another one to play with.}
 
-Help Quit.No {Keep Playing Micropolis} \
-{Press this button to continue playing this game of Micropolis.}
+Help Quit.No {Keep Playing Freepolis} \
+{Press this button to continue playing this game of Freepolis.}
 
-Help Quit.IQuit {Really Quit Micropolis} \
-{Press this button to quit playing this game of Micropolis.}
+Help Quit.IQuit {Really Quit Freepolis} \
+{Press this button to quit playing this game of Freepolis.}
 
-Help Quit.IResign {Resign Micropolis} \
-{Press this button to resign yourself from this game of Micropolis.}
+Help Quit.IResign {Resign Freepolis} \
+{Press this button to resign yourself from this game of Freepolis.}
 
-Help Quit.AllQuit {Everyone Quit Micropolis} \
-{Press this vote button to quit Micropolis if everyone else agrees.}
+Help Quit.AllQuit {Everyone Quit Freepolis} \
+{Press this vote button to quit Freepolis if everyone else agrees.}
 
 Help Plan.Veto {Veto Plan} \
 {Press this button to veto the plan.}
@@ -106,15 +104,15 @@ Help Disaster.No {Don't Cause a Disaster} \
 
 # head window help
 
-Help Head {Micropolis Controls Window} {}
-Help Head.MicropolisMenu {Micropolis Main Menu} {}
+Help Head {Freepolis Controls Window} {}
+Help Head.MicropolisMenu {Freepolis Main Menu} {}
 Help Head.OptionsMenu {Options Menu} {}
 Help Head.DisastersMenu {Disasters Menu} {}
 Help Head.TimeMenu {Time Menu} {}
 Help Head.PriorityMenu {Priority Menu} {}
 Help Head.WindowsMenu {Windows Menu} {}
-Help Head.Date {Micropolis Date Display} {}
-Help Head.Funds {Micropolis Funds Display} {}
+Help Head.Date {Freepolis Date Display} {}
+Help Head.Funds {Freepolis Funds Display} {}
 Help Head.Graph {Res Com Ind History Graph} {}
 Help Head.Demand {Res Com Ind Demand Gauge} {}
 Help Head.Log {Scrolling Message Log} {}
@@ -124,7 +122,7 @@ Help Head.Entry {Text Entry Field} {}
 
 # notice window help
 
-Help Notice {Micropolis Notice Window} {}
+Help Notice {Freepolis Notice Window} {}
 Help Notice.Title {Notice Title} {}
 Help Notice.Text {Notice Text} {}
 Help Notice.Dismiss {Notice Dismiss Button} {}
@@ -132,7 +130,7 @@ Help Notice.View {Notice Map View} {}
 
 # help window help
 
-Help Help {Micropolis Help Window} {}
+Help Help {Freepolis Help Window} {}
 Help Help.Title {Help Title} {}
 Help Help.Scrollbar {Help Text Scrollbar} {}
 Help Help.Text {Help Text} {}
@@ -140,7 +138,7 @@ Help Help.Dismiss {Help Dismiss Button} {}
 
 # frob window help
 
-Help Frob {Micropolis Frob-O-Matic Dynamic Zone Filter} {This bank of (min/max) interval sliders adjust the filters for the dynamic zone map view. The zones that do not pass through the filter are invisible, and the zones passing through all the filters are displayed, as you adjust the filter intervals.}
+Help Frob {Freepolis Frob-O-Matic Dynamic Zone Filter} {This bank of (min/max) interval sliders adjust the filters for the dynamic zone map view. The zones that do not pass through the filter are invisible, and the zones passing through all the filters are displayed, as you adjust the filter intervals.}
 Help Frob.Title {Frob Title} {}
 Help Frob.PopulationDensity {Frob Population Density} {Adjust the minimum and maximum Population Density to display in the dynamic map zone menu.}
 Help Frob.RateOfGrowth {Frob Rate Of Growth} {Adjust the minimum and maximum Rate Of Growth to display in the dynamic map zone menu.}
@@ -154,7 +152,7 @@ Help Frob.Dismiss {Frob Dismiss Button} {}
 
 # scenario window help
 
-Help Scenario {Micropolis Chooser Window} {}
+Help Scenario {Freepolis Chooser Window} {}
 Help Scenario.NewCity {New City Button} {}
 Help Scenario.LoadCity {Load City Button} {}
 Help Scenario.Dullsville {Dullsville Scenario Button} {}
@@ -173,14 +171,14 @@ Help Scenario.Level {Game Level Buttons} {}
 
 # map window help
 
-Help Map {Micropolis Map Window} {}
+Help Map {Freepolis Map Window} {}
 Help Map.View {Map View} {}
 Help Map.Zones {Map Zones Menu} {}
 Help Map.Overlays {Map Overlays Menu} {}
 
 # editor window help
 
-Help Editor {Micropolis Editor Window} {}
+Help Editor {Freepolis Editor Window} {}
 Help Editor.Display {Editor Display Menu} {}
 Help Editor.Options {Editor Options Menu} {}
 Help Editor.Message {Editor Message Banner} {}
@@ -212,7 +210,7 @@ Help Editor.BuildPie {Editor Tool Build Pie Menu} {}
 
 # budget window help
 
-Help Budget {Micropolis Budget Window} {}
+Help Budget {Freepolis Budget Window} {}
 Help Budget.Label {Paused to set the Budget} {}
 Help Budget.Collected {Taxes Collected} {}
 Help Budget.Flow {Cash Flow} {}
@@ -229,7 +227,7 @@ Help Budget.AutoCancel {Automatic Cancel Timeout} {}
 
 # graph window help
 
-Help Graph {Micropolis Graph Window} {}
+Help Graph {Freepolis Graph Window} {}
 Help Graph.10Years {Graph 10 Year Scale} {}
 Help Graph.120Years {Graph 120 Year Scale} {}
 Help Graph.Res {Graph Residential Toggle} {}
@@ -243,7 +241,7 @@ Help Graph.Dismiss {Dismiss Graph Window Button} {}
 
 # evaluation window help
 
-Help Evaluation {Micropolis Evaluation Window} {}
+Help Evaluation {Freepolis Evaluation Window} {}
 Help Evaluation.Opinion {Public Opinion} {}
 Help Evaluation.GoodJob {Are You Doing a Good Job?} {}
 Help Evaluation.WorstProblems {Your Worst Problems} {}
@@ -253,18 +251,18 @@ Help Evaluation.Dismiss {Dismiss Evaluation Window Button} {}
 
 # ask window help
 
-Help Ask {Micropolis Query Window} {}
+Help Ask {Freepolis Query Window} {}
 
 # add player window
 
-Help Player {Micropolis Player Window} {}
-Help Player.Players {Displays of Micropolis Players} {}
+Help Player {Freepolis Player Window} {}
+Help Player.Players {Displays of Freepolis Players} {}
 Help Player.Display {Display of Player to Add} {}
 Help Player.Dismiss {Dismiss Player Window Button} {}
 
 # file window
 
-Help File {Micropolis File Chooser Window} {}
+Help File {Freepolis File Chooser Window} {}
 Help File.List {List of File Names} {}
 Help File.Directory {Directory Name} {}
 Help File.File {File Name} {}

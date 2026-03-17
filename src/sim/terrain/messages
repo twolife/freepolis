@@ -1,10 +1,8 @@
 /* messages
  *
- * Micropolis, Unix Version.  This game was released for the Unix platform
+ * Freepolis, Unix Version.  This game was released for the Unix platform
  * in or about 1990 and has been modified for inclusion in the One Laptop
- * Per Child program.  Copyright (C) 1989 - 2007 Electronic Arts Inc.  If
- * you need assistance with this program, you may contact:
- *   http://wiki.laptop.org/go/Micropolis  or email  micropolis@laptop.org.
+ * Per Child program.  Copyright (C) 1989 - 2007 Electronic Arts Inc.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -114,7 +112,7 @@ struct msgpr popMsgs[]={
 {"POLLUTION ALERT- Pollution in your"
  "\ncity has exceeded the maximum"
  "\nallowable amounts established by"
- "\nthe Micropolis pollution agency. You"
+ "\nthe Freepolis pollution agency. You"
  "\nare running the risk of grave"
  "\necological consequences. Either"
  "\nclean up your act or open a gas"
@@ -123,11 +121,7 @@ struct msgpr popMsgs[]={
 {"MEGALOPOLIS - Congratulations, you"
  "\nhave reached the highest category"
  "\nof urban development, the mega-"
- "\nlopolis. If you manage to reach"
- "\nthis level send us email at micropolis@laptop.org"
- "\nor send us a copy of your city. We "
- "\nmight do something interesting with"
- "\nit.",-39},
+ "\nlopolis.",-39},
 
 {"METROPOLIS - Your capital city has"
  "\nnow achieved the status of metro-"

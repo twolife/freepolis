@@ -1,10 +1,8 @@
-# Window: Player, for Unix Micropolis.
+# Window: Player, for Unix Freepolis.
 #
-# Micropolis, Unix Version.  This game was released for the Unix platform
+# Freepolis, Unix Version.  This game was released for the Unix platform
 # in or about 1990 and has been modified for inclusion in the One Laptop
-# Per Child program.  Copyright (C) 1989 - 2007 Electronic Arts Inc.  If
-# you need assistance with this program, you may contact:
-#   http://wiki.laptop.org/go/Micropolis  or email  micropolis@laptop.org.
+# Per Child program.  Copyright (C) 1989 - 2007 Electronic Arts Inc.
 # 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -72,8 +70,8 @@ toplevel $win -screen $display
 
 SetHelp $win Player
 
-wm title $win {Micropolis Players}
-wm iconname $win {Micropolis Players}
+wm title $win {Freepolis Players}
+wm iconname $win {Freepolis Players}
 wm geometry $win 400x250+5+5
 wm positionfrom $win user
 wm sizefrom $win user
@@ -88,7 +86,7 @@ frame $win.top \
 LinkWindow $win.background $win.top
 
 label $win.top.label \
-  -text "X11 Servers of Micropolis Players" \
+  -text "X11 Servers of Freepolis Players" \
   -font [Font $win Large]
 
 text $win.top.text \
@@ -101,7 +99,7 @@ text $win.top.text \
 LinkWindow $win.text $win.top.text
 $win.top.text delete 0.0 end
 $win.top.text insert end {\
-Micropolis is connected to the X11 servers listed above.
+Freepolis is connected to the X11 servers listed above.
 To add another player to the game, enter their display name.
 If you don't have a "Multi Player" license, you can just \
 add more players on your own display, by entering ":0".}

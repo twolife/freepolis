@@ -1,14 +1,12 @@
 #######################################################################
-# Micropolis.tcl, by Don Hopkins.
+# Freepolis.tcl, by Don Hopkins.
 # Copyright (C) 2002 by Electronic Arts.
-# This file defines the user interface of Micropolis. 
+# This file defines the user interface of Freepolis. 
 # Modify at your own risk!
 ########################################################################
-# Micropolis, Unix Version.  This game was released for the Unix platform
+# Freepolis, Unix Version.  This game was released for the Unix platform
 # in or about 1990 and has been modified for inclusion in the One Laptop
-# Per Child program.  Copyright (C) 1989 - 2007 Electronic Arts Inc.  If
-# you need assistance with this program, you may contact:
-#   http://wiki.laptop.org/go/Micropolis  or email  micropolis@laptop.org.
+# Per Child program.  Copyright (C) 1989 - 2007 Electronic Arts Inc.
 # 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -82,7 +80,7 @@ source $tk_library/wish.tcl
 
 set UniqueID 0
 set State uninitialized
-set CityName "Micropolis"
+set CityName "Freepolis"
 set GameLevel 0
 set SimHome [pwd]
 set CityLibDir $SimHome/cities
@@ -124,7 +122,7 @@ set NickName "nickname"
 set UserName "username"
 set ServerName "servername"
 set RealName "realname"
-set ChannelName "#Micropolis"
+set ChannelName "#Freepolis"
 set HomeDir ""
 set ResourceDir ""
 set HostName ""
@@ -250,7 +248,7 @@ set ScenarioButtons600x450 {
 }
 
 set ScenarioButtons $ScenarioButtons1200x900
-set ScenarioBackground "@images/background-micropolis.xpm"
+set ScenarioBackground "@images/background-freepolis.xpm"
 set ScenarioMapX 534
 set ScenarioMapY 48
 set ScenarioMapFloatX -1
@@ -270,7 +268,7 @@ set screenheight [winfo screenheight .]
 if {($screenwidth < $ScenarioPanelWidth) ||
     ($screenheight < $ScenarioPanelHeight)} {
 	puts stdout "Screen too small for normal scenario window, using resized version.\n"
-	set ScenarioBackground "@images/background-micropolis-small.xpm"
+	set ScenarioBackground "@images/background-freepolis-small.xpm"
 	set ScenarioPanelWidth 600
 	set ScenarioPanelHeight 450
 	set ScenarioMapX -1
@@ -340,7 +338,7 @@ set FontInfo {
 
 
 set MapTitles {
-  {Micropolis Overall Map}
+  {Freepolis Overall Map}
   {Residential Zone Map}
   {Commercial Zone Map}
   {Industrial Zone Map}
@@ -457,7 +455,7 @@ set DynamicDataNames {
 ########################################################################
 
 
-wm title . {Micropolis Root}
+wm title . {Freepolis Root}
 
 
 if {"[sim Platform]" == "msdos"} {
@@ -548,7 +546,7 @@ Growth:	    %s} \
 {{view {PanView $v $QueryX $QueryY}}}
 
 Message 10 #ff4f4f {POLLUTION ALERT!} \
-{Pollution in your city has exceeded the maximum allowable amounts established by the Micropolis Pollution Agency.  You are running the risk of grave ecological consequences.
+{Pollution in your city has exceeded the maximum allowable amounts established by the Freepolis Pollution Agency.  You are running the risk of grave ecological consequences.
 
 Either clean up your act or open a gas mask concession at city hall.} \
 {{view {PanView $v [sim PolMaxX] [sim PolMaxY]}}}
@@ -623,15 +621,13 @@ Message 38 #7fff7f {METROPOLIS} \
 {{view {PanView $v [sim CenterX] [sim CenterY]}}}
 
 Message 39 #7fff7f {MEGALOPOLIS} \
-{Congratulation, you have reached the highest category of urban development, the megalopolis.
-
-If you manage to reach this level, send us email at micropolis@laptop.org or send us a copy of your city.  We might do something interesting with it.} \
+{Congratulation, you have reached the highest category of urban development, the megalopolis.} \
 {{view {PanView $v [sim CenterX] [sim CenterY]}}}
 
 Message 40 #7fff7f {MEGALINIUM} \
 {Congratulation, you have reached the end of time!
 
-Because of the toroidal nature of the the Micropolis Space/Time Continuum, your city has wrapped back in time to 1900!} \
+Because of the toroidal nature of the the Freepolis Space/Time Continuum, your city has wrapped back in time to 1900!} \
 {{view {PanView $v [sim CenterX] [sim CenterY]}}}
 
 # XXX: write more text
@@ -675,10 +671,10 @@ Message 200 #ff4f4f {IMPEACHMENT NOTICE!} \
 
 You should seriously consider taking an extended vacation -- NOW.  (Or read the manual and try again.)}
 
-Message 300 #ffd700 {About Micropolis} \
-"Micropolis Version [sim Version] Copyright (C) 2007
+Message 300 #ffd700 {About Freepolis} \
+"Freepolis Version [sim Version] Copyright (C) 2007
     by Electronic Arts.
-Based on the Original Micropolis Concept and Design
+Based on the Original Freepolis Concept and Design
     by Will Wright.
 TCL/Tk User Interface Designed and Created
     by Don Hopkins, DUX Software.
@@ -4782,7 +4778,7 @@ proc UIStartMicropolis {homedir resourcedir hostname} {
   }
 
   if {"$HeadWindows" == ""} {
-    echo Micropolis is exiting because it couldn't connect to any players.
+    echo Freepolis is exiting because it couldn't connect to any players.
     sim ReallyQuit
   }
 }
@@ -4807,8 +4803,8 @@ proc UIQuit {head} {
     set m "{I quit!} Quit.IResign {DoIResign %s}"
     set r "{Everyone quit!} Quit.AllQuit {DoReallyQuit %s}"
   }
-  AskQuestion [Color $head #ff0000 #ffffff] "Quit Playing Micropolis" \
-    "Do you want to quit playing Micropolis?" \
+  AskQuestion [Color $head #ff0000 #ffffff] "Quit Playing Freepolis" \
+    "Do you want to quit playing Freepolis?" \
     $l $m $r
 }
 
@@ -5155,9 +5151,9 @@ proc UIUpdateRunning {} {
   global HeadWindows Time State
 
 	if {($State == "play") && $Time} {
-    set pict "@images/micropolisg.xpm"
+    set pict "@images/freepolisg.xpm"
   } else {
-    set pict "@images/micropoliss.xpm"
+    set pict "@images/freepoliss.xpm"
   }
 
   foreach win $HeadWindows {
@@ -5186,7 +5182,7 @@ proc UISetCityName {name} {
   global EditorWindows
   global CityName
   set CityName $name
-  set title "Micropolis Editor on $name"
+  set title "Freepolis Editor on $name"
   foreach win $EditorWindows {
     # TODO: set editor window and icon title
     #wm title $win "$title"

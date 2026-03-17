@@ -11,15 +11,15 @@ proc Question {id color title msg {props {}}} {
   set Questions($id) [list $color $title $msg $props]
 }
 
-Question QuitSingle #ff0000 "Quit Micropolis" \
-    "Do you want to quit playing Micropolis?" \
+Question QuitSingle #ff0000 "Quit Freepolis" \
+    "Do you want to quit playing Freepolis?" \
 {{left {{Keep Playing.} Quit.KeepPlaying
    {RejectPlan}}}
  {right {{I Quit!} Quit.IQuit
    {DoReallyQuit %s}}}}
 
-Question QuitMulti #ff0000 "Quit Micropolis" \
-    "Do you want to quit playing Micropolis?" \
+Question QuitMulti #ff0000 "Quit Freepolis" \
+    "Do you want to quit playing Freepolis?" \
 {{left {{Keep Playing.} Quit.KeepPlaying 
    {RejectPlan}}}
  {middle {{I Resign!} Quit.IResign

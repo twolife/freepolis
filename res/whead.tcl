@@ -1,10 +1,8 @@
-# Window: Head (global controls & menus), for Unix Micropolis.
+# Window: Head (global controls & menus), for Unix Freepolis.
 #
-# Micropolis, Unix Version.  This game was released for the Unix platform
+# Freepolis, Unix Version.  This game was released for the Unix platform
 # in or about 1990 and has been modified for inclusion in the One Laptop
-# Per Child program.  Copyright (C) 1989 - 2007 Electronic Arts Inc.  If
-# you need assistance with this program, you may contact:
-#   http://wiki.laptop.org/go/Micropolis  or email  micropolis@laptop.org.
+# Per Child program.  Copyright (C) 1989 - 2007 Electronic Arts Inc.
 # 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -97,7 +95,7 @@ if {!(("$visual" == "pseudocolor") ||
       (("$visual" == "staticgray") &&
        ($depth == 1)))} {
   catch "destroy $win"
-  puts stderr "Micropolis can't find an appropriate visual on display \"$display\"."
+  puts stderr "Freepolis can't find an appropriate visual on display \"$display\"."
   set win ""
   return ""
 }
@@ -123,8 +121,8 @@ tk_bindForTraversal $win
 bind $win <F10> {tk_firstMenu %W} 
 bind $win <Alt-Key> {tk_traverseToMenu %W %A} 
 
-wm title $win "Micropolis Controls"
-wm iconname $win {Micropolis Controls}
+wm title $win "Freepolis Controls"
+wm iconname $win {Freepolis Controls}
 wm geometry $win ${initialwidth}x${initialheight}+0+0
 #wm positionfrom $win user
 wm withdraw $win
@@ -157,7 +155,7 @@ SetHelp $win.col1.w1.f1.micropolis Head.MicropolisMenu
 
 menubutton $win.col1.w1.f1.micropolis\
   -menu $win.col1.w1.f1.micropolis.m\
-  -text {Micropolis}\
+  -text {Freepolis}\
   -font [Font $win Medium]\
   -variable $win.postedMenu
 tk_bindForTraversal $win.col1.w1.f1.micropolis
@@ -427,7 +425,7 @@ $win.col1.w1.f2.f1.frame.demand create rectangle -10 -10 1 1 \
   -fill [Color $win #ffff00 #000000]
 $win.col1.w1.f2.f1.frame.demand create bitmap 0 4 \
   -tags micropolis \
-  -bitmap "@images/micropoliss.xpm" \
+  -bitmap "@images/freepoliss.xpm" \
   -anchor nw 
 
 $win.col1.w1.f2.f1.frame.demand bind micropolis <1> {TogglePause}

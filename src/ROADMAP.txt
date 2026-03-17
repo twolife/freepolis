@@ -1,10 +1,10 @@
 ========================================================================
 
-Roadmap of the Micropolis source code. 
+Roadmap of the Freepolis source code. 
 
 ========================================================================
 
-Micropolis designed and implemented by Will Wright, 
+Freepolis designed and implemented by Will Wright, 
 Unix porting, optimization and multi player user interface design 
 by Don Hopkins (dhopkins@DonHopkins.com), for DUX Software.
 
@@ -135,12 +135,12 @@ Resources:
       tk.tdx
       tk.tlb
 
-    Micropolis user interface code:
+    Freepolis user interface code:
 
-      micropolis.tcl
-        Micropolis utilities and shared interface code. 
+      freepolis.tcl
+        Freepolis utilities and shared interface code. 
       help.tcl
-        Micropolis help messages.
+        Freepolis help messages.
       wask.tcl
         Ask question window.
       wbudget.tcl
@@ -168,14 +168,14 @@ Resources:
       wscen.tcl
         Choose scenario window.
 
-    Micropolis sound server code:
+    Freepolis sound server code:
 
       sound.tcl
         Code loaded by sound server, 
 	which runs in another process,
 	and is controlled via the TCL "send" command. 
 	No longer used. 
-	Sound should be built into Micropolis, using a modern standard sound library (and file formats). 
+	Sound should be built into Freepolis, using a modern standard sound library (and file formats). 
 
 Base Libraries:
 
@@ -196,18 +196,16 @@ Base Libraries:
     Free software.
     Modified for unix porting.
 
-Micropolis source code:
+Freepolis source code:
 
   src/sim
 
   src/sim/terrain
 
 ========================================================================
-Micropolis, Unix Version.  This game was released for the Unix platform
+Freepolis, Unix Version.  This game was released for the Unix platform
 in or about 1990 and has been modified for inclusion in the One Laptop
-Per Child program.  Copyright (C) 1989 - 2007 Electronic Arts Inc.  If
-you need assistance with this program, you may contact:
-  http://wiki.laptop.org/go/Micropolis  or email  micropolis@laptop.org.
+Per Child program.  Copyright (C) 1989 - 2007 Electronic Arts Inc.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

@@ -1,10 +1,8 @@
 /* w_cam.c
  *
- * Micropolis, Unix Version.  This game was released for the Unix platform
+ * Freepolis, Unix Version.  This game was released for the Unix platform
  * in or about 1990 and has been modified for inclusion in the One Laptop
- * Per Child program.  Copyright (C) 1989 - 2007 Electronic Arts Inc.  If
- * you need assistance with this program, you may contact:
- *   http://wiki.laptop.org/go/Micropolis  or email  micropolis@laptop.org.
+ * Per Child program.  Copyright (C) 1989 - 2007 Electronic Arts Inc.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -729,7 +727,7 @@ DoResizeCam(SimCam *scam, int w, int h)
     if (scam->shminfo->shmid < 0) {
       perror("shmget");
       fprintf(stderr,
-	      "Drat, Micropolis can't share memory with X display \"%s\".\n",
+	      "Drat, Freepolis can't share memory with X display \"%s\".\n",
 	      scam->x->display);
       goto FALL_BACK;
     }
@@ -739,7 +737,7 @@ DoResizeCam(SimCam *scam, int w, int h)
     if ((int)scam->data == -1) {
       perror("shmat");
       fprintf(stderr,
-	      "Drat, Micropolis can't find any memory to share with display \"%s\".\n",
+	      "Drat, Freepolis can't find any memory to share with display \"%s\".\n",
 	      scam->x->display);
       goto FALL_BACK;
     }
@@ -756,7 +754,7 @@ DoResizeCam(SimCam *scam, int w, int h)
 
       if (XShmAttach(scam->x->dpy, scam->shminfo) == 0) {
 	fprintf(stderr,
-		"Drat, the X display \"%s\" can't access Micropolis's shared memory.\n",
+		"Drat, the X display \"%s\" can't access Freepolis's shared memory.\n",
 		scam->x->display);
 	GotXError = 1;
       }

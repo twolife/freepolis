@@ -1,10 +1,8 @@
 /* sim.c
  *
- * Micropolis, Unix Version.  This game was released for the Unix platform
+ * Freepolis, Unix Version.  This game was released for the Unix platform
  * in or about 1990 and has been modified for inclusion in the One Laptop
- * Per Child program.  Copyright (C) 1989 - 2007 Electronic Arts Inc.  If
- * you need assistance with this program, you may contact:
- *   http://wiki.laptop.org/go/Micropolis  or email  micropolis@laptop.org.
+ * Per Child program.  Copyright (C) 1989 - 2007 Electronic Arts Inc.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -160,7 +158,7 @@ env_init(void)
 
   if (lost) {
     fprintf(stderr,
-	    "Please check the environment or reinstall Micropolis and try again! Sorry!\n");
+	    "Please check the environment or reinstall Freepolis and try again! Sorry!\n");
     sim_exit(1); // Just sets tkMustExit and ExitReturn
     return;
   }
@@ -235,7 +233,7 @@ SignalExitHandler(int sig)
     exit(-1);
   } else {
     triedToBailOnce = 1;
-    fprintf(stderr, "\nMicropolis has been terminated by a signal.\n");
+    fprintf(stderr, "\nFreepolis has been terminated by a signal.\n");
     fprintf(stderr, "Pick a window -- you're leaving!\n\n");
     fflush(stderr);
     sim_really_exit(-1);
@@ -629,7 +627,7 @@ main(int argc, char *argv[])
   int c, errflg = 0;
   extern int isatty(int);
 
-  printf("Welcome to X11 Multi Player Micropolis version %s by Will Wright, Don Hopkins.\n",
+  printf("Welcome to X11 Multi Player Freepolis version %s by Will Wright, Don Hopkins.\n",
 	 MicropolisVersion);
   printf("Copyright (C) 2002 by Electronic Arts, Maxis. All rights reserved.\n");
   printf("Support for newer Unix systems and new bugs added by Michael Gernoth.\n");

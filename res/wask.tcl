@@ -1,10 +1,8 @@
-# Window: Query.  Ask the player something.  For Unix Micropolis
+# Window: Query.  Ask the player something.  For Unix Freepolis
 #
-# Micropolis, Unix Version.  This game was released for the Unix platform
+# Freepolis, Unix Version.  This game was released for the Unix platform
 # in or about 1990 and has been modified for inclusion in the One Laptop
-# Per Child program.  Copyright (C) 1989 - 2007 Electronic Arts Inc.  If
-# you need assistance with this program, you may contact:
-#   http://wiki.laptop.org/go/Micropolis  or email  micropolis@laptop.org.
+# Per Child program.  Copyright (C) 1989 - 2007 Electronic Arts Inc.
 # 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -72,8 +70,8 @@ toplevel $win -screen $display
 
 SetHelp $win Ask
 
-wm title $win {Micropolis Query}
-wm iconname $win {Micropolis Query}
+wm title $win {Freepolis Query}
+wm iconname $win {Freepolis Query}
 wm geometry $win 350x200+5+5
 wm positionfrom $win user
 wm sizefrom $win user

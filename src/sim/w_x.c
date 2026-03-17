@@ -1,10 +1,8 @@
 /* w_x.c:  X Window System support
  *
- * Micropolis, Unix Version.  This game was released for the Unix platform
+ * Freepolis, Unix Version.  This game was released for the Unix platform
  * in or about 1990 and has been modified for inclusion in the One Laptop
- * Per Child program.  Copyright (C) 1989 - 2007 Electronic Arts Inc.  If
- * you need assistance with this program, you may contact:
- *   http://wiki.laptop.org/go/Micropolis  or email  micropolis@laptop.org.
+ * Per Child program.  Copyright (C) 1989 - 2007 Electronic Arts Inc.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -405,7 +403,7 @@ FindXDisplay(Tk_Window tkwin)
 		"Oh, dear.  There don't seem to be enough free colors on X display \"%s\".\n",
 		xd->display);
 	fprintf(stderr,
-		"Micropolis will try to run anyway, but might look pretty weird!\n");
+		"Freepolis will try to run anyway, but might look pretty weird!\n");
       }
     } else { /* Black and white screen */
       int white = WhitePixelOfScreen(xd->screen);
@@ -454,7 +452,7 @@ FindXDisplay(Tk_Window tkwin)
 		  "Darn, X display \"%s\" claims to support the shared memory extension,\n",
 		  xd->display);
 	  fprintf(stderr,
-		  "but is too lame to support shared memory pixmaps, so Micropolis will run slower.\n");
+		  "but is too lame to support shared memory pixmaps, so Freepolis will run slower.\n");
 	  fprintf(stderr,
 		  "Please complain to your X server vendor, %s\n",
 		  XServerVendor(xd->dpy));
@@ -744,7 +742,7 @@ DoResizeView(SimView *view, int w, int h)
 				    w, h, view->x->depth);
       if (view->pixmap2 == None) {
 	fprintf(stderr,
-		"Sorry, Micropolis can't create a pixmap on X display \"%s\"!\n",
+		"Sorry, Freepolis can't create a pixmap on X display \"%s\"!\n",
 		view->x->display);
 	sim_exit(1); // Just sets tkMustExit and ExitReturn
 	return;
@@ -768,7 +766,7 @@ DoResizeView(SimView *view, int w, int h)
 				    view->x->depth);
       if (view->pixmap2 == None) {
 	fprintf(stderr,
-		"Sorry, Micropolis couldn't create a pixmap on X display \"%s\"!\n",
+		"Sorry, Freepolis couldn't create a pixmap on X display \"%s\"!\n",
 		view->x->display);
 	sim_exit(1); // Just sets tkMustExit and ExitReturn
 	return;
@@ -786,7 +784,7 @@ DoResizeView(SimView *view, int w, int h)
 					   1);
       if (view->overlay_pixmap == None) {
 	fprintf(stderr,
-		"Sorry, Micropolis couldn't create another pixmap on X display \"%s\".\n",
+		"Sorry, Freepolis couldn't create another pixmap on X display \"%s\".\n",
 		view->x->display);
 	sim_exit(1); // Just sets tkMustExit and ExitReturn
 	return;
@@ -900,7 +898,7 @@ DoResizeView(SimView *view, int w, int h)
     if (view->shminfo->shmid < 0) {
       perror("shmget");
       fprintf(stderr,
-	      "Darn, Micropolis can't share memory with X display \"%s\".\n",
+	      "Darn, Freepolis can't share memory with X display \"%s\".\n",
 	      view->x->display);
       goto FALL_BACK;
     }
@@ -909,7 +907,7 @@ DoResizeView(SimView *view, int w, int h)
     if ((char*)view->data == (char*)-1) {
       perror("shmat");
       fprintf(stderr,
-	      "Darn, Micropolis can't find any memory to share with display \"%s\".\n",
+	      "Darn, Freepolis can't find any memory to share with display \"%s\".\n",
 	      view->x->display);
       goto FALL_BACK;
     }
@@ -928,7 +926,7 @@ DoResizeView(SimView *view, int w, int h)
 	XShmAttach(view->x->dpy, view->shminfo);
       if (result  == 0) {
 	fprintf(stderr,
-		"Darn, the X display \"%s\" can't access Micropolis's shared memory.\n",
+		"Darn, the X display \"%s\" can't access Freepolis's shared memory.\n",
 		view->x->display);
 	GotXError = 1;
       }
@@ -946,7 +944,7 @@ DoResizeView(SimView *view, int w, int h)
 	if (GotXError ||
 	    (view->pixmap == None)) {
 	  fprintf(stderr,
-		  "Darn, Micropolis couldn't get a shared memory pixmap on X display \"%s\".\n",
+		  "Darn, Freepolis couldn't get a shared memory pixmap on X display \"%s\".\n",
 		  view->x->display);
 	  GotXError = 1;
 	}
@@ -1034,7 +1032,7 @@ DoResizeView(SimView *view, int w, int h)
 				 view->x->depth);
     if (view->pixmap == None) {
       fprintf(stderr,
-	      "Sorry, Micropolis can't create pixmap on X display \"%s\".\n",
+	      "Sorry, Freepolis can't create pixmap on X display \"%s\".\n",
 	      view->x->display);
       sim_exit(1); // Just sets tkMustExit and ExitReturn
       return;

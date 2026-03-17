@@ -1,17 +1,16 @@
 ========================================================================
 
-Linux Micropolis for X11.
+Linux Freepolis for X11.
 
 ========================================================================
 
-Micropolis is a registered trademark of Micropolis Corporation
-(Micropolis GmbH) and is licensed here as a courtesy of the owner.
-
-See https://micropolis.com/ for Micropolis Corporation (Micropolis GmbH)
+This game was initially released under the name "Micropolis",
+a registered trademark of Micropolis Corporation (Micropolis GmbH).
+It was renamed to avoid their restrictive "MICROPOLIS PUBLIC NAME LICENSE".
 
 ========================================================================
 
-Micropolis designed and implemented by Will Wright, 
+Freepolis designed and implemented by Will Wright,
 Copyright (C) 2002 by Electronic Arts.
 Unix porting, optimization and TCL/Tk user interface design 
 by Don Hopkins (dhopkins@DonHopkins.com, http://www.DonHopkins.com),
@@ -27,23 +26,21 @@ This README file contains several copyright notices.  Keep reading.
 See the file "COPYING" for the full text of the GNU General Public License.
 
 The following copyright notice applies to the original source code
-of Micropolis (in src/sim/) as well as to the X11 Tk port of Micropolis
+of Freepolis (in src/sim/) as well as to the X11 Tk port of Freepolis
 (in res/*.tcl), and to all of the non-text files in this source code
 release, including:
 
     cities/*		All loadable city images
     images/*		All graphical images
-    activity/activity-micropolis.svg	Icon for Micropolis in Sugar
+    activity/activity-freepolis.svg	Icon for Freepolis in Sugar
     res/hexa.*		Map Graphics
     res/snro.*		Scenarios
     res/sounds/*	Sounds played by the game
     res/stri.*		Text strings displayed by the game
 
-Micropolis, Unix Version.  This game was released for the Unix platform
+Freepolis, Unix Version.  This game was released for the Unix platform
 in or about 1990 and has been modified for inclusion in the One Laptop
-Per Child program.  Copyright (C) 1989 - 2007 Electronic Arts Inc.  If
-you need assistance with this program, you may contact:
-  http://wiki.laptop.org/go/Micropolis  or email  micropolis@laptop.org.
+Per Child program.  Copyright (C) 1989 - 2007 Electronic Arts Inc.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

@@ -79,7 +79,7 @@ proc SetDynamicData {win index min max} {
 
 global MapTitles
 set MapTitles {
-  {Micropolis Map}
+  {Freepolis Map}
   {Residential Zone Map}
   {Commercial Zone Map}
   {Industrial Zone Map}

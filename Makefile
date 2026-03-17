@@ -1,8 +1,8 @@
 PREFIX=/usr/local
-DATADIR=$(PREFIX)/share/micropolis
-LIBEXECDIR=$(PREFIX)/libexec/micropolis
+DATADIR=$(PREFIX)/share/freepolis
+LIBEXECDIR=$(PREFIX)/libexec/freepolis
 BINDIR=$(PREFIX)/bin
-DOCDIR=$(PREFIX)/share/doc/micropolis
+DOCDIR=$(PREFIX)/share/doc/freepolis
 PIXMAPDIR=$(PREFIX)/share/pixmaps
 APPLICATIONSDIR=$(PREFIX)/share/applications
 
@@ -16,7 +16,7 @@ DIRS=	$(DESTDIR)/$(DATADIR)/res/sounds \
 RES=	res/buildidx.tcl res/button.tcl res/entry.tcl res/help.tcl res/hexa.112 \
 	res/hexa.232 res/hexa.384 res/hexa.385 res/hexa.386 res/hexa.387 \
 	res/hexa.388 res/hexa.456 res/hexa.544 res/hexa.563 res/hexa.999 \
-	res/init.tcl res/listbox.tcl res/menu.tcl res/micropolis.tcl \
+	res/init.tcl res/listbox.tcl res/menu.tcl res/freepolis.tcl \
 	res/mkindex.tcl res/parray.tcl res/snro.111 res/snro.222 res/snro.333 \
 	res/snro.444 res/snro.555 res/snro.666 res/snro.777 res/snro.888 \
 	res/sound.tcl res/stri.202 res/stri.219 res/stri.301 res/stri.356 \
@@ -64,11 +64,11 @@ install-dirs:
 install-bin:
 	$(INSTALL) -m 0755 res/sim $(DESTDIR)/$(LIBEXECDIR)/sim
 	$(INSTALL) -m 0755 res/sounds/player $(DESTDIR)/$(DATADIR)/res/sounds/player
-	echo "#!/bin/sh" >$(DESTDIR)/$(BINDIR)/micropolis
-	echo "SIMHOME=$(DATADIR); export SIMHOME" >>$(DESTDIR)/$(BINDIR)/micropolis
-	echo "echo \"Starting Micropolis in \$${SIMHOME} ... \"" >>$(DESTDIR)/$(BINDIR)/micropolis
-	echo "cd $(DATADIR) && exec $(LIBEXECDIR)/sim \"\$$@\"" >>$(DESTDIR)/$(BINDIR)/micropolis
-	chmod 755 $(DESTDIR)/$(BINDIR)/micropolis
+	echo "#!/bin/sh" >$(DESTDIR)/$(BINDIR)/freepolis
+	echo "SIMHOME=$(DATADIR); export SIMHOME" >>$(DESTDIR)/$(BINDIR)/freepolis
+	echo "echo \"Starting Freepolis in \$${SIMHOME} ... \"" >>$(DESTDIR)/$(BINDIR)/freepolis
+	echo "cd $(DATADIR) && exec $(LIBEXECDIR)/sim \"\$$@\"" >>$(DESTDIR)/$(BINDIR)/freepolis
+	chmod 755 $(DESTDIR)/$(BINDIR)/freepolis
 
 install-res: install-res-sounds
 	for file in $(RES); do \
@@ -88,11 +88,11 @@ install-doc:
 	find manual -type f -exec $(INSTALL) -m 0644 {} $(DESTDIR)/$(DOCDIR)/ \;
 
 install-desktop:
-	$(INSTALL) -m 0644 Micropolis.desktop $(DESTDIR)/$(APPLICATIONSDIR)/micropolis.desktop
-	$(INSTALL) -m 0644 Micropolis.png $(DESTDIR)/$(PIXMAPDIR)/micropolis.png
+	$(INSTALL) -m 0644 Freepolis.desktop $(DESTDIR)/$(APPLICATIONSDIR)/freepolis.desktop
+	$(INSTALL) -m 0644 Freepolis.png $(DESTDIR)/$(PIXMAPDIR)/freepolis.png
 
 uninstall:
-	rm -f $(DESTDIR)/$(BINDIR)/micropolis
+	rm -f $(DESTDIR)/$(BINDIR)/freepolis
 	rm -f $(DESTDIR)/$(LIBEXECDIR)/sim
 	-rmdir $(DESTDIR)/$(LIBEXECDIR)
 	rm -f $(DESTDIR)/$(DATADIR)/res/sounds/player
@@ -109,8 +109,8 @@ uninstall:
 	-rmdir $(DESTDIR)/$(DATADIR)
 	rm -f $(DESTDIR)/$(DOCDIR)/*.html $(DESTDIR)/$(DOCDIR)/README
 	-rmdir $(DESTDIR)/$(DOCDIR)
-	rm -f $(DESTDIR)/$(APPLICATIONSDIR)/micropolis.desktop
-	rm -f $(DESTDIR)/$(PIXMAPDIR)/micropolis.png
+	rm -f $(DESTDIR)/$(APPLICATIONSDIR)/freepolis.desktop
+	rm -f $(DESTDIR)/$(PIXMAPDIR)/freepolis.png
 
 .PHONY: all clean install install-dirs install-bin install-res \
 	install-res-sounds install-images \

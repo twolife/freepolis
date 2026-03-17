@@ -1,10 +1,8 @@
-# Makefile for Micropolis
+# Makefile for Freepolis
 # 
-# Micropolis, Unix Version.  This game was released for the Unix platform
+# Freepolis, Unix Version.  This game was released for the Unix platform
 # in or about 1990 and has been modified for inclusion in the One Laptop
-# Per Child program.  Copyright (C) 1989 - 2007 Electronic Arts Inc.  If
-# you need assistance with this program, you may contact:
-#   http://wiki.laptop.org/go/Micropolis  or email  micropolis@laptop.org.
+# Per Child program.  Copyright (C) 1989 - 2007 Electronic Arts Inc.
 # 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -62,17 +60,17 @@
 RES = ../res
 
 TARFILES = \
-	micropolis-activity/Micropolis \
-	micropolis-activity/README \
-	micropolis-activity/COPYING \
-	micropolis-activity/cities \
-	micropolis-activity/images \
-	micropolis-activity/res \
-	micropolis-activity/manual \
-	micropolis-activity/activity \
-	micropolis-activity/__init__.py \
-	micropolis-activity/micropolisactivity.py \
-	micropolis-activity/Micropolis.png
+	freepolis-activity/Freepolis \
+	freepolis-activity/README \
+	freepolis-activity/COPYING \
+	freepolis-activity/cities \
+	freepolis-activity/images \
+	freepolis-activity/res \
+	freepolis-activity/manual \
+	freepolis-activity/activity \
+	freepolis-activity/__init__.py \
+	freepolis-activity/freepolisactivity.py \
+	freepolis-activity/Freepolis.png
 
 all:
 	cd tcl ; $(MAKE) all
@@ -81,7 +79,7 @@ all:
 	cd sim ; $(MAKE) all
 
 clean:
-	rm -f Micropolis.tgz
+	rm -f Freepolis.tgz
 	(cd $(RES) ; touch junk~ ; rm -f sim *~)
 	(cd .. ; touch junk~ ; rm -f *~)
 	touch junk~ ; rm -f *~
@@ -97,17 +95,17 @@ install: all
 
 tar:
 	touch $(RES)/junk~ ../images/junk~
-	rm -f ../../micropolis-activity.tgz $(RES)/*~ ../images/*~
-	(cd ../.. ; tar cfvz micropolis-activity.tgz $(TARFILES)) 
+	rm -f ../../freepolis-activity.tgz $(RES)/*~ ../images/*~
+	(cd ../.. ; tar cfvz freepolis-activity.tgz $(TARFILES)) 
 
 xo:  install
 	touch $(RES)/junk~ ../images/junk~
-	rm -f ../../micropolis.xo $(RES)/*~ ../images/*~
+	rm -f ../../freepolis.xo $(RES)/*~ ../images/*~
 	rm -rf BUILDIT
 	mkdir BUILDIT
 	tar cf - -C ../.. $(TARFILES) | (cd BUILDIT; tar xf -)
-	mv BUILDIT/micropolis-activity BUILDIT/micropolis.activity
-	(cd BUILDIT; zip -r ../../../micropolis.xo micropolis.activity)
+	mv BUILDIT/freepolis-activity BUILDIT/freepolis.activity
+	(cd BUILDIT; zip -r ../../../freepolis.xo freepolis.activity)
 	rm -rf BUILDIT
 
 #
@@ -117,12 +115,12 @@ xo:  install
 #   vi activity/activity.info
 #   git commit activity/activity.info
 # Now make the source tar file:
-#   git-archive --format=tar --prefix=micropolis-activity-3/ HEAD >../micropolis-activity-3-src.tar
-#   gzip -9 ../micropolis-activity-3-src.tar
-#   chmod a-w ../micropolis-activity-3-src.tar.gz
+#   git-archive --format=tar --prefix=freepolis-activity-3/ HEAD >../freepolis-activity-3-src.tar
+#   gzip -9 ../freepolis-activity-3-src.tar
+#   chmod a-w ../freepolis-activity-3-src.tar.gz
 # Now make the binary:
 #   (cd src; make xo)
-#   mv ../micropolis.xo ../micropolis-3.xo
-#   chmod a-w ../micropolis-3.xo 
+#   mv ../freepolis.xo ../freepolis-3.xo
+#   chmod a-w ../freepolis-3.xo 
 # You're done.  Publish them.
 #

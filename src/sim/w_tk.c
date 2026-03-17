@@ -1,10 +1,8 @@
 /* w_tk.c
  *
- * Micropolis, Unix Version.  This game was released for the Unix platform
+ * Freepolis, Unix Version.  This game was released for the Unix platform
  * in or about 1990 and has been modified for inclusion in the One Laptop
- * Per Child program.  Copyright (C) 1989 - 2007 Electronic Arts Inc.  If
- * you need assistance with this program, you may contact:
- *   http://wiki.laptop.org/go/Micropolis  or email  micropolis@laptop.org.
+ * Per Child program.  Copyright (C) 1989 - 2007 Electronic Arts Inc.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -186,10 +184,10 @@ TileViewCmd(CLIENT_ARGS)
   }
 
   if (viewclass == Editor_Class) {
-    InitNewView(view, "MicropolisEditor", Editor_Class, EDITOR_W, EDITOR_H);
+    InitNewView(view, "FreepolisEditor", Editor_Class, EDITOR_W, EDITOR_H);
     DoNewEditor(view);
   } else {
-    InitNewView(view, "MicropolisMap", Map_Class, MAP_W, MAP_H);
+    InitNewView(view, "FreepolisMap", Map_Class, MAP_W, MAP_H);
     DoNewMap(view);
   }
 
@@ -725,7 +723,7 @@ Eval(char *buf)
     char *errorinfo = Tcl_GetVar(tk_mainInterp, "errorInfo",
 				 TCL_GLOBAL_ONLY);
     if (errorinfo == NULL) errorinfo = "<no backtrace>";
-    fprintf(stderr, "Micropolis: error in TCL code: %s\n%s\n",
+    fprintf(stderr, "Freepolis: error in TCL code: %s\n%s\n",
 	    tk_mainInterp->result, errorinfo);
   }
   return (result);
@@ -751,7 +749,7 @@ void tk_main(void)
                     NULL);             /* Standard default file */
 #endif
 
-  MainWindow = Tk_CreateMainWindow(tk_mainInterp, FirstDisplay, "Micropolis");
+  MainWindow = Tk_CreateMainWindow(tk_mainInterp, FirstDisplay, "Freepolis");
   if (MainWindow == NULL) {
     fprintf(stderr, "%s\n", tk_mainInterp->result);
     sim_really_exit(1); // Just sets tkMustExit and ExitReturn
@@ -793,7 +791,7 @@ void tk_main(void)
 
   sim = MakeNewSim();
 
-  sprintf(initCmd, "source %s/micropolis.tcl", ResourceDir);
+  sprintf(initCmd, "source %s/freepolis.tcl", ResourceDir);
   filename2UNIX(initCmd);
   if (Eval(initCmd)) {
     sim_exit(1); // Just sets tkMustExit and ExitReturn

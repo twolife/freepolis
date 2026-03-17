@@ -1,10 +1,8 @@
-# Window: Graphs of money, crime, etc, for Unix Micropolis
+# Window: Graphs of money, crime, etc, for Unix Freepolis
 #
-# Micropolis, Unix Version.  This game was released for the Unix platform
+# Freepolis, Unix Version.  This game was released for the Unix platform
 # in or about 1990 and has been modified for inclusion in the One Laptop
-# Per Child program.  Copyright (C) 1989 - 2007 Electronic Arts Inc.  If
-# you need assistance with this program, you may contact:
-#   http://wiki.laptop.org/go/Micropolis  or email  micropolis@laptop.org.
+# Per Child program.  Copyright (C) 1989 - 2007 Electronic Arts Inc.
 # 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -78,8 +76,8 @@ bind $win <Visibility> {[WindowLink %W.graphview] Visible [string compare %s Ful
 bind $win <Map> {[WindowLink %W.graphview] Visible 1}
 bind $win <Unmap> {[WindowLink %W.graphview] Visible 0}
 
-#wm title $win {Micropolis Graph}
-#wm iconname $win {Micropolis Graph}
+#wm title $win {Freepolis Graph}
+#wm iconname $win {Freepolis Graph}
 #wm group $win $head
 #wm geometry $win 550x200+440+730
 #wm positionfrom $win user

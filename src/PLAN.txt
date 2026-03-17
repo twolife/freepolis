@@ -1,4 +1,4 @@
-Plan for developing Micropolis for OLPC.
+Plan for developing Freepolis for OLPC.
 
 First, get it running on the current OLPC platform.
 
@@ -80,7 +80,7 @@ Replace TCL/Tk with Python/GTK, and use Pango/Cairo for graphics.
         Chat. 
 	White board.
     Educational.
-      Bring old Micropolis courseware up to date, and integrate with the game. 
+      Bring old Freepolis courseware up to date, and integrate with the game. 
       Export simulation data to spreadsheet or xml. 
       Creative writing, storytelling, newspaper reporting, blogging, etc.
       Scenarios and experiments.
@@ -102,7 +102,7 @@ Replace TCL/Tk with Python/GTK, and use Pango/Cairo for graphics.
 
     Visual Programming
 
-      Simplify the Micropolis interface and make it easier for kids to
+      Simplify the Freepolis interface and make it easier for kids to
       use it with the game controller, in a way that will support
       multi player interaction.
 
@@ -140,7 +140,7 @@ Replace TCL/Tk with Python/GTK, and use Pango/Cairo for graphics.
 
       This makes the game easily usable by little kids in book mode. 
 
-      Also support small children using Micropolis like a drawing tool or
+      Also support small children using Freepolis like a drawing tool or
       etch-a-sketch, simply doodling with the editing tools for the
       visceral pleasure of it, and setting fires and other disasters
       to watch it burn and mutate.
@@ -157,12 +157,12 @@ Replace TCL/Tk with Python/GTK, and use Pango/Cairo for graphics.
 	with logic and math and nested "ic chip" components.
 
 	Plug in graphics to represent the agent: use classic logo
-	turtle and Micropolis sprites, but also allow kids to plug in
+	turtle and Freepolis sprites, but also allow kids to plug in
 	their own.
-	  Micropolis sprites have 8 rotations. 
+	  Freepolis sprites have 8 rotations. 
 	  SVG or Cairo drawings can be rotated continuously.
 
-        Re-implement the classic Micropolis agents like the monster,
+        Re-implement the classic Freepolis agents like the monster,
         tornado, helicopter, train, etc in terms of logo turtles, that
         kids can drive around, learn to use, open up and modify (by
         turning internal tuning knobs, or even rewiring).
@@ -198,7 +198,7 @@ Replace TCL/Tk with Python/GTK, and use Pango/Cairo for graphics.
 
 	Edit the world. 
 
-	  All Micropolis editing tools (including colored pens that draw
+	  All Freepolis editing tools (including colored pens that draw
 	  on overlays) should be available to the agent.
 
 	  Enable users to plug in their own editing tools, that they
@@ -217,7 +217,7 @@ Replace TCL/Tk with Python/GTK, and use Pango/Cairo for graphics.
 	current cursor position.
 
 	Remixing. Journaling. Programming by demonstration or example.
-	You could use a tape recorder to record a bunch of Micropolis
+	You could use a tape recorder to record a bunch of Freepolis
 	editing commands that you act out (or you can just select them
 	from the journal), then you can play those tapes back with
 	relative coordinates, so they apply relative to where the
@@ -237,11 +237,9 @@ Replace TCL/Tk with Python/GTK, and use Pango/Cairo for graphics.
 	Cocoa / StageCraft Creator).
 
 --
-Micropolis, Unix Version.  This game was released for the Unix platform
+Freepolis, Unix Version.  This game was released for the Unix platform
 in or about 1990 and has been modified for inclusion in the One Laptop
-Per Child program.  Copyright (C) 1989 - 2007 Electronic Arts Inc.  If
-you need assistance with this program, you may contact:
-  http://wiki.laptop.org/go/Micropolis  or email  micropolis@laptop.org.
+Per Child program.  Copyright (C) 1989 - 2007 Electronic Arts Inc.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

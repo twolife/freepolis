@@ -1,10 +1,8 @@
-# Window: Budget, for Unix Micropolis
+# Window: Budget, for Unix Freepolis
 #
-# Micropolis, Unix Version.  This game was released for the Unix platform
+# Freepolis, Unix Version.  This game was released for the Unix platform
 # in or about 1990 and has been modified for inclusion in the One Laptop
-# Per Child program.  Copyright (C) 1989 - 2007 Electronic Arts Inc.  If
-# you need assistance with this program, you may contact:
-#   http://wiki.laptop.org/go/Micropolis  or email  micropolis@laptop.org.
+# Per Child program.  Copyright (C) 1989 - 2007 Electronic Arts Inc.
 # 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -74,8 +72,8 @@ SetHelp $win Budget
 global [set var $win.visible]
 set $var 0
 
-wm title $win {Micropolis Budget}
-wm iconname $win {Micropolis Budget}
+wm title $win {Freepolis Budget}
+wm iconname $win {Freepolis Budget}
 wm group $win $head
 wm geometry $win 600x600+5+5
 wm positionfrom $win user
@@ -88,7 +86,7 @@ label $win.label\
   -borderwidth 1\
   -relief raised\
   -font [Font $win Large]\
-  -text {Micropolis has paused to set the budget...}
+  -text {Freepolis has paused to set the budget...}
 
 SetHelp $win.label Budget.Label
 

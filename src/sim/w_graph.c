@@ -1,10 +1,8 @@
 /* w_graph.c
  *
- * Micropolis, Unix Version.  This game was released for the Unix platform
+ * Freepolis, Unix Version.  This game was released for the Unix platform
  * in or about 1990 and has been modified for inclusion in the One Laptop
- * Per Child program.  Copyright (C) 1989 - 2007 Electronic Arts Inc.  If
- * you need assistance with this program, you may contact:
- *   http://wiki.laptop.org/go/Micropolis  or email  micropolis@laptop.org.
+ * Per Child program.  Copyright (C) 1989 - 2007 Electronic Arts Inc.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -680,7 +678,7 @@ DoResizeGraph(SimGraph *graph, int w, int h)
 				w, h, graph->x->depth);
   if (graph->pixmap == None) {
     fprintf(stderr,
-	    "Sorry, Micropolis can't create a pixmap on X display \"%s\".\n",
+	    "Sorry, Freepolis can't create a pixmap on X display \"%s\".\n",
 	    graph->x->display);
     sim_exit(1); // Just sets tkMustExit and ExitReturn
     return;

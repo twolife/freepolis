@@ -1,10 +1,8 @@
-# Window: Help, for Unix Micropolis.
+# Window: Help, for Unix Freepolis.
 #
-# Micropolis, Unix Version.  This game was released for the Unix platform
+# Freepolis, Unix Version.  This game was released for the Unix platform
 # in or about 1990 and has been modified for inclusion in the One Laptop
-# Per Child program.  Copyright (C) 1989 - 2007 Electronic Arts Inc.  If
-# you need assistance with this program, you may contact:
-#   http://wiki.laptop.org/go/Micropolis  or email  micropolis@laptop.org.
+# Per Child program.  Copyright (C) 1989 - 2007 Electronic Arts Inc.
 # 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -71,8 +69,8 @@ toplevel $win -screen $display
 
 SetHelp $win Help
 
-wm title $win {Micropolis Help}
-wm iconname $win {Micropolis Help}
+wm title $win {Freepolis Help}
+wm iconname $win {Freepolis Help}
 wm geometry $win 400x240+5+5
 wm positionfrom $win user
 wm sizefrom $win user

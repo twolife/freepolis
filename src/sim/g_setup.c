@@ -1,10 +1,8 @@
 /* g_setup.c
  *
- * Micropolis, Unix Version.  This game was released for the Unix platform
+ * Freepolis, Unix Version.  This game was released for the Unix platform
  * in or about 1990 and has been modified for inclusion in the One Laptop
- * Per Child program.  Copyright (C) 1989 - 2007 Electronic Arts Inc.  If
- * you need assistance with this program, you may contact:
- *   http://wiki.laptop.org/go/Micropolis  or email  micropolis@laptop.org.
+ * Per Child program.  Copyright (C) 1989 - 2007 Electronic Arts Inc.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -229,7 +227,7 @@ GetObjectXpms(XDisplay *xd, int id, int frames)
 			    &pixmaps[i + i], &pixmaps[i + i + 1],
 			    &attributes) < 0) {
       fprintf(stderr,
-	      "Uh oh, Micropolis couldn't read the pixmap file \"%s\".\n",
+	      "Uh oh, Freepolis couldn't read the pixmap file \"%s\".\n",
 	      name);
       sim_exit(1); // Just sets tkMustExit and ExitReturn
       return NULL;
@@ -311,7 +309,7 @@ GetViewTiles(SimView *view)
 			       &view->x->big_tile_image, NULL,
 			       &attributes) < 0) {
 	  fprintf(stderr,
-		  "Uh oh, Micropolis couldn't read the pixmap file \"%s\".\n",
+		  "Uh oh, Freepolis couldn't read the pixmap file \"%s\".\n",
 		  name);
 	  sim_exit(1); // Just sets tkMustExit and ExitReturn
 	  return;
@@ -328,7 +326,7 @@ GetViewTiles(SimView *view)
 				&view->x->big_tile_pixmap, NULL,
 				&attributes) < 0) {
 	  fprintf(stderr,
-		  "Uh oh, Micropolis couldn't read the pixmap file \"%s\".\n",
+		  "Uh oh, Freepolis couldn't read the pixmap file \"%s\".\n",
 		  name);
 	  sim_exit(1); // Just sets tkMustExit and ExitReturn
 	  return;
@@ -348,7 +346,7 @@ GetViewTiles(SimView *view)
 			       &view->x->small_tile_image, NULL,
 			       &attributes) < 0) {
 	  fprintf(stderr,
-		  "Uh oh, Micropolis couldn't read the pixmap file \"%s\".\n",
+		  "Uh oh, Freepolis couldn't read the pixmap file \"%s\".\n",
 		  name);
 	  sim_exit(1); // Just sets tkMustExit and ExitReturn
 	  return;

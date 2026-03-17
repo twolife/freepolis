@@ -1,7 +1,7 @@
 [Activity]
-name = Micropolis
+name = Freepolis
 activity_version = 7
-icon = activity-micropolis
-service_name = org.laptop.Micropolis
-class = micropolisactivity.MicropolisActivity
+icon = activity-freepolis
+service_name = org.laptop.Freepolis
+class = freepolisactivity.FreepolisActivity
 show_launcher = yes

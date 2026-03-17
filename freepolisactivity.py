@@ -1,10 +1,8 @@
 # -*- mode: python; tab-width: 4 -*-
 #
-# Micropolis, Unix Version.  This game was released for the Unix platform
+# Freepolis, Unix Version.  This game was released for the Unix platform
 # in or about 1990 and has been modified for inclusion in the One Laptop
-# Per Child program.  Copyright (C) 1989 - 2007 Electronic Arts Inc.  If
-# you need assistance with this program, you may contact:
-#   http://wiki.laptop.org/go/Micropolis  or email  micropolis@laptop.org.
+# Per Child program.  Copyright (C) 1989 - 2007 Electronic Arts Inc.
 # 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -91,13 +89,13 @@ def QuoteTCL(s):
     return s.replace('"', '\\"')
 
 
-class MicropolisActivity(activity.Activity):
+class FreepolisActivity(activity.Activity):
 
     def __init__(self, handle):
 
         activity.Activity.__init__(self, handle)
     
-        self.set_title(_('Micropolis Activity'))
+        self.set_title(_('Freepolis Activity'))
         self.connect('destroy', self._destroy_cb)
         self.connect('focus-in-event', self._focus_in_cb)
         self.connect('focus-out-event', self._focus_out_cb)
@@ -107,7 +105,7 @@ class MicropolisActivity(activity.Activity):
         self._bundle_path = get_bundle_path()
 
         if False:
-            # FIXME: Plug Micropolis's window into a gtk socket.
+            # FIXME: Plug Freepolis's window into a gtk socket.
             # Doesn't work yet, but it would be cool if it did. 
             socket = gtk.Socket()
             try:
@@ -122,7 +120,7 @@ class MicropolisActivity(activity.Activity):
 
         command = os.path.join(
             self._bundle_path,
-            'Micropolis')
+            'Freepolis')
 
         args = [
             command,
@@ -131,7 +129,7 @@ class MicropolisActivity(activity.Activity):
         ]
 
         logging.debug("CWD: " + self._bundle_path)
-        logging.debug("Micropolis ARGS: " + repr(args))
+        logging.debug("Freepolis ARGS: " + repr(args))
 
         self._process = subprocess.Popen(
             args,
@@ -153,16 +151,16 @@ class MicropolisActivity(activity.Activity):
         logging.debug("STARTED THREAD. " + str(t))
 
         uri = handle.uri or ''
-        logging.debug("Micropolis SUGARSTARTUP URI " + repr(uri))
+        logging.debug("Freepolis SUGARSTARTUP URI " + repr(uri))
         self.send_process(
             'SugarStartUp "' + QuoteTCL(uri) + '"\n')
 
         nick = profile.get_nick_name() or ''
-        logging.debug("Micropolis SUGARNICKNAME NICK " + repr(nick))
+        logging.debug("Freepolis SUGARNICKNAME NICK " + repr(nick))
         self.send_process(
             'SugarNickName "' + QuoteTCL(nick) + '"\n')
 
-        #logging.debug("started Micropolis, pid " + repr(self._pid))
+        #logging.debug("started Freepolis, pid " + repr(self._pid))
 
         ps = presenceservice.get_instance()
 
@@ -232,29 +230,29 @@ class MicropolisActivity(activity.Activity):
 
 
     def _plug_added_cb(self, sock):
-        logging.debug("Micropolis window opened")
+        logging.debug("Freepolis window opened")
         return False
 
 
     def _plug_removed_cb(self, sock):
-        logging.debug("Micropolis window closed")
+        logging.debug("Freepolis window closed")
         self.destroy()
         return False
 
     
     def _destroy_cb(self, window):
-        logging.debug("Micropolis activity destroyed %r" % window)
+        logging.debug("Freepolis activity destroyed %r" % window)
         self.quit_process()
 
         
     def _focus_in_cb(self, window, event):
-        logging.debug("Micropolis activated %r %r" % (window, event))
+        logging.debug("Freepolis activated %r %r" % (window, event))
         self.send_process(
             'SugarActivate\n')
 
 
     def _focus_out_cb(self, window, event):
-        logging.debug("Micropolis deactivated %r %r" % (window, event))
+        logging.debug("Freepolis deactivated %r %r" % (window, event))
         self.send_process(
             'SugarDeactivate\n')
 
@@ -272,7 +270,7 @@ class MicropolisActivity(activity.Activity):
             color = buddy.get_color() or ''
             address = buddy.get_ip4_address() or ''
 
-        logging.debug("Micropolis _BUDDY_APPEARED_CB KEY " + repr(key) + " NICK " + repr(nick) + " COLOR " + repr(color) + " ADDRESS " + repr(address))
+        logging.debug("Freepolis _BUDDY_APPEARED_CB KEY " + repr(key) + " NICK " + repr(nick) + " COLOR " + repr(color) + " ADDRESS " + repr(address))
 
         logging.debug("Buddy appeared " + repr(buddy.props.nick))
 
@@ -296,7 +294,7 @@ class MicropolisActivity(activity.Activity):
             color = buddy.get_color() or ''
             address = buddy.get_ip4_address() or ''
 
-        logging.debug("Micropolis _BUDDY_DISAPPEARED_CB KEY " + repr(key) + " NICK " + repr(nick) + " COLOR " + repr(color) + " ADDRESS " + repr(address))
+        logging.debug("Freepolis _BUDDY_DISAPPEARED_CB KEY " + repr(key) + " NICK " + repr(nick) + " COLOR " + repr(color) + " ADDRESS " + repr(address))
 
         logging.debug("Buddy disappeared " + repr(buddy.props.nick))
 

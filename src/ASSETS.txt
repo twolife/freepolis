@@ -1,9 +1,9 @@
-Micropolis Assets:
+Freepolis Assets:
 
-  This is a list of required and optional assets for Micropolis. 
+  This is a list of required and optional assets for Freepolis. 
 
   As noted, some of them are for the current TCL/Tk based version of
-  Micropolis that we want to get out right away.  Others are for the more
+  Freepolis that we want to get out right away.  Others are for the more
   advanced Python version that we're developing after releasing the
   TCL/Tk version.
 
@@ -44,16 +44,16 @@ Micropolis Assets:
     decide to support. It would be great to be able to use the same
     SVG source graphics in the Python version, scaling them as
     appropriate to adapt to the screen layout. We should revisit the
-    icons and graphics after we port Micropolis to Python.
+    icons and graphics after we port Freepolis to Python.
 
     What follows is a complete list of graphics we could use in the
     TCL/Tk version. SVG is ideal but PNG is sufficient for this time.
 
-    Micropolis icon for use in Sugar user interface, in SVG or PNG. 
+    Freepolis icon for use in Sugar user interface, in SVG or PNG. 
 
     Logos:
-      Micropolis logo
-      Micropolis lettering
+      Freepolis logo
+      Freepolis lettering
       OLPC Project logo
       XO Laptop logo
       Linux Penguin logo
@@ -181,7 +181,7 @@ Micropolis Assets:
     Later, the Python version will require a bunch more sounds for its
     user interface, which will depend on the user interface features
     we decide to support. So we should revisit the sound effects
-    later once Micropolis is ported to Python. 
+    later once Freepolis is ported to Python. 
 
     To be authentic, I would like to use the original sounds that the
     simulator made (like the Skywatch One helicopter), or re-record
@@ -199,7 +199,7 @@ Micropolis Assets:
 
   Update Documentation
 
-    I have translated the Micropolis manual to HTML. 
+    I have translated the Freepolis manual to HTML. 
 
     It's the original version that applies to the multi player
     X11/TCL/Tk version, which needs to be update in a few places where
@@ -208,7 +208,7 @@ Micropolis Assets:
     It would benefit from some nice reformatting and CSS styles, as well
     as some illustrations and screen snapshots.
 
-    After we port Micropolis to Python, the interface-specific
+    After we port Freepolis to Python, the interface-specific
     documentation will have to be rewritten, re-illustrated, and then it
     will have to be translated to different languages.
 
@@ -240,26 +240,24 @@ Micropolis Assets:
       help text. It would be nice for the help text to hsve illustrations
       of the corresponding windows and components in use.
 
-      After we port Micropolis to Python, the help files will have to be
+      After we port Freepolis to Python, the help files will have to be
       re-inventoried, rewritten, re-illustrated, and translated to
       different languages.
 
     Courseware
 
-      We need to include any Micropolis courseware or teacher's guides with
+      We need to include any Freepolis courseware or teacher's guides with
       the documentation, and update it to relect the current user
       interface.
 
-      After we port Micropolis to Python, we will need to update the
+      After we port Freepolis to Python, we will need to update the
       courseware to reflect the features and user interface of the new
       user interface.
 
 --
-Micropolis, Unix Version.  This game was released for the Unix platform
+Freepolis, Unix Version.  This game was released for the Unix platform
 in or about 1990 and has been modified for inclusion in the One Laptop
-Per Child program.  Copyright (C) 1989 - 2007 Electronic Arts Inc.  If
-you need assistance with this program, you may contact:
-  http://wiki.laptop.org/go/Micropolis  or email  micropolis@laptop.org.
+Per Child program.  Copyright (C) 1989 - 2007 Electronic Arts Inc.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
